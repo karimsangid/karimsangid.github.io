@@ -499,6 +499,7 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
    ============================================================ */
 .about {
   padding: clamp(100px, 15vh, 200px) 0;
+  position: relative;
 }
 
 .about-statement {
@@ -619,7 +620,9 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
    PROJECTS
    ============================================================ */
 .projects {
-  padding: clamp(80px, 12vh, 160px) 0;
+  padding: clamp(80px, 12vh, 160px) 0 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .project-card {
@@ -1242,6 +1245,7 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
    ============================================================ */
 .skills {
   padding: clamp(80px, 12vh, 160px) 0;
+  position: relative;
 }
 
 .skills-grid {
@@ -1310,6 +1314,7 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
    ============================================================ */
 .experience {
   padding: clamp(80px, 12vh, 160px) 0;
+  position: relative;
 }
 
 .timeline {
@@ -1467,6 +1472,8 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
 .contact {
   padding: clamp(100px, 15vh, 200px) 0 0;
   text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .contact-heading {
@@ -1760,19 +1767,13 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
   .stat:not(:last-child)::after { display: none; }
 }
 
-/* --- 11. Section Gradient Dividers --- */
-.about::before,
-.projects::before,
-.skills::before,
-.experience::before,
-.contact::before {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent) 50%, transparent);
-  opacity: 0.2;
-  margin-bottom: clamp(40px, 6vh, 80px);
+/* --- 11. Section Gradient Dividers (now using inner pseudo-element via border-top) --- */
+.about,
+.projects,
+.skills,
+.experience,
+.contact {
+  border-top: 1px solid rgba(255, 68, 68, 0.08);
 }
 
 /* --- 12. Nav Link Hover Underline Enhancement --- */
@@ -1852,4 +1853,239 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
   margin-left: 2px;
   vertical-align: text-bottom;
   animation: blink 0.7s step-end infinite;
+}
+
+/* ============================================================
+   INSANE MODE — HORIZONTAL SCROLL GALLERY
+   ============================================================ */
+.projects-wrapper {
+  position: relative;
+}
+
+.projects-track {
+  position: sticky;
+  top: 0;
+  display: flex;
+  gap: 40px;
+  padding: 0 8vw;
+  align-items: center;
+  height: 100vh;
+  will-change: transform;
+}
+
+.projects-track .project-card {
+  flex-shrink: 0;
+  width: 85vw;
+  max-width: 1200px;
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================================================
+   INSANE MODE — SECTION FADE TRANSITIONS
+   ============================================================ */
+section {
+  position: relative;
+}
+
+.about::before,
+.skills::before,
+.experience::before,
+.contact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, #050507, transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.about::after,
+.skills::after,
+.experience::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to top, #050507, transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ============================================================
+   INSANE MODE — GLITCH EFFECT ON HERO NAME
+   ============================================================ */
+@keyframes glitch {
+  0%, 93%, 100% { transform: translate(0); text-shadow: none; }
+  94% { transform: translate(-2px, 1px); text-shadow: 2px 0 #ff4444, -2px 0 #00ffff; }
+  95% { transform: translate(2px, -1px); text-shadow: -2px 0 #ff4444, 2px 0 #00ffff; }
+  96% { transform: translate(0); text-shadow: none; }
+  97% { transform: translate(1px, 2px); text-shadow: 1px 0 #ff4444, -1px 0 #00ffff; }
+  98% { transform: translate(-1px, -1px); text-shadow: none; }
+}
+
+.hero-name {
+  animation: glitch 6s infinite;
+}
+
+/* ============================================================
+   INSANE MODE — WORD SPLIT REVEAL
+   ============================================================ */
+.word-mask {
+  overflow: hidden;
+  display: inline-block;
+}
+
+.word {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal.revealed .word {
+  transform: translateY(0);
+}
+
+.scroll-reveal.revealed .word-mask:nth-child(2) .word { transition-delay: 0.1s; }
+.scroll-reveal.revealed .word-mask:nth-child(3) .word { transition-delay: 0.2s; }
+.scroll-reveal.revealed .word-mask:nth-child(4) .word { transition-delay: 0.3s; }
+
+/* ============================================================
+   INSANE MODE — SKILL PILL FLOAT
+   ============================================================ */
+@keyframes floatPill {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* ============================================================
+   INSANE MODE — CONTACT RADAR PULSE
+   ============================================================ */
+.contact-cta {
+  position: relative;
+  display: inline-block;
+}
+
+.contact-cta::before,
+.contact-cta::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  border: 1px solid rgba(255, 68, 68, 0.15);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: radarPulse 4s ease-out infinite;
+  pointer-events: none;
+}
+
+.contact-cta::after {
+  animation-delay: 2s;
+}
+
+@keyframes radarPulse {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(8); opacity: 0; }
+}
+
+/* Contact email floating */
+@keyframes floatEmail {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.contact-email {
+  animation: floatEmail 3s ease-in-out infinite;
+}
+
+/* ============================================================
+   INSANE MODE — LOADING SCREEN UPGRADE
+   ============================================================ */
+.loader-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.015) 2px,
+    rgba(255, 255, 255, 0.015) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+  animation: scanlineMove 8s linear infinite;
+}
+
+@keyframes scanlineMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 200px; }
+}
+
+.loader-glitch {
+  animation: loaderGlitch 2s ease-in-out infinite;
+}
+
+@keyframes loaderGlitch {
+  0%, 60%, 100% { text-shadow: none; opacity: 1; }
+  61% { text-shadow: 3px 0 #ff4444, -3px 0 #00ffff; transform: translate(-2px); }
+  62% { text-shadow: -3px 0 #ff4444, 3px 0 #00ffff; transform: translate(2px); }
+  63% { text-shadow: none; transform: translate(0); }
+  80% { opacity: 1; }
+  81% { opacity: 0.7; }
+  82% { opacity: 1; }
+  83% { opacity: 0.5; }
+  84% { opacity: 1; }
+}
+
+.loader-bar-fill {
+  box-shadow: 0 0 15px rgba(255, 68, 68, 0.6), 0 0 30px rgba(255, 68, 68, 0.3);
+  animation: loaderFill 1.3s var(--ease-in-out) forwards, loaderPulseGlow 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes loaderPulseGlow {
+  0% { box-shadow: 0 0 10px rgba(255, 68, 68, 0.4), 0 0 20px rgba(255, 68, 68, 0.2); }
+  100% { box-shadow: 0 0 20px rgba(255, 68, 68, 0.8), 0 0 40px rgba(255, 68, 68, 0.4); }
+}
+
+/* ============================================================
+   INSANE MODE — MORPHING BLOB (scroll-driven border-radius)
+   ============================================================ */
+.hero-blob {
+  transition: border-radius 0.3s ease;
+}
+
+/* ============================================================
+   INSANE MODE — KONAMI MATRIX RAIN
+   ============================================================ */
+.matrix-rain-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.matrix-rain-canvas.active {
+  opacity: 1;
+}
+
+/* ============================================================
+   INSANE MODE — MOBILE DISABLE COMPLEX EFFECTS
+   ============================================================ */
+@media (pointer: coarse) {
+  .hero-name { animation: none; }
+  .contact-email { animation: none; }
+  .contact-cta::before,
+  .contact-cta::after { display: none; }
+  .loader-glitch { animation: none; }
+  .loader-scanlines { display: none; }
+  section::before, section::after { display: none; }
 }
