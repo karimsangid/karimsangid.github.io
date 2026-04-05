@@ -136,7 +136,8 @@
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('revealed');
-        revealObserver.unobserve(entry.target);
+      } else {
+        entry.target.classList.remove('revealed');
       }
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
