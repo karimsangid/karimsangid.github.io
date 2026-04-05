@@ -627,7 +627,7 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
 
 .project-card {
   max-width: var(--container);
-  margin: 0 auto clamp(40px, 6vh, 80px);
+  margin: 0 auto 48px;
   padding: 0 clamp(24px, 5vw, 80px);
 }
 
@@ -639,10 +639,11 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: clamp(32px, 4vw, 64px);
+  padding: clamp(32px, 4vw, 56px);
   transition: border-color 0.4s, box-shadow 0.4s;
   position: relative;
   overflow: hidden;
+  min-height: 420px;
 }
 
 .project-card-inner:hover {
@@ -665,21 +666,24 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
 
 .project-name {
   font-family: var(--font-heading);
-  font-size: clamp(28px, 3vw, 42px);
+  font-size: clamp(24px, 2.5vw, 36px);
   font-weight: 800;
   letter-spacing: -0.03em;
   margin-bottom: 8px;
 }
 
 .project-desc {
-  font-size: 16px;
+  font-size: 15px;
   color: var(--text-secondary);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+  min-height: 24px;
 }
 
 .project-features {
   margin-bottom: 24px;
   padding-left: 0;
+  list-style: none;
+  min-height: 120px;
 }
 
 .project-features li {
@@ -756,7 +760,7 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 280px;
+  height: 300px;
 }
 
 /* --- Terminal (SentinelIQ) --- */
@@ -1785,12 +1789,32 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
 /* --- 13. Contact Shimmer Effect --- */
 .contact-heading {
   position: relative;
-  background: linear-gradient(90deg, var(--text) 0%, var(--text) 40%, var(--accent) 50%, var(--text) 60%, var(--text) 100%);
+  color: #fff;
+}
+
+.contact-heading .word {
+  background: linear-gradient(90deg, #fff 0%, #fff 40%, var(--accent) 50%, #fff 60%, #fff 100%);
   background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shimmerText 4s ease-in-out infinite;
+}
+
+/* Ensure contact heading words are visible */
+.contact-heading .word-mask {
+  overflow: hidden;
+  display: inline-block;
+}
+.contact-heading .word {
+  transform: translateY(0);
+}
+.contact .scroll-reveal .word {
+  transform: translateY(110%);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.contact .scroll-reveal.revealed .word {
+  transform: translateY(0);
 }
 
 @keyframes shimmerText {
