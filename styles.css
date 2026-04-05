@@ -481,6 +481,19 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
   to   { transform: translateX(-50%); }
 }
 
+.marquee--reverse {
+  border-top: none;
+}
+
+.marquee-track--reverse {
+  animation: marqueeScrollReverse 35s linear infinite;
+}
+
+@keyframes marqueeScrollReverse {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
 /* ============================================================
    ABOUT SECTION
    ============================================================ */
@@ -504,6 +517,13 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
 .about-quote em {
   font-style: italic;
   color: var(--accent);
+  text-shadow: 0 0 40px rgba(255, 68, 68, 0.3), 0 0 80px rgba(255, 68, 68, 0.1);
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { text-shadow: 0 0 40px rgba(255, 68, 68, 0.3), 0 0 80px rgba(255, 68, 68, 0.1); }
+  50% { text-shadow: 0 0 60px rgba(255, 68, 68, 0.5), 0 0 120px rgba(255, 68, 68, 0.2); }
 }
 
 .about-stats {
@@ -1253,13 +1273,36 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
   border: 1px solid var(--border);
   border-radius: 100px;
   color: var(--text-secondary);
-  transition: border-color 0.3s, color 0.3s, box-shadow 0.3s;
+  transition: all 0.3s ease;
+  cursor: default;
+  opacity: 0;
+  transform: translateY(10px);
 }
 
+.scroll-reveal.revealed .skill-pill {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-reveal.revealed .skill-pill:nth-child(1) { transition-delay: 0.05s; }
+.scroll-reveal.revealed .skill-pill:nth-child(2) { transition-delay: 0.1s; }
+.scroll-reveal.revealed .skill-pill:nth-child(3) { transition-delay: 0.15s; }
+.scroll-reveal.revealed .skill-pill:nth-child(4) { transition-delay: 0.2s; }
+.scroll-reveal.revealed .skill-pill:nth-child(5) { transition-delay: 0.25s; }
+.scroll-reveal.revealed .skill-pill:nth-child(6) { transition-delay: 0.3s; }
+.scroll-reveal.revealed .skill-pill:nth-child(7) { transition-delay: 0.35s; }
+.scroll-reveal.revealed .skill-pill:nth-child(8) { transition-delay: 0.4s; }
+.scroll-reveal.revealed .skill-pill:nth-child(9) { transition-delay: 0.45s; }
+.scroll-reveal.revealed .skill-pill:nth-child(10) { transition-delay: 0.5s; }
+.scroll-reveal.revealed .skill-pill:nth-child(11) { transition-delay: 0.55s; }
+.scroll-reveal.revealed .skill-pill:nth-child(12) { transition-delay: 0.6s; }
+
 .skill-pill:hover {
-  border-color: var(--accent-border);
-  color: var(--text);
-  box-shadow: 0 0 20px rgba(255, 68, 68, 0.06);
+  border-color: var(--accent);
+  color: #fff;
+  background: rgba(255, 68, 68, 0.08);
+  box-shadow: 0 0 25px rgba(255, 68, 68, 0.12), 0 0 60px rgba(255, 68, 68, 0.04);
+  transform: translateY(-2px);
 }
 
 /* ============================================================
