@@ -1263,8 +1263,8 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
 .vis-house-floor { width: 120px; height: 80px; background: rgba(255, 68, 68, 0.03); transform: translateX(20px) translateY(125px) rotateX(90deg); }
 .vis-house-roof { position: absolute; width: 100%; height: 100%; transform-style: preserve-3d; }
 .vis-roof-side { position: absolute; width: 140px; height: 60px; border: 1px solid rgba(255, 68, 68, 0.35); }
-.vis-roof-left { background: linear-gradient(135deg, rgba(255, 68, 68, 0.15), rgba(255, 68, 68, 0.05)); transform: translateX(10px) translateY(5px) translateZ(0px) rotateX(30deg); transform-origin: top center; box-shadow: 0 0 15px rgba(255, 68, 68, 0.08); }
-.vis-roof-right { background: linear-gradient(225deg, rgba(255, 68, 68, 0.12), rgba(255, 68, 68, 0.04)); transform: translateX(10px) translateY(53px) translateZ(0px) rotateX(-30deg); transform-origin: top center; }
+.vis-roof-left { background: linear-gradient(135deg, rgba(255, 68, 68, 0.15), rgba(255, 68, 68, 0.05)); transform: translateX(10px) translateY(5px) rotateX(25deg); transform-origin: top center; box-shadow: 0 0 15px rgba(255, 68, 68, 0.08); }
+.vis-roof-right { background: linear-gradient(225deg, rgba(255, 68, 68, 0.12), rgba(255, 68, 68, 0.04)); transform: translateX(10px) translateY(5px) rotateX(-25deg); transform-origin: top center; }
 .vis-house-door { position: absolute; width: 20px; height: 35px; background: rgba(255, 68, 68, 0.15); border: 1px solid rgba(255, 68, 68, 0.3); border-radius: 2px 2px 0 0; transform: translateX(70px) translateY(90px) translateZ(41px); }
 .vis-house-window { position: absolute; width: 18px; height: 18px; background: rgba(255, 200, 100, 0.15); border: 1px solid rgba(255, 200, 100, 0.3); box-shadow: 0 0 8px rgba(255, 200, 100, 0.1); }
 .vis-house-win1 { transform: translateX(35px) translateY(55px) translateZ(41px); }
