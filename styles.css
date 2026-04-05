@@ -817,52 +817,158 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
   100% { transform: translateY(-50%); }
 }
 
-/* --- Satellite (RoofRoof) --- */
-.vis-satellite {
+/* --- 3D Rotating House (RoofRoof) --- */
+.vis-house-scene {
   width: 100%;
   max-width: 300px;
-  aspect-ratio: 1;
+  height: 280px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  perspective: 600px;
 }
 
-.vis-sat-grid {
+.vis-house-orbit {
+  width: 160px;
+  height: 160px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: houseRotate 8s linear infinite;
+}
+
+@keyframes houseRotate {
+  from { transform: rotateX(-20deg) rotateY(0deg); }
+  to   { transform: rotateX(-20deg) rotateY(360deg); }
+}
+
+.vis-house {
   width: 100%;
   height: 100%;
-  background-image:
-    linear-gradient(rgba(255, 68, 68, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 68, 68, 0.08) 1px, transparent 1px);
-  background-size: 20px 20px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
   position: relative;
-  overflow: hidden;
+  transform-style: preserve-3d;
 }
 
-.vis-sat-scan {
+.vis-house-body {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  box-shadow: 0 0 20px var(--accent), 0 0 60px rgba(255, 68, 68, 0.3);
-  animation: satScan 3s ease-in-out infinite;
+  height: 100%;
+  transform-style: preserve-3d;
 }
 
-@keyframes satScan {
-  0%, 100% { top: 0; }
-  50%      { top: calc(100% - 3px); }
+.vis-house-wall {
+  position: absolute;
+  border: 1px solid rgba(255, 68, 68, 0.25);
+}
+
+.vis-house-front {
+  width: 120px;
+  height: 90px;
+  background: rgba(255, 68, 68, 0.06);
+  transform: translateX(20px) translateY(35px) translateZ(40px);
+}
+
+.vis-house-back {
+  width: 120px;
+  height: 90px;
+  background: rgba(255, 68, 68, 0.04);
+  transform: translateX(20px) translateY(35px) translateZ(-40px);
+}
+
+.vis-house-left {
+  width: 80px;
+  height: 90px;
+  background: rgba(255, 68, 68, 0.05);
+  transform: translateX(-18px) translateY(35px) rotateY(90deg);
+}
+
+.vis-house-right {
+  width: 80px;
+  height: 90px;
+  background: rgba(255, 68, 68, 0.05);
+  transform: translateX(102px) translateY(35px) rotateY(90deg);
+}
+
+.vis-house-floor {
+  width: 120px;
+  height: 80px;
+  background: rgba(255, 68, 68, 0.03);
+  transform: translateX(20px) translateY(125px) rotateX(90deg);
+}
+
+/* Roof */
+.vis-house-roof {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.vis-roof-side {
+  position: absolute;
+  width: 140px;
+  height: 60px;
+  border: 1px solid rgba(255, 68, 68, 0.35);
+}
+
+.vis-roof-left {
+  background: linear-gradient(135deg, rgba(255, 68, 68, 0.15), rgba(255, 68, 68, 0.05));
+  transform: translateX(10px) translateY(5px) translateZ(0px) rotateX(35deg);
+  transform-origin: top center;
+  box-shadow: 0 0 15px rgba(255, 68, 68, 0.08);
+}
+
+.vis-roof-right {
+  background: linear-gradient(225deg, rgba(255, 68, 68, 0.12), rgba(255, 68, 68, 0.04));
+  transform: translateX(10px) translateY(5px) translateZ(0px) rotateX(-35deg);
+  transform-origin: bottom center;
+}
+
+/* Door */
+.vis-house-door {
+  position: absolute;
+  width: 20px;
+  height: 35px;
+  background: rgba(255, 68, 68, 0.15);
+  border: 1px solid rgba(255, 68, 68, 0.3);
+  border-radius: 2px 2px 0 0;
+  transform: translateX(70px) translateY(90px) translateZ(41px);
+}
+
+/* Windows */
+.vis-house-window {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: rgba(255, 200, 100, 0.15);
+  border: 1px solid rgba(255, 200, 100, 0.3);
+  box-shadow: 0 0 8px rgba(255, 200, 100, 0.1);
+}
+
+.vis-house-win1 {
+  transform: translateX(35px) translateY(55px) translateZ(41px);
+}
+
+.vis-house-win2 {
+  transform: translateX(105px) translateY(55px) translateZ(41px);
+}
+
+/* Shadow under house */
+.vis-house-shadow {
+  width: 140px;
+  height: 20px;
+  background: radial-gradient(ellipse, rgba(255, 68, 68, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  margin-top: -10px;
 }
 
 .vis-sat-label {
-  position: absolute;
-  bottom: -28px;
-  left: 50%;
-  transform: translateX(-50%);
   font-family: var(--font-mono);
   font-size: 10px;
   color: var(--accent);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
+  margin-top: 12px;
   animation: blink 1s step-end infinite;
 }
 
