@@ -68,7 +68,8 @@
 
   <!-- Loading Screen -->
   <div class="loader" id="loader">
-    <div class="loader-text">
+    <div class="loader-scanlines"></div>
+    <div class="loader-text loader-glitch" data-text="K.S">
       <span class="loader-letter">K</span><span class="loader-dot">.</span><span class="loader-letter">S</span>
     </div>
     <div class="loader-bar"><div class="loader-bar-fill"></div></div>
@@ -181,8 +182,14 @@
   <!-- Projects -->
   <section class="projects" id="projects">
     <div class="container">
-      <h2 class="section-title scroll-reveal">SELECTED WORK</h2>
+      <h2 class="section-title scroll-reveal">
+        <span class="word-mask"><span class="word">SELECTED</span></span>
+        <span class="word-mask"><span class="word">WORK</span></span>
+      </h2>
     </div>
+
+    <div class="projects-wrapper">
+      <div class="projects-track">
 
     <!-- Project 01: SentinelIQ -->
     <div class="project-card scroll-reveal" data-project="1">
@@ -521,12 +528,18 @@
         </div>
       </div>
     </div>
+
+      </div><!-- /.projects-track -->
+    </div><!-- /.projects-wrapper -->
   </section>
 
   <!-- Skills -->
   <section class="skills" id="skills">
     <div class="container">
-      <h2 class="section-title scroll-reveal">TECH STACK</h2>
+      <h2 class="section-title scroll-reveal">
+        <span class="word-mask"><span class="word">TECH</span></span>
+        <span class="word-mask"><span class="word">STACK</span></span>
+      </h2>
       <div class="skills-grid scroll-reveal">
         <div class="skill-category">
           <h4 class="skill-category-title">Languages</h4>
@@ -639,7 +652,9 @@
   <!-- Experience -->
   <section class="experience" id="experience">
     <div class="container">
-      <h2 class="section-title scroll-reveal">EXPERIENCE</h2>
+      <h2 class="section-title scroll-reveal">
+        <span class="word-mask"><span class="word">EXPERIENCE</span></span>
+      </h2>
       <div class="timeline">
         <div class="timeline-item scroll-reveal">
           <div class="timeline-dot"></div>
@@ -721,7 +736,13 @@
   <!-- Contact -->
   <section class="contact" id="contact">
     <div class="container">
-      <h2 class="contact-heading scroll-reveal">LET'S BUILD<br>SOMETHING</h2>
+      <div class="contact-cta">
+        <h2 class="contact-heading scroll-reveal">
+          <span class="word-mask"><span class="word">LET'S</span></span>
+          <span class="word-mask"><span class="word">BUILD</span></span><br>
+          <span class="word-mask"><span class="word">SOMETHING</span></span>
+        </h2>
+      </div>
       <a href="mailto:karimsangid@gmail.com" class="contact-email magnetic" id="contactEmail">karimsangid@gmail.com</a>
       <div class="contact-socials scroll-reveal">
         <a href="https://github.com/karimsangid" target="_blank" rel="noopener" class="social-link" aria-label="GitHub">

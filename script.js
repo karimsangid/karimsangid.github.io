@@ -146,13 +146,13 @@
     revealObserver.observe(el);
   });
 
-  // ---- COUNTER ANIMATION ----
+  // ---- COUNTER ANIMATION (re-counts on every scroll into view) ----
   var statNumbers = document.querySelectorAll('.stat-number[data-target]');
   var counterObserver = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
+        entry.target.textContent = '0';
         animateCounter(entry.target);
-        counterObserver.unobserve(entry.target);
       }
     });
   }, { threshold: 0.5 });
@@ -198,33 +198,25 @@
     });
   });
 
-  // ---- MAGNETIC BUTTON (Contact Email) ----
-  var magneticEl = document.getElementById('contactEmail');
-  if (magneticEl && !isTouch) {
-    magneticEl.addEventListener('mousemove', function (e) {
-      var rect = this.getBoundingClientRect();
-      var x = e.clientX - rect.left - rect.width / 2;
-      var y = e.clientY - rect.top - rect.height / 2;
-      this.style.transform = 'translate(' + (x * 0.2) + 'px, ' + (y * 0.2) + 'px)';
-    });
-    magneticEl.addEventListener('mouseleave', function () {
-      this.style.transform = 'translate(0, 0)';
+  // ---- MAGNETIC BUTTONS (all interactive elements) ----
+  if (!isTouch) {
+    document.querySelectorAll('.project-link, .nav-links a, .contact-email, .social-link, .cert-item').forEach(function (btn) {
+      btn.addEventListener('mousemove', function (e) {
+        var rect = btn.getBoundingClientRect();
+        var x = e.clientX - rect.left - rect.width / 2;
+        var y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = 'translate(' + (x * 0.3) + 'px, ' + (y * 0.3) + 'px)';
+        btn.style.transition = 'transform 0.1s ease';
+      });
+      btn.addEventListener('mouseleave', function () {
+        btn.style.transform = 'translate(0, 0)';
+        btn.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      });
     });
   }
 
-  // ---- PARALLAX ON HERO BLOBS ----
+  // ---- PARALLAX ON HERO BLOBS (handled in INSANE MODE parallax section below) ----
   var heroBlobs = document.querySelectorAll('.hero-blob');
-  if (!isTouch && heroBlobs.length > 0) {
-    window.addEventListener('scroll', function () {
-      var scrollY = window.scrollY;
-      if (scrollY < window.innerHeight * 1.5) {
-        heroBlobs.forEach(function (blob, i) {
-          var speed = 0.08 + i * 0.04;
-          blob.style.transform = 'translateY(' + (scrollY * speed) + 'px)';
-        });
-      }
-    }, { passive: true });
-  }
 
   // ---- TERMINAL TYPING EFFECT (PC Terminal project) ----
   var cmdTyped = document.querySelector('.vis-cmd-typed');
@@ -469,5 +461,201 @@
   statNumsAll.forEach(function (el) {
     glowObserver.observe(el);
   });
+
+  // ============================================================
+  // INSANE MODE — HORIZONTAL SCROLL GALLERY
+  // ============================================================
+  var projectsSection = document.getElementById('projects');
+  var projectsTrack = document.querySelector('.projects-track');
+  var projectsWrapper = document.querySelector('.projects-wrapper');
+
+  if (projectsTrack && projectsWrapper && projectsSection) {
+    var projectCards = projectsTrack.querySelectorAll('.project-card');
+    var numCards = projectCards.length;
+
+    function setupHorizontalScroll() {
+      if (window.innerWidth <= 900) {
+        // Disable horizontal scroll on mobile
+        projectsWrapper.style.height = 'auto';
+        projectsTrack.style.transform = 'none';
+        projectsTrack.style.position = 'relative';
+        projectsTrack.style.flexDirection = 'column';
+        projectsTrack.style.height = 'auto';
+        return;
+      }
+      projectsTrack.style.position = '';
+      projectsTrack.style.flexDirection = '';
+      projectsTrack.style.height = '';
+
+      // Calculate total scroll distance needed
+      var trackWidth = 0;
+      projectCards.forEach(function (card) {
+        trackWidth += card.offsetWidth + 40; // 40 = gap
+      });
+      trackWidth -= 40; // Remove last gap
+      var wrapperHeight = trackWidth - window.innerWidth + window.innerHeight;
+      projectsWrapper.style.height = Math.max(wrapperHeight, window.innerHeight) + 'px';
+    }
+
+    setupHorizontalScroll();
+    window.addEventListener('resize', setupHorizontalScroll);
+
+    window.addEventListener('scroll', function () {
+      if (window.innerWidth <= 900) return;
+      var wrapperRect = projectsWrapper.getBoundingClientRect();
+      var wrapperHeight = projectsWrapper.offsetHeight;
+      var scrollInWrapper = -wrapperRect.top;
+      var maxScroll = wrapperHeight - window.innerHeight;
+
+      if (scrollInWrapper < 0) scrollInWrapper = 0;
+      if (scrollInWrapper > maxScroll) scrollInWrapper = maxScroll;
+
+      var progress = maxScroll > 0 ? scrollInWrapper / maxScroll : 0;
+
+      var trackWidth = 0;
+      projectCards.forEach(function (card) {
+        trackWidth += card.offsetWidth + 40;
+      });
+      trackWidth -= 40;
+
+      var maxTranslate = trackWidth - window.innerWidth + 160; // 160 = padding
+      var translateX = progress * maxTranslate;
+
+      projectsTrack.style.transform = 'translateX(' + (-translateX) + 'px)';
+    }, { passive: true });
+  }
+
+  // ============================================================
+  // INSANE MODE — PARALLAX DEPTH
+  // ============================================================
+  if (!isTouch) {
+    var heroContent = document.querySelector('.hero-content');
+    var statNums = document.querySelectorAll('.stat-number');
+
+    window.addEventListener('scroll', function () {
+      var scrollY = window.scrollY;
+
+      // Hero text parallax (0.5x)
+      if (heroContent && scrollY < window.innerHeight * 1.5) {
+        heroContent.style.transform = 'translateY(' + (scrollY * 0.15) + 'px)';
+      }
+
+      // Hero blobs parallax (0.3x) — enhance existing
+      heroBlobs.forEach(function (blob, i) {
+        if (scrollY < window.innerHeight * 1.5) {
+          var speed = 0.12 + i * 0.06;
+          // Morphing border-radius based on scroll
+          var morphProgress = (scrollY / window.innerHeight) * 100;
+          var br1 = 50 + Math.sin(morphProgress * 0.02 + i) * 20;
+          var br2 = 50 + Math.cos(morphProgress * 0.03 + i) * 15;
+          var br3 = 50 + Math.sin(morphProgress * 0.025 + i * 2) * 18;
+          var br4 = 50 + Math.cos(morphProgress * 0.015 + i * 3) * 22;
+          blob.style.borderRadius = br1 + '% ' + br2 + '% ' + br3 + '% ' + br4 + '%';
+          blob.style.transform = 'translateY(' + (scrollY * speed) + 'px) scale(' + (1 + Math.sin(morphProgress * 0.01) * 0.1) + ')';
+        }
+      });
+
+      // Stats slight upward drift
+      statNums.forEach(function (num) {
+        var rect = num.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          var offset = (rect.top - window.innerHeight / 2) * 0.05;
+          num.style.transform = 'translateY(' + offset + 'px)';
+        }
+      });
+    }, { passive: true });
+  }
+
+  // ============================================================
+  // INSANE MODE — SKILL PILL FLOAT + INDEX VAR
+  // ============================================================
+  var allPills = document.querySelectorAll('.skill-pill');
+  allPills.forEach(function (pill, index) {
+    pill.style.setProperty('--pill-i', index);
+  });
+
+  // Add float animation when skills section is revealed
+  var skillsGrid = document.querySelector('.skills-grid');
+  if (skillsGrid) {
+    var pillObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.skill-pill').forEach(function (pill) {
+            pill.style.animation = 'floatPill 4s ease-in-out infinite';
+            pill.style.animationDelay = 'calc(var(--pill-i, 0) * 0.3s)';
+          });
+        } else {
+          entry.target.querySelectorAll('.skill-pill').forEach(function (pill) {
+            pill.style.animation = '';
+          });
+        }
+      });
+    }, { threshold: 0.1 });
+    pillObserver.observe(skillsGrid);
+  }
+
+  // ============================================================
+  // INSANE MODE — KONAMI CODE EASTER EGG
+  // ============================================================
+  var konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+  var konamiIndex = 0;
+
+  document.addEventListener('keydown', function (e) {
+    if (e.keyCode === konamiSequence[konamiIndex]) {
+      konamiIndex++;
+      if (konamiIndex === konamiSequence.length) {
+        konamiIndex = 0;
+        triggerMatrixRain();
+      }
+    } else {
+      konamiIndex = 0;
+    }
+  });
+
+  function triggerMatrixRain() {
+    var canvas = document.createElement('canvas');
+    canvas.className = 'matrix-rain-canvas';
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    document.body.appendChild(canvas);
+
+    var ctx = canvas.getContext('2d');
+    var columns = Math.floor(canvas.width / 14);
+    var drops = [];
+    for (var i = 0; i < columns; i++) {
+      drops[i] = Math.random() * -100;
+    }
+
+    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+
+    // Force reflow then activate
+    canvas.offsetHeight;
+    canvas.classList.add('active');
+
+    var matrixInterval = setInterval(function () {
+      ctx.fillStyle = 'rgba(5, 5, 7, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#ff4444';
+      ctx.font = '14px monospace';
+
+      for (var i2 = 0; i2 < drops.length; i2++) {
+        var text = chars.charAt(Math.floor(Math.random() * chars.length));
+        ctx.fillStyle = Math.random() > 0.5 ? '#ff4444' : '#00ffff';
+        ctx.fillText(text, i2 * 14, drops[i2] * 14);
+        if (drops[i2] * 14 > canvas.height && Math.random() > 0.975) {
+          drops[i2] = 0;
+        }
+        drops[i2]++;
+      }
+    }, 40);
+
+    setTimeout(function () {
+      canvas.classList.remove('active');
+      setTimeout(function () {
+        clearInterval(matrixInterval);
+        canvas.remove();
+      }, 300);
+    }, 3000);
+  }
 
 })();
