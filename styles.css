@@ -1315,30 +1315,32 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
 }
 
 /*
-  Roof math:
-  Ridge at Y=10, Z=0. Eaves at Y=35 (wall tops), Z=±40.
-  Slope vector: dY=25, dZ=40 → length=47px, angle=atan(40/25)=58deg
-  Both panels: top edge = ridge, transform-origin: top center
-  Front slope: rotateX(58deg) → bottom toward +Z
-  Back slope:  rotateX(-58deg) → bottom toward -Z
+  Roof: skip rotateX entirely. Place each slope as a 3D face
+  using the same translate+rotate pattern as walls.
+
+  Front slope: a flat panel tilted to face forward-upward.
+  Position it at the midpoint between ridge (Y=10,Z=0) and front eave (Y=35,Z=40),
+  then rotate it to the correct angle.
+
+  Midpoint: Y=22, Z=20. The panel is 140px wide, 47px tall (slope length).
+  Angle from vertical: atan2(40,25) ≈ 58deg → from horizontal: 32deg
 */
 .vis-roof-side {
   position: absolute;
   width: 140px;
   height: 47px;
   border: 1px solid rgba(255, 68, 68, 0.35);
-  transform-origin: top center;
 }
 
 .vis-roof-left {
   background: linear-gradient(135deg, rgba(255, 68, 68, 0.15), rgba(255, 68, 68, 0.05));
-  transform: translateX(10px) translateY(10px) rotateX(58deg);
+  transform: translateX(10px) translateY(22px) translateZ(20px) rotateX(32deg);
   box-shadow: 0 0 15px rgba(255, 68, 68, 0.08);
 }
 
 .vis-roof-right {
   background: linear-gradient(225deg, rgba(255, 68, 68, 0.12), rgba(255, 68, 68, 0.04));
-  transform: translateX(10px) translateY(10px) rotateX(-58deg);
+  transform: translateX(10px) translateY(22px) translateZ(-20px) rotateX(-32deg);
 }
 
 .vis-house-door {
