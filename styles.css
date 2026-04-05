@@ -1576,6 +1576,28 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
   color: var(--text-secondary);
 }
 
+.cert-issuer {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.cert-item--award {
+  border-color: rgba(255, 200, 50, 0.2);
+  background: rgba(255, 200, 50, 0.03);
+}
+
+.cert-item--award:hover {
+  border-color: rgba(255, 200, 50, 0.4);
+  box-shadow: 0 0 20px rgba(255, 200, 50, 0.06);
+}
+
+.cert-badge--award {
+  color: #ffc832;
+  background: rgba(255, 200, 50, 0.1);
+}
+
 /* ============================================================
    CONTACT
    ============================================================ */
