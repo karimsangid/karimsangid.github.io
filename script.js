@@ -1,27 +1,88 @@
 /* ============================================================
-   karimsangid.dev — Premium Portfolio Script
+   karimsangid.dev — ULTRA Premium Portfolio Script
    ============================================================ */
 
 (function () {
   'use strict';
 
-  // ---- LOADING SCREEN ----
-  const loader = document.getElementById('loader');
+  var isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+  // ============================================================
+  // LOADING SCREEN — DRAMATIC BOOT SEQUENCE
+  // ============================================================
+  var loader = document.getElementById('loader');
+  var loaderPercent = document.getElementById('loaderPercent');
+  var loaderGrid = document.getElementById('loaderGrid');
+
+  // Loader grid canvas animation
+  if (loaderGrid) {
+    var lgCtx = loaderGrid.getContext('2d');
+    loaderGrid.width = window.innerWidth;
+    loaderGrid.height = window.innerHeight;
+    var gridRunning = true;
+
+    function drawLoaderGrid() {
+      if (!gridRunning) return;
+      lgCtx.clearRect(0, 0, loaderGrid.width, loaderGrid.height);
+      lgCtx.strokeStyle = 'rgba(255, 68, 68, 0.04)';
+      lgCtx.lineWidth = 0.5;
+      var spacing = 60;
+      var time = Date.now() * 0.001;
+      for (var x = 0; x < loaderGrid.width; x += spacing) {
+        var wave = Math.sin(x * 0.01 + time) * 10;
+        lgCtx.beginPath();
+        lgCtx.moveTo(x, 0);
+        lgCtx.lineTo(x + wave, loaderGrid.height);
+        lgCtx.stroke();
+      }
+      for (var y = 0; y < loaderGrid.height; y += spacing) {
+        var wave2 = Math.cos(y * 0.01 + time) * 10;
+        lgCtx.beginPath();
+        lgCtx.moveTo(0, y);
+        lgCtx.lineTo(loaderGrid.width, y + wave2);
+        lgCtx.stroke();
+      }
+      requestAnimationFrame(drawLoaderGrid);
+    }
+    drawLoaderGrid();
+  }
+
+  // Percent counter
+  var percentVal = 0;
+  function countPercent() {
+    if (percentVal < 100) {
+      percentVal += Math.floor(Math.random() * 8) + 2;
+      if (percentVal > 100) percentVal = 100;
+      if (loaderPercent) loaderPercent.textContent = percentVal + '%';
+      setTimeout(countPercent, 60 + Math.random() * 80);
+    }
+  }
+  countPercent();
+
   window.addEventListener('load', function () {
     setTimeout(function () {
+      percentVal = 100;
+      if (loaderPercent) loaderPercent.textContent = '100%';
+      // Screen flash
+      document.body.classList.add('flash');
+      setTimeout(function () { document.body.classList.remove('flash'); }, 200);
       loader.classList.add('done');
-      setTimeout(function () { loader.style.display = 'none'; }, 800);
-    }, 1400);
+      gridRunning = false;
+      setTimeout(function () { loader.style.display = 'none'; }, 1000);
+    }, 1800);
   });
 
-  // ---- CUSTOM CURSOR ----
-  const dot = document.getElementById('cursorDot');
-  const ring = document.getElementById('cursorRing');
-  const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  // ============================================================
+  // CUSTOM CURSOR + GLOW
+  // ============================================================
+  var dot = document.getElementById('cursorDot');
+  var ring = document.getElementById('cursorRing');
+  var glow = document.getElementById('cursorGlow');
 
   if (!isTouch && dot && ring) {
-    let mx = -100, my = -100;
-    let rx = -100, ry = -100;
+    var mx = -100, my = -100;
+    var rx = -100, ry = -100;
+    var gx = -100, gy = -100;
 
     document.addEventListener('mousemove', function (e) {
       mx = e.clientX;
@@ -35,38 +96,48 @@
       ry += (my - ry) * 0.15;
       ring.style.left = rx + 'px';
       ring.style.top = ry + 'px';
+      if (glow) {
+        gx += (mx - gx) * 0.08;
+        gy += (my - gy) * 0.08;
+        glow.style.left = gx + 'px';
+        glow.style.top = gy + 'px';
+      }
       requestAnimationFrame(moveCursorRing);
     })();
 
-    // Expand ring on hover over interactive elements
     var interactiveSelector = 'a, button, .project-card-inner, .skill-pill, .cert-item, .contact-email, .social-link, .vis-flashcard';
     document.addEventListener('mouseover', function (e) {
       if (e.target.closest(interactiveSelector)) {
         ring.classList.add('hover');
+        dot.classList.add('hover');
       }
     });
     document.addEventListener('mouseout', function (e) {
       if (e.target.closest(interactiveSelector)) {
         ring.classList.remove('hover');
+        dot.classList.remove('hover');
       }
     });
 
-    // Hide cursor when leaving window
     document.addEventListener('mouseleave', function () {
       dot.classList.add('hidden');
       ring.classList.add('hidden');
+      if (glow) glow.classList.add('hidden');
     });
     document.addEventListener('mouseenter', function () {
       dot.classList.remove('hidden');
       ring.classList.remove('hidden');
+      if (glow) glow.classList.remove('hidden');
     });
   } else {
-    // Hide custom cursor elements on touch devices
     if (dot) dot.style.display = 'none';
     if (ring) ring.style.display = 'none';
+    if (glow) glow.style.display = 'none';
   }
 
-  // ---- NAVIGATION ----
+  // ============================================================
+  // NAVIGATION
+  // ============================================================
   var nav = document.getElementById('nav');
   var navToggle = document.getElementById('navToggle');
   var navLinks = document.getElementById('navLinks');
@@ -78,18 +149,15 @@
       nav.classList.remove('scrolled');
     }
   }
-
   window.addEventListener('scroll', updateNav, { passive: true });
   updateNav();
 
-  // Mobile menu toggle
   navToggle.addEventListener('click', function () {
     navToggle.classList.toggle('active');
     navLinks.classList.toggle('open');
     document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
   });
 
-  // Close menu on link click
   navLinks.querySelectorAll('a').forEach(function (link) {
     link.addEventListener('click', function () {
       navToggle.classList.remove('active');
@@ -98,7 +166,6 @@
     });
   });
 
-  // Close on Escape
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && navLinks.classList.contains('open')) {
       navToggle.classList.remove('active');
@@ -127,10 +194,11 @@
       }
     });
   }
-
   window.addEventListener('scroll', highlightActiveNav, { passive: true });
 
-  // ---- SCROLL REVEAL (IntersectionObserver) ----
+  // ============================================================
+  // SCROLL REVEAL (IntersectionObserver) — WITH 3D CARD ENTRANCES
+  // ============================================================
   var revealElements = document.querySelectorAll('.scroll-reveal');
   var revealObserver = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
@@ -140,13 +208,15 @@
         entry.target.classList.remove('revealed');
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
   revealElements.forEach(function (el) {
     revealObserver.observe(el);
   });
 
-  // ---- COUNTER ANIMATION (re-counts on every scroll into view) ----
+  // ============================================================
+  // COUNTER ANIMATION
+  // ============================================================
   var statNumbers = document.querySelectorAll('.stat-number[data-target]');
   var counterObserver = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
@@ -157,33 +227,30 @@
     });
   }, { threshold: 0.5 });
 
-  statNumbers.forEach(function (el) {
-    counterObserver.observe(el);
-  });
+  statNumbers.forEach(function (el) { counterObserver.observe(el); });
 
   function animateCounter(el) {
     var target = parseInt(el.getAttribute('data-target'), 10);
     var duration = 2000;
     var start = null;
-
     function step(timestamp) {
       if (!start) start = timestamp;
       var progress = Math.min((timestamp - start) / duration, 1);
-      // Ease out cubic
       var eased = 1 - Math.pow(1 - progress, 3);
-      var current = Math.floor(eased * target);
-      el.textContent = current.toLocaleString();
+      el.textContent = Math.floor(eased * target).toLocaleString();
       if (progress < 1) {
         requestAnimationFrame(step);
       } else {
         el.textContent = target.toLocaleString();
+        el.classList.add('counted');
       }
     }
-
     requestAnimationFrame(step);
   }
 
-  // ---- SMOOTH SCROLL FOR ANCHOR LINKS ----
+  // ============================================================
+  // SMOOTH SCROLL
+  // ============================================================
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {
       var href = this.getAttribute('href');
@@ -198,152 +265,189 @@
     });
   });
 
-  // ---- MAGNETIC BUTTONS (all interactive elements) ----
+  // ============================================================
+  // MAGNETIC BUTTONS — SPRING PHYSICS
+  // ============================================================
   if (!isTouch) {
     document.querySelectorAll('.project-link, .nav-links a, .contact-email, .social-link, .cert-item').forEach(function (btn) {
+      var bx = 0, by = 0, tx = 0, ty = 0;
       btn.addEventListener('mousemove', function (e) {
         var rect = btn.getBoundingClientRect();
-        var x = e.clientX - rect.left - rect.width / 2;
-        var y = e.clientY - rect.top - rect.height / 2;
-        btn.style.transform = 'translate(' + (x * 0.3) + 'px, ' + (y * 0.3) + 'px)';
-        btn.style.transition = 'transform 0.1s ease';
+        tx = (e.clientX - rect.left - rect.width / 2) * 0.35;
+        ty = (e.clientY - rect.top - rect.height / 2) * 0.35;
       });
       btn.addEventListener('mouseleave', function () {
-        btn.style.transform = 'translate(0, 0)';
-        btn.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        tx = 0;
+        ty = 0;
+      });
+      (function springAnimate() {
+        bx += (tx - bx) * 0.15;
+        by += (ty - by) * 0.15;
+        if (Math.abs(bx) > 0.1 || Math.abs(by) > 0.1 || Math.abs(tx) > 0.1 || Math.abs(ty) > 0.1) {
+          btn.style.transform = 'translate(' + bx + 'px, ' + by + 'px)';
+        }
+        requestAnimationFrame(springAnimate);
+      })();
+    });
+  }
+
+  // ============================================================
+  // INTERACTIVE PARTICLE CONSTELLATION — CANVAS
+  // ============================================================
+  var heroCanvas = document.getElementById('heroCanvas');
+  if (heroCanvas && !isTouch) {
+    var ctx = heroCanvas.getContext('2d');
+    var particles = [];
+    var particleCount = 80;
+    var connectionDist = 150;
+    var pmx = -1000, pmy = -1000;
+    var mouseRadius = 200;
+
+    function resizeCanvas() {
+      heroCanvas.width = window.innerWidth;
+      heroCanvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    document.addEventListener('mousemove', function (e) {
+      pmx = e.clientX;
+      pmy = e.clientY;
+    });
+
+    for (var i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        r: 1.5 + Math.random() * 1.5
+      });
+    }
+
+    function animateParticles() {
+      if (window.scrollY > window.innerHeight * 1.2) {
+        requestAnimationFrame(animateParticles);
+        return;
+      }
+      ctx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
+
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+        // Mouse repulsion
+        var dx = p.x - pmx;
+        var dy = p.y - pmy;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < mouseRadius && dist > 0) {
+          var force = (mouseRadius - dist) / mouseRadius;
+          p.vx += (dx / dist) * force * 0.8;
+          p.vy += (dy / dist) * force * 0.8;
+        }
+
+        // Damping
+        p.vx *= 0.98;
+        p.vy *= 0.98;
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Wrap
+        if (p.x < 0) p.x = heroCanvas.width;
+        if (p.x > heroCanvas.width) p.x = 0;
+        if (p.y < 0) p.y = heroCanvas.height;
+        if (p.y > heroCanvas.height) p.y = 0;
+
+        // Draw particle
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 68, 68, 0.6)';
+        ctx.fill();
+
+        // Connections
+        for (var j = i + 1; j < particles.length; j++) {
+          var p2 = particles[j];
+          var cdx = p.x - p2.x;
+          var cdy = p.y - p2.y;
+          var cd = Math.sqrt(cdx * cdx + cdy * cdy);
+          if (cd < connectionDist) {
+            var alpha = (1 - cd / connectionDist) * 0.15;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = 'rgba(255, 68, 68, ' + alpha + ')';
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+
+        // Mouse connections
+        if (dist < mouseRadius * 1.5) {
+          var mAlpha = (1 - dist / (mouseRadius * 1.5)) * 0.3;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(pmx, pmy);
+          ctx.strokeStyle = 'rgba(255, 68, 68, ' + mAlpha + ')';
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+
+      // Mouse node glow
+      if (pmx > 0 && pmy > 0 && pmx < heroCanvas.width && pmy < heroCanvas.height) {
+        var grad = ctx.createRadialGradient(pmx, pmy, 0, pmx, pmy, 60);
+        grad.addColorStop(0, 'rgba(255, 68, 68, 0.15)');
+        grad.addColorStop(1, 'rgba(255, 68, 68, 0)');
+        ctx.beginPath();
+        ctx.arc(pmx, pmy, 60, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+      }
+
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+  }
+
+  // ============================================================
+  // CARD SPOTLIGHT — CURSOR GRADIENT FOLLOW
+  // ============================================================
+  if (!isTouch) {
+    document.querySelectorAll('.project-card-inner').forEach(function (card) {
+      var spotlight = card.querySelector('.card-spotlight');
+      if (!spotlight) return;
+
+      card.addEventListener('mousemove', function (e) {
+        var rect = card.getBoundingClientRect();
+        var x = e.clientX - rect.left;
+        var y = e.clientY - rect.top;
+        spotlight.style.opacity = '1';
+        spotlight.style.background = 'radial-gradient(600px circle at ' + x + 'px ' + y + 'px, rgba(255, 68, 68, 0.06), transparent 40%)';
+      });
+
+      card.addEventListener('mouseleave', function () {
+        spotlight.style.opacity = '0';
       });
     });
   }
 
-  // ---- PARALLAX ON HERO BLOBS (handled in INSANE MODE parallax section below) ----
-  var heroBlobs = document.querySelectorAll('.hero-blob');
-
-  // ---- TERMINAL TYPING EFFECT (PC Terminal project) ----
-  var cmdTyped = document.querySelector('.vis-cmd-typed');
-  if (cmdTyped) {
-    var commands = ['Get-Process | Sort CPU -Desc', 'netstat -an | Select-String LISTEN', 'Get-Service | Where Status -eq Running', 'systeminfo | Select-String "OS"'];
-    var cmdIndex = 0;
-    var charIndex = 0;
-    var typing = true;
-
-    function typeCmd() {
-      var cmd = commands[cmdIndex];
-      if (typing) {
-        if (charIndex <= cmd.length) {
-          cmdTyped.textContent = cmd.substring(0, charIndex);
-          charIndex++;
-          setTimeout(typeCmd, 50 + Math.random() * 40);
-        } else {
-          typing = false;
-          setTimeout(typeCmd, 2000);
-        }
-      } else {
-        cmdTyped.textContent = '';
-        charIndex = 0;
-        cmdIndex = (cmdIndex + 1) % commands.length;
-        typing = true;
-        setTimeout(typeCmd, 400);
-      }
-    }
-
-    // Start typing when visible
-    var cmdObserver = new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting) {
-        typeCmd();
-        cmdObserver.disconnect();
-      }
-    }, { threshold: 0.3 });
-
-    var cmdEl = document.querySelector('.vis-cmd');
-    if (cmdEl) cmdObserver.observe(cmdEl);
-  }
-
-  // ---- SCROLL PROGRESS BAR ----
-  var scrollProgress = document.getElementById('scrollProgress');
-  if (scrollProgress) {
-    window.addEventListener('scroll', function () {
-      var scrollTop = window.scrollY;
-      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      var scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      scrollProgress.style.width = scrollPercent + '%';
-    }, { passive: true });
-  }
-
-  // ---- FLOATING PARTICLES IN HERO ----
-  var heroSection = document.getElementById('hero');
-  if (heroSection) {
-    var particleCount = 18;
-    for (var p = 0; p < particleCount; p++) {
-      var particle = document.createElement('div');
-      particle.className = 'particle';
-      var size = 2 + Math.random() * 2;
-      var startX = Math.random() * 100;
-      var startY = Math.random() * 100;
-      var duration = 15 + Math.random() * 20;
-      var delay = Math.random() * -20;
-      particle.style.cssText = 'width:' + size + 'px;height:' + size + 'px;left:' + startX + '%;top:' + startY + '%;opacity:' + (0.1 + Math.random() * 0.1) + ';animation:particleDrift' + (p % 3) + ' ' + duration + 's linear ' + delay + 's infinite;';
-      heroSection.querySelector('.hero-bg').appendChild(particle);
-    }
-
-    var particleStyle = document.createElement('style');
-    particleStyle.textContent =
-      '@keyframes particleDrift0{0%{transform:translate(0,0)}25%{transform:translate(60px,-80px)}50%{transform:translate(-40px,-160px)}75%{transform:translate(80px,-240px)}100%{transform:translate(0,0)}}' +
-      '@keyframes particleDrift1{0%{transform:translate(0,0)}25%{transform:translate(-50px,-60px)}50%{transform:translate(70px,-120px)}75%{transform:translate(-30px,-200px)}100%{transform:translate(0,0)}}' +
-      '@keyframes particleDrift2{0%{transform:translate(0,0)}25%{transform:translate(40px,-100px)}50%{transform:translate(-60px,-50px)}75%{transform:translate(20px,-180px)}100%{transform:translate(0,0)}}';
-    document.head.appendChild(particleStyle);
-  }
-
-  // ---- MOUSE TRAIL EFFECT (desktop only) ----
+  // ============================================================
+  // 3D TILT ON PROJECT CARDS
+  // ============================================================
   if (!isTouch) {
-    var trailCount = 6;
-    var trailDots = [];
-    for (var t = 0; t < trailCount; t++) {
-      var trailDot = document.createElement('div');
-      trailDot.className = 'mouse-trail';
-      document.body.appendChild(trailDot);
-      trailDots.push({ el: trailDot, x: -100, y: -100 });
-    }
-
-    var trailMx = -100, trailMy = -100;
-    document.addEventListener('mousemove', function (e) {
-      trailMx = e.clientX;
-      trailMy = e.clientY;
-    });
-
-    (function animateTrail() {
-      var prevX = trailMx, prevY = trailMy;
-      for (var i = 0; i < trailDots.length; i++) {
-        var d = trailDots[i];
-        var targetX = i === 0 ? trailMx : trailDots[i - 1].x;
-        var targetY = i === 0 ? trailMy : trailDots[i - 1].y;
-        d.x += (targetX - d.x) * (0.35 - i * 0.04);
-        d.y += (targetY - d.y) * (0.35 - i * 0.04);
-        d.el.style.left = d.x + 'px';
-        d.el.style.top = d.y + 'px';
-        d.el.style.opacity = (0.3 - (i * 0.05));
-        d.el.style.transform = 'translate(-50%, -50%)';
-      }
-      requestAnimationFrame(animateTrail);
-    })();
-  }
-
-  // ---- TILT EFFECT ON PROJECT CARDS (desktop only) ----
-  if (!isTouch) {
-    var projectCards = document.querySelectorAll('.project-card-inner');
-    projectCards.forEach(function (card) {
+    document.querySelectorAll('.project-card-inner').forEach(function (card) {
       card.addEventListener('mousemove', function (e) {
         var rect = card.getBoundingClientRect();
         var x = e.clientX - rect.left;
         var y = e.clientY - rect.top;
         var centerX = rect.width / 2;
         var centerY = rect.height / 2;
-        var rotateX = ((y - centerY) / centerY) * -3;
-        var rotateY = ((x - centerX) / centerX) * 3;
-        card.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+        var rotateX = ((y - centerY) / centerY) * -4;
+        var rotateY = ((x - centerX) / centerX) * 4;
+        card.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale(1.01)';
       });
       card.addEventListener('mouseleave', function () {
-        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-        card.style.transition = 'transform 0.5s ease';
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+        card.style.transition = 'transform 0.6s cubic-bezier(0.33, 1, 0.68, 1)';
       });
       card.addEventListener('mouseenter', function () {
         card.style.transition = 'transform 0.1s ease';
@@ -351,15 +455,16 @@
     });
   }
 
-  // ---- TEXT SCRAMBLE EFFECT ON PROJECT NAMES ----
-  var scrambleChars = '!@#$%^&*()_+-=[]{}|;\':",./<>?';
+  // ============================================================
+  // TEXT SCRAMBLE — ON PROJECT NAMES
+  // ============================================================
+  var scrambleChars = '!@#$%^&*()_+-=[]{}|;\':",./<>?ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   var projectNameEls = document.querySelectorAll('.project-name');
 
   var scrambleObserver = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
         scrambleText(entry.target);
-        scrambleObserver.unobserve(entry.target);
       }
     });
   }, { threshold: 0.5 });
@@ -372,7 +477,7 @@
   function scrambleText(el) {
     var original = el.getAttribute('data-original');
     var length = original.length;
-    var duration = 500;
+    var duration = 600;
     var startTime = null;
 
     function step(timestamp) {
@@ -380,8 +485,8 @@
       var progress = Math.min((timestamp - startTime) / duration, 1);
       var result = '';
       for (var i = 0; i < length; i++) {
-        if (original[i] === ' ') {
-          result += ' ';
+        if (original[i] === ' ' || original[i] === '.') {
+          result += original[i];
           continue;
         }
         if (progress > (i / length) * 0.7 + 0.3) {
@@ -397,11 +502,12 @@
         el.textContent = original;
       }
     }
-
     requestAnimationFrame(step);
   }
 
-  // ---- TYPING EFFECT ON ABOUT BIO ----
+  // ============================================================
+  // TYPING EFFECT ON ABOUT BIO
+  // ============================================================
   var bioParagraph = document.querySelector('.about-bio p');
   if (bioParagraph) {
     var bioOriginalText = bioParagraph.textContent;
@@ -425,95 +531,152 @@
     var cursor = document.createElement('span');
     cursor.className = 'typing-cursor';
     el.appendChild(cursor);
-    var charIndex2 = 0;
+    var ci = 0;
 
-    function typeNextChar() {
-      if (charIndex2 < text.length) {
-        el.insertBefore(document.createTextNode(text[charIndex2]), cursor);
-        charIndex2++;
-        setTimeout(typeNextChar, 15);
+    function typeNext() {
+      if (ci < text.length) {
+        el.insertBefore(document.createTextNode(text[ci]), cursor);
+        ci++;
+        setTimeout(typeNext, 12);
       } else {
         setTimeout(function () {
           if (cursor.parentNode) cursor.parentNode.removeChild(cursor);
         }, 2000);
       }
     }
-
-    typeNextChar();
+    typeNext();
   }
 
-  // ---- STAT NUMBER GLOW AFTER COUNTING ----
-  // Patch: add 'counted' class after counter finishes
-  var statNumsAll = document.querySelectorAll('.stat-number[data-target]');
-  var glowObserver = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        var el = entry.target;
-        // Wait for counter animation to finish (2s) then add glow
-        setTimeout(function () {
-          el.classList.add('counted');
-        }, 2200);
-        glowObserver.unobserve(el);
+  // ============================================================
+  // TERMINAL TYPING (PC Terminal)
+  // ============================================================
+  var cmdTyped = document.querySelector('.vis-cmd-typed');
+  if (cmdTyped) {
+    var commands = ['Get-Process | Sort CPU -Desc', 'netstat -an | Select-String LISTEN', 'Get-Service | Where Status -eq Running', 'systeminfo | Select-String "OS"'];
+    var cmdIdx = 0, charIdx = 0, typing = true;
+
+    function typeCmd() {
+      var cmd = commands[cmdIdx];
+      if (typing) {
+        if (charIdx <= cmd.length) {
+          cmdTyped.textContent = cmd.substring(0, charIdx);
+          charIdx++;
+          setTimeout(typeCmd, 50 + Math.random() * 40);
+        } else {
+          typing = false;
+          setTimeout(typeCmd, 2000);
+        }
+      } else {
+        cmdTyped.textContent = '';
+        charIdx = 0;
+        cmdIdx = (cmdIdx + 1) % commands.length;
+        typing = true;
+        setTimeout(typeCmd, 400);
       }
-    });
-  }, { threshold: 0.5 });
+    }
 
-  statNumsAll.forEach(function (el) {
-    glowObserver.observe(el);
-  });
-
-  // Horizontal scroll removed — using vertical layout
+    var cmdObs = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { typeCmd(); cmdObs.disconnect(); }
+    }, { threshold: 0.3 });
+    var cmdEl = document.querySelector('.vis-cmd');
+    if (cmdEl) cmdObs.observe(cmdEl);
+  }
 
   // ============================================================
-  // INSANE MODE — PARALLAX DEPTH
+  // SCROLL PROGRESS BAR
+  // ============================================================
+  var scrollProgress = document.getElementById('scrollProgress');
+  if (scrollProgress) {
+    window.addEventListener('scroll', function () {
+      var scrollTop = window.scrollY;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      scrollProgress.style.width = pct + '%';
+    }, { passive: true });
+  }
+
+  // ============================================================
+  // MOUSE TRAIL — UPGRADED WITH FADE
   // ============================================================
   if (!isTouch) {
-    var heroContent = document.querySelector('.hero-content');
-    var statNums = document.querySelectorAll('.stat-number');
+    var trailCount = 8;
+    var trailDots = [];
+    for (var t = 0; t < trailCount; t++) {
+      var trailDot = document.createElement('div');
+      trailDot.className = 'mouse-trail';
+      document.body.appendChild(trailDot);
+      trailDots.push({ el: trailDot, x: -100, y: -100 });
+    }
 
+    var trailMx = -100, trailMy = -100;
+    document.addEventListener('mousemove', function (e) {
+      trailMx = e.clientX;
+      trailMy = e.clientY;
+    });
+
+    (function animateTrail() {
+      for (var i = 0; i < trailDots.length; i++) {
+        var d = trailDots[i];
+        var targetX = i === 0 ? trailMx : trailDots[i - 1].x;
+        var targetY = i === 0 ? trailMy : trailDots[i - 1].y;
+        d.x += (targetX - d.x) * (0.3 - i * 0.03);
+        d.y += (targetY - d.y) * (0.3 - i * 0.03);
+        d.el.style.left = d.x + 'px';
+        d.el.style.top = d.y + 'px';
+        d.el.style.opacity = (0.4 - (i * 0.05));
+        var size = 4 - i * 0.3;
+        d.el.style.width = size + 'px';
+        d.el.style.height = size + 'px';
+      }
+      requestAnimationFrame(animateTrail);
+    })();
+  }
+
+  // ============================================================
+  // PARALLAX — MULTI-LAYER DEPTH
+  // ============================================================
+  var heroBlobs = document.querySelectorAll('.hero-blob');
+  var heroContent = document.querySelector('.hero-content');
+  var geoShapes = document.querySelectorAll('.geo');
+
+  if (!isTouch) {
     window.addEventListener('scroll', function () {
       var scrollY = window.scrollY;
 
-      // Hero text parallax (0.5x)
       if (heroContent && scrollY < window.innerHeight * 1.5) {
-        heroContent.style.transform = 'translateY(' + (scrollY * 0.15) + 'px)';
+        heroContent.style.transform = 'translateY(' + (scrollY * 0.2) + 'px)';
+        heroContent.style.opacity = Math.max(0, 1 - scrollY / (window.innerHeight * 0.8));
       }
 
-      // Hero blobs parallax (0.3x) — enhance existing
       heroBlobs.forEach(function (blob, i) {
         if (scrollY < window.innerHeight * 1.5) {
-          var speed = 0.12 + i * 0.06;
-          // Morphing border-radius based on scroll
+          var speed = 0.12 + i * 0.08;
           var morphProgress = (scrollY / window.innerHeight) * 100;
           var br1 = 50 + Math.sin(morphProgress * 0.02 + i) * 20;
           var br2 = 50 + Math.cos(morphProgress * 0.03 + i) * 15;
           var br3 = 50 + Math.sin(morphProgress * 0.025 + i * 2) * 18;
           var br4 = 50 + Math.cos(morphProgress * 0.015 + i * 3) * 22;
           blob.style.borderRadius = br1 + '% ' + br2 + '% ' + br3 + '% ' + br4 + '%';
-          blob.style.transform = 'translateY(' + (scrollY * speed) + 'px) scale(' + (1 + Math.sin(morphProgress * 0.01) * 0.1) + ')';
+          blob.style.transform = 'translateY(' + (scrollY * speed) + 'px) scale(' + (1 + Math.sin(morphProgress * 0.01) * 0.15) + ')';
         }
       });
 
-      // Stats slight upward drift
-      statNums.forEach(function (num) {
-        var rect = num.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-          var offset = (rect.top - window.innerHeight / 2) * 0.05;
-          num.style.transform = 'translateY(' + offset + 'px)';
-        }
+      // Floating geometry parallax
+      geoShapes.forEach(function (geo, i) {
+        var speed = 0.03 + i * 0.01;
+        geo.style.transform = 'translateY(' + (scrollY * speed) + 'px) rotate(' + (scrollY * 0.05 + i * 30) + 'deg)';
       });
     }, { passive: true });
   }
 
   // ============================================================
-  // INSANE MODE — SKILL PILL FLOAT + INDEX VAR
+  // SKILL PILL FLOAT + INDEX
   // ============================================================
   var allPills = document.querySelectorAll('.skill-pill');
   allPills.forEach(function (pill, index) {
     pill.style.setProperty('--pill-i', index);
   });
 
-  // Add float animation when skills section is revealed
   var skillsGrid = document.querySelector('.skills-grid');
   if (skillsGrid) {
     var pillObserver = new IntersectionObserver(function (entries) {
@@ -534,7 +697,22 @@
   }
 
   // ============================================================
-  // INSANE MODE — KONAMI CODE EASTER EGG
+  // SECTION TITLE SCRAMBLE ON SCROLL
+  // ============================================================
+  document.querySelectorAll('.section-title .word').forEach(function (wordEl) {
+    wordEl.setAttribute('data-original', wordEl.textContent);
+    var wordObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          scrambleText(entry.target);
+        }
+      });
+    }, { threshold: 0.8 });
+    wordObs.observe(wordEl);
+  });
+
+  // ============================================================
+  // KONAMI CODE EASTER EGG
   // ============================================================
   var konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
   var konamiIndex = 0;
@@ -558,43 +736,45 @@
     canvas.height = window.innerHeight;
     document.body.appendChild(canvas);
 
-    var ctx = canvas.getContext('2d');
+    var c = canvas.getContext('2d');
     var columns = Math.floor(canvas.width / 14);
     var drops = [];
-    for (var i = 0; i < columns; i++) {
-      drops[i] = Math.random() * -100;
-    }
+    for (var i = 0; i < columns; i++) drops[i] = Math.random() * -100;
 
     var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
 
-    // Force reflow then activate
     canvas.offsetHeight;
     canvas.classList.add('active');
 
     var matrixInterval = setInterval(function () {
-      ctx.fillStyle = 'rgba(5, 5, 7, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#ff4444';
-      ctx.font = '14px monospace';
+      c.fillStyle = 'rgba(5, 5, 7, 0.05)';
+      c.fillRect(0, 0, canvas.width, canvas.height);
+      c.font = '14px monospace';
 
-      for (var i2 = 0; i2 < drops.length; i2++) {
+      for (var i = 0; i < drops.length; i++) {
         var text = chars.charAt(Math.floor(Math.random() * chars.length));
-        ctx.fillStyle = Math.random() > 0.5 ? '#ff4444' : '#00ffff';
-        ctx.fillText(text, i2 * 14, drops[i2] * 14);
-        if (drops[i2] * 14 > canvas.height && Math.random() > 0.975) {
-          drops[i2] = 0;
-        }
-        drops[i2]++;
+        c.fillStyle = Math.random() > 0.5 ? '#ff4444' : '#00ffff';
+        c.fillText(text, i * 14, drops[i] * 14);
+        if (drops[i] * 14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
       }
     }, 40);
 
     setTimeout(function () {
       canvas.classList.remove('active');
-      setTimeout(function () {
-        clearInterval(matrixInterval);
-        canvas.remove();
-      }, 300);
+      setTimeout(function () { clearInterval(matrixInterval); canvas.remove(); }, 300);
     }, 3000);
   }
+
+  // ============================================================
+  // SECTION VISIBILITY — STAGGER CHILDREN
+  // ============================================================
+  document.querySelectorAll('.timeline-item').forEach(function (item, idx) {
+    item.style.transitionDelay = (idx * 0.15) + 's';
+  });
+
+  document.querySelectorAll('.cert-item').forEach(function (item, idx) {
+    item.style.transitionDelay = (idx * 0.1) + 's';
+  });
 
 })();

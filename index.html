@@ -25,7 +25,7 @@
 
   <!-- SEO Meta Tags -->
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://karimsangiddev.vercel.app">
+  <link rel="canonical" href="https://karimsangid.dev">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -38,7 +38,7 @@
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Karim Sangid",
-    "url": "https://karimsangiddev.vercel.app",
+    "url": "https://karimsangid.dev",
     "jobTitle": "AI & Security Engineer",
     "worksFor": {
       "@type": "Organization",
@@ -69,15 +69,26 @@
   <!-- Loading Screen -->
   <div class="loader" id="loader">
     <div class="loader-scanlines"></div>
-    <div class="loader-text loader-glitch" data-text="K.S">
-      <span class="loader-letter">K</span><span class="loader-dot">.</span><span class="loader-letter">S</span>
+    <canvas class="loader-grid-canvas" id="loaderGrid"></canvas>
+    <div class="loader-content">
+      <div class="loader-text loader-glitch" data-text="K.S">
+        <span class="loader-letter">K</span><span class="loader-dot">.</span><span class="loader-letter">S</span>
+      </div>
+      <div class="loader-boot" id="loaderBoot">
+        <p class="boot-line" style="--i:0">[SYS] Initializing core modules...</p>
+        <p class="boot-line" style="--i:1">[NET] Establishing secure connection...</p>
+        <p class="boot-line" style="--i:2">[GPU] Rendering pipeline active...</p>
+        <p class="boot-line" style="--i:3">[OK_] All systems operational.</p>
+      </div>
+      <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+      <div class="loader-percent" id="loaderPercent">0%</div>
     </div>
-    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
   </div>
 
   <!-- Custom Cursor -->
   <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
+  <div class="cursor-glow" id="cursorGlow"></div>
 
   <!-- Grain Overlay -->
   <div class="grain" aria-hidden="true"></div>
@@ -106,10 +117,23 @@
 
   <!-- Hero -->
   <section class="hero" id="hero">
+    <canvas class="hero-canvas" id="heroCanvas"></canvas>
+    <div class="hero-aurora"></div>
     <div class="hero-bg">
       <div class="hero-blob hero-blob--1"></div>
       <div class="hero-blob hero-blob--2"></div>
       <div class="hero-blob hero-blob--3"></div>
+    </div>
+    <!-- Floating geometry -->
+    <div class="geo-shapes" aria-hidden="true">
+      <div class="geo geo--tri" style="--x:15%;--y:20%;--s:40px;--d:20s;--del:0s"></div>
+      <div class="geo geo--circle" style="--x:80%;--y:30%;--s:24px;--d:25s;--del:-5s"></div>
+      <div class="geo geo--hex" style="--x:70%;--y:75%;--s:36px;--d:22s;--del:-8s"></div>
+      <div class="geo geo--diamond" style="--x:25%;--y:80%;--s:28px;--d:18s;--del:-3s"></div>
+      <div class="geo geo--tri" style="--x:90%;--y:60%;--s:20px;--d:24s;--del:-12s"></div>
+      <div class="geo geo--circle" style="--x:10%;--y:55%;--s:16px;--d:28s;--del:-7s"></div>
+      <div class="geo geo--cross" style="--x:50%;--y:15%;--s:22px;--d:19s;--del:-10s"></div>
+      <div class="geo geo--diamond" style="--x:60%;--y:45%;--s:18px;--d:26s;--del:-15s"></div>
     </div>
     <div class="hero-content">
       <h1 class="hero-name" aria-label="Karim Sangid">
@@ -191,10 +215,11 @@
     <div class="projects-wrapper">
       <div class="projects-track">
     <!-- Project 01: Hummus IQ -->
-    <div class="project-card scroll-reveal" data-project="1">
+    <div class="project-card scroll-reveal" data-project="1" data-enter="left">
       <div class="project-card-inner">
+        <div class="card-spotlight"></div>
         <div class="project-info">
-          <span class="project-number">01</span>
+          <span class="project-number">01</span>
           <h3 class="project-name">Hummus IQ</h3>
           <p class="project-desc">AI Assistant</p>
           <ul class="project-features">
@@ -220,10 +245,11 @@
     </div>
 
     <!-- Project 02: RoofRoof -->
-    <div class="project-card scroll-reveal" data-project="2">
+    <div class="project-card scroll-reveal" data-project="2" data-enter="right">
       <div class="project-card-inner">
+        <div class="card-spotlight"></div>
         <div class="project-info">
-          <span class="project-number">02</span>
+          <span class="project-number">02</span>
           <h3 class="project-name">RoofRoof.solutions</h3>
           <p class="project-desc">Satellite Roof Inspection Platform</p>
           <ul class="project-features">
@@ -265,10 +291,11 @@
     </div>
 
     <!-- Project 03: SentinelIQ -->
-    <div class="project-card scroll-reveal" data-project="3">
+    <div class="project-card scroll-reveal" data-project="3" data-enter="left">
       <div class="project-card-inner">
+        <div class="card-spotlight"></div>
         <div class="project-info">
-          <span class="project-number">03</span>
+          <span class="project-number">03</span>
           <h3 class="project-name">SentinelIQ</h3>
           <p class="project-desc">AI-Powered Security Log Analyzer</p>
           <ul class="project-features">
@@ -311,10 +338,11 @@
     </div>
 
     <!-- Project 04: HummusOSINT -->
-    <div class="project-card scroll-reveal" data-project="4">
+    <div class="project-card scroll-reveal" data-project="4" data-enter="right">
       <div class="project-card-inner">
+        <div class="card-spotlight"></div>
         <div class="project-info">
-          <span class="project-number">04</span>
+          <span class="project-number">04</span>
           <h3 class="project-name">HummusOSINT</h3>
           <p class="project-desc">Open Source Intelligence Platform</p>
           <ul class="project-features">
@@ -348,10 +376,11 @@
     </div>
 
     <!-- Project 05: Cram -->
-    <div class="project-card scroll-reveal" data-project="5">
+    <div class="project-card scroll-reveal" data-project="5" data-enter="left">
       <div class="project-card-inner">
+        <div class="card-spotlight"></div>
         <div class="project-info">
-          <span class="project-number">05</span>
+          <span class="project-number">05</span>
           <h3 class="project-name">Cram</h3>
           <p class="project-desc">AI Study Assistant</p>
           <ul class="project-features">
@@ -383,10 +412,11 @@
     </div>
 
     <!-- Project 06: HummusLink -->
-    <div class="project-card scroll-reveal" data-project="6">
+    <div class="project-card scroll-reveal" data-project="6" data-enter="right">
       <div class="project-card-inner">
+        <div class="card-spotlight"></div>
         <div class="project-info">
-          <span class="project-number">06</span>
+          <span class="project-number">06</span>
           <h3 class="project-name">HummusLink</h3>
           <p class="project-desc">Cross-Platform Sync Bridge</p>
           <ul class="project-features">
@@ -419,10 +449,11 @@
     </div>
 
     <!-- Project 07: Blazin-App -->
-    <div class="project-card scroll-reveal" data-project="7">
+    <div class="project-card scroll-reveal" data-project="7" data-enter="left">
       <div class="project-card-inner">
+        <div class="card-spotlight"></div>
         <div class="project-info">
-          <span class="project-number">07</span>
+          <span class="project-number">07</span>
           <h3 class="project-name">Blazin-App</h3>
           <p class="project-desc">Mobile Food Delivery App</p>
           <ul class="project-features">
@@ -452,10 +483,11 @@
     </div>
 
     <!-- Project 08: FiveM Game Development -->
-    <div class="project-card scroll-reveal" data-project="8">
+    <div class="project-card scroll-reveal" data-project="8" data-enter="right">
       <div class="project-card-inner">
+        <div class="card-spotlight"></div>
         <div class="project-info">
-          <span class="project-number">08</span>
+          <span class="project-number">08</span>
           <h3 class="project-name">FiveM Server Platform</h3>
           <p class="project-desc">Multiplayer Game Infrastructure &amp; Development</p>
           <ul class="project-features">
@@ -489,10 +521,11 @@
     </div>
 
     <!-- Project 09: Papi-AI -->
-    <div class="project-card scroll-reveal" data-project="9">
+    <div class="project-card scroll-reveal" data-project="9" data-enter="left">
       <div class="project-card-inner">
+        <div class="card-spotlight"></div>
         <div class="project-info">
-          <span class="project-number">09</span>
+          <span class="project-number">09</span>
           <h3 class="project-name">Papi-AI</h3>
           <p class="project-desc">AI Dating Assistant</p>
           <ul class="project-features">
@@ -517,10 +550,11 @@
     </div>
 
     <!-- Project 10: PC Terminal Server -->
-    <div class="project-card scroll-reveal" data-project="10">
+    <div class="project-card scroll-reveal" data-project="10" data-enter="right">
       <div class="project-card-inner">
+        <div class="card-spotlight"></div>
         <div class="project-info">
-          <span class="project-number">10</span>
+          <span class="project-number">10</span>
           <h3 class="project-name">PC Terminal Server</h3>
           <p class="project-desc">Remote PowerShell from Phone</p>
           <ul class="project-features">
