@@ -490,11 +490,13 @@
       // Calculate total scroll distance needed
       var trackWidth = 0;
       projectCards.forEach(function (card) {
-        trackWidth += card.offsetWidth + 40; // 40 = gap
+        trackWidth += card.offsetWidth + 40;
       });
-      trackWidth -= 40; // Remove last gap
-      var wrapperHeight = trackWidth - window.innerWidth + window.innerHeight;
-      projectsWrapper.style.height = Math.max(wrapperHeight, window.innerHeight) + 'px';
+      trackWidth -= 40;
+      // Wrapper height = enough vertical scroll to move through all cards horizontally
+      // Use 300px per card as scroll distance (smooth but not endless)
+      var wrapperHeight = (numCards * 300) + window.innerHeight;
+      projectsWrapper.style.height = wrapperHeight + 'px';
     }
 
     setupHorizontalScroll();
