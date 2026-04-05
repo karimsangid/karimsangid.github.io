@@ -190,12 +190,69 @@
 
     <div class="projects-wrapper">
       <div class="projects-track">
-
-    <!-- Project 01: SentinelIQ -->
+    <!-- Project 01: Hummus IQ -->
     <div class="project-card scroll-reveal" data-project="1">
       <div class="project-card-inner">
         <div class="project-info">
-          <span class="project-number">01</span>
+          <span class="project-number">01
+          <h3 class="project-name">Hummus IQ</h3>
+          <p class="project-desc">AI Assistant</p>
+          <ul class="project-features">
+            <li>Local LLM with RAG, persistent memory &amp; vision</li>
+            <li>7-engine parallel web search</li>
+            <li>Real-time WebSocket streaming</li>
+            <li>Code execution sandbox</li>
+          </ul>
+          <div class="project-tech">
+            <span>Python</span><span>FastAPI</span><span>ChromaDB</span><span>Ollama</span><span>SQLite</span>
+          </div>
+          <a href="https://github.com/karimsangid/hummus-iq" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
+        </div>
+        <div class="project-visual">
+          <div class="vis-chat">
+            <div class="vis-chat-bubble vis-chat-bubble--user" style="--i:0">How does RAG improve accuracy?</div>
+            <div class="vis-chat-bubble vis-chat-bubble--ai" style="--i:1">RAG grounds responses in retrieved documents, reducing hallucination...</div>
+            <div class="vis-chat-bubble vis-chat-bubble--user" style="--i:2">Search the web for latest benchmarks</div>
+            <div class="vis-chat-bubble vis-chat-bubble--ai" style="--i:3">Searching 7 engines in parallel...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 02: RoofRoof -->
+    <div class="project-card scroll-reveal" data-project="2">
+      <div class="project-card-inner">
+        <div class="project-info">
+          <span class="project-number">02
+          <h3 class="project-name">RoofRoof.solutions</h3>
+          <p class="project-desc">Satellite Roof Inspection Platform</p>
+          <ul class="project-features">
+            <li>Computer vision (OpenCV) on satellite imagery</li>
+            <li>Google Solar API for 3D roof geometry</li>
+            <li>6+ API integrations (ATTOM, NOAA, NWS, Census)</li>
+            <li>Branded PDF report generation &amp; lead capture</li>
+          </ul>
+          <div class="project-tech">
+            <span>Python</span><span>Flask</span><span>OpenCV</span><span>NumPy</span><span>Google Solar API</span><span>ReportLab</span>
+          </div>
+          <span class="project-link project-link--private">Private Repository</span>
+        </div>
+        <div class="project-visual">
+          <div class="vis-satellite">
+            <div class="vis-sat-grid">
+              <div class="vis-sat-scan"></div>
+            </div>
+            <div class="vis-sat-label">SCANNING ROOF GEOMETRY...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 03: SentinelIQ -->
+    <div class="project-card scroll-reveal" data-project="3">
+      <div class="project-card-inner">
+        <div class="project-info">
+          <span class="project-number">03
           <h3 class="project-name">SentinelIQ</h3>
           <p class="project-desc">AI-Powered Security Log Analyzer</p>
           <ul class="project-features">
@@ -237,75 +294,11 @@
       </div>
     </div>
 
-    <!-- Project 02: RoofRoof -->
-    <div class="project-card scroll-reveal" data-project="2">
-      <div class="project-card-inner">
-        <div class="project-info">
-          <span class="project-number">02</span>
-          <h3 class="project-name">RoofRoof.solutions</h3>
-          <p class="project-desc">Satellite Roof Inspection Platform</p>
-          <ul class="project-features">
-            <li>Computer vision (OpenCV) on satellite imagery</li>
-            <li>Google Solar API for 3D roof geometry</li>
-            <li>6+ API integrations (ATTOM, NOAA, NWS, Census)</li>
-            <li>Branded PDF report generation &amp; lead capture</li>
-          </ul>
-          <div class="project-tech">
-            <span>Python</span><span>Flask</span><span>OpenCV</span><span>NumPy</span><span>Google Solar API</span><span>ReportLab</span>
-          </div>
-          <span class="project-link project-link--private">Private Repository</span>
-        </div>
-        <div class="project-visual">
-          <div class="vis-satellite">
-            <div class="vis-sat-grid">
-              <div class="vis-sat-scan"></div>
-            </div>
-            <div class="vis-sat-label">SCANNING ROOF GEOMETRY...</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Project 03: Cram -->
-    <div class="project-card scroll-reveal" data-project="3">
-      <div class="project-card-inner">
-        <div class="project-info">
-          <span class="project-number">03</span>
-          <h3 class="project-name">Cram</h3>
-          <p class="project-desc">AI Study Assistant</p>
-          <ul class="project-features">
-            <li>RAG-powered Q&amp;A with source citations</li>
-            <li>Flashcard generation with SM-2 spaced repetition</li>
-            <li>Practice quizzes with LLM grading</li>
-            <li>Knowledge gap tracker</li>
-          </ul>
-          <div class="project-tech">
-            <span>Python</span><span>FastAPI</span><span>ChromaDB</span><span>Ollama</span><span>SQLite</span><span>WebSocket</span>
-          </div>
-          <a href="https://github.com/karimsangid/cram" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
-        </div>
-        <div class="project-visual">
-          <div class="vis-flashcard">
-            <div class="vis-flashcard-inner">
-              <div class="vis-flashcard-front">
-                <span class="vis-fc-label">QUESTION</span>
-                <p>What is RAG in the context of LLMs?</p>
-              </div>
-              <div class="vis-flashcard-back">
-                <span class="vis-fc-label">ANSWER</span>
-                <p>Retrieval-Augmented Generation — combining LLM reasoning with external knowledge retrieval.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Project 04: HummusOSINT -->
     <div class="project-card scroll-reveal" data-project="4">
       <div class="project-card-inner">
         <div class="project-info">
-          <span class="project-number">04</span>
+          <span class="project-number">04
           <h3 class="project-name">HummusOSINT</h3>
           <p class="project-desc">Open Source Intelligence Platform</p>
           <ul class="project-features">
@@ -338,11 +331,46 @@
       </div>
     </div>
 
-    <!-- Project 05: HummusLink -->
+    <!-- Project 05: Cram -->
     <div class="project-card scroll-reveal" data-project="5">
       <div class="project-card-inner">
         <div class="project-info">
-          <span class="project-number">05</span>
+          <span class="project-number">05
+          <h3 class="project-name">Cram</h3>
+          <p class="project-desc">AI Study Assistant</p>
+          <ul class="project-features">
+            <li>RAG-powered Q&amp;A with source citations</li>
+            <li>Flashcard generation with SM-2 spaced repetition</li>
+            <li>Practice quizzes with LLM grading</li>
+            <li>Knowledge gap tracker</li>
+          </ul>
+          <div class="project-tech">
+            <span>Python</span><span>FastAPI</span><span>ChromaDB</span><span>Ollama</span><span>SQLite</span><span>WebSocket</span>
+          </div>
+          <a href="https://github.com/karimsangid/cram" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
+        </div>
+        <div class="project-visual">
+          <div class="vis-flashcard">
+            <div class="vis-flashcard-inner">
+              <div class="vis-flashcard-front">
+                <span class="vis-fc-label">QUESTION</span>
+                <p>What is RAG in the context of LLMs?</p>
+              </div>
+              <div class="vis-flashcard-back">
+                <span class="vis-fc-label">ANSWER</span>
+                <p>Retrieval-Augmented Generation — combining LLM reasoning with external knowledge retrieval.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 06: HummusLink -->
+    <div class="project-card scroll-reveal" data-project="6">
+      <div class="project-card-inner">
+        <div class="project-info">
+          <span class="project-number">06
           <h3 class="project-name">HummusLink</h3>
           <p class="project-desc">Cross-Platform Sync Bridge</p>
           <ul class="project-features">
@@ -374,40 +402,11 @@
       </div>
     </div>
 
-    <!-- Project 06: Hummus IQ -->
-    <div class="project-card scroll-reveal" data-project="6">
-      <div class="project-card-inner">
-        <div class="project-info">
-          <span class="project-number">06</span>
-          <h3 class="project-name">Hummus IQ</h3>
-          <p class="project-desc">AI Assistant</p>
-          <ul class="project-features">
-            <li>Local LLM with RAG, persistent memory &amp; vision</li>
-            <li>7-engine parallel web search</li>
-            <li>Real-time WebSocket streaming</li>
-            <li>Code execution sandbox</li>
-          </ul>
-          <div class="project-tech">
-            <span>Python</span><span>FastAPI</span><span>ChromaDB</span><span>Ollama</span><span>SQLite</span>
-          </div>
-          <a href="https://github.com/karimsangid/hummus-iq" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
-        </div>
-        <div class="project-visual">
-          <div class="vis-chat">
-            <div class="vis-chat-bubble vis-chat-bubble--user" style="--i:0">How does RAG improve accuracy?</div>
-            <div class="vis-chat-bubble vis-chat-bubble--ai" style="--i:1">RAG grounds responses in retrieved documents, reducing hallucination...</div>
-            <div class="vis-chat-bubble vis-chat-bubble--user" style="--i:2">Search the web for latest benchmarks</div>
-            <div class="vis-chat-bubble vis-chat-bubble--ai" style="--i:3">Searching 7 engines in parallel...</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Project 07: Blazin-App -->
     <div class="project-card scroll-reveal" data-project="7">
       <div class="project-card-inner">
         <div class="project-info">
-          <span class="project-number">07</span>
+          <span class="project-number">07
           <h3 class="project-name">Blazin-App</h3>
           <p class="project-desc">Mobile Food Delivery App</p>
           <ul class="project-features">
@@ -436,67 +435,11 @@
       </div>
     </div>
 
-    <!-- Project 08: Papi-AI -->
+    <!-- Project 08: FiveM Game Development -->
     <div class="project-card scroll-reveal" data-project="8">
       <div class="project-card-inner">
         <div class="project-info">
-          <span class="project-number">08</span>
-          <h3 class="project-name">Papi-AI</h3>
-          <p class="project-desc">AI Dating Assistant</p>
-          <ul class="project-features">
-            <li>Live message recommendations</li>
-            <li>Profile builder &amp; scam detection</li>
-            <li>"Rizz Score" tracking</li>
-            <li>Powered by Llama 3.3 70B via Groq</li>
-          </ul>
-          <div class="project-tech">
-            <span>Python</span><span>FastAPI</span><span>Groq API</span><span>Llama 3.3 70B</span>
-          </div>
-          <span class="project-link project-link--private">Private Repository</span>
-        </div>
-        <div class="project-visual">
-          <div class="vis-heart">
-            <svg class="vis-heart-svg" viewBox="0 0 200 60" fill="none">
-              <polyline class="vis-heart-line" points="0,30 30,30 40,10 50,50 60,20 70,40 80,30 100,30 110,10 120,50 130,20 140,40 150,30 200,30"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Project 09: PC Terminal Server -->
-    <div class="project-card scroll-reveal" data-project="9">
-      <div class="project-card-inner">
-        <div class="project-info">
-          <span class="project-number">09</span>
-          <h3 class="project-name">PC Terminal Server</h3>
-          <p class="project-desc">Remote PowerShell from Phone</p>
-          <ul class="project-features">
-            <li>JWT auth &amp; rate limiting</li>
-            <li>Command history &amp; persistence</li>
-            <li>Mobile-first responsive UI</li>
-            <li>Secure remote execution</li>
-          </ul>
-          <div class="project-tech">
-            <span>Node.js</span><span>Express</span><span>SQLite</span><span>JWT</span>
-          </div>
-          <span class="project-link project-link--private">Private Repository</span>
-        </div>
-        <div class="project-visual">
-          <div class="vis-cmd">
-            <div class="vis-cmd-bar"><span></span><span></span><span></span></div>
-            <div class="vis-cmd-body">
-              <p>PS C:\Users\karim&gt; <span class="vis-cmd-typed"></span><span class="vis-cmd-cursor">|</span></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Project 10: FiveM Game Development -->
-    <div class="project-card scroll-reveal" data-project="10">
-      <div class="project-card-inner">
-        <div class="project-info">
-          <span class="project-number">10</span>
+          <span class="project-number">08
           <h3 class="project-name">FiveM Server Platform</h3>
           <p class="project-desc">Multiplayer Game Infrastructure &amp; Development</p>
           <ul class="project-features">
@@ -529,6 +472,62 @@
       </div>
     </div>
 
+    <!-- Project 09: Papi-AI -->
+    <div class="project-card scroll-reveal" data-project="9">
+      <div class="project-card-inner">
+        <div class="project-info">
+          <span class="project-number">09
+          <h3 class="project-name">Papi-AI</h3>
+          <p class="project-desc">AI Dating Assistant</p>
+          <ul class="project-features">
+            <li>Live message recommendations</li>
+            <li>Profile builder &amp; scam detection</li>
+            <li>"Rizz Score" tracking</li>
+            <li>Powered by Llama 3.3 70B via Groq</li>
+          </ul>
+          <div class="project-tech">
+            <span>Python</span><span>FastAPI</span><span>Groq API</span><span>Llama 3.3 70B</span>
+          </div>
+          <span class="project-link project-link--private">Private Repository</span>
+        </div>
+        <div class="project-visual">
+          <div class="vis-heart">
+            <svg class="vis-heart-svg" viewBox="0 0 200 60" fill="none">
+              <polyline class="vis-heart-line" points="0,30 30,30 40,10 50,50 60,20 70,40 80,30 100,30 110,10 120,50 130,20 140,40 150,30 200,30"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 10: PC Terminal Server -->
+    <div class="project-card scroll-reveal" data-project="10">
+      <div class="project-card-inner">
+        <div class="project-info">
+          <span class="project-number">10
+          <h3 class="project-name">PC Terminal Server</h3>
+          <p class="project-desc">Remote PowerShell from Phone</p>
+          <ul class="project-features">
+            <li>JWT auth &amp; rate limiting</li>
+            <li>Command history &amp; persistence</li>
+            <li>Mobile-first responsive UI</li>
+            <li>Secure remote execution</li>
+          </ul>
+          <div class="project-tech">
+            <span>Node.js</span><span>Express</span><span>SQLite</span><span>JWT</span>
+          </div>
+          <span class="project-link project-link--private">Private Repository</span>
+        </div>
+        <div class="project-visual">
+          <div class="vis-cmd">
+            <div class="vis-cmd-bar"><span></span><span></span><span></span></div>
+            <div class="vis-cmd-body">
+              <p>PS C:\Users\karim&gt; <span class="vis-cmd-typed"></span><span class="vis-cmd-cursor">|</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
       </div><!-- /.projects-track -->
     </div><!-- /.projects-wrapper -->
   </section>
