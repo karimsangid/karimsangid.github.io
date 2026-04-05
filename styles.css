@@ -1253,12 +1253,10 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
   to   { transform: rotateX(-20deg) rotateY(360deg); }
 }
 
-/* 3D House — all measurements from container center (80,80) */
 .vis-house {
   width: 100%;
   height: 100%;
-  position: absolute;
-  top: 0; left: 0;
+  position: relative;
   transform-style: preserve-3d;
 }
 
@@ -1274,42 +1272,41 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
   border: 1px solid rgba(255, 68, 68, 0.25);
 }
 
-/* Body: 100w x 70h x 70d, centered at (80, 95) so roof has room up top */
 .vis-house-front {
-  width: 100px; height: 70px;
-  background: rgba(255, 68, 68, 0.08);
-  left: 30px; top: 60px;
-  transform: translateZ(35px);
-}
-.vis-house-back {
-  width: 100px; height: 70px;
-  background: rgba(255, 68, 68, 0.05);
-  left: 30px; top: 60px;
-  transform: translateZ(-35px);
-}
-.vis-house-left {
-  width: 70px; height: 70px;
+  width: 120px;
+  height: 90px;
   background: rgba(255, 68, 68, 0.06);
-  left: -5px; top: 60px;
-  transform: rotateY(90deg);
-  transform-origin: right center;
-}
-.vis-house-right {
-  width: 70px; height: 70px;
-  background: rgba(255, 68, 68, 0.06);
-  left: 130px; top: 60px;
-  transform: rotateY(-90deg);
-  transform-origin: left center;
-}
-.vis-house-floor {
-  width: 100px; height: 70px;
-  background: rgba(255, 68, 68, 0.03);
-  left: 30px; top: 130px;
-  transform: rotateX(90deg);
-  transform-origin: top center;
+  transform: translateX(20px) translateY(35px) translateZ(40px);
 }
 
-/* Roof — two panels meeting at ridge, each 110w x 50 slope length */
+.vis-house-back {
+  width: 120px;
+  height: 90px;
+  background: rgba(255, 68, 68, 0.04);
+  transform: translateX(20px) translateY(35px) translateZ(-40px);
+}
+
+.vis-house-left {
+  width: 80px;
+  height: 90px;
+  background: rgba(255, 68, 68, 0.05);
+  transform: translateX(-18px) translateY(35px) rotateY(90deg);
+}
+
+.vis-house-right {
+  width: 80px;
+  height: 90px;
+  background: rgba(255, 68, 68, 0.05);
+  transform: translateX(102px) translateY(35px) rotateY(90deg);
+}
+
+.vis-house-floor {
+  width: 120px;
+  height: 80px;
+  background: rgba(255, 68, 68, 0.03);
+  transform: translateX(20px) translateY(125px) rotateX(90deg);
+}
+
 .vis-house-roof {
   position: absolute;
   width: 100%;
@@ -1319,53 +1316,54 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
 
 .vis-roof-side {
   position: absolute;
-  width: 110px;
-  height: 50px;
+  width: 140px;
+  height: 60px;
   border: 1px solid rgba(255, 68, 68, 0.35);
-  left: 25px;
-  top: 60px;
-  transform-origin: top center;
 }
 
-/* Front slope — hinge at top edge, rotate bottom toward front (+Z) */
 .vis-roof-left {
-  background: linear-gradient(135deg, rgba(255, 68, 68, 0.18), rgba(255, 68, 68, 0.06));
-  transform: rotateX(45deg);
+  background: linear-gradient(135deg, rgba(255, 68, 68, 0.15), rgba(255, 68, 68, 0.05));
+  transform: translateX(10px) translateY(5px) translateZ(0px) rotateX(35deg);
+  transform-origin: top center;
   box-shadow: 0 0 15px rgba(255, 68, 68, 0.08);
 }
 
-/* Back slope — hinge at top edge, rotate bottom toward back (-Z) */
 .vis-roof-right {
-  background: linear-gradient(225deg, rgba(255, 68, 68, 0.14), rgba(255, 68, 68, 0.04));
-  transform: rotateX(-45deg);
+  background: linear-gradient(225deg, rgba(255, 68, 68, 0.12), rgba(255, 68, 68, 0.04));
+  transform: translateX(10px) translateY(5px) translateZ(0px) rotateX(-35deg);
+  transform-origin: bottom center;
 }
 
-/* Door */
 .vis-house-door {
   position: absolute;
-  width: 16px; height: 28px;
+  width: 20px;
+  height: 35px;
   background: rgba(255, 68, 68, 0.15);
   border: 1px solid rgba(255, 68, 68, 0.3);
   border-radius: 2px 2px 0 0;
-  left: 72px; top: 102px;
-  transform: translateZ(36px);
+  transform: translateX(70px) translateY(90px) translateZ(41px);
 }
 
-/* Windows */
 .vis-house-window {
   position: absolute;
-  width: 16px; height: 16px;
+  width: 18px;
+  height: 18px;
   background: rgba(255, 200, 100, 0.15);
   border: 1px solid rgba(255, 200, 100, 0.3);
   box-shadow: 0 0 8px rgba(255, 200, 100, 0.1);
 }
-.vis-house-win1 { left: 42px; top: 72px; transform: translateZ(36px); }
-.vis-house-win2 { left: 102px; top: 72px; transform: translateZ(36px); }
 
-/* Shadow */
+.vis-house-win1 {
+  transform: translateX(35px) translateY(55px) translateZ(41px);
+}
+
+.vis-house-win2 {
+  transform: translateX(105px) translateY(55px) translateZ(41px);
+}
+
 .vis-house-shadow {
-  width: 120px;
-  height: 16px;
+  width: 140px;
+  height: 20px;
   background: radial-gradient(ellipse, rgba(255, 68, 68, 0.12) 0%, transparent 70%);
   border-radius: 50%;
   margin-top: -10px;
