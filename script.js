@@ -462,70 +462,7 @@
     glowObserver.observe(el);
   });
 
-  // ============================================================
-  // INSANE MODE — HORIZONTAL SCROLL GALLERY
-  // ============================================================
-  var projectsSection = document.getElementById('projects');
-  var projectsTrack = document.querySelector('.projects-track');
-  var projectsWrapper = document.querySelector('.projects-wrapper');
-
-  if (projectsTrack && projectsWrapper && projectsSection) {
-    var projectCards = projectsTrack.querySelectorAll('.project-card');
-    var numCards = projectCards.length;
-
-    function setupHorizontalScroll() {
-      if (window.innerWidth <= 900) {
-        // Disable horizontal scroll on mobile
-        projectsWrapper.style.height = 'auto';
-        projectsTrack.style.transform = 'none';
-        projectsTrack.style.position = 'relative';
-        projectsTrack.style.flexDirection = 'column';
-        projectsTrack.style.height = 'auto';
-        return;
-      }
-      projectsTrack.style.position = '';
-      projectsTrack.style.flexDirection = '';
-      projectsTrack.style.height = '';
-
-      // Calculate total scroll distance needed
-      var trackWidth = 0;
-      projectCards.forEach(function (card) {
-        trackWidth += card.offsetWidth + 40;
-      });
-      trackWidth -= 40;
-      // Wrapper height = enough vertical scroll to move through all cards horizontally
-      // Use 300px per card as scroll distance (smooth but not endless)
-      var wrapperHeight = (numCards * 300) + window.innerHeight;
-      projectsWrapper.style.height = wrapperHeight + 'px';
-    }
-
-    setupHorizontalScroll();
-    window.addEventListener('resize', setupHorizontalScroll);
-
-    window.addEventListener('scroll', function () {
-      if (window.innerWidth <= 900) return;
-      var wrapperRect = projectsWrapper.getBoundingClientRect();
-      var wrapperHeight = projectsWrapper.offsetHeight;
-      var scrollInWrapper = -wrapperRect.top;
-      var maxScroll = wrapperHeight - window.innerHeight;
-
-      if (scrollInWrapper < 0) scrollInWrapper = 0;
-      if (scrollInWrapper > maxScroll) scrollInWrapper = maxScroll;
-
-      var progress = maxScroll > 0 ? scrollInWrapper / maxScroll : 0;
-
-      var trackWidth = 0;
-      projectCards.forEach(function (card) {
-        trackWidth += card.offsetWidth + 40;
-      });
-      trackWidth -= 40;
-
-      var maxTranslate = trackWidth - window.innerWidth + 160; // 160 = padding
-      var translateX = progress * maxTranslate;
-
-      projectsTrack.style.transform = 'translateX(' + (-translateX) + 'px)';
-    }, { passive: true });
-  }
+  // Horizontal scroll removed — using vertical layout
 
   // ============================================================
   // INSANE MODE — PARALLAX DEPTH

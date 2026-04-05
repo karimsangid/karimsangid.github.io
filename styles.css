@@ -1860,44 +1860,12 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
    ============================================================ */
 .projects-wrapper {
   position: relative;
-  background: var(--bg);
 }
 
 .projects-track {
-  position: sticky;
-  top: 0;
   display: flex;
+  flex-direction: column;
   gap: 40px;
-  padding: 0 8vw;
-  align-items: center;
-  height: 100vh;
-  will-change: transform;
-  overflow: visible;
-}
-
-.projects-track .project-card {
-  flex-shrink: 0;
-  width: 75vw;
-  max-width: 1000px;
-  margin: 0;
-  padding: 0;
-}
-
-@media (max-width: 900px) {
-  .projects-wrapper {
-    height: auto !important;
-  }
-  .projects-track {
-    position: relative !important;
-    flex-direction: column;
-    height: auto;
-    transform: none !important;
-    padding: 0 5vw;
-  }
-  .projects-track .project-card {
-    width: 100%;
-    max-width: 100%;
-  }
 }
 
 /* ============================================================
