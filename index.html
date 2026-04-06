@@ -62,7 +62,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="styles.css?v=4">
+  <link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
 
@@ -143,10 +143,6 @@
       <div class="geo geo--dot" style="--x:55%;--y:80%;--s:3px;--d:16s;--del:-1s"></div>
     </div>
     <div class="hero-content">
-      <div class="hero-badge">
-        <span class="hero-badge-dot"></span>
-        <span class="hero-badge-text">AVAILABLE FOR WORK</span>
-      </div>
       <h1 class="hero-name" aria-label="Karim Sangid">
         <span class="hero-line">
           <span class="hero-letter" style="--i:0">K</span><span class="hero-letter" style="--i:1">A</span><span class="hero-letter" style="--i:2">R</span><span class="hero-letter" style="--i:3">I</span><span class="hero-letter" style="--i:4">M</span>
@@ -161,10 +157,7 @@
       <div class="hero-founder">
         <span class="hero-role reveal-text" style="--delay:0.8s">Founder, Hummus Development LLC</span>
       </div>
-      <div class="hero-cta-row">
-        <a href="#projects" class="hero-cta">View My Work</a>
-        <a href="#contact" class="hero-cta hero-cta--outline">Get In Touch</a>
-      </div>
+      <p class="hero-desc">MS Computer Science @ George Mason University. Azure AZ-204 Certified.<br>Building full-stack AI systems, security tools, and computer vision platforms.</p>
     </div>
     <div class="hero-scroll">
       <span class="hero-scroll-text">Scroll</span>
@@ -281,25 +274,7 @@
         </div>
         <div class="project-visual">
           <div class="vis-house-scene">
-            <div class="vis-house-orbit">
-              <div class="vis-house">
-                <div class="vis-house-body">
-                  <div class="vis-house-wall vis-house-front"></div>
-                  <div class="vis-house-wall vis-house-back"></div>
-                  <div class="vis-house-wall vis-house-left"></div>
-                  <div class="vis-house-wall vis-house-right"></div>
-                  <div class="vis-house-wall vis-house-floor"></div>
-                </div>
-                <div class="vis-house-roof">
-                  <div class="vis-roof-side vis-roof-left"></div>
-                  <div class="vis-roof-side vis-roof-right"></div>
-                </div>
-                <div class="vis-house-door"></div>
-                <div class="vis-house-window vis-house-win1"></div>
-                <div class="vis-house-window vis-house-win2"></div>
-              </div>
-            </div>
-            <div class="vis-house-shadow"></div>
+            <canvas class="vis-house-canvas" id="houseCanvas" width="300" height="260"></canvas>
             <div class="vis-sat-label">ROOFROOF.SOLUTIONS</div>
           </div>
         </div>
@@ -828,6 +803,6 @@
     </footer>
   </section>
 
-  <script src="script.js?v=4"></script>
+  <script src="script.js?v=5"></script>
 </body>
 </html>

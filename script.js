@@ -579,6 +579,141 @@
   }
 
   // ============================================================
+  // 3D WIREFRAME HOUSE — CANVAS (RoofRoof)
+  // ============================================================
+  var houseCanvas = document.getElementById('houseCanvas');
+  if (houseCanvas) {
+    var hCtx = houseCanvas.getContext('2d');
+    var hAngle = 0;
+
+    // House vertices: [x, y, z] centered at origin
+    // Body: 80w x 60h x 60d
+    var houseVerts = [
+      // Body bottom (0-3)
+      [-40, 30, -30], [40, 30, -30], [40, 30, 30], [-40, 30, 30],
+      // Body top (4-7)
+      [-40, -30, -30], [40, -30, -30], [40, -30, 30], [-40, -30, 30],
+      // Roof ridge (8-9)
+      [-45, -60, 0], [45, -60, 0],
+      // Roof overhang front (10-11)
+      [-45, -30, 35], [45, -30, 35],
+      // Roof overhang back (12-13)
+      [-45, -30, -35], [45, -30, -35],
+      // Door (14-17)
+      [5, 30, 30.5], [18, 30, 30.5], [18, 5, 30.5], [5, 5, 30.5],
+      // Window left (18-21)
+      [-30, -15, 30.5], [-15, -15, 30.5], [-15, 0, 30.5], [-30, 0, 30.5],
+      // Window right (22-25)
+      [25, -15, 30.5], [35, -15, 30.5], [35, 0, 30.5], [25, 0, 30.5]
+    ];
+
+    // Edges: pairs of vertex indices
+    var bodyEdges = [
+      [0,1],[1,2],[2,3],[3,0], // bottom
+      [4,5],[5,6],[6,7],[7,4], // top
+      [0,4],[1,5],[2,6],[3,7]  // verticals
+    ];
+    var roofEdges = [
+      [8,9],       // ridge
+      [8,10],[9,11],[10,11], // front slope
+      [8,12],[9,13],[12,13], // back slope
+    ];
+    var doorEdges = [[14,15],[15,16],[16,17],[17,14]];
+    var win1Edges = [[18,19],[19,20],[20,21],[21,18]];
+    var win2Edges = [[22,23],[23,24],[24,25],[25,22]];
+
+    function project3D(x, y, z, angle) {
+      // Rotate around Y axis
+      var cosA = Math.cos(angle);
+      var sinA = Math.sin(angle);
+      var rx = x * cosA - z * sinA;
+      var rz = x * sinA + z * cosA;
+      // Slight tilt down (rotate around X)
+      var tilt = -0.3;
+      var cosT = Math.cos(tilt);
+      var sinT = Math.sin(tilt);
+      var ry = y * cosT - rz * sinT;
+      var rz2 = y * sinT + rz * cosT;
+      // Perspective projection
+      var fov = 300;
+      var scale = fov / (fov + rz2 + 150);
+      return {
+        x: 150 + rx * scale,
+        y: 120 + ry * scale,
+        depth: rz2
+      };
+    }
+
+    function drawEdges(edges, color, lineWidth) {
+      hCtx.strokeStyle = color;
+      hCtx.lineWidth = lineWidth || 1;
+      for (var i = 0; i < edges.length; i++) {
+        var a = houseVerts[edges[i][0]];
+        var b = houseVerts[edges[i][1]];
+        var pa = project3D(a[0], a[1], a[2], hAngle);
+        var pb = project3D(b[0], b[1], b[2], hAngle);
+        hCtx.beginPath();
+        hCtx.moveTo(pa.x, pa.y);
+        hCtx.lineTo(pb.x, pb.y);
+        hCtx.stroke();
+      }
+    }
+
+    function drawHouse() {
+      hAngle += 0.008;
+      hCtx.clearRect(0, 0, 300, 260);
+
+      // Shadow
+      hCtx.beginPath();
+      hCtx.ellipse(150, 230, 60, 10, 0, 0, Math.PI * 2);
+      hCtx.fillStyle = 'rgba(255, 68, 68, 0.06)';
+      hCtx.fill();
+
+      // Body
+      drawEdges(bodyEdges, 'rgba(255, 68, 68, 0.25)', 1);
+      // Roof
+      drawEdges(roofEdges, 'rgba(255, 68, 68, 0.4)', 1.5);
+      // Door
+      drawEdges(doorEdges, 'rgba(255, 68, 68, 0.3)', 1);
+      // Windows
+      drawEdges(win1Edges, 'rgba(255, 200, 100, 0.3)', 1);
+      drawEdges(win2Edges, 'rgba(255, 200, 100, 0.3)', 1);
+
+      // Window glow
+      var w1 = project3D(-22.5, -7.5, 30.5, hAngle);
+      var w2 = project3D(30, -7.5, 30.5, hAngle);
+      if (w1.depth < 100) {
+        var glow1 = hCtx.createRadialGradient(w1.x, w1.y, 0, w1.x, w1.y, 8);
+        glow1.addColorStop(0, 'rgba(255, 200, 100, 0.08)');
+        glow1.addColorStop(1, 'rgba(255, 200, 100, 0)');
+        hCtx.beginPath();
+        hCtx.arc(w1.x, w1.y, 8, 0, Math.PI * 2);
+        hCtx.fillStyle = glow1;
+        hCtx.fill();
+      }
+      if (w2.depth < 100) {
+        var glow2 = hCtx.createRadialGradient(w2.x, w2.y, 0, w2.x, w2.y, 8);
+        glow2.addColorStop(0, 'rgba(255, 200, 100, 0.08)');
+        glow2.addColorStop(1, 'rgba(255, 200, 100, 0)');
+        hCtx.beginPath();
+        hCtx.arc(w2.x, w2.y, 8, 0, Math.PI * 2);
+        hCtx.fillStyle = glow2;
+        hCtx.fill();
+      }
+
+      requestAnimationFrame(drawHouse);
+    }
+
+    var houseObs = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) {
+        drawHouse();
+        houseObs.disconnect();
+      }
+    }, { threshold: 0.2 });
+    houseObs.observe(houseCanvas);
+  }
+
+  // ============================================================
   // TERMINAL TYPING (PC Terminal)
   // ============================================================
   var cmdTyped = document.querySelector('.vis-cmd-typed');
