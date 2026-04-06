@@ -1406,7 +1406,7 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
   font-size: 10px;
   color: var(--accent);
   letter-spacing: 0.15em;
-  margin-top: 8px;
+  margin-top: -30px;
   animation: blink 1s step-end infinite;
 }
 
