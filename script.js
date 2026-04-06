@@ -665,7 +665,7 @@
 
       // Shadow
       hCtx.beginPath();
-      hCtx.ellipse(250, 380, 90, 16, 0, 0, Math.PI * 2);
+      hCtx.ellipse(250, 340, 90, 14, 0, 0, Math.PI * 2);
       hCtx.fillStyle = 'rgba(255, 68, 68, 0.06)';
       hCtx.fill();
 
