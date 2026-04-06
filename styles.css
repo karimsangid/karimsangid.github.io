@@ -35,6 +35,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--nav-height);
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -1399,6 +1400,8 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
 
 .vis-house-canvas {
   display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 .vis-sat-label {
@@ -1421,8 +1424,8 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
 .vis-fc-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 12px; }
 .vis-flashcard-front p, .vis-flashcard-back p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
 
-/* --- Matrix Canvas (HummusOSINT) --- */
-.vis-matrix-canvas { display: block; border-radius: 8px; background: #0a0a0f; }
+/* --- Matrix Canvas (HummusI) --- */
+.vis-matrix-canvas { display: block; border-radius: 8px; background: #0a0a0f; max-width: 100%; height: auto; }
 
 /* --- Devices (HummusLink) --- */
 .vis-devices { display: flex; align-items: center; gap: 20px; }
@@ -2067,13 +2070,45 @@ section { position: relative; }
    RESPONSIVE + MOBILE
    ============================================================ */
 @media (max-width: 600px) {
-  .hero-name { font-size: clamp(48px, 18vw, 120px); }
-  .section-title { font-size: clamp(32px, 10vw, 64px); margin-bottom: 48px; }
-  .contact-heading { font-size: clamp(36px, 14vw, 80px); }
-  .project-card-inner { padding: 24px; }
+  .hero-name { font-size: clamp(42px, 16vw, 120px); }
+  .hero-desc { font-size: 13px; padding: 0 8px; }
+  .section-title { font-size: clamp(28px, 10vw, 64px); margin-bottom: 40px; }
+  .contact-heading { font-size: clamp(32px, 12vw, 80px); }
+  .project-card { padding: 0 16px; margin-bottom: 32px; }
+  .project-card-inner { padding: 20px; gap: 24px; min-height: auto; }
+  .project-number { font-size: clamp(60px, 16vw, 100px); }
+  .project-features { min-height: auto; }
+  .project-visual { height: auto; min-height: 180px; }
   .vis-terminal, .vis-matrix-canvas, .vis-chat, .vis-heart, .vis-cmd { max-width: 100%; }
-  .vis-phone { width: 150px; height: 260px; }
-  .vis-devices { transform: scale(0.85); }
+  .vis-phone { width: 140px; height: 240px; }
+  .vis-phone-notch { width: 60px; height: 16px; }
+  .vis-devices { transform: scale(0.75); }
+  .vis-flashcard { width: 100%; max-width: 240px; height: 160px; }
+  .vis-fivem-server { width: 100%; }
+  .vis-house-scene { max-width: 100%; height: auto; }
+  .about-quote { font-size: clamp(24px, 7vw, 48px); }
+  .about-bio p { font-size: 14px; }
+  .about-statement { margin-bottom: 48px; }
+  .timeline { padding-left: 32px; }
+  .timeline-role { font-size: clamp(16px, 4vw, 20px); }
+  .timeline-bullets li { font-size: 12px; }
+  .certs-grid { grid-template-columns: 1fr; }
+  .cert-item { padding: 14px 16px; }
+  .contact-email { font-size: clamp(14px, 4vw, 24px); padding: 12px 24px; }
+  .contact-socials { gap: 16px; margin-bottom: 48px; }
+  .marquee-content { font-size: 11px; }
+  .skills-grid { gap: 32px; }
+  .skill-pill { font-size: 11px; padding: 6px 12px; }
+  .hero-grid-bg { display: none; }
+}
+
+@media (max-width: 380px) {
+  .hero-name { font-size: clamp(36px, 15vw, 80px); }
+  .project-card-inner { padding: 16px; }
+  .vis-phone { width: 120px; height: 200px; }
+  .vis-devices { transform: scale(0.65); }
+  .nav-links a { font-size: 20px; }
+  .contact-heading { font-size: clamp(28px, 11vw, 60px); }
 }
 
 @media (pointer: coarse) {
@@ -2086,8 +2121,17 @@ section { position: relative; }
   section::before, section::after { display: none; }
   .hero-canvas { display: none; }
   .hero-aurora { animation: none; }
+  .hero-grid-bg { display: none; }
   .geo-shapes { display: none; }
   .mouse-trail { display: none !important; }
   .particle { display: none !important; }
   .cursor-glow { display: none !important; }
+  /* Bigger tap targets */
+  .nav-links a { padding: 8px 4px; }
+  .social-link { width: 52px; height: 52px; }
+  .project-link { padding: 8px 0; }
+  .skill-pill { padding: 10px 16px; }
+  /* Disable hover-only effects */
+  .project-card-inner:hover::before { display: none; }
+  .hero-content::before, .hero-content::after, .hero-bg::after { display: none; }
 }
