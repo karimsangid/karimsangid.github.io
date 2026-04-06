@@ -62,7 +62,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="styles.css?v=2">
+  <link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
 
@@ -118,6 +118,7 @@
   <!-- Hero -->
   <section class="hero" id="hero">
     <canvas class="hero-canvas" id="heroCanvas"></canvas>
+    <div class="hero-grid-bg" aria-hidden="true"></div>
     <div class="hero-aurora"></div>
     <div class="hero-bg">
       <div class="hero-blob hero-blob--1"></div>
@@ -134,8 +135,18 @@
       <div class="geo geo--circle" style="--x:10%;--y:55%;--s:16px;--d:28s;--del:-7s"></div>
       <div class="geo geo--cross" style="--x:50%;--y:15%;--s:22px;--d:19s;--del:-10s"></div>
       <div class="geo geo--diamond" style="--x:60%;--y:45%;--s:18px;--d:26s;--del:-15s"></div>
+      <div class="geo geo--ring" style="--x:35%;--y:35%;--s:50px;--d:30s;--del:-2s"></div>
+      <div class="geo geo--ring" style="--x:75%;--y:65%;--s:32px;--d:22s;--del:-9s"></div>
+      <div class="geo geo--dot" style="--x:45%;--y:25%;--s:6px;--d:15s;--del:-4s"></div>
+      <div class="geo geo--dot" style="--x:85%;--y:45%;--s:4px;--d:18s;--del:-6s"></div>
+      <div class="geo geo--dot" style="--x:20%;--y:65%;--s:5px;--d:20s;--del:-11s"></div>
+      <div class="geo geo--dot" style="--x:55%;--y:80%;--s:3px;--d:16s;--del:-1s"></div>
     </div>
     <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        <span class="hero-badge-text">AVAILABLE FOR WORK</span>
+      </div>
       <h1 class="hero-name" aria-label="Karim Sangid">
         <span class="hero-line">
           <span class="hero-letter" style="--i:0">K</span><span class="hero-letter" style="--i:1">A</span><span class="hero-letter" style="--i:2">R</span><span class="hero-letter" style="--i:3">I</span><span class="hero-letter" style="--i:4">M</span>
@@ -150,11 +161,16 @@
       <div class="hero-founder">
         <span class="hero-role reveal-text" style="--delay:0.8s">Founder, Hummus Development LLC</span>
       </div>
+      <div class="hero-cta-row">
+        <a href="#projects" class="hero-cta">View My Work</a>
+        <a href="#contact" class="hero-cta hero-cta--outline">Get In Touch</a>
+      </div>
     </div>
     <div class="hero-scroll">
       <span class="hero-scroll-text">Scroll</span>
       <div class="hero-scroll-line"></div>
     </div>
+    <div class="hero-vignette" aria-hidden="true"></div>
   </section>
 
   <!-- Marquee -->
@@ -812,6 +828,6 @@
     </footer>
   </section>
 
-  <script src="script.js?v=2"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>
