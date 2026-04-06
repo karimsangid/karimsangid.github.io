@@ -635,11 +635,11 @@
       var ry = y * cosT - rz * sinT;
       var rz2 = y * sinT + rz * cosT;
       // Perspective projection
-      var fov = 500;
-      var scale = fov / (fov + rz2 + 150);
+      var fov = 600;
+      var scale = fov / (fov + rz2 + 200);
       return {
-        x: 250 + rx * scale * 2.2,
-        y: 240 + ry * scale * 2.2,
+        x: 250 + rx * scale * 2.0,
+        y: 210 + ry * scale * 2.0,
         depth: rz2
       };
     }
@@ -665,7 +665,7 @@
 
       // Shadow
       hCtx.beginPath();
-      hCtx.ellipse(250, 410, 100, 18, 0, 0, Math.PI * 2);
+      hCtx.ellipse(250, 380, 90, 16, 0, 0, Math.PI * 2);
       hCtx.fillStyle = 'rgba(255, 68, 68, 0.06)';
       hCtx.fill();
 
@@ -711,6 +711,51 @@
       }
     }, { threshold: 0.2 });
     houseObs.observe(houseCanvas);
+  }
+
+  // ============================================================
+  // OSINT MATRIX RAIN — CANVAS
+  // ============================================================
+  var osintCanvas = document.getElementById('osintCanvas');
+  if (osintCanvas) {
+    var oCtx = osintCanvas.getContext('2d');
+    var oCols = Math.floor(300 / 12);
+    var oDrops = [];
+    for (var oi = 0; oi < oCols; oi++) oDrops[oi] = Math.random() * -50;
+    var oChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&<>{}[]:/?.';
+    var oRunning = false;
+
+    function drawOsintMatrix() {
+      if (!oRunning) return;
+      oCtx.fillStyle = 'rgba(10, 10, 15, 0.08)';
+      oCtx.fillRect(0, 0, 300, 220);
+      oCtx.font = '11px monospace';
+
+      for (var i = 0; i < oDrops.length; i++) {
+        var ch = oChars.charAt(Math.floor(Math.random() * oChars.length));
+        var bright = Math.random();
+        if (bright > 0.92) {
+          oCtx.fillStyle = '#ff4444';
+        } else if (bright > 0.85) {
+          oCtx.fillStyle = 'rgba(255, 68, 68, 0.8)';
+        } else {
+          oCtx.fillStyle = 'rgba(255, 68, 68, 0.35)';
+        }
+        oCtx.fillText(ch, i * 12, oDrops[i] * 12);
+        if (oDrops[i] * 12 > 220 && Math.random() > 0.96) oDrops[i] = 0;
+        oDrops[i] += 0.4 + Math.random() * 0.3;
+      }
+      requestAnimationFrame(drawOsintMatrix);
+    }
+
+    var osintObs = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) {
+        if (!oRunning) { oRunning = true; drawOsintMatrix(); }
+      } else {
+        oRunning = false;
+      }
+    }, { threshold: 0.2 });
+    osintObs.observe(osintCanvas);
   }
 
   // ============================================================
