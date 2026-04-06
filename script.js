@@ -635,11 +635,11 @@
       var ry = y * cosT - rz * sinT;
       var rz2 = y * sinT + rz * cosT;
       // Perspective projection
-      var fov = 400;
+      var fov = 500;
       var scale = fov / (fov + rz2 + 150);
       return {
-        x: 200 + rx * scale * 1.4,
-        y: 160 + ry * scale * 1.4,
+        x: 250 + rx * scale * 2.2,
+        y: 200 + ry * scale * 2.2,
         depth: rz2
       };
     }
@@ -661,11 +661,11 @@
 
     function drawHouse() {
       hAngle += 0.008;
-      hCtx.clearRect(0, 0, 400, 350);
+      hCtx.clearRect(0, 0, 500, 450);
 
       // Shadow
       hCtx.beginPath();
-      hCtx.ellipse(200, 310, 80, 14, 0, 0, Math.PI * 2);
+      hCtx.ellipse(250, 400, 100, 18, 0, 0, Math.PI * 2);
       hCtx.fillStyle = 'rgba(255, 68, 68, 0.06)';
       hCtx.fill();
 
