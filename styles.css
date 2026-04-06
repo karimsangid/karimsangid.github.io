@@ -1226,6 +1226,10 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
   50%      { color: rgba(255, 68, 68, 0.07); }
 }
 
+.serif-i {
+  font-family: 'Georgia', 'Times New Roman', serif;
+}
+
 .project-name {
   font-family: var(--font-heading);
   font-size: clamp(24px, 2.5vw, 36px);
