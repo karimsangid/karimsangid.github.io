@@ -639,7 +639,7 @@
       var scale = fov / (fov + rz2 + 150);
       return {
         x: 250 + rx * scale * 2.2,
-        y: 200 + ry * scale * 2.2,
+        y: 240 + ry * scale * 2.2,
         depth: rz2
       };
     }
@@ -665,7 +665,7 @@
 
       // Shadow
       hCtx.beginPath();
-      hCtx.ellipse(250, 400, 100, 18, 0, 0, Math.PI * 2);
+      hCtx.ellipse(250, 410, 100, 18, 0, 0, Math.PI * 2);
       hCtx.fillStyle = 'rgba(255, 68, 68, 0.06)';
       hCtx.fill();
 
