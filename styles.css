@@ -2101,7 +2101,6 @@ section { position: relative; }
   .marquee-content { font-size: 11px; }
   .skills-grid { gap: 32px; }
   .skill-pill { font-size: 11px; padding: 6px 12px; }
-  .hero-grid-bg { display: none; }
 }
 
 @media (max-width: 380px) {
@@ -2121,10 +2120,6 @@ section { position: relative; }
   .loader-scanlines { display: none; }
   .loader-grid-canvas { display: none; }
   section::before, section::after { display: none; }
-  .hero-canvas { display: none; }
-  .hero-aurora { animation: none; }
-  .hero-grid-bg { display: none; }
-  .geo-shapes { display: none; }
   .mouse-trail { display: none !important; }
   .particle { display: none !important; }
   .cursor-glow { display: none !important; }

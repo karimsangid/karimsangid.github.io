@@ -295,10 +295,10 @@
   // INTERACTIVE PARTICLE CONSTELLATION — CANVAS (UPGRADED)
   // ============================================================
   var heroCanvas = document.getElementById('heroCanvas');
-  if (heroCanvas && !isTouch) {
+  if (heroCanvas) {
     var ctx = heroCanvas.getContext('2d');
     var particles = [];
-    var particleCount = 120;
+    var particleCount = isTouch ? 60 : 120;
     var connectionDist = 160;
     var pmx = -1000, pmy = -1000;
     var mouseRadius = 250;
@@ -850,7 +850,7 @@
   var heroContent = document.querySelector('.hero-content');
   var geoShapes = document.querySelectorAll('.geo');
 
-  if (!isTouch) {
+  {
     window.addEventListener('scroll', function () {
       var scrollY = window.scrollY;
 
