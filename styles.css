@@ -2114,6 +2114,11 @@ section { position: relative; }
 
 @media (pointer: coarse) {
   .hero-name { animation: none; }
+  .hero-letter, .hero-role {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
   .contact-email { animation: none; }
   .contact-cta::before, .contact-cta::after { display: none; }
   .loader-glitch { animation: none; }
