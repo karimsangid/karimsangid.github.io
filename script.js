@@ -14,8 +14,9 @@
   var loaderPercent = document.getElementById('loaderPercent');
   var loaderGrid = document.getElementById('loaderGrid');
 
-  // Loader grid canvas animation
-  if (loaderGrid) {
+  // Loader grid canvas animation (skip on touch — element is display:none anyway,
+  // running it just burns CPU during the critical first paint)
+  if (loaderGrid && !isTouch) {
     var lgCtx = loaderGrid.getContext('2d');
     loaderGrid.width = window.innerWidth;
     loaderGrid.height = window.innerHeight;
@@ -60,16 +61,20 @@
   countPercent();
 
   window.addEventListener('load', function () {
+    var holdMs = isTouch ? 400 : 1800;
+    var fadeMs = isTouch ? 350 : 1000;
     setTimeout(function () {
       percentVal = 100;
       if (loaderPercent) loaderPercent.textContent = '100%';
-      // Screen flash
-      document.body.classList.add('flash');
-      setTimeout(function () { document.body.classList.remove('flash'); }, 200);
+      // Screen flash (skip on touch for snappier reveal)
+      if (!isTouch) {
+        document.body.classList.add('flash');
+        setTimeout(function () { document.body.classList.remove('flash'); }, 200);
+      }
       loader.classList.add('done');
       gridRunning = false;
-      setTimeout(function () { loader.style.display = 'none'; }, 1000);
-    }, 1800);
+      setTimeout(function () { loader.style.display = 'none'; }, fadeMs);
+    }, holdMs);
   });
 
   // ============================================================
