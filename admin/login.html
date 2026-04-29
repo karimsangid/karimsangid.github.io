@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>HUMMUS_DEV // AUTH</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%230a0b0d'/><text x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-weight='700' font-size='34' fill='%236dff8e'>K</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0b0d;
+      --panel: #11141a;
+      --line: #1f242d;
+      --text: #e6ebf2;
+      --mute: #7c8896;
+      --dim: #4f5864;
+      --green: #6dff8e;
+      --green-glow: rgba(109, 255, 142, .35);
+      --crit: #ff5b6e;
+      --mono: 'Geist Mono', 'JetBrains Mono', ui-monospace, Menlo, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 14px;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    body {
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        repeating-linear-gradient(to bottom, rgba(255,255,255,.012) 0 1px, transparent 1px 3px),
+        radial-gradient(120% 90% at 50% 0%, transparent 60%, rgba(0,0,0,.55) 100%);
+      mix-blend-mode: screen;
+    }
+    .auth {
+      position: relative; z-index: 1;
+      width: 100%; max-width: 420px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 28px;
+      animation: reveal .5s cubic-bezier(.2,.7,.2,1);
+    }
+    @keyframes reveal { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .auth h1 {
+      font-size: 11px;
+      letter-spacing: .22em;
+      color: var(--mute);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .auth h1 b { color: var(--text); font-weight: 600; }
+    .auth .sub {
+      font-size: 12px;
+      color: var(--dim);
+      margin-bottom: 22px;
+      letter-spacing: .04em;
+    }
+    .auth label {
+      display: block;
+      font-size: 10.5px;
+      letter-spacing: .18em;
+      color: var(--mute);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .auth input {
+      width: 100%;
+      background: #06080b;
+      border: 1px solid var(--line);
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 14px;
+      padding: 12px 14px;
+      outline: none;
+      letter-spacing: .04em;
+    }
+    .auth input:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 1px var(--green-glow);
+    }
+    .auth button {
+      width: 100%;
+      margin-top: 18px;
+      background: var(--green);
+      color: #0a0b0d;
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      padding: 14px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 18px var(--green-glow);
+      transition: filter .15s ease;
+    }
+    .auth button:hover { filter: brightness(1.1); }
+    .auth button:disabled { opacity: .55; cursor: wait; }
+    .auth .err {
+      color: var(--crit);
+      font-size: 11px;
+      letter-spacing: .14em;
+      margin-top: 14px;
+      min-height: 16px;
+      text-transform: uppercase;
+    }
+    .auth .meta {
+      margin-top: 22px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      font-size: 10.5px;
+      letter-spacing: .16em;
+      color: var(--dim);
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+    }
+    .auth .meta .led {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green-glow);
+      margin-right: 8px;
+      vertical-align: -1px;
+    }
+  </style>
+</head>
+<body>
+  <form class="auth" id="auth" autocomplete="on">
+    <h1><b>HUMMUS_DEV</b> &nbsp;/&nbsp; authentication required</h1>
+    <p class="sub">Restricted endpoint. Single-user access.</p>
+    <label for="pw">Password</label>
+    <input id="pw" type="password" name="password" autofocus autocomplete="current-password" required>
+    <button type="submit" id="btn">[ENTER]</button>
+    <div class="err" id="err"></div>
+    <div class="meta">
+      <span><span class="led"></span>SESSION &middot; 7 DAYS</span>
+      <span>karim@hummus-dev</span>
+    </div>
+  </form>
+  <script>
+    (function () {
+      const form = document.getElementById('auth');
+      const pw = document.getElementById('pw');
+      const btn = document.getElementById('btn');
+      const err = document.getElementById('err');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        err.textContent = '';
+        btn.disabled = true;
+        btn.textContent = '[VERIFYING…]';
+        try {
+          const r = await fetch('/api/admin/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password: pw.value }),
+            credentials: 'same-origin',
+          });
+          if (r.ok) {
+            window.location.href = '/admin';
+            return;
+          }
+          let data = {};
+          try { data = await r.json(); } catch (_) {}
+          if (data.error === 'server_misconfigured') {
+            err.textContent = '× SERVER NOT CONFIGURED';
+          } else {
+            err.textContent = '× ACCESS DENIED';
+          }
+        } catch (_) {
+          err.textContent = '× NETWORK ERROR';
+        }
+        btn.disabled = false;
+        btn.textContent = '[ENTER]';
+        pw.select();
+      });
+    })();
+  </script>
+</body>
+</html>

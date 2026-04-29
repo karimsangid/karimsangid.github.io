@@ -1,0 +1,850 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>HUMMUS_DEV // Q2.2026 — Profit Telemetry</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%230a0b0d'/><text x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-weight='700' font-size='34' fill='%236dff8e'>K</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:           #0a0b0d;
+    --bg-2:         #0f1115;
+    --panel:        #11141a;
+    --panel-2:      #161a21;
+    --line:         #1f242d;
+    --line-soft:    #161a21;
+    --text:         #e6ebf2;
+    --mute:         #7c8896;
+    --dim:          #4f5864;
+
+    --green:        #6dff8e;
+    --green-glow:   rgba(109, 255, 142, .35);
+    --amber:        #ffb547;
+    --amber-glow:   rgba(255, 181, 71, .30);
+    --cyan:         #5dd4ff;
+    --cyan-glow:    rgba(93, 212, 255, .30);
+
+    --crit:         #ff5b6e;
+    --warn:         #ffb547;
+    --ok:           #6dff8e;
+
+    --mono: 'Geist Mono', 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0}
+  html,body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--mono);
+    font-size:14px;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:50;
+    background:
+      repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,.012) 0 1px,
+        transparent 1px 3px
+      ),
+      radial-gradient(120% 90% at 50% 0%, transparent 60%, rgba(0,0,0,.55) 100%);
+    mix-blend-mode:screen;
+  }
+  body::after{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:51; opacity:.06;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  .statusbar{
+    position:sticky; top:0; z-index:40;
+    display:flex; align-items:center; gap:18px;
+    background:#06070a;
+    border-bottom:1px solid var(--line);
+    padding:8px 18px;
+    font-size:11px; letter-spacing:.06em;
+    color:var(--mute);
+  }
+  .statusbar .led{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--ok);
+    box-shadow: 0 0 8px var(--green-glow);
+    animation: blip 2.4s ease-in-out infinite;
+  }
+  @keyframes blip { 0%,90%,100%{opacity:1} 92%{opacity:.2} }
+  .statusbar b{color:var(--text); font-weight:600}
+  .statusbar .sep{color:var(--dim)}
+  .statusbar .right{margin-left:auto; display:flex; gap:14px; align-items:center}
+  .statusbar .logout{
+    color:var(--crit);
+    text-decoration:none;
+    letter-spacing:.18em;
+    font-weight:600;
+    padding:2px 8px;
+    border:1px solid transparent;
+    transition: border-color .15s ease, background .15s ease;
+    cursor:pointer;
+  }
+  .statusbar .logout:hover{
+    border-color:var(--crit);
+    background:rgba(255,91,110,.08);
+  }
+
+  .page{
+    max-width:1200px;
+    margin:0 auto;
+    padding:28px 18px 44px;
+    position:relative;
+  }
+
+  .boot{
+    border:1px solid var(--line);
+    background:var(--panel);
+    padding:14px 18px;
+    margin-bottom:22px;
+    display:grid;
+    gap:4px;
+    font-size:12px;
+    color:var(--mute);
+  }
+  .boot .line{
+    display:flex; gap:10px; align-items:baseline;
+    opacity:0; animation: typeLine .4s ease-out forwards;
+  }
+  .boot .line:nth-child(1){animation-delay:.05s}
+  .boot .line:nth-child(2){animation-delay:.20s}
+  .boot .line:nth-child(3){animation-delay:.35s}
+  .boot .line:nth-child(4){animation-delay:.50s}
+  .boot .line:nth-child(5){animation-delay:.65s}
+  @keyframes typeLine { from{opacity:0; transform:translateX(-4px)} to{opacity:1; transform:translateX(0)} }
+  .tag{font-weight:600}
+  .tag.sys{color:var(--cyan)}
+  .tag.net{color:var(--amber)}
+  .tag.gpu{color:#c79bff}
+  .tag.ok{color:var(--ok)}
+  .tag.fin{color:var(--green)}
+  .boot .arrow{color:var(--dim)}
+
+  .ticker{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:var(--bg-2);
+    overflow:hidden;
+    margin-bottom:22px;
+    padding:10px 0;
+    position:relative;
+  }
+  .ticker::before, .ticker::after{
+    content:""; position:absolute; top:0; bottom:0; width:80px; z-index:2; pointer-events:none;
+  }
+  .ticker::before{left:0; background:linear-gradient(90deg, var(--bg-2), transparent)}
+  .ticker::after{right:0; background:linear-gradient(-90deg, var(--bg-2), transparent)}
+  .ticker .track{
+    display:flex; gap:36px; white-space:nowrap;
+    animation: scroll 40s linear infinite;
+    font-size:12px; letter-spacing:.18em; color:var(--mute);
+  }
+  .ticker .track span{display:inline-flex; align-items:center; gap:36px}
+  .ticker .track span::after{content:"•"; color:var(--green); margin-left:36px}
+  @keyframes scroll{
+    from{transform:translateX(0)}
+    to{transform:translateX(-50%)}
+  }
+
+  .panel{
+    border:1px solid var(--line);
+    background:var(--panel);
+    margin-bottom:22px;
+    position:relative;
+  }
+  .panel-head{
+    display:flex; align-items:center; gap:14px;
+    border-bottom:1px solid var(--line);
+    padding:10px 14px;
+    background:linear-gradient(180deg, rgba(255,255,255,.025), transparent);
+    font-size:11px;
+    letter-spacing:.18em;
+    color:var(--mute);
+    text-transform:uppercase;
+  }
+  .panel-head .tlc{
+    width:8px; height:8px; border-radius:50%;
+    border:1px solid var(--dim); display:inline-block;
+  }
+  .panel-head .title{color:var(--text); font-weight:600; letter-spacing:.18em}
+  .panel-head .mono-id{margin-left:auto; color:var(--dim); font-size:10.5px}
+  .panel-body{padding:22px}
+
+  .hero{
+    display:grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap:30px;
+    align-items:end;
+  }
+  .hero .label{
+    color:var(--mute); font-size:11px; letter-spacing:.22em; text-transform:uppercase;
+    margin-bottom:14px;
+    display:flex; gap:10px; align-items:center;
+  }
+  .hero .label::before{
+    content:"$"; color:var(--green);
+    text-shadow: 0 0 8px var(--green-glow);
+  }
+  .hero .figure{
+    display:flex; align-items:flex-start; gap:0;
+    line-height:.85;
+    color:var(--text);
+  }
+  .hero .currency{
+    font-size:46px; font-weight:300; color:var(--mute);
+    margin-top:14px;
+  }
+  .hero .amount{
+    font-size:clamp(72px, 11vw, 142px);
+    font-weight:300;
+    letter-spacing:-.04em;
+    color:var(--green);
+    text-shadow: 0 0 22px var(--green-glow);
+    font-feature-settings:"tnum" 1;
+  }
+  .hero .cents{
+    font-size:clamp(28px, 4vw, 48px);
+    font-weight:300;
+    color:var(--green);
+    opacity:.55;
+    margin-top:14px;
+    letter-spacing:-.02em;
+  }
+  .hero .caret{
+    display:inline-block;
+    width:12px; height:clamp(56px, 8vw, 96px);
+    background:var(--green);
+    margin-left:8px; margin-top:14px;
+    box-shadow: 0 0 12px var(--green-glow);
+    animation: blink 1s steps(2,end) infinite;
+  }
+  @keyframes blink { to { opacity:0 } }
+
+  .hero .meta{
+    border-left:1px solid var(--line);
+    padding-left:24px;
+    color:var(--mute);
+    font-size:12px;
+  }
+  .hero .meta .row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    border-bottom:1px dashed var(--line);
+    padding:7px 0;
+    letter-spacing:.06em;
+  }
+  .hero .meta .row:last-child{border-bottom:none}
+  .hero .meta .k{text-transform:uppercase; font-size:10.5px; letter-spacing:.16em}
+  .hero .meta .v{color:var(--text); font-weight:600; font-feature-settings:"tnum" 1}
+  .hero .meta .v.ok{color:var(--ok)}
+
+  .split{ display:grid; gap:14px; }
+  .split .axis-top{
+    display:flex; justify-content:space-between;
+    color:var(--dim); font-size:10.5px; letter-spacing:.18em; text-transform:uppercase;
+  }
+  .stackbar{
+    display:flex; height:56px;
+    border:1px solid var(--line);
+    background:#000;
+  }
+  .stackbar .seg{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 16px;
+    font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+    color:#0a0b0d;
+    font-weight:600;
+    transition: filter .25s ease;
+    position:relative;
+    overflow:hidden;
+  }
+  .stackbar .seg::before{
+    content:""; position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(0,0,0,.10) 0 1px, transparent 1px 5px);
+    pointer-events:none;
+  }
+  .stackbar .seg:hover{filter:brightness(1.08)}
+  .stackbar .seg.s1{background:var(--green); box-shadow: inset 0 0 24px rgba(0,0,0,.18)}
+  .stackbar .seg.s2{background:var(--amber); box-shadow: inset 0 0 24px rgba(0,0,0,.18)}
+  .stackbar .seg.s3{background:var(--cyan);  box-shadow: inset 0 0 24px rgba(0,0,0,.18)}
+  .stackbar .seg + .seg{border-left:1px solid var(--bg)}
+
+  .legend{
+    display:flex; gap:24px; flex-wrap:wrap; margin-top:6px;
+    font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--mute);
+  }
+  .legend .item{display:inline-flex; align-items:center; gap:10px}
+  .legend i{width:10px; height:10px; display:inline-block}
+  .legend .i1{background:var(--green); box-shadow:0 0 8px var(--green-glow)}
+  .legend .i2{background:var(--amber); box-shadow:0 0 8px var(--amber-glow)}
+  .legend .i3{background:var(--cyan);  box-shadow:0 0 8px var(--cyan-glow)}
+
+  .streams{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:16px;
+  }
+  .stream{
+    border:1px solid var(--line);
+    background:var(--panel);
+    position:relative;
+    overflow:hidden;
+  }
+  .stream-head{
+    display:flex; align-items:center; gap:10px;
+    border-bottom:1px solid var(--line);
+    padding:9px 14px;
+    background:linear-gradient(180deg, rgba(255,255,255,.025), transparent);
+    font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--mute);
+  }
+  .stream-head .num{font-weight:700; color:var(--text)}
+  .stream-head .ok-tag{
+    margin-left:auto;
+    color:var(--green);
+    font-size:10px; letter-spacing:.22em;
+    border:1px solid var(--green);
+    padding:2px 6px;
+    box-shadow: inset 0 0 8px rgba(109,255,142,.10);
+  }
+  .stream.s2 .ok-tag{color:var(--amber); border-color:var(--amber); box-shadow: inset 0 0 8px rgba(255,181,71,.10)}
+  .stream.s3 .ok-tag{color:var(--cyan); border-color:var(--cyan); box-shadow: inset 0 0 8px rgba(93,212,255,.10)}
+  .stream-body{padding:18px}
+
+  .stream h3{
+    font-size:18px; font-weight:500; letter-spacing:-.005em;
+    color:var(--text);
+    margin-bottom:6px;
+    line-height:1.2;
+  }
+  .stream h3 .accent{color:var(--green)}
+  .stream.s2 h3 .accent{color:var(--amber)}
+  .stream.s3 h3 .accent{color:var(--cyan)}
+
+  .stream .desc{
+    font-size:12px; line-height:1.55; color:var(--mute);
+    margin-bottom:18px;
+  }
+
+  .ring-row{
+    display:flex; align-items:center; gap:16px;
+    padding-bottom:16px;
+    border-bottom:1px dashed var(--line);
+    margin-bottom:14px;
+  }
+  .ring{ width:84px; height:84px; flex:none; position:relative; }
+  .ring svg{transform:rotate(-90deg); display:block; filter: drop-shadow(0 0 6px var(--g))}
+  .ring.s1{--g: var(--green-glow)}
+  .ring.s2{--g: var(--amber-glow)}
+  .ring.s3{--g: var(--cyan-glow)}
+  .ring .center{
+    position:absolute; inset:0; display:grid; place-items:center;
+    color:var(--text); font-weight:600; font-size:14px;
+  }
+  .ring-amt .amt{
+    font-size:24px; font-weight:500; color:var(--text);
+    letter-spacing:-.01em;
+    font-feature-settings:"tnum" 1;
+  }
+  .ring-amt .lab{
+    color:var(--dim); font-size:10.5px; letter-spacing:.2em; text-transform:uppercase;
+    margin-top:6px;
+  }
+
+  .deets{
+    display:grid; grid-template-columns: 1fr auto; gap:6px 10px;
+    font-size:11px; color:var(--mute);
+    letter-spacing:.06em;
+  }
+  .deets .k{text-transform:uppercase; letter-spacing:.16em; font-size:10.5px}
+  .deets .v{color:var(--text); font-weight:600; font-feature-settings:"tnum" 1}
+  .deets .v.up{color:var(--ok)}
+
+  .feed{
+    background:#06080b;
+    border:1px solid var(--line);
+    padding:14px 16px;
+    font-size:12px;
+    color:var(--mute);
+    display:grid; gap:5px;
+    max-height:220px; overflow:hidden;
+    position:relative;
+  }
+  .feed::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:30px;
+    background:linear-gradient(to top, #06080b, transparent);
+    pointer-events:none;
+  }
+  .feed .ln{display:flex; gap:10px; align-items:baseline}
+  .feed .ts{color:var(--dim)}
+  .feed .lvl{font-weight:700; min-width:50px}
+  .feed .lvl.info{color:var(--cyan)}
+  .feed .lvl.ok{color:var(--ok)}
+  .feed .lvl.warn{color:var(--warn)}
+  .feed .ln .msg{color:var(--text)}
+  .feed .ln .msg .num{color:var(--green); font-weight:600}
+
+  .parity{
+    display:grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap:30px;
+    align-items:center;
+  }
+  .parity h2{
+    font-size:28px; font-weight:500; letter-spacing:-.01em;
+    margin-bottom:14px; line-height:1.15;
+  }
+  .parity h2 .accent{color:var(--green); text-shadow: 0 0 10px var(--green-glow)}
+  .parity p{
+    color:var(--mute); font-size:13px; line-height:1.6;
+    margin-bottom:18px; max-width:480px;
+  }
+  .ascii-key{
+    border:1px dashed var(--line);
+    padding:12px 14px;
+    font-size:11px; color:var(--mute);
+    letter-spacing:.04em;
+  }
+  .ascii-key .ln{display:flex; gap:10px}
+  .ascii-key .ln .k{color:var(--text); min-width:90px}
+  .ascii-key .ln.s1 .k::before{content:"[01] "; color:var(--green)}
+  .ascii-key .ln.s2 .k::before{content:"[02] "; color:var(--amber)}
+  .ascii-key .ln.s3 .k::before{content:"[03] "; color:var(--cyan)}
+
+  .triangle-host{
+    background:#06080b;
+    border:1px solid var(--line);
+    padding:18px;
+    position:relative;
+  }
+  .triangle-host::before{
+    content:"PARITY_PLOT.svg"; position:absolute; top:8px; right:12px;
+    color:var(--dim); font-size:10px; letter-spacing:.18em;
+  }
+  .triangle-host svg{display:block; width:100%; height:auto}
+
+  .endline{
+    margin-top:30px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap;
+    font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--mute);
+  }
+  .endline .prompt{color:var(--text); text-transform:none; letter-spacing:.02em}
+  .endline .prompt .g{color:var(--green)}
+  .endline .prompt .caret-mini{
+    display:inline-block; width:8px; height:13px; background:var(--green);
+    vertical-align:-2px; margin-left:4px;
+    animation: blink 1s steps(2,end) infinite;
+    box-shadow: 0 0 8px var(--green-glow);
+  }
+
+  .panel, .ticker{
+    opacity:0; transform: translateY(8px);
+    animation: reveal .55s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  .panel:nth-of-type(1){animation-delay:.55s}
+  .panel:nth-of-type(2){animation-delay:.70s}
+  .panel:nth-of-type(3){animation-delay:.85s}
+  .panel:nth-of-type(4){animation-delay:1.00s}
+  .panel:nth-of-type(5){animation-delay:1.15s}
+  .ticker{animation-delay:.65s}
+  @keyframes reveal { to{opacity:1; transform:translateY(0)} }
+
+  @media (max-width: 880px){
+    .hero{grid-template-columns:1fr; gap:20px}
+    .hero .meta{border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:14px}
+    .streams{grid-template-columns:1fr}
+    .stackbar{flex-direction:column; height:auto}
+    .stackbar .seg{padding:14px 16px; border-left:none !important; border-bottom:1px solid var(--bg)}
+    .parity{grid-template-columns:1fr}
+    .statusbar .right .hide-mob{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="statusbar">
+  <span class="led"></span>
+  <span><b>HUMMUS_DEV</b> <span class="sep">/</span> profit.telemetry</span>
+  <span class="sep">·</span>
+  <span>FILE_NO H-44021</span>
+  <span class="right">
+    <span class="hide-mob">VA · USA</span>
+    <span class="hide-mob">UTC<span id="utc-offset">-04</span></span>
+    <span id="now">--:--:--</span>
+    <span class="sep">·</span>
+    <a href="#" class="logout" id="logout-btn" title="End session">[LOGOUT]</a>
+  </span>
+</div>
+
+<div class="page">
+
+  <div class="boot">
+    <div class="line"><span class="tag sys">[SYS]</span><span class="arrow">»</span><span>Initializing financial telemetry pipeline…</span></div>
+    <div class="line"><span class="tag net">[NET]</span><span class="arrow">»</span><span>Aggregating ledger across <b style="color:var(--text)">3</b> revenue streams…</span></div>
+    <div class="line"><span class="tag gpu">[DB_]</span><span class="arrow">»</span><span>SQLite ledger v2 · <b style="color:var(--text)">14,883</b> rows scanned</span></div>
+    <div class="line"><span class="tag fin">[FIN]</span><span class="arrow">»</span><span>Q2.2026 close · variance within tolerance</span></div>
+    <div class="line"><span class="tag ok">[OK_]</span><span class="arrow">»</span><span style="color:var(--text)">All systems operational. Report ready.</span></div>
+  </div>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="track">
+      <span>FIVEM • LUA SCRIPTS • VEHICLE PACKS • ANIMATED MODS • FASTAPI • REACT • CHROMADB • OPENCV • GROQ • LLAMA 3.3 70B • RAG • SQLITE • DOCKER • AZURE • VERCEL • TAILSCALE • CLOUDFLARE • CLIENT BUILDS • CONSULTING • IT/HARDWARE • ONE-OFF COMMISSIONS • </span>
+      <span>FIVEM • LUA SCRIPTS • VEHICLE PACKS • ANIMATED MODS • FASTAPI • REACT • CHROMADB • OPENCV • GROQ • LLAMA 3.3 70B • RAG • SQLITE • DOCKER • AZURE • VERCEL • TAILSCALE • CLOUDFLARE • CLIENT BUILDS • CONSULTING • IT/HARDWARE • ONE-OFF COMMISSIONS • </span>
+    </div>
+  </div>
+
+  <section class="panel">
+    <div class="panel-head">
+      <span class="tlc"></span>
+      <span class="title">PROFIT_TOTAL.READOUT</span>
+      <span class="mono-id">~/hummus_dev/q2.2026/profit</span>
+    </div>
+    <div class="panel-body">
+      <div class="hero">
+        <div>
+          <div class="label">Quarterly net · realized</div>
+          <div class="figure">
+            <span class="currency">$</span>
+            <span class="amount" id="hero-amt">50,847</span>
+            <span class="cents">.62</span>
+            <span class="caret"></span>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="row"><span class="k">total_profit</span><span class="v">$50,847.62</span></div>
+          <div class="row"><span class="k">streams_active</span><span class="v">03</span></div>
+          <div class="row"><span class="k">avg_per_stream</span><span class="v">$16,949.21</span></div>
+          <div class="row"><span class="k">variance</span><span class="v">±1.7%</span></div>
+          <div class="row"><span class="k">threshold_50k</span><span class="v ok">▲ CLEARED</span></div>
+          <div class="row"><span class="k">status</span><span class="v ok">▲ HEALTHY</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <span class="tlc"></span>
+      <span class="title">REVENUE_SPLIT.bar</span>
+      <span class="mono-id">fig.01 · stacked</span>
+    </div>
+    <div class="panel-body">
+      <div class="split">
+        <div class="axis-top">
+          <span>$0</span>
+          <span>$12.7K</span>
+          <span>$25.4K</span>
+          <span>$38.1K</span>
+          <span>$50.8K</span>
+        </div>
+        <div class="stackbar">
+          <div class="seg s1" style="flex: 17284">
+            <span>5M / GAME_DEV</span>
+            <span>33.99%</span>
+          </div>
+          <div class="seg s2" style="flex: 16925">
+            <span>WEB · AI</span>
+            <span>33.29%</span>
+          </div>
+          <div class="seg s3" style="flex: 16639">
+            <span>MISC.</span>
+            <span>32.72%</span>
+          </div>
+        </div>
+        <div class="legend">
+          <span class="item"><i class="i1"></i> [01] FiveM · Game Development</span>
+          <span class="item"><i class="i2"></i> [02] Website Design · AI Programming</span>
+          <span class="item"><i class="i3"></i> [03] Miscellaneous</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <span class="tlc"></span>
+      <span class="title">STREAM_BREAKDOWN.grid</span>
+      <span class="mono-id">3 streams · q2.2026</span>
+    </div>
+    <div class="panel-body">
+      <div class="streams">
+
+        <article class="stream s1">
+          <div class="stream-head">
+            <span class="num">[01]</span>
+            <span>5M / Game Development</span>
+            <span class="ok-tag">OK</span>
+          </div>
+          <div class="stream-body">
+            <h3>FiveM <span class="accent">// game dev</span></h3>
+            <p class="desc">143 custom vehicle mods, 150+ resources, 300+ Lua scripts. Seasonal pack drops + roleplay server ops.</p>
+
+            <div class="ring-row">
+              <div class="ring s1">
+                <svg width="84" height="84" viewBox="0 0 84 84">
+                  <circle cx="42" cy="42" r="34" fill="none" stroke="#1a1f27" stroke-width="9"/>
+                  <circle cx="42" cy="42" r="34" fill="none" stroke="var(--green)" stroke-width="9"
+                    stroke-dasharray="213.63" stroke-dashoffset="141.04" stroke-linecap="butt"/>
+                </svg>
+                <div class="center">34%</div>
+              </div>
+              <div class="ring-amt">
+                <div class="amt">$17,283.91</div>
+                <div class="lab">realized · q2</div>
+              </div>
+            </div>
+
+            <div class="deets">
+              <span class="k">top_sku</span><span class="v">animated_xmas_22</span>
+              <span class="k">units</span><span class="v">148 packs</span>
+              <span class="k">vs_q1</span><span class="v up">+71.5%</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="stream s2">
+          <div class="stream-head">
+            <span class="num">[02]</span>
+            <span>Web · AI</span>
+            <span class="ok-tag">OK</span>
+          </div>
+          <div class="stream-body">
+            <h3>web design <span class="accent">// AI programming</span></h3>
+            <p class="desc">FastAPI / React client builds, Vercel deploys. In-house: Hummus IQ, Papi AI, SentinelIQ, Cram.</p>
+
+            <div class="ring-row">
+              <div class="ring s2">
+                <svg width="84" height="84" viewBox="0 0 84 84">
+                  <circle cx="42" cy="42" r="34" fill="none" stroke="#1a1f27" stroke-width="9"/>
+                  <circle cx="42" cy="42" r="34" fill="none" stroke="var(--amber)" stroke-width="9"
+                    stroke-dasharray="213.63" stroke-dashoffset="142.53" stroke-linecap="butt"/>
+                </svg>
+                <div class="center">33%</div>
+              </div>
+              <div class="ring-amt">
+                <div class="amt">$16,924.57</div>
+                <div class="lab">realized · q2</div>
+              </div>
+            </div>
+
+            <div class="deets">
+              <span class="k">engagements</span><span class="v">7 active</span>
+              <span class="k">avg_ticket</span><span class="v">$2,418</span>
+              <span class="k">vs_q1</span><span class="v up">+22.4%</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="stream s3">
+          <div class="stream-head">
+            <span class="num">[03]</span>
+            <span>Miscellaneous</span>
+            <span class="ok-tag">OK</span>
+          </div>
+          <div class="stream-body">
+            <h3>misc. <span class="accent">// engagements</span></h3>
+            <p class="desc">Consulting, hardware/IT setup work, one-off commissions, ad-hoc revenue not bucketed elsewhere.</p>
+
+            <div class="ring-row">
+              <div class="ring s3">
+                <svg width="84" height="84" viewBox="0 0 84 84">
+                  <circle cx="42" cy="42" r="34" fill="none" stroke="#1a1f27" stroke-width="9"/>
+                  <circle cx="42" cy="42" r="34" fill="none" stroke="var(--cyan)" stroke-width="9"
+                    stroke-dasharray="213.63" stroke-dashoffset="143.74" stroke-linecap="butt"/>
+                </svg>
+                <div class="center">33%</div>
+              </div>
+              <div class="ring-amt">
+                <div class="amt">$16,639.14</div>
+                <div class="lab">realized · q2</div>
+              </div>
+            </div>
+
+            <div class="deets">
+              <span class="k">items</span><span class="v">14 logged</span>
+              <span class="k">largest</span><span class="v">$3,200</span>
+              <span class="k">vs_q1</span><span class="v up">+8.1%</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <span class="tlc"></span>
+      <span class="title">PARITY_INDEX.plot</span>
+      <span class="mono-id">fig.02 · ternary</span>
+    </div>
+    <div class="panel-body">
+      <div class="parity">
+        <div>
+          <h2>Sitting <span class="accent">square</span> in the middle.</h2>
+          <p>The triangle plots Q2 revenue mix as a single point. A perfectly balanced quarter — equal contributions from all three streams — places the dot dead-center. This quarter sits a hair off-center; FiveM lifts slightly heavier, but no single source carries the company.</p>
+
+          <div class="ascii-key">
+            <div class="ln s1"><span class="k">FiveM</span><span>33.99%  ·  $17,283.91</span></div>
+            <div class="ln s2"><span class="k">Web · AI</span><span>33.29%  ·  $16,924.57</span></div>
+            <div class="ln s3"><span class="k">Misc.</span><span>32.72%  ·  $16,639.14</span></div>
+          </div>
+        </div>
+
+        <div class="triangle-host">
+          <svg viewBox="0 0 420 380" xmlns="http://www.w3.org/2000/svg">
+            <g stroke="#202632" stroke-width="1" fill="none">
+              <polygon points="115,275 305,275 210,110" />
+              <polygon points="138,247 282,247 210,140" />
+              <polygon points="162,220 258,220 210,170" />
+            </g>
+            <g stroke="#1a2030" stroke-width="1" stroke-dasharray="3 4" fill="none">
+              <line x1="210" y1="110" x2="210" y2="305"/>
+              <line x1="115" y1="275" x2="305" y2="275"/>
+            </g>
+
+            <polygon points="60,310 360,310 210,50"
+                     fill="rgba(255,255,255,0.015)"
+                     stroke="#2a3140" stroke-width="1.5"/>
+
+            <circle cx="210" cy="50"  r="22" fill="rgba(109,255,142,.08)" />
+            <circle cx="60"  cy="310" r="22" fill="rgba(255,181,71,.08)" />
+            <circle cx="360" cy="310" r="22" fill="rgba(93,212,255,.08)" />
+
+            <circle cx="210" cy="50"  r="7" fill="#6dff8e" stroke="#0a0b0d" stroke-width="2"/>
+            <circle cx="60"  cy="310" r="7" fill="#ffb547" stroke="#0a0b0d" stroke-width="2"/>
+            <circle cx="360" cy="310" r="7" fill="#5dd4ff" stroke="#0a0b0d" stroke-width="2"/>
+
+            <circle cx="210" cy="223.33" r="2.5" fill="#4f5864"/>
+
+            <g>
+              <circle cx="209" cy="221" r="14" fill="rgba(109,255,142,.18)"/>
+              <circle cx="209" cy="221" r="9"  fill="none" stroke="#6dff8e" stroke-width="1.4"/>
+              <circle cx="209" cy="221" r="3.5" fill="#6dff8e"/>
+            </g>
+
+            <g font-family="Geist Mono, JetBrains Mono, monospace" font-size="10" letter-spacing="1.2">
+              <text x="210" y="32" text-anchor="middle" fill="#6dff8e" font-weight="700">[01] 5M / GAME</text>
+              <text x="210" y="45" text-anchor="middle" fill="#7c8896">33.99%</text>
+
+              <text x="60"  y="332" text-anchor="middle" fill="#ffb547" font-weight="700">[02] WEB · AI</text>
+              <text x="60"  y="346" text-anchor="middle" fill="#7c8896">33.29%</text>
+
+              <text x="360" y="332" text-anchor="middle" fill="#5dd4ff" font-weight="700">[03] MISC.</text>
+              <text x="360" y="346" text-anchor="middle" fill="#7c8896">32.72%</text>
+
+              <text x="226" y="218" fill="#6dff8e" font-style="italic">Q2 · 2026</text>
+            </g>
+
+            <g stroke="#7c8896" stroke-width="1" fill="none">
+              <path d="M 320 178 Q 280 208 235 219" stroke-linecap="round"/>
+              <path d="M 238 215 l -5 5 l 6 1" stroke-linecap="round"/>
+            </g>
+            <g font-family="Geist Mono, JetBrains Mono, monospace" font-size="10" fill="#aab2bf" letter-spacing="1">
+              <text x="328" y="170">// near-perfect</text>
+              <text x="328" y="184">// parity</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <span class="tlc"></span>
+      <span class="title">LEDGER_TAIL.log</span>
+      <span class="mono-id">last 8 entries</span>
+    </div>
+    <div class="panel-body" style="padding:14px 14px 18px">
+      <div class="feed">
+        <div class="ln"><span class="ts">[Q2 04:14:22]</span><span class="lvl info">INFO</span><span class="msg">Stripe payout reconciled · <span class="num">$3,200.00</span> — misc / consulting</span></div>
+        <div class="ln"><span class="ts">[Q2 04:14:25]</span><span class="lvl ok">OK__</span><span class="msg">FiveM Tebex sale · pack <span class="num">animated_xmas_22</span> · <span class="num">$24.99</span></span></div>
+        <div class="ln"><span class="ts">[Q2 04:14:31]</span><span class="lvl info">INFO</span><span class="msg">Client invoice closed · web build · <span class="num">$2,450.00</span></span></div>
+        <div class="ln"><span class="ts">[Q2 04:14:39]</span><span class="lvl warn">WARN</span><span class="msg">FX rate fluctuation · USD/EUR · adjusted <span class="num">+$0.42</span></span></div>
+        <div class="ln"><span class="ts">[Q2 04:14:47]</span><span class="lvl ok">OK__</span><span class="msg">Groq API monthly billed · expensed against stream <span class="num">[02]</span></span></div>
+        <div class="ln"><span class="ts">[Q2 04:14:53]</span><span class="lvl info">INFO</span><span class="msg">Q2 close · streams active <span class="num">3/3</span> · variance <span class="num">±1.7%</span></span></div>
+        <div class="ln"><span class="ts">[Q2 04:14:55]</span><span class="lvl ok">OK__</span><span class="msg">Threshold $50K cleared · realized <span class="num">$50,847.62</span></span></div>
+        <div class="ln"><span class="ts">[Q2 04:14:56]</span><span class="lvl ok">OK__</span><span class="msg">Report committed · ledger v2 · row <span class="num">14883</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="endline">
+    <span class="prompt"><span class="g">karim@hummus-dev</span>:~/q2.2026$ end_of_report<span class="caret-mini"></span></span>
+    <span>HUMMUS DEVELOPMENT LLC · Q2 · 2026 · CONFIDENTIAL</span>
+  </div>
+
+</div>
+
+<script>
+  (function(){
+    const el = document.getElementById('now');
+    const offsetEl = document.getElementById('utc-offset');
+    function pad(n){return String(n).padStart(2,'0')}
+    function tick(){
+      const d = new Date();
+      el.textContent = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+      const off = -d.getTimezoneOffset() / 60;
+      const sign = off >= 0 ? '+' : '-';
+      offsetEl.textContent = sign + pad(Math.abs(off));
+    }
+    tick(); setInterval(tick, 1000);
+  })();
+
+  (function(){
+    const el = document.getElementById('hero-amt');
+    const target = 50847;
+    const dur = 1300;
+    const start = performance.now() + 600;
+    function tick(now){
+      const t = Math.max(0, Math.min(1, (now - start) / dur));
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = Math.floor(target * eased).toLocaleString('en-US');
+      if (t < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toLocaleString('en-US');
+    }
+    requestAnimationFrame(tick);
+  })();
+
+  document.querySelectorAll('.ring svg circle:nth-child(2)').forEach((c, i) => {
+    const final = c.getAttribute('stroke-dashoffset');
+    c.setAttribute('stroke-dashoffset', '213.63');
+    setTimeout(() => {
+      c.style.transition = 'stroke-dashoffset 1.2s cubic-bezier(.2,.7,.2,1)';
+      c.setAttribute('stroke-dashoffset', final);
+    }, 900 + i * 200);
+  });
+
+  (function(){
+    const btn = document.getElementById('logout-btn');
+    if (!btn) return;
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      btn.textContent = '[ENDING…]';
+      try {
+        await fetch('/api/admin/logout', {
+          method: 'POST',
+          credentials: 'same-origin',
+        });
+      } catch (_) {}
+      window.location.href = '/admin/login';
+    });
+  })();
+</script>
+
+</body>
+</html>
