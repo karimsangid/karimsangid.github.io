@@ -2114,7 +2114,7 @@ section { position: relative; }
 
 @media (pointer: coarse) {
   .hero-name { animation: none; }
-  .hero-letter, .hero-role {
+  .hero-letter, .hero-role, .hero-desc {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
