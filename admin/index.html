@@ -470,6 +470,11 @@
 
   @media (max-width: 880px){
     body::before, body::after{display:none}
+    .panel, .ticker, .boot .line {
+      opacity: 1 !important;
+      transform: none !important;
+      animation: none !important;
+    }
     .hero{grid-template-columns:1fr; gap:20px}
     .hero .meta{border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:14px}
     .streams{grid-template-columns:1fr}
@@ -892,7 +897,10 @@
     requestAnimationFrame(tick);
   })();
 
-  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  (function(){
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = matchMedia('(max-width: 880px)').matches;
+    if (reduceMotion || isMobile) return;
     document.querySelectorAll('.ring svg circle:nth-child(2)').forEach((c, i) => {
       const final = c.getAttribute('stroke-dashoffset');
       c.setAttribute('stroke-dashoffset', '213.63');
@@ -901,7 +909,7 @@
         c.setAttribute('stroke-dashoffset', final);
       }, 600 + i * 120);
     });
-  }
+  })();
 
   (function(){
     const btn = document.getElementById('logout-btn');
