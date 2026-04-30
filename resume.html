@@ -444,16 +444,16 @@
   }
 
   /* ============================================================
-     PRINT — convert dark site theme to light professional layout
-     so PDFs / printed copies are recruiter-friendly + ATS-safe
+     PRINT — light professional layout (V2(1)-style spacing)
+     Site stays dark on screen; PDFs render recruiter-friendly white-bg.
      ============================================================ */
   @media print {
-    /* Print-specific colors — light-mode professional palette */
-    html { font-size: 12.5px; }
+    html { font-size: 14px; }
     body {
       background: #ffffff !important;
-      color: #1f2933 !important;
+      color: #2c3e50 !important;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+      line-height: 1.45 !important;
     }
     .control-bar { display: none !important; }
     .page-wrap { padding: 0; display: block; background: #ffffff !important; }
@@ -468,96 +468,223 @@
       background: #ffffff !important;
     }
 
-    /* HEADER — solid white with brand-color rule below */
+    /* HEADER — V2(1) spacing: 32px/44px/26px, bigger subtitle/contact */
     header.resume-head {
       background: #ffffff !important;
-      color: #0e1116 !important;
-      padding: 22px 36px 16px !important;
-      border-bottom: 1px solid #e3e7ec !important;
+      color: #1a2332 !important;
+      padding: 28px 40px 22px !important;
+      border-bottom: 1px solid #e2e8f0 !important;
     }
     header.resume-head::after {
-      left: 36px; right: 36px; bottom: 0;
+      left: 40px; right: 40px; bottom: 0;
       background: linear-gradient(90deg, #b8252b 0%, #d9a14a 100%) !important;
       height: 2px !important;
     }
-    header.resume-head h1 { color: #0e1116 !important; }
+    header.resume-head h1 {
+      color: #1a2332 !important;
+      font-size: 26px !important;
+      letter-spacing: 0.5px !important;
+      margin-bottom: 4px !important;
+    }
     header.resume-head h1 .dot { color: #b8252b !important; }
-    header.resume-head .subtitle { color: #4b5765 !important; }
+    header.resume-head .subtitle {
+      color: #5a6a7a !important;
+      font-size: 13px !important;
+      letter-spacing: 0.3px !important;
+    }
     header.resume-head .subtitle .sep { color: #b8252b !important; }
 
-    .contact-grid .label { color: #7a8696 !important; }
+    .contact-grid {
+      gap: 4px 28px !important;
+      font-size: 12.5px !important;
+    }
+    .contact-grid .label {
+      color: #7a8696 !important;
+      font-size: 10px !important;
+      letter-spacing: 0.8px !important;
+    }
     .contact-grid a,
-    .contact-grid span:not(.label) { color: #0e1116 !important; }
+    .contact-grid span:not(.label) {
+      color: #1a2332 !important;
+      font-size: 12.5px !important;
+    }
 
-    /* MAIN BODY */
-    main { padding: 14px 36px 18px !important; }
-    section.r-sec { margin-bottom: 10px !important; break-inside: auto; }
+    /* MAIN BODY — V2(1) padding 24px/44px/32px */
+    main { padding: 20px 40px 24px !important; }
+    section.r-sec { margin-bottom: 14px !important; }
 
+    /* Section title — bigger, more breathable */
     .section-title {
       color: #b8252b !important;
       border-left: 3px solid #b8252b !important;
+      font-size: 13px !important;
+      letter-spacing: 1.2px !important;
+      margin-bottom: 10px !important;
     }
 
-    /* SUMMARY */
-    .summary p { color: #4b5765 !important; }
-    .summary strong { color: #0e1116 !important; }
+    /* SUMMARY — bigger body text */
+    .summary p {
+      color: #5a6a7a !important;
+      font-size: 12.8px !important;
+      line-height: 1.55 !important;
+    }
+    .summary strong { color: #1a2332 !important; font-weight: 600 !important; }
 
-    /* EXPERIENCE */
-    .exp-entry { break-inside: avoid; margin-bottom: 7px !important; }
-    .exp-title { color: #0e1116 !important; }
-    .exp-company { color: #4b5765 !important; }
-    .exp-meta { color: #7a8696 !important; }
-    .exp-bullets li { color: #1f2933 !important; }
-    .exp-bullets li::before { color: #b8252b !important; }
-    .exp-bullets li strong { color: #0e1116 !important; }
+    /* EXPERIENCE — V2(1) sizes: title 13.5, company 12.5, bullets 12.5 */
+    .exp-entry { break-inside: avoid; margin-bottom: 12px !important; }
+    .exp-header { margin-bottom: 3px !important; }
+    .exp-title {
+      color: #1a2332 !important;
+      font-size: 13.5px !important;
+    }
+    .exp-company {
+      color: #5a6a7a !important;
+      font-size: 12.5px !important;
+    }
+    .exp-meta {
+      color: #5a6a7a !important;
+      font-size: 12px !important;
+      font-family: inherit !important;
+      letter-spacing: 0 !important;
+    }
+    .exp-bullets { padding-left: 14px !important; margin-top: 3px !important; }
+    .exp-bullets li {
+      color: #2c3e50 !important;
+      font-size: 12.5px !important;
+      line-height: 1.5 !important;
+      margin-bottom: 2px !important;
+    }
+    .exp-bullets li::before {
+      content: "–" !important;
+      color: #b8252b !important;
+      left: -13px !important;
+      font-weight: 600 !important;
+    }
+    .exp-bullets li strong { color: #1a2332 !important; font-weight: 600 !important; }
 
-    /* PROJECTS */
+    /* PROJECTS — V2(1) padding 12px/16px/10px, name 13.5 */
     .project-card {
       break-inside: avoid;
-      background: #fafbfc !important;
-      border: 1px solid #d6dde6 !important;
+      background: #f8fafc !important;
+      border: 1px solid #d1dce6 !important;
       border-left: 3px solid #b8252b !important;
-      padding: 8px 13px 6px !important;
-      margin-bottom: 6px !important;
+      border-radius: 6px !important;
+      padding: 12px 16px 10px !important;
+      margin-bottom: 10px !important;
     }
     .project-card.gold { border-left-color: #d9a14a !important; }
-    .project-name { color: #0e1116 !important; }
-    .project-link { color: #b8252b !important; }
-    .project-type { color: #7a8696 !important; }
-    .project-bullets li { color: #1f2933 !important; }
-    .project-bullets li::before { color: #b8252b !important; }
-    .project-bullets li strong { color: #0e1116 !important; }
+    .project-header { margin-bottom: 4px !important; }
+    .project-name {
+      color: #1a2332 !important;
+      font-size: 13.5px !important;
+      font-family: 'Inter', sans-serif !important;
+    }
+    .project-link {
+      color: #b8252b !important;
+      font-size: 11px !important;
+      font-family: inherit !important;
+      letter-spacing: 0 !important;
+    }
+    .project-type {
+      color: #5a6a7a !important;
+      font-size: 11px !important;
+      font-family: inherit !important;
+      letter-spacing: 0 !important;
+      text-transform: none !important;
+      font-style: italic !important;
+    }
+    .project-bullets { padding-left: 14px !important; margin-bottom: 6px !important; }
+    .project-bullets li {
+      color: #2c3e50 !important;
+      font-size: 12px !important;
+      line-height: 1.5 !important;
+      margin-bottom: 1px !important;
+    }
+    .project-bullets li::before {
+      content: "–" !important;
+      color: #b8252b !important;
+      left: -13px !important;
+      font-weight: 600 !important;
+    }
+    .project-bullets li strong { color: #1a2332 !important; font-weight: 600 !important; }
     .project-bullets li code {
       background: #fbf0dc !important;
       color: #8a4a0c !important;
-      border: 1px solid #e3e7ec !important;
+      border: 1px solid #f0e3c5 !important;
+      font-family: 'Consolas', 'Courier New', monospace !important;
+      font-size: 11px !important;
     }
+    .project-tech { margin-top: 4px !important; gap: 4px !important; }
     .project-tech .tag {
       background: #fbf0dc !important;
       color: #8a4a0c !important;
       border: 1px solid #f0e3c5 !important;
+      font-family: 'Inter', sans-serif !important;
+      font-size: 10px !important;
+      padding: 1px 7px !important;
+      letter-spacing: 0 !important;
     }
 
-    /* SKILLS */
-    .skill-label { color: #0e1116 !important; }
+    /* SKILLS — V2(1) sizes: label 11.5, pills 11 */
+    .skills-stack { gap: 8px !important; }
+    .skill-row {
+      grid-template-columns: 90px 1fr !important;
+      gap: 8px !important;
+    }
+    .skill-label {
+      color: #2c3e50 !important;
+      font-size: 11.5px !important;
+      font-family: 'Inter', sans-serif !important;
+      letter-spacing: 0.3px !important;
+      padding-top: 3px !important;
+    }
+    .pills { gap: 4px !important; }
     .pills .pill {
-      background: #eef1f5 !important;
-      color: #36404c !important;
-      border: 1px solid #e3e7ec !important;
+      background: #edf2f7 !important;
+      color: #4a5568 !important;
+      border: 1px solid #e2e8f0 !important;
+      font-family: 'Inter', sans-serif !important;
+      font-size: 11px !important;
+      padding: 2px 8px !important;
+      font-weight: 500 !important;
     }
 
-    /* EDUCATION */
-    .edu-row .degree { color: #0e1116 !important; }
-    .edu-row .school { color: #4b5765 !important; }
-    .edu-row .meta { color: #7a8696 !important; }
-    .cert-item { color: #1f2933 !important; }
-    .cert-item strong { color: #b8252b !important; }
-    .cert-item .cert-detail { color: #7a8696 !important; }
+    /* EDUCATION — V2(1) size 13 */
+    .edu-row {
+      font-size: 13px !important;
+      margin-bottom: 2px !important;
+    }
+    .edu-row .degree {
+      color: #1a2332 !important;
+      font-family: 'Inter', sans-serif !important;
+      font-weight: 600 !important;
+    }
+    .edu-row .school {
+      color: #5a6a7a !important;
+      font-size: 13px !important;
+    }
+    .edu-row .meta {
+      color: #5a6a7a !important;
+      font-size: 12px !important;
+      font-family: inherit !important;
+      letter-spacing: 0 !important;
+    }
+    .cert-grid { margin-top: 6px !important; gap: 4px 18px !important; }
+    .cert-item {
+      color: #2c3e50 !important;
+      font-size: 13px !important;
+    }
+    .cert-item strong {
+      color: #b8252b !important;
+      font-weight: 600 !important;
+    }
+    .cert-item .cert-detail {
+      color: #5a6a7a !important;
+      font-size: 12px !important;
+    }
 
-    /* Hide URL underlines, force inherit color on links */
     a { color: inherit !important; text-decoration: none !important; }
 
-    /* Render ALL backgrounds + colors in the PDF, not blanks */
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
