@@ -508,7 +508,7 @@
       Local roofing contractors waste thousands a month on lead-gen platforms that bundle stale, oversold leads under opaque pricing. The economics break for the buyer, the experience breaks for the homeowner, and nobody owns the relationship.
     </p>
     <p>
-      RoofRoof is built around a simple inversion: <strong>flat-price leads, exclusive on first-touch, billed upfront, no per-night invoice surprise.</strong> A contractor logs in, chooses a service area, drops a credit card, and gets a clean stream of phone-verified intent leads — each <code>$149</code>, each from a real homeowner who filled out the LP form and consented to outreach.
+      RoofRoof is built around a simple inversion: <strong>flat-price leads, exclusive on first-touch, billed upfront, no per-night invoice surprise.</strong> A contractor logs in, chooses a service area, drops a credit card, and gets a clean stream of phone-verified intent leads from homeowners who filled out the LP form and consented to outreach.
     </p>
   </section>
 
@@ -538,8 +538,8 @@
    <span class="pipe">│</span>              <span class="pipe">│</span>              <span class="pipe">│</span>              <span class="pipe">│</span>              <span class="pipe">│</span>
    <span class="pipe">└──────────────┴──────┬───────┴──────────────┴──────────────┘</span>
                           <span class="pipe">▼</span>
-              <span class="layer">Supabase Postgres  (PgBouncer · :6543 · RLS)</span>
-              <span class="label">leads · orders · users · coupons · payments · ...</span>
+              <span class="layer">Supabase Postgres  (transaction pooler · RLS)</span>
+              <span class="label">tenant-isolated tables · service vs anon roles</span>
                           <span class="pipe">│</span>
        <span class="pipe">┌──────────────────────┼──────────────────────┐</span>
        <span class="pipe">▼</span>                      <span class="pipe">▼</span>                      <span class="pipe">▼</span>
@@ -554,24 +554,19 @@
       <h2 class="section-title">Hardest Engineering Decisions</h2>
     </div>
 
-    <h3 style="font-family:var(--font-h); font-size:18px; font-weight:600; margin-top:20px; margin-bottom:8px;">Server-authoritative coupon engine</h3>
+    <h3 style="font-family:var(--font-h); font-size:18px; font-weight:600; margin-top:20px; margin-bottom:8px;">Server-authoritative promo logic</h3>
     <p>
-      Promo codes ship with a per-coupon JSON config: <code>free_order: bool</code>, <code>max_quantity: int</code>, <code>once_per_user: bool</code>, <code>flat_off_cents</code>. Validation lives entirely server-side. Public-page coupons (e.g. <code>ROOF25</code>) are advertised; affiliate codes (<code>AFFILIATEKAZ</code>, <code>ROOFY5</code>) are never rendered into the HTML — they exist only in <code>server/routes/coupons.js</code>, so a curious visitor can't enumerate them by viewing source.
+      Promo handling lives entirely server-side. The client never sees the rules, the codes, or the discount math — it gets a final price and a yes/no on whether a code applied. Per-user usage caps, max-quantity limits, and per-code constraints are all enforced on the server before any payment intent is created. Codes that aren't meant to be public are kept out of the rendered HTML so view-source can't enumerate them.
     </p>
-    <ul class="bullets">
-      <li><strong>Per-user enforcement:</strong> a <code>userHasUsedCoupon()</code> helper joins on <code>orders.coupon_code</code> + <code>orders.user_id</code>, so the same affiliate code can't be re-applied across orders.</li>
-      <li><strong>Guest path locked down:</strong> <code>applyCoupon</code> for unauthenticated users returns "Sign in to apply this code" for anything but <code>ROOF25</code>.</li>
-      <li><strong>Discount lockout flag:</strong> <code>orders.coupon_applied</code> guarantees the discount lands on the first invoice and never compounds across re-bills.</li>
-    </ul>
 
     <h3 style="font-family:var(--font-h); font-size:18px; font-weight:600; margin-top:24px; margin-bottom:8px;">Meta Pixel + CAPI deduplication</h3>
     <p>
-      Browser Pixel + server-side Conversions API (via Stape gateway) both fire <code>Lead</code> when a homeowner completes the intake form. To prevent Meta from counting the same conversion twice, every browser/server pair shares a deterministic <code>event_id</code> = the new <code>leads.id</code> UUID. Meta dedups on collision and the attribution stays clean.
+      Browser Pixel + server-side Conversions API (via Stape gateway) both fire <code>Lead</code> when a homeowner completes the intake form. To prevent Meta from double-counting, every browser/server pair shares a deterministic <code>event_id</code> tied to the new lead's record. Meta dedups on collision and the attribution stays clean.
     </p>
 
-    <h3 style="font-family:var(--font-h); font-size:18px; font-weight:600; margin-top:24px; margin-bottom:8px;">Connection pooling vs. PgBouncer</h3>
+    <h3 style="font-family:var(--font-h); font-size:18px; font-weight:600; margin-top:24px; margin-bottom:8px;">Serverless + Postgres pooling</h3>
     <p>
-      Netlify Functions are short-lived → cold-start a fresh Postgres connection on every invocation = pool exhaustion at scale. Solution: route Supabase via the transaction pooler at <code>:6543</code>, with one strict caveat — disable prepared-statement caching on the asyncpg/postgres-js client (<code>statement_cache_size=0</code>). Without that flag you hit a stream of <code>DuplicatePreparedStatementError</code>s on every cold start. (Saved as a permanent note in personal memory — too painful to relearn.)
+      Short-lived serverless functions cold-starting fresh DB connections on every invocation = pool exhaustion at scale. Solution: route Postgres through a transaction pooler with prepared-statement caching disabled on the client. Skip the latter and you get a stream of duplicate-prepared-statement errors on every cold start. (Saved as a permanent note in personal memory — too painful to relearn.)
     </p>
   </section>
 
@@ -584,23 +579,23 @@
     <div class="tech-grid">
       <div class="tech-cell">
         <h4>Auto-deploy from GitHub</h4>
-        <p>~28 seconds from <code>git push origin fixed-price-model</code> to Netlify production. Push-before-deploy is the law — no rogue CLI deploys allowed.</p>
+        <p>~28 seconds from <code>git push</code> to production. Push-before-deploy is the law — no rogue CLI deploys allowed.</p>
       </div>
       <div class="tech-cell gold">
         <h4>Row-level security</h4>
-        <p>RLS enabled on every one of the 11 Supabase tables. Service role for server, anon role for client, never the other way around.</p>
+        <p>RLS enabled on every database table. Service role for server, anon role for client, never the other way around.</p>
       </div>
       <div class="tech-cell green">
         <h4>Stripe live + webhook</h4>
-        <p>Live <code>sk_live_</code> keys; webhook <code>/api/stripe/webhook</code> verifies signatures and reconciles order state.</p>
+        <p>Live Stripe; webhook signature-verifies every event and reconciles order state. Everything else assumes the webhook is the source of truth, not the client.</p>
       </div>
       <div class="tech-cell blue">
         <h4>Twilio toll-free</h4>
-        <p><code>+1 855-974-3074</code> for outbound notifications. Lead-capture SMS blast fans out to a comma-separated list held in a single Netlify env var, edited without code change.</p>
+        <p>Verified toll-free number for outbound notifications. Lead-capture SMS blast fans out to a recipient list held in a single env var — editable without redeploying.</p>
       </div>
       <div class="tech-cell purple">
         <h4>Daily watcher</h4>
-        <p>Scheduled trigger pings Twilio once per day; pushes an ntfy alert if the toll-free verification status changes (currently IN_REVIEW).</p>
+        <p>Scheduled trigger pings Twilio once per day; pushes an ntfy alert if the toll-free verification status changes.</p>
       </div>
       <div class="tech-cell">
         <h4>Restore-deploy drill</h4>
@@ -615,33 +610,33 @@
       <h2 class="section-title">Incident: The Rogue CLI Deploy</h2>
     </div>
     <p>
-      April 17 — admin lead rows stopped being clickable. Black-box smoke-test passed (200s everywhere), but the modal logic was missing from the live admin bundle. Worth telling because the response shape is the differentiator.
+      One night earlier this year, admin lead rows stopped being clickable in production. Black-box smoke-test passed (200s everywhere), but interaction logic was missing from the live admin bundle. Worth telling because the response shape is the differentiator.
     </p>
     <div class="timeline">
       <div class="timeline-event">
-        <div class="ts">01:57 UTC · Detection</div>
-        <h5>Live admin missing 235 lines</h5>
-        <p>Auto-deploy chain looked clean on GitHub but the Netlify build history showed a CLI deploy 14 minutes earlier with <code>commit_ref: None, committer: None</code> — fingerprint of <code>netlify deploy --prod</code> from someone's stale local checkout.</p>
+        <div class="ts">Detection</div>
+        <h5>Live admin missing UI handlers</h5>
+        <p>Auto-deploy chain looked clean on GitHub, but the host's build history showed a CLI deploy fired earlier in the night with no commit reference and no committer — fingerprint of someone running <code>deploy --prod</code> off a stale local checkout.</p>
       </div>
       <div class="timeline-event">
-        <div class="ts">02:04 UTC · Diagnosis</div>
-        <h5>Found the offender</h5>
-        <p>A third-party collaborator on <code>vibeyvault917-art/roofroofcopy</code> had pushed an old branch to production via CLI. The deploy had no commit, no committer, and silently overwrote 235 lines of admin UI including the <code>openLeadModal</code> handler.</p>
+        <div class="ts">Diagnosis</div>
+        <h5>Stale fork, force-pushed to prod</h5>
+        <p>An external collaborator's fork had pushed an old branch directly to production via CLI. The deploy carried no commit hash and silently overwrote a chunk of admin-UI handlers.</p>
       </div>
       <div class="timeline-event">
-        <div class="ts">02:08 UTC · Fix</div>
+        <div class="ts">Fix</div>
         <h5>One API call, instant rollback</h5>
-        <p><code>netlify api restoreSiteDeploy</code> against the last clean auto-deploy bundle. Live restored in seconds, no rebuild, no credits charged. Wrote a permanent recipe so this fix is one paste away next time.</p>
+        <p><code>restoreSiteDeploy</code> against the last clean auto-deploy bundle. Live restored in seconds, no rebuild, no credits charged. Wrote a permanent recipe so this fix is one paste away next time.</p>
       </div>
       <div class="timeline-event">
-        <div class="ts">Same day · Forward visibility</div>
-        <h5>Spec'd Vibey-Watch</h5>
-        <p>Drafted a 30-min-cadence Python daemon that polls vibey's GitHub events + Netlify deploy hooks, pushes ntfy on rogue activity. Build deferred — but the visibility gap is closed in spec form.</p>
+        <div class="ts">Forward visibility</div>
+        <h5>Spec'd a watch daemon</h5>
+        <p>Drafted a periodic Python daemon that polls public collaborator activity + deploy hooks and pushes ntfy on anything that looks rogue. Build deferred — but the visibility gap is closed in spec form.</p>
       </div>
     </div>
     <div class="callout">
       <div class="label">Lesson encoded</div>
-      <p><strong>Git-before-Netlify is now non-negotiable.</strong> Any change goes to GitHub first; if a deploy doesn't trace back to a commit on <code>fixed-price-model</code>, it gets <code>restoreSiteDeploy</code>'d on sight.</p>
+      <p><strong>Git-before-deploy is now non-negotiable.</strong> Any change goes to source control first; anything that lands on prod without tracing back to a commit on the active production branch gets rolled back on sight.</p>
     </div>
   </section>
 
@@ -651,16 +646,16 @@
       <h2 class="section-title">What I'd Do Differently</h2>
     </div>
     <ul class="bullets">
-      <li><strong>Stage branch deploys.</strong> All experiments now go through branch deploys with auto-publish off. Burned the team's 3,000-credit Netlify Pro cap once running 299 prod deploys in a billing cycle — ~99.7% utilization triggered platform-wide HTTP 503 on the team. Recovery via add-on credits + manual <code>createSiteBuild</code> was clean but not a path I want to walk twice.</li>
-      <li><strong>Move the test harness off Twilio's live pool.</strong> A leftover <code>+15551234567</code> placeholder in a seed script was firing dozens of Error 21211 events per week against the toll-free number that's currently in carrier verification — bad for approval, easy to miss, fixed.</li>
-      <li><strong>Write the e2e suite to the new billing model.</strong> The flip from nightly billing to upfront-at-create left a handful of <code>test-e2e.js</code> assertions still asserting the old invariant. They pass, but they're testing the wrong thing.</li>
+      <li><strong>Stage branch deploys.</strong> All experiments now go through branch deploys with auto-publish off. Easy to burn through a host's deploy quota when every iteration goes straight to prod — branch-deploy isolation makes the iteration cheap and the production pipeline calm.</li>
+      <li><strong>Keep the test harness off live communication APIs.</strong> Leftover placeholder numbers in seed scripts can fire real failed-delivery events against a real toll-free number, which hurts carrier verification standing. Mock mode + reserved test numbers belong in any seed/CI path.</li>
+      <li><strong>Keep the e2e suite in lockstep with the billing model.</strong> When the pricing model flipped to upfront-at-create, a handful of older test assertions kept passing while testing the wrong invariant. Easy to miss, worth a sweep.</li>
     </ul>
   </section>
 
   <a href="/case/wheaton" class="next-case">
     <div class="label">Next Case Study</div>
     <h3>Wheaton Valet Cleaners <span class="arrow">&rarr;</span></h3>
-    <p>First paid client engagement — Next.js 16 multi-brand rebuild, federal-compliant Liberty Press launch, $4K invoice closed.</p>
+    <p>First contracted client engagement — Next.js 16 multi-brand rebuild, federal-compliant Liberty Press launch.</p>
   </a>
 
 </div>

@@ -24,7 +24,7 @@ const SUBTITLES = {
   home:     'AI & Security Engineer · Founder, Hummus Development LLC',
   resume:   'AI & Security Engineer · Full-Stack Product Builder',
   roofroof: 'Live roofing-lead marketplace — Stripe, Twilio, Supabase + RLS',
-  wheaton:  'Paid client engagement — Next.js 16 multi-brand rebuild · $4K invoice closed',
+  wheaton:  'Client engagement — Next.js 16 multi-brand rebuild + federal launch',
   sentinel: 'AI-powered SIEM companion — LLM embeddings + natural-language query',
   papi:     'Cross-platform AI wingman — RN mobile + custom LoRA on RTX 4060 Ti',
 };
@@ -33,7 +33,7 @@ const BADGES = {
   home:     ['MS CS @ GMU', 'Azure AZ-204', '23 shipped projects'],
   resume:   ['MS CS @ GMU', 'Azure AZ-204', '75K+ LOC'],
   roofroof: ['Live in production', '8K+ LOC', 'Stripe + Twilio + Supabase'],
-  wheaton:  ['$4K invoice closed', '5 brand pages', 'Federal launch'],
+  wheaton:  ['Multi-brand rebuild', '5 brand pages', 'Federal launch'],
   sentinel: ['AI × Cybersecurity', 'Multi-format ingest', 'NL query engine'],
   papi:     ['Mobile + Backend + LoRA', 'RTX 4060 Ti', 'Tailscale-served'],
 };
