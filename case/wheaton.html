@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wheaton Valet Cleaners — Case Study | Karim Sangid</title>
+<meta name="description" content="A paid Hummus Development engagement: Next.js 16 multi-brand rebuild, 5 sister-location pages, federal-compliant DOE launch, AI chatbot, and a closed $4,000 invoice.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://karimsangid.dev/case/wheaton">
+<meta property="og:title" content="Wheaton Valet Cleaners — Case Study">
+<meta property="og:description" content="A paid Hummus Development engagement: Next.js 16 rebuild, federal launch, $4K invoice.">
+<meta property="og:url" content="https://karimsangid.dev/case/wheaton">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://karimsangid.dev/api/og?slug=wheaton">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://karimsangid.dev/api/og?slug=wheaton">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23050507'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-weight='700' font-size='38' fill='%23ff4444'>K</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #050507;
+    --bg-card: #0d0d12;
+    --bg-card-2: #14141b;
+    --text: #ffffff;
+    --text-soft: #b8bcc8;
+    --text-mute: #6b7080;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.16);
+    --accent: #d9a14a;
+    --accent-soft: rgba(217,161,74,0.10);
+    --accent-line: rgba(217,161,74,0.32);
+    --red: #ff4444;
+    --green: #4ade80;
+    --blue: #60a5fa;
+    --font-h: 'Space Grotesk', system-ui, sans-serif;
+    --font-b: 'Inter', system-ui, sans-serif;
+    --font-m: 'JetBrains Mono', monospace;
+  }
+
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-b);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: #ecc176; }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(217,161,74,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(217,161,74,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 1; }
+
+  nav.top {
+    position: sticky;
+    top: 0;
+    background: rgba(5,5,7,0.86);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+  }
+  nav.top .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+  nav.top .logo {
+    font-family: var(--font-h);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    color: var(--text);
+  }
+  nav.top .logo .dot { color: var(--red); }
+  nav.top .crumbs {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text-mute);
+    font-family: var(--font-m);
+  }
+  nav.top .crumbs a { color: var(--text-soft); }
+  nav.top .crumbs .sep { color: var(--accent); }
+
+  header.hero {
+    padding: 80px 0 50px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  header.hero::before {
+    content: "";
+    position: absolute;
+    top: 60%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(217,161,74,0.10) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-m);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .hero-eyebrow .pipe { color: var(--text-mute); margin: 0 8px; }
+  h1.hero-title {
+    font-family: var(--font-h);
+    font-size: clamp(36px, 5.5vw, 60px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    margin-bottom: 20px;
+  }
+  h1.hero-title .accent { color: var(--accent); }
+  .hero-tag {
+    font-size: 18px;
+    color: var(--text-soft);
+    max-width: 720px;
+    margin-bottom: 28px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--font-m);
+    font-size: 12px;
+    color: var(--text-mute);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .hero-meta .item strong { color: var(--text); font-weight: 600; }
+  .hero-cta {
+    margin-top: 32px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    font-family: var(--font-h);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.4px;
+    border: 1px solid var(--border-strong);
+    border-radius: 4px;
+    transition: all 0.18s ease;
+    color: var(--text);
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+  .btn.btn-primary { background: var(--accent); border-color: var(--accent); color: #0a0a0a; }
+  .btn.btn-primary:hover { background: #ecc176; border-color: #ecc176; color: #0a0a0a; }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    margin: 60px 0;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .stat {
+    background: var(--bg);
+    padding: 26px 22px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: var(--font-h);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+  .stat-label {
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--text-mute);
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+  }
+  @media (max-width: 720px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  section.section { padding: 50px 0; border-bottom: 1px solid var(--border); }
+  section.section:last-child { border-bottom: none; }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 28px;
+  }
+  .section-num {
+    font-family: var(--font-m);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 2px;
+  }
+  h2.section-title {
+    font-family: var(--font-h);
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+  }
+
+  p.lead { font-size: 17px; color: var(--text-soft); margin-bottom: 18px; }
+  p { font-size: 16px; color: var(--text-soft); margin-bottom: 14px; }
+  p strong { color: var(--text); font-weight: 600; }
+  p code, .body code {
+    font-family: var(--font-m);
+    font-size: 13px;
+    background: var(--bg-card);
+    padding: 2px 7px;
+    border-radius: 3px;
+    color: var(--accent);
+    border: 1px solid var(--border);
+  }
+
+  ul.bullets { margin: 14px 0 18px; list-style: none; }
+  ul.bullets li {
+    font-size: 16px;
+    color: var(--text-soft);
+    padding-left: 22px;
+    position: relative;
+    margin-bottom: 8px;
+  }
+  ul.bullets li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--accent);
+    font-size: 12px;
+  }
+  ul.bullets li strong { color: var(--text); font-weight: 600; }
+
+  .pages-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin: 18px 0;
+  }
+  .page-cell {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 16px 18px;
+  }
+  .page-cell h4 {
+    font-family: var(--font-h);
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .page-cell .route {
+    font-family: var(--font-m);
+    font-size: 11px;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .page-cell p { font-size: 13px; color: var(--text-mute); margin: 0; }
+  @media (max-width: 720px) {
+    .pages-grid { grid-template-columns: 1fr; }
+  }
+
+  .invoice {
+    background: linear-gradient(135deg, rgba(217,161,74,0.10), rgba(217,161,74,0.03));
+    border: 1px solid var(--accent-line);
+    border-radius: 6px;
+    padding: 32px 32px 28px;
+    margin: 32px 0;
+  }
+  .invoice .invoice-id {
+    font-family: var(--font-m);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .invoice h3 {
+    font-family: var(--font-h);
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .invoice-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 16px;
+  }
+  .invoice-item .k {
+    font-family: var(--font-m);
+    font-size: 10px;
+    color: var(--text-mute);
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .invoice-item .v {
+    font-family: var(--font-h);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .invoice-item .v.amount { color: var(--accent); }
+  @media (max-width: 720px) {
+    .invoice-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .callout {
+    background: linear-gradient(135deg, rgba(217,161,74,0.08), rgba(255,68,68,0.04));
+    border: 1px solid var(--accent-line);
+    border-radius: 6px;
+    padding: 24px 26px;
+    margin: 28px 0;
+  }
+  .callout .label {
+    font-family: var(--font-m);
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .callout p { margin: 0; color: var(--text); font-size: 15px; }
+  .callout p strong { color: var(--accent); }
+
+  footer {
+    padding: 60px 0 80px;
+    border-top: 1px solid var(--border);
+  }
+  .footer-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .footer-grid p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-mute);
+    font-family: var(--font-m);
+  }
+  .next-case {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px;
+    margin-bottom: 50px;
+    transition: border-color 0.18s ease;
+  }
+  .next-case:hover { border-color: var(--accent); }
+  .next-case .label {
+    font-family: var(--font-m);
+    font-size: 11px;
+    color: var(--text-mute);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .next-case h3 {
+    font-family: var(--font-h);
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .next-case h3 .arrow { color: var(--accent); margin-left: 8px; }
+  .next-case p { margin: 0; color: var(--text-mute); font-size: 14px; }
+
+  @media (max-width: 720px) {
+    h1.hero-title { font-size: 36px; letter-spacing: -1px; }
+    .hero-tag { font-size: 16px; }
+    nav.top .crumbs { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <a href="/" class="logo">K<span class="dot">.</span>S</a>
+    <div class="crumbs">
+      <a href="/">~</a>
+      <span class="sep">/</span>
+      <a href="/#projects">work</a>
+      <span class="sep">/</span>
+      <span>wheaton-valet</span>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">
+      Case Study <span class="pipe">|</span> Paid Client Engagement <span class="pipe">|</span> Hummus Development LLC
+    </div>
+    <h1 class="hero-title">Wheaton Valet<span class="accent">.</span></h1>
+    <p class="hero-tag">
+      Five-brand Next.js 16 rebuild for a Maryland dry-cleaning franchise — culminating in a federal-compliant launch inside the U.S. Department of Education building. First contracted Hummus Development engagement, scoped, shipped, and invoiced.
+    </p>
+    <div class="hero-meta">
+      <span class="item"><strong>Stack</strong> · Next.js 16 / Vercel / Tailwind / Framer Motion</span>
+      <span class="item"><strong>Status</strong> · Live · paid client</span>
+      <span class="item"><strong>Pages</strong> · 5 brand sites · 10 services</span>
+      <span class="item"><strong>Role</strong> · Solo full-stack + delivery</span>
+    </div>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://wheaton-valet-cleaners.vercel.app" target="_blank" rel="noopener">View live preview &rarr;</a>
+      <a class="btn" href="/">&larr; Back to portfolio</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">$4,000</div>
+      <div class="stat-label">Invoice · Net 14</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Brand Pages</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">12</div>
+      <div class="stat-label">JSON-LD Schemas</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">14/14</div>
+      <div class="stat-label">Chatbot Smoke Pass</div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2 class="section-title">The Brief</h2>
+    </div>
+    <p class="lead">
+      Yasha Taginya runs Wheaton Valet Cleaners and three sister locations across the DC metro. The existing Lovable.dev site loaded slowly, lacked a path for individual brand pages, and was never going to ship the inbound the team wanted before their fifth location — a federal site inside the Department of Education's Liberty Press facility — went live.
+    </p>
+    <p>
+      Scope: a complete rebuild on a stack the business could grow into, five distinct brand experiences under a single deployment, real intake (email + SMS), and an honest SEO foundation that didn't rely on tricks. Closed and invoiced as a fixed-price engagement under Hummus Development LLC.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2 class="section-title">The Five Brand Pages</h2>
+    </div>
+    <p>
+      One Next.js codebase, one Vercel deployment, five distinct visual identities — each tuned to its physical location's vibe and customer base.
+    </p>
+    <div class="pages-grid">
+      <div class="page-cell">
+        <h4>Wheaton (flagship)</h4>
+        <div class="route">/</div>
+        <p>Family-owned local dry cleaner in Wheaton, MD. Warm palette, hours, services grid, 4 sister-locations cross-link.</p>
+      </div>
+      <div class="page-cell">
+        <h4>Debonair · Kensington</h4>
+        <div class="route">/debonair</div>
+        <p>Premium hub with two storefronts. Distinct branding, separate intake, custom hours.</p>
+      </div>
+      <div class="page-cell">
+        <h4>Debonair · DC</h4>
+        <div class="route">/debonair-dc</div>
+        <p>Sub-location of the Debonair brand with its own storefront content and contact details.</p>
+      </div>
+      <div class="page-cell">
+        <h4>Rockville</h4>
+        <div class="route">/rockville</div>
+        <p>Newer location with full feature parity to Wheaton — services, hours, intake, SEO.</p>
+      </div>
+      <div class="page-cell" style="grid-column: span 2; border-left-color: var(--red);">
+        <h4>Liberty Press @ DOE — federal launch</h4>
+        <div class="route">/liberty-press</div>
+        <p>Full standalone brand experience peer to the four public sites. Cinzel federal serif, parallax hero with starburst seal accents + parchment grid texture, live countdown to opening day, federal-corridor about block, custom 6-service grid, FAQ accordion, sister-locations grid. <strong>No public Schedule Pickup CTAs</strong> — federal-only access; tel: and email-only contact paths.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Stack &amp; Architecture</h2>
+    </div>
+    <ul class="bullets">
+      <li><strong>Next.js 16 + React 19 + Tailwind</strong> — App Router, server components by default, streaming where it earns its keep.</li>
+      <li><strong>Framer Motion</strong> for entrance animations on hero, parallax on Liberty Press, and an accordion that doesn't fight the page.</li>
+      <li><strong>Vercel deployment</strong> with cleanUrls, SSL via the platform, automatic preview branches per PR.</li>
+      <li><strong>Resend</strong> for transactional intake email, domain-verified, <code>RESEND_API_KEY</code> set via <code>printf</code> not <code>echo</code> (the trailing-newline gotcha that breaks generated URLs is real).</li>
+      <li><strong>Twilio SMS</strong> as a fallback intake channel; both wires drop into a single <code>/api/intake</code> endpoint that returns <code>{"ok":true,"email":true,"sms":true}</code>.</li>
+      <li><strong>AI chatbot</strong> handling price quotes, hours, address-intent shortcuts, and Liberty Press routing — smoke-tested at 14 of 14 critical flows on the production deploy.</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2 class="section-title">SEO &amp; Trust</h2>
+    </div>
+    <p>
+      Every brand page ships with its own structured data so Google has unambiguous machine-readable signals — not generic boilerplate. Twelve <code>JSON-LD</code> schemas across the property: <code>LocalBusiness</code>, <code>Organization</code>, <code>Service</code> (per service), <code>FAQPage</code>, <code>BreadcrumbList</code>, plus location-specific <code>PostalAddress</code>.
+    </p>
+    <ul class="bullets">
+      <li><strong>A-grade audit</strong> on the standalone Vercel preview before DNS flip — meta, OG, canonicals, sitemap, robots, JSON-LD all green.</li>
+      <li><strong>Audit verification rule:</strong> third-party SEO audits hit cached HTML half the time. Every claim was verified against a live <code>curl | grep</code> before action — saved hours of "fixing" things that weren't broken.</li>
+      <li><strong>Real reviews only.</strong> No invented testimonials, no fake star counts. Where social proof lives on the page, it's pulled from real Google Business profile data with citation.</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Delivered &amp; Invoiced</h2>
+    </div>
+    <div class="invoice">
+      <div class="invoice-id">Invoice HD-2026-001</div>
+      <h3>First contracted Hummus Development engagement, closed.</h3>
+      <p style="color:var(--text-soft);">Issued April 29, 2026. Net 14. Wheaton Valet Cleaners LLC. Sent.</p>
+      <div class="invoice-grid">
+        <div class="invoice-item">
+          <div class="k">Amount</div>
+          <div class="v amount">$4,000</div>
+        </div>
+        <div class="invoice-item">
+          <div class="k">Terms</div>
+          <div class="v">Net 14</div>
+        </div>
+        <div class="invoice-item">
+          <div class="k">Pages Shipped</div>
+          <div class="v">5</div>
+        </div>
+        <div class="invoice-item">
+          <div class="k">Federal Launch</div>
+          <div class="v">2026-05-11</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="label">Why this matters</div>
+      <p>This is not a portfolio mock. Real invoice, real client, real federal launch on the calendar. The next engagement gets pitched against a delivered one — not a promise.</p>
+    </div>
+  </section>
+
+  <a href="/case/roofroof" class="next-case">
+    <div class="label">Next Case Study</div>
+    <h3>RoofRoof.solutions <span class="arrow">&rarr;</span></h3>
+    <p>Live roofing-lead marketplace — Stripe in production, Twilio toll-free, Supabase + RLS, Meta Pixel + CAPI dedup, and a real production-incident write-up.</p>
+  </a>
+
+</div>
+
+<footer>
+  <div class="wrap footer-grid">
+    <p>&copy; 2026 Karim Sangid · Hummus Development LLC</p>
+    <p><a href="/" style="color:var(--text-soft);">karimsangid.dev</a> · <a href="https://github.com/karimsangid" style="color:var(--text-soft);">github.com/karimsangid</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

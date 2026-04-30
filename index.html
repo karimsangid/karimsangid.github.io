@@ -4,16 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Karim Sangid — AI &amp; Security Engineer</title>
-  <meta name="description" content="Karim Sangid is an AI & Security Engineer, Azure certified developer, and founder of Hummus Development LLC. MS Computer Science at George Mason University.">
+  <meta name="description" content="Karim Sangid is an AI & Security Engineer and full-stack product builder. Founder of Hummus Development LLC. Live Stripe marketplace, paid client web platforms, mobile AI app, self-hosted LoRA fine-tuning. MS Computer Science at George Mason University.">
   <meta name="author" content="Karim Sangid">
-  <meta name="keywords" content="Karim Sangid, software engineer, AI, security, Azure, portfolio, Hummus Development">
+  <meta name="keywords" content="Karim Sangid, software engineer, AI, security, Azure, full-stack, Next.js, FastAPI, LoRA fine-tuning, Stripe, portfolio, Hummus Development">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Karim Sangid — AI & Security Engineer">
-  <meta property="og:description" content="AI & Security Engineer | Founder, Hummus Development LLC. Building AI-powered tools that solve real problems.">
+  <meta property="og:description" content="AI & Security Engineer · Full-Stack Product Builder · Founder, Hummus Development LLC. Live Stripe marketplace, paid client web platforms, mobile AI app, self-hosted LoRA fine-tuning.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://karimsangid.dev">
-  <meta property="og:image" content="https://karimsangid.dev/og-image.png">
+  <meta property="og:image" content="https://karimsangid.dev/api/og?slug=home">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23050507'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-weight='700' font-size='38' fill='%23ff4444'>K</text></svg>">
@@ -30,7 +32,8 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Karim Sangid — AI & Security Engineer">
-  <meta name="twitter:description" content="AI & Security Engineer | Founder, Hummus Development LLC. Building AI-powered tools that solve real problems.">
+  <meta name="twitter:description" content="AI & Security Engineer · Full-Stack Product Builder · Founder, Hummus Development LLC.">
+  <meta name="twitter:image" content="https://karimsangid.dev/api/og?slug=home">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -105,8 +108,10 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Work</a></li>
+        <li><a href="#case-studies">Case Studies</a></li>
         <li><a href="#skills">Stack</a></li>
         <li><a href="#experience">Experience</a></li>
+        <li><a href="/resume">Resume</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
@@ -157,7 +162,7 @@
       <div class="hero-founder">
         <span class="hero-role reveal-text" style="--delay:0.8s">Founder, Hummus Development LLC</span>
       </div>
-      <p class="hero-desc">MS Computer Science @ George Mason University. Azure AZ-204 Certified.<br>Building full-stack AI systems, security tools, and computer vision platforms.</p>
+      <p class="hero-desc">MS Computer Science @ George Mason University &bull; Azure AZ-204 Certified.<br>Live Stripe marketplace, paid client web platforms, mobile AI app, self-hosted LoRA fine-tuning.</p>
     </div>
     <div class="hero-scroll">
       <span class="hero-scroll-text">Scroll</span>
@@ -169,8 +174,8 @@
   <!-- Marquee -->
   <div class="marquee" aria-hidden="true">
     <div class="marquee-track">
-      <span class="marquee-content">PYTHON &bull; FASTAPI &bull; REACT &bull; CHROMADB &bull; OPENCV &bull; AZURE &bull; DOCKER &bull; WEBSOCKET &bull; OLLAMA &bull; SIEM &bull; RAG &bull; LLM &bull; TYPESCRIPT &bull; FLASK &bull; NIST &bull; NODE.JS &bull; SQLITE &bull; LINUX &bull; REACT NATIVE &bull; EXPO &bull; JWT &bull; GROQ &bull; ZEROCONF &bull; REPORTLAB &bull; NUMPY &bull;&nbsp;</span>
-      <span class="marquee-content">PYTHON &bull; FASTAPI &bull; REACT &bull; CHROMADB &bull; OPENCV &bull; AZURE &bull; DOCKER &bull; WEBSOCKET &bull; OLLAMA &bull; SIEM &bull; RAG &bull; LLM &bull; TYPESCRIPT &bull; FLASK &bull; NIST &bull; NODE.JS &bull; SQLITE &bull; LINUX &bull; REACT NATIVE &bull; EXPO &bull; JWT &bull; GROQ &bull; ZEROCONF &bull; REPORTLAB &bull; NUMPY &bull;&nbsp;</span>
+      <span class="marquee-content">NEXT.JS &bull; PYTHON &bull; FASTAPI &bull; REACT 19 &bull; STRIPE &bull; TWILIO &bull; SUPABASE &bull; CHROMADB &bull; OPENCV &bull; AZURE &bull; DOCKER &bull; WEBSOCKET &bull; OLLAMA &bull; LORA &bull; UNSLOTH &bull; GGUF &bull; SIEM &bull; RAG &bull; LLM &bull; TYPESCRIPT &bull; SWIFTUI &bull; WIDGETKIT &bull; NODE.JS &bull; LINUX &bull; EXPO &bull; GROQ &bull;&nbsp;</span>
+      <span class="marquee-content">NEXT.JS &bull; PYTHON &bull; FASTAPI &bull; REACT 19 &bull; STRIPE &bull; TWILIO &bull; SUPABASE &bull; CHROMADB &bull; OPENCV &bull; AZURE &bull; DOCKER &bull; WEBSOCKET &bull; OLLAMA &bull; LORA &bull; UNSLOTH &bull; GGUF &bull; SIEM &bull; RAG &bull; LLM &bull; TYPESCRIPT &bull; SWIFTUI &bull; WIDGETKIT &bull; NODE.JS &bull; LINUX &bull; EXPO &bull; GROQ &bull;&nbsp;</span>
     </div>
   </div>
 
@@ -186,19 +191,19 @@
   <section class="about" id="about">
     <div class="container">
       <div class="about-statement scroll-reveal">
-        <p class="about-quote">I build AI-powered tools<br>that solve <em>real</em> problems.</p>
+        <p class="about-quote">I ship products,<br>not <em>side projects</em>.</p>
       </div>
       <div class="about-stats scroll-reveal">
         <div class="stat">
-          <span class="stat-number" data-target="33000">0</span><span class="stat-plus">+</span>
+          <span class="stat-number" data-target="75000">0</span><span class="stat-plus">+</span>
           <span class="stat-label">Lines of Code</span>
         </div>
         <div class="stat">
-          <span class="stat-number" data-target="13">0</span><span class="stat-plus">+</span>
-          <span class="stat-label">Projects Built</span>
+          <span class="stat-number" data-target="23">0</span><span class="stat-plus">+</span>
+          <span class="stat-label">Projects Shipped</span>
         </div>
         <div class="stat">
-          <span class="stat-number" data-target="9">0</span>
+          <span class="stat-number" data-target="12">0</span>
           <span class="stat-label">GitHub Repos</span>
         </div>
         <div class="stat">
@@ -207,7 +212,7 @@
         </div>
       </div>
       <div class="about-bio scroll-reveal">
-        <p>22-year-old MS Computer Science student at George Mason University, based in McLean, Virginia. I architect full-stack AI systems&mdash;from security log analyzers with LLM embeddings to satellite roof inspection platforms with computer vision. Azure AZ-204 certified. US Citizen.</p>
+        <p>22-year-old MS Computer Science student at George Mason University, based in McLean, Virginia. I run a one-person product studio under Hummus Development LLC: a live roofing-lead marketplace with Stripe and Twilio, paid client web platforms (first $4K invoice issued April 2026), a cross-platform AI dating app with custom LoRA fine-tuning on local hardware, and an AI-powered SIEM companion. Azure AZ-204 certified. US Citizen.</p>
       </div>
     </div>
   </section>
@@ -260,17 +265,17 @@
         <div class="project-info">
           <span class="project-number">02</span>
           <h3 class="project-name">RoofRoof.solutions</h3>
-          <p class="project-desc">Satellite Roof Inspection Platform</p>
+          <p class="project-desc">Live Roofing-Lead Marketplace &mdash; Stripe + Twilio + Supabase</p>
           <ul class="project-features">
-            <li>Computer vision (OpenCV) on satellite imagery</li>
-            <li>Google Solar API for 3D roof geometry</li>
-            <li>6+ API integrations (ATTOM, NOAA, NWS, Census)</li>
-            <li>Branded PDF report generation &amp; lead capture</li>
+            <li>8,000+ line Express/Node + Netlify Functions stack</li>
+            <li>Live Stripe payments, custom coupon engine, admin refunds</li>
+            <li>Twilio SMS lead-blast + Meta Pixel/CAPI dedup</li>
+            <li>Supabase Postgres via PgBouncer pooler with RLS</li>
           </ul>
           <div class="project-tech">
-            <span>Python</span><span>Flask</span><span>OpenCV</span><span>NumPy</span><span>Google Solar API</span><span>ReportLab</span>
+            <span>Node.js</span><span>Express</span><span>Netlify Functions</span><span>Supabase</span><span>Stripe</span><span>Twilio</span><span>Meta CAPI</span>
           </div>
-          <span class="project-link project-link--private">Private Repository</span>
+          <a href="https://roofroof.solutions" target="_blank" rel="noopener" class="project-link">Visit roofroof.solutions &rarr;</a>
         </div>
         <div class="project-visual">
           <div class="vis-house-scene">
@@ -334,7 +339,7 @@
         <div class="card-spotlight"></div>
         <div class="project-info">
           <span class="project-number">04</span>
-          <h3 class="project-name">HummusI</h3>
+          <h3 class="project-name">HummusOSINT</h3>
           <p class="project-desc">Open Source Intelligence Platform</p>
           <ul class="project-features">
             <li>Username search across 100+ platforms</li>
@@ -426,34 +431,34 @@
       </div>
     </div>
 
-    <!-- Project 07: Blazin-App -->
+    <!-- Project 07: Wheaton Valet Cleaners -->
     <div class="project-card scroll-reveal" data-project="7" data-enter="left">
       <div class="project-card-inner">
         <div class="card-spotlight"></div>
         <div class="project-info">
           <span class="project-number">07</span>
-          <h3 class="project-name">Blazin Chicken &amp; Gyro</h3>
-          <p class="project-desc">Mobile Food Ordering App</p>
+          <h3 class="project-name">Wheaton Valet Cleaners</h3>
+          <p class="project-desc">Paid Client Build &mdash; Next.js 16 Multi-Brand Site</p>
           <ul class="project-features">
-            <li>Cross-platform iOS / Android / Web</li>
-            <li>9,800+ lines of TypeScript</li>
-            <li>Cart, rewards &amp; loyalty system</li>
-            <li>Location services &amp; order tracking</li>
+            <li>Full Next.js 16 + Tailwind + Framer Motion rebuild</li>
+            <li>5 brand pages incl. DOE Liberty Press federal launch</li>
+            <li>A-grade SEO &mdash; 12 JSON-LD schemas, chatbot 14/14 smoke</li>
+            <li>Live Resend email + Twilio SMS intake pipeline</li>
           </ul>
           <div class="project-tech">
-            <span>React Native</span><span>Expo</span><span>TypeScript</span>
+            <span>Next.js 16</span><span>React 19</span><span>Tailwind</span><span>Framer Motion</span><span>Vercel</span><span>Resend</span><span>Twilio</span>
           </div>
-          <span class="project-link project-link--private">Private Repository</span>
+          <a href="https://wheaton-valet-cleaners.vercel.app" target="_blank" rel="noopener" class="project-link">View live site &rarr;</a>
         </div>
         <div class="project-visual">
           <div class="vis-phone">
             <div class="vis-phone-notch"></div>
             <div class="vis-phone-screen">
-              <div class="vis-phone-header">Blazin C&amp;G</div>
-              <div class="vis-phone-item"><span class="vis-phone-dot"></span> Spicy Chicken Bowl <span class="vis-phone-price">$12.99</span></div>
-              <div class="vis-phone-item"><span class="vis-phone-dot"></span> Loaded Fries <span class="vis-phone-price">$8.49</span></div>
-              <div class="vis-phone-item"><span class="vis-phone-dot"></span> Mango Smoothie <span class="vis-phone-price">$5.99</span></div>
-              <div class="vis-phone-btn">Order Now</div>
+              <div class="vis-phone-header">Wheaton Valet</div>
+              <div class="vis-phone-item"><span class="vis-phone-dot"></span> Dry Cleaning <span class="vis-phone-price">2-day</span></div>
+              <div class="vis-phone-item"><span class="vis-phone-dot"></span> Wash &amp; Fold <span class="vis-phone-price">$1.85/lb</span></div>
+              <div class="vis-phone-item"><span class="vis-phone-dot"></span> Alterations <span class="vis-phone-price">From $12</span></div>
+              <div class="vis-phone-btn">Schedule Pickup</div>
             </div>
           </div>
         </div>
@@ -504,16 +509,16 @@
         <div class="card-spotlight"></div>
         <div class="project-info">
           <span class="project-number">09</span>
-          <h3 class="project-name">Papi-AI</h3>
-          <p class="project-desc">AI Dating Assistant</p>
+          <h3 class="project-name">Papi AI</h3>
+          <p class="project-desc">Cross-Platform AI Wingman &mdash; Mobile + Backend + Custom LoRA</p>
           <ul class="project-features">
-            <li>Live message recommendations</li>
-            <li>Profile builder &amp; scam detection</li>
-            <li>"Rizz Score" tracking</li>
-            <li>Powered by Llama 3.3 70B via Groq</li>
+            <li>RN/Expo SDK 54 mobile app on EAS Update preview channel</li>
+            <li>Vercel FastAPI backend &mdash; Groq Llama 3.3 70B + Whisper</li>
+            <li>Self-hosted Qwen2.5-7B LoRA pipeline (Unsloth + WSL + 4060 Ti)</li>
+            <li>GGUF export served through local Ollama gateway</li>
           </ul>
           <div class="project-tech">
-            <span>Python</span><span>FastAPI</span><span>Groq API</span><span>Llama 3.3 70B</span>
+            <span>React Native</span><span>Expo</span><span>FastAPI</span><span>Groq</span><span>Unsloth</span><span>LoRA / GGUF</span><span>Ollama</span>
           </div>
           <span class="project-link project-link--private">Private Repository</span>
         </div>
@@ -533,16 +538,16 @@
         <div class="card-spotlight"></div>
         <div class="project-info">
           <span class="project-number">10</span>
-          <h3 class="project-name">PC Terminal Server</h3>
-          <p class="project-desc">Remote PowerShell from Phone</p>
+          <h3 class="project-name">Local AI Gateway</h3>
+          <p class="project-desc">OpenAI-Compatible API in Front of Personal Ollama</p>
           <ul class="project-features">
-            <li>JWT auth &amp; rate limiting</li>
-            <li>Command history &amp; persistence</li>
-            <li>Mobile-first responsive UI</li>
-            <li>Secure remote execution</li>
+            <li>Bearer-auth HTTP gateway over Tailscale</li>
+            <li>/v1/chat/completions, /v1/embeddings, /v1/models</li>
+            <li>Foundation for fully local AI workflows</li>
+            <li>Windows Scheduled Task &mdash; runs on logon, 24/7</li>
           </ul>
           <div class="project-tech">
-            <span>Node.js</span><span>Express</span><span>SQLite</span><span>JWT</span>
+            <span>Python</span><span>FastAPI</span><span>Ollama</span><span>Tailscale</span><span>Bearer Auth</span>
           </div>
           <span class="project-link project-link--private">Private Repository</span>
         </div>
@@ -550,7 +555,9 @@
           <div class="vis-cmd">
             <div class="vis-cmd-bar"><span></span><span></span><span></span></div>
             <div class="vis-cmd-body">
-              <p>PS C:\Users\karim&gt; <span class="vis-cmd-typed"></span><span class="vis-cmd-cursor">|</span></p>
+              <p>$ curl -H "Authorization: Bearer $KEY" \</p>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;100.89.111.87:8089/v1/chat/completions</p>
+              <p>&gt; <span class="vis-cmd-typed"></span><span class="vis-cmd-cursor">|</span></p>
             </div>
           </div>
         </div>
@@ -558,6 +565,199 @@
     </div>
       </div><!-- /.projects-track -->
     </div><!-- /.projects-wrapper -->
+  </section>
+
+  <!-- Case Studies -->
+  <style>
+    .case-studies { padding: 100px 0; position: relative; }
+    .case-studies .container { max-width: 1100px; }
+    .case-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 50px;
+    }
+    @media (max-width: 860px) { .case-grid { grid-template-columns: 1fr; } }
+    .case-card {
+      position: relative;
+      display: block;
+      padding: 36px 32px 30px;
+      background: linear-gradient(180deg, var(--bg-card) 0%, rgba(10,10,15,0.6) 100%);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform 0.32s var(--ease-out), border-color 0.32s var(--ease-out);
+      cursor: none;
+    }
+    .case-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(800px circle at var(--mx, 50%) var(--my, 50%), rgba(255,68,68,0.08), transparent 40%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .case-card:hover::before { opacity: 1; }
+    .case-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,68,68,0.4);
+    }
+    .case-card.gold:hover { border-color: rgba(217,161,74,0.45); }
+    .case-card.gold::before {
+      background: radial-gradient(800px circle at var(--mx, 50%) var(--my, 50%), rgba(217,161,74,0.10), transparent 40%);
+    }
+    .case-card.green:hover { border-color: rgba(74,222,128,0.45); }
+    .case-card.green::before {
+      background: radial-gradient(800px circle at var(--mx, 50%) var(--my, 50%), rgba(74,222,128,0.10), transparent 40%);
+    }
+    .case-card.purple:hover { border-color: rgba(192,132,252,0.45); }
+    .case-card.purple::before {
+      background: radial-gradient(800px circle at var(--mx, 50%) var(--my, 50%), rgba(192,132,252,0.10), transparent 40%);
+    }
+    .case-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .case-card.gold .case-eyebrow { color: #d9a14a; }
+    .case-card.green .case-eyebrow { color: #4ade80; }
+    .case-card.purple .case-eyebrow { color: #c084fc; }
+    .case-eyebrow .pipe { color: var(--text-secondary); margin: 0 8px; }
+    .case-title {
+      font-family: var(--font-heading);
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.6px;
+      margin-bottom: 14px;
+    }
+    .case-title .accent { color: var(--accent); }
+    .case-card.gold .case-title .accent { color: #d9a14a; }
+    .case-card.green .case-title .accent { color: #4ade80; }
+    .case-card.purple .case-title .accent { color: #c084fc; }
+    .case-summary {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin-bottom: 20px;
+    }
+    .case-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 24px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+    .case-stat .num {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.4px;
+      line-height: 1;
+    }
+    .case-stat .lbl {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      color: var(--text-secondary);
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .case-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+    .case-card.gold .case-cta { color: #d9a14a; }
+    .case-card.green .case-cta { color: #4ade80; }
+    .case-card.purple .case-cta { color: #c084fc; }
+    .case-cta .arrow { transition: transform 0.25s ease; }
+    .case-card:hover .case-cta .arrow { transform: translateX(4px); }
+  </style>
+  <section class="case-studies" id="case-studies">
+    <div class="container">
+      <h2 class="section-title scroll-reveal">
+        <span class="word-mask"><span class="word">CASE</span></span>
+        <span class="word-mask"><span class="word">STUDIES</span></span>
+      </h2>
+      <p class="scroll-reveal" style="font-size:17px;color:var(--text-secondary);max-width:680px;margin-top:18px;">
+        Four of the projects above, opened up. Architecture, hardest decisions, live operations, real incidents.
+      </p>
+      <div class="case-grid">
+        <a href="/case/roofroof" class="case-card scroll-reveal">
+          <div class="case-eyebrow">
+            Live in production <span class="pipe">|</span> Stripe + Twilio + Supabase
+          </div>
+          <h3 class="case-title">RoofRoof<span class="accent">.</span>solutions</h3>
+          <p class="case-summary">
+            Self-serve roofing-lead marketplace. Live Stripe payments, server-authoritative coupon engine, Meta Pixel + CAPI dedup, restoreSiteDeploy incident write-up.
+          </p>
+          <div class="case-stats">
+            <div class="case-stat"><div class="num">8K+</div><div class="lbl">LOC</div></div>
+            <div class="case-stat"><div class="num">11</div><div class="lbl">DB tables · RLS</div></div>
+            <div class="case-stat"><div class="num">~28s</div><div class="lbl">Push to live</div></div>
+          </div>
+          <span class="case-cta">Read the case study <span class="arrow">&rarr;</span></span>
+        </a>
+        <a href="/case/wheaton" class="case-card gold scroll-reveal">
+          <div class="case-eyebrow">
+            Paid client engagement <span class="pipe">|</span> $4K invoice closed
+          </div>
+          <h3 class="case-title">Wheaton Valet<span class="accent">.</span></h3>
+          <p class="case-summary">
+            Five-brand Next.js 16 rebuild. Federal-compliant launch inside the U.S. Department of Education. First contracted Hummus Development engagement.
+          </p>
+          <div class="case-stats">
+            <div class="case-stat"><div class="num">$4K</div><div class="lbl">Invoice · Net 14</div></div>
+            <div class="case-stat"><div class="num">5</div><div class="lbl">Brand pages</div></div>
+            <div class="case-stat"><div class="num">14/14</div><div class="lbl">Bot smoke pass</div></div>
+          </div>
+          <span class="case-cta">Read the case study <span class="arrow">&rarr;</span></span>
+        </a>
+        <a href="/case/sentinel" class="case-card green scroll-reveal">
+          <div class="case-eyebrow">
+            AI &times; Cybersecurity <span class="pipe">|</span> ChromaDB + LLM embeddings
+          </div>
+          <h3 class="case-title">SentinelIQ<span class="accent">.</span></h3>
+          <p class="case-summary">
+            AI-powered SIEM companion. Multi-format log ingestion (syslog / Windows Events / CEF / firewall), three independent anomaly-scoring methods, plain-English query engine.
+          </p>
+          <div class="case-stats">
+            <div class="case-stat"><div class="num">4</div><div class="lbl">Log parsers</div></div>
+            <div class="case-stat"><div class="num">3</div><div class="lbl">Scoring methods</div></div>
+            <div class="case-stat"><div class="num">NL</div><div class="lbl">Query engine</div></div>
+          </div>
+          <span class="case-cta">Read the case study <span class="arrow">&rarr;</span></span>
+        </a>
+        <a href="/case/papi" class="case-card purple scroll-reveal">
+          <div class="case-eyebrow">
+            Mobile + Backend + LoRA <span class="pipe">|</span> RTX 4060 Ti at home
+          </div>
+          <h3 class="case-title">Papi AI<span class="accent">.</span></h3>
+          <p class="case-summary">
+            Cross-platform AI wingman. React Native mobile + Vercel FastAPI on Groq + custom Qwen2.5-7B LoRA fine-tune lab on a local 16 GB GPU.
+          </p>
+          <div class="case-stats">
+            <div class="case-stat"><div class="num">v2.9</div><div class="lbl">Live mobile</div></div>
+            <div class="case-stat"><div class="num">7B</div><div class="lbl">LoRA base</div></div>
+            <div class="case-stat"><div class="num">3</div><div class="lbl">Stack layers</div></div>
+          </div>
+          <span class="case-cta">Read the case study <span class="arrow">&rarr;</span></span>
+        </a>
+      </div>
+    </div>
   </section>
 
   <!-- Skills -->
@@ -572,11 +772,12 @@
           <h4 class="skill-category-title">Languages</h4>
           <div class="skill-pills">
             <span class="skill-pill">Python</span>
+            <span class="skill-pill">TypeScript</span>
+            <span class="skill-pill">JavaScript</span>
             <span class="skill-pill">Java</span>
             <span class="skill-pill">C#</span>
-            <span class="skill-pill">JavaScript</span>
-            <span class="skill-pill">TypeScript</span>
             <span class="skill-pill">SQL</span>
+            <span class="skill-pill">Swift</span>
             <span class="skill-pill">PHP</span>
             <span class="skill-pill">Lua</span>
             <span class="skill-pill">HTML5</span>
@@ -589,15 +790,18 @@
           <h4 class="skill-category-title">AI / ML</h4>
           <div class="skill-pills">
             <span class="skill-pill">RAG Pipelines</span>
+            <span class="skill-pill">LoRA Fine-Tuning</span>
+            <span class="skill-pill">Unsloth</span>
+            <span class="skill-pill">GGUF / llama.cpp</span>
             <span class="skill-pill">LLM Integration</span>
             <span class="skill-pill">Computer Vision</span>
             <span class="skill-pill">Vector Databases</span>
             <span class="skill-pill">Embeddings</span>
-            <span class="skill-pill">NLP</span>
             <span class="skill-pill">OpenCV</span>
             <span class="skill-pill">ChromaDB</span>
             <span class="skill-pill">Ollama</span>
             <span class="skill-pill">Groq</span>
+            <span class="skill-pill">Whisper</span>
             <span class="skill-pill">Prompt Engineering</span>
             <span class="skill-pill">Anomaly Detection</span>
           </div>
@@ -605,17 +809,20 @@
         <div class="skill-category">
           <h4 class="skill-category-title">Frameworks &amp; Libraries</h4>
           <div class="skill-pills">
+            <span class="skill-pill">Next.js 16</span>
+            <span class="skill-pill">React 19</span>
+            <span class="skill-pill">React Native</span>
+            <span class="skill-pill">Expo</span>
+            <span class="skill-pill">SwiftUI</span>
+            <span class="skill-pill">WidgetKit</span>
             <span class="skill-pill">FastAPI</span>
             <span class="skill-pill">Flask</span>
             <span class="skill-pill">Express.js</span>
-            <span class="skill-pill">React</span>
-            <span class="skill-pill">React Native</span>
-            <span class="skill-pill">Expo</span>
+            <span class="skill-pill">Tailwind</span>
+            <span class="skill-pill">Framer Motion</span>
             <span class="skill-pill">WebSocket</span>
             <span class="skill-pill">NumPy</span>
-            <span class="skill-pill">Pillow</span>
             <span class="skill-pill">ReportLab</span>
-            <span class="skill-pill">Matplotlib</span>
           </div>
         </div>
         <div class="skill-category">
@@ -623,14 +830,28 @@
           <div class="skill-pills">
             <span class="skill-pill">Microsoft Azure</span>
             <span class="skill-pill">Azure Functions</span>
-            <span class="skill-pill">Azure App Services</span>
+            <span class="skill-pill">Vercel</span>
+            <span class="skill-pill">Netlify</span>
+            <span class="skill-pill">Supabase</span>
             <span class="skill-pill">Docker</span>
             <span class="skill-pill">CI/CD</span>
-            <span class="skill-pill">Git</span>
             <span class="skill-pill">GitHub Actions</span>
-            <span class="skill-pill">Vercel</span>
+            <span class="skill-pill">EAS Update</span>
             <span class="skill-pill">Linux</span>
             <span class="skill-pill">Windows Server</span>
+            <span class="skill-pill">WSL2</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h4 class="skill-category-title">Payments &amp; Comms</h4>
+          <div class="skill-pills">
+            <span class="skill-pill">Stripe (live)</span>
+            <span class="skill-pill">Twilio SMS</span>
+            <span class="skill-pill">Resend</span>
+            <span class="skill-pill">Meta Pixel + CAPI</span>
+            <span class="skill-pill">GA4</span>
+            <span class="skill-pill">GTM</span>
+            <span class="skill-pill">Webhooks</span>
           </div>
         </div>
         <div class="skill-category">
@@ -716,9 +937,10 @@
             <h4 class="timeline-role">Founder &amp; Software Engineer</h4>
             <p class="timeline-company">Hummus Development LLC</p>
             <ul class="timeline-bullets">
-              <li>Founded software development company building AI-powered security, productivity, and developer tools</li>
-              <li>Shipped 10+ products including SentinelIQ, Cram, RoofRoof, HummusLink, Hummus IQ, and HummusI</li>
-              <li>33,000+ lines of production code across Python, JavaScript, TypeScript, Lua, and C#</li>
+              <li>Operate a one-person product studio &mdash; paid client web platforms, in-house SaaS, AI tooling, and native iOS apps end-to-end</li>
+              <li>Issued first contracted client invoice April 2026 (Wheaton Valet Cleaners, $4,000) following a 5-page Next.js 16 rebuild + intake pipeline + chatbot delivery</li>
+              <li>Run live infrastructure across Vercel, Netlify, Supabase, Stripe, Twilio, Resend, and a self-hosted Tailscale-served AI gateway on personal hardware</li>
+              <li>23 shipped projects, 75,000+ lines of production code across Python, TypeScript, Swift, JavaScript, Lua, and C#</li>
             </ul>
           </div>
         </div>

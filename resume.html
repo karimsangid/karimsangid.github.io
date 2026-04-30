@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume — Karim Sangid</title>
+<meta name="description" content="Karim Sangid — AI & Security Engineer, Full-Stack Product Builder, Founder of Hummus Development LLC. MS Computer Science at George Mason University. Azure AZ-204 certified.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://karimsangid.dev/resume">
+<meta property="og:title" content="Resume — Karim Sangid">
+<meta property="og:description" content="AI & Security Engineer · Full-Stack Product Builder · Founder, Hummus Development LLC">
+<meta property="og:url" content="https://karimsangid.dev/resume">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://karimsangid.dev/api/og?slug=resume">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://karimsangid.dev/api/og?slug=resume">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23050507'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-weight='700' font-size='38' fill='%23ff4444'>K</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* RESUME-CARD TOKENS */
+  :root {
+    --shell-bg: #050507;
+    --shell-border: rgba(255,255,255,0.08);
+    --shell-text: #b8bcc8;
+    --shell-mute: #6b7080;
+    --shell-accent: #ff4444;
+
+    --ink:        #0e1116;
+    --ink-2:      #1c222b;
+    --accent:     #b8252b;
+    --accent-2:   #d9a14a;
+    --accent-soft:#fbf0dc;
+    --text:       #1f2933;
+    --text-soft:  #4b5765;
+    --text-mute:  #7a8696;
+    --border:     #e3e7ec;
+    --card:       #fafbfc;
+    --pill:       #eef1f5;
+    --pill-text:  #36404c;
+    --rule:       #d6dde6;
+    --white:      #ffffff;
+  }
+
+  html { font-size: 13.5px; -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text);
+    line-height: 1.42;
+    background: var(--shell-bg);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    min-height: 100vh;
+  }
+
+  /* ---- TOP CONTROL BAR (hidden on print) ---- */
+  .control-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(5,5,7,0.92);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--shell-border);
+    padding: 16px 24px;
+  }
+  .control-inner {
+    max-width: 8.5in;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .control-inner .branding {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 0.4px;
+    text-decoration: none;
+  }
+  .control-inner .branding .dot { color: var(--shell-accent); }
+  .control-inner .branding .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--shell-mute);
+    margin-left: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .control-actions {
+    display: flex;
+    gap: 10px;
+  }
+  .ctrl-btn {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.16);
+    padding: 9px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .ctrl-btn:hover {
+    border-color: var(--shell-accent);
+    color: var(--shell-accent);
+    transform: translateY(-1px);
+  }
+  .ctrl-btn.primary {
+    background: var(--shell-accent);
+    border-color: var(--shell-accent);
+  }
+  .ctrl-btn.primary:hover {
+    background: #ff6b6b;
+    border-color: #ff6b6b;
+    color: #fff;
+  }
+
+  /* ---- PAGE WRAPPER ---- */
+  .page-wrap {
+    padding: 40px 20px 80px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .page {
+    width: 8.5in;
+    max-width: 100%;
+    min-height: 11in;
+    background: var(--white);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  /* ---- HEADER ---- */
+  header.resume-head {
+    background: linear-gradient(135deg, var(--ink) 0%, var(--ink-2) 100%);
+    color: var(--white);
+    padding: 26px 44px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  header.resume-head::after {
+    content: "";
+    position: absolute;
+    left: 44px; right: 44px; bottom: 14px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%);
+  }
+  .header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  header.resume-head h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    line-height: 1.05;
+    color: var(--white);
+  }
+  header.resume-head .tag-line {
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.78);
+    letter-spacing: 0.2px;
+  }
+  header.resume-head .tag-line .sep { color: var(--accent-2); margin: 0 6px; }
+  header.resume-head .pills {
+    margin-top: 9px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  header.resume-head .h-pill {
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.92);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+  header.resume-head .h-pill.h-pill--accent {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3px 12px;
+    font-size: 11.5px;
+    flex-shrink: 0;
+    align-self: flex-start;
+  }
+  .contact-grid .label {
+    color: rgba(255,255,255,0.45);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    padding-top: 2px;
+  }
+  .contact-grid a, .contact-grid span {
+    color: rgba(255,255,255,0.92);
+    text-decoration: none;
+  }
+
+  /* ---- MAIN ---- */
+  main { padding: 16px 44px 22px; }
+  section.r-sec { margin-bottom: 12px; }
+  section.r-sec:last-child { margin-bottom: 0; }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    color: var(--accent);
+    margin-bottom: 7px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .summary p {
+    font-size: 12px;
+    color: var(--text-soft);
+    line-height: 1.55;
+  }
+  .summary strong { color: var(--text); font-weight: 600; }
+
+  .infra-strip {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px 12px;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-size: 10.5px;
+    color: var(--text-soft);
+  }
+  .infra-strip strong {
+    color: var(--accent);
+    font-weight: 700;
+    margin-right: 4px;
+    font-size: 9.5px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 20px;
+  }
+
+  .exp-entry { margin-bottom: 9px; }
+  .exp-entry:last-child { margin-bottom: 0; }
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 2px;
+  }
+  .exp-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .exp-company {
+    font-size: 11.5px;
+    color: var(--text-soft);
+    font-weight: 500;
+  }
+  .exp-meta {
+    font-size: 11px;
+    color: var(--text-mute);
+    font-variant-numeric: tabular-nums;
+  }
+  .exp-bullets { list-style: none; padding-left: 12px; margin-top: 2px; }
+  .exp-bullets li {
+    font-size: 11.5px;
+    color: var(--text);
+    line-height: 1.46;
+    margin-bottom: 1px;
+    position: relative;
+  }
+  .exp-bullets li::before {
+    content: "\25AA";
+    position: absolute;
+    left: -11px;
+    top: 0;
+    color: var(--accent);
+    font-size: 9px;
+  }
+  .exp-bullets li strong { font-weight: 700; }
+
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 9px 13px 8px;
+    margin-bottom: 7px;
+  }
+  .project-card:last-child { margin-bottom: 0; }
+  .project-card.alt { border-left-color: var(--accent-2); }
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 3px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .project-name-row { display: flex; align-items: baseline; gap: 7px; flex-wrap: wrap; }
+  .project-name {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .project-status {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 2px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+  }
+  .status-live { background: #d8f0db; color: #1a6b32; }
+  .status-shipped { background: var(--accent-soft); color: #8a4a0c; }
+  .status-paid { background: #ffe6e6; color: #a3232b; }
+  .project-link {
+    font-size: 10px;
+    color: var(--text-mute);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .project-link strong { color: var(--accent); }
+  .project-tagline {
+    font-size: 11px;
+    color: var(--text-soft);
+    font-style: italic;
+    margin-bottom: 3px;
+  }
+  .project-bullets { list-style: none; padding-left: 12px; margin-bottom: 4px; }
+  .project-bullets li {
+    font-size: 11px;
+    color: var(--text);
+    line-height: 1.46;
+    margin-bottom: 0;
+    position: relative;
+  }
+  .project-bullets li::before {
+    content: "\25AA";
+    position: absolute;
+    left: -11px;
+    top: 1px;
+    color: var(--accent-2);
+    font-size: 9px;
+  }
+  .project-bullets li strong { font-weight: 700; }
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    margin-top: 3px;
+  }
+  .project-tech .tech {
+    font-size: 9px;
+    background: var(--accent-soft);
+    color: #8a4a0c;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 2px;
+    letter-spacing: 0.2px;
+  }
+
+  .client-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .client-cell {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 7px 10px;
+  }
+  .client-name {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .client-line {
+    font-size: 10.5px;
+    color: var(--text-soft);
+    line-height: 1.4;
+    margin-top: 1px;
+  }
+  .client-stack {
+    margin-top: 2px;
+    font-size: 9px;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+
+  .skills-stack { display: flex; flex-direction: column; gap: 5px; }
+  .skill-row {
+    display: grid;
+    grid-template-columns: 78px 1fr;
+    gap: 8px;
+    align-items: start;
+  }
+  .skill-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding-top: 2px;
+  }
+  .pills { display: flex; flex-wrap: wrap; gap: 3px; }
+  .pills .pill {
+    background: var(--pill);
+    color: var(--pill-text);
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .edu-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 11.5px;
+    margin-bottom: 3px;
+  }
+  .edu-row .degree { font-weight: 700; }
+  .edu-row .school { color: var(--text-soft); font-size: 11px; }
+  .edu-row .meta { color: var(--text-mute); font-size: 10.5px; }
+
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px 16px;
+    margin-top: 4px;
+  }
+  .cert-item {
+    font-size: 10.5px;
+    color: var(--text);
+  }
+  .cert-item strong {
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  /* ---- PRINT ---- */
+  @media print {
+    html { font-size: 12.5px; }
+    body { background: none; }
+    .control-bar { display: none !important; }
+    .page-wrap { padding: 0; display: block; }
+    .page { box-shadow: none; width: 100%; max-width: none; min-height: auto; margin: 0; border-radius: 0; }
+    header.resume-head { padding: 20px 36px 16px; }
+    header.resume-head::after { left: 36px; right: 36px; }
+    main { padding: 12px 36px 14px; }
+    section.r-sec { margin-bottom: 9px; }
+    .project-card { break-inside: avoid; padding: 7px 11px 6px; margin-bottom: 5px; }
+    .exp-entry { break-inside: avoid; margin-bottom: 7px; }
+    .client-cell { break-inside: avoid; }
+    a { color: inherit !important; }
+  }
+
+  @page { size: letter; margin: 0; }
+
+  @media (max-width: 720px) {
+    html { font-size: 12.5px; }
+    .header-row { flex-direction: column; gap: 14px; }
+    .contact-grid { font-size: 11px; }
+    .two-col { grid-template-columns: 1fr; gap: 12px; }
+    .control-bar { padding: 12px 16px; }
+    .control-inner .branding .meta { display: none; }
+    .ctrl-btn { padding: 8px 12px; font-size: 12px; }
+    main { padding: 14px 24px 18px; }
+    header.resume-head { padding: 22px 24px 18px; }
+    header.resume-head::after { left: 24px; right: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP CONTROL BAR -->
+<div class="control-bar">
+  <div class="control-inner">
+    <a href="/" class="branding">
+      K<span class="dot">.</span>S
+      <span class="meta">// Resume v3 · 2026-04-30</span>
+    </a>
+    <div class="control-actions">
+      <a href="/" class="ctrl-btn">&larr; Portfolio</a>
+      <button onclick="window.print()" class="ctrl-btn primary">&darr; Download PDF</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESUME PAGE -->
+<div class="page-wrap">
+  <div class="page">
+
+    <!-- HEADER -->
+    <header class="resume-head">
+      <div class="header-row">
+        <div>
+          <h1>Karim Sangid</h1>
+          <div class="tag-line">
+            AI &amp; Security Engineer <span class="sep">/</span>
+            Full-Stack Product Builder <span class="sep">/</span>
+            Founder, Hummus Development LLC
+          </div>
+          <div class="pills">
+            <span class="h-pill h-pill--accent">MS CS @ GMU</span>
+            <span class="h-pill">Azure AZ-204</span>
+            <span class="h-pill">US Citizen</span>
+            <span class="h-pill">McLean, VA</span>
+            <span class="h-pill">Ships paid client work</span>
+          </div>
+        </div>
+        <div class="contact-grid">
+          <span class="label">Email</span>
+          <a href="mailto:karimsangid@gmail.com">karimsangid@gmail.com</a>
+          <span class="label">Web</span>
+          <a href="https://karimsangid.dev">karimsangid.dev</a>
+          <span class="label">LinkedIn</span>
+          <a href="https://linkedin.com/in/karim-sangid">linkedin.com/in/karim-sangid</a>
+          <span class="label">GitHub</span>
+          <a href="https://github.com/karimsangid">github.com/karimsangid</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+      <section class="r-sec summary">
+        <p>
+          Engineer who <strong>ships into production</strong> — not just GitHub. Through Hummus Development LLC, run a one-person product company building a
+          <strong>live roofing-lead marketplace</strong> (Stripe, Twilio, Supabase), <strong>paid client web platforms</strong> (first $4K invoice issued April 2026),
+          a <strong>cross-platform AI dating app</strong> with custom LoRA fine-tuning on a local RTX 4060 Ti, and an
+          <strong>AI-powered SIEM companion</strong>. Day job: enterprise identity-management deployment at NextgenID for federal-compliance environments
+          (NIST, FIPS). MS Computer Science at George Mason University. Azure Developer Associate (AZ-204).
+          20+ shipped projects, 75,000+ lines of production code.
+        </p>
+      </section>
+
+      <section class="r-sec">
+        <div class="infra-strip">
+          <span><strong>2026 Ship Record</strong> Wheaton Valet (paid · live) · Duke Dental (live) · Ex Home Solutions (live) · RoofRoof billing flip + Stripe live · Papi AI v2.9 (TestFlight peers) · Local LoRA fine-tune lab</span>
+        </div>
+      </section>
+
+      <div class="two-col">
+
+        <!-- LEFT COLUMN -->
+        <div>
+
+          <section class="r-sec">
+            <h2 class="section-title">Experience</h2>
+
+            <div class="exp-entry">
+              <div class="exp-header">
+                <div><span class="exp-title">Field Engineer II</span> <span class="exp-company">— NextgenID, McLean, VA</span></div>
+                <span class="exp-meta">Aug 2025 – Mar 2026</span>
+              </div>
+              <ul class="exp-bullets">
+                <li>Led enterprise deployment of integrated identity-management hardware/software stacks across multiple federal client sites</li>
+                <li>Resolved production incidents across networking, OS, and application layers with 95%+ first-visit resolution</li>
+                <li>Implemented secure system configurations aligned with NIST and FIPS controls for federal-compliance environments</li>
+              </ul>
+            </div>
+
+            <div class="exp-entry">
+              <div class="exp-header">
+                <div><span class="exp-title">QA &amp; Cybersecurity Engineer</span> <span class="exp-company">— NextgenID, McLean, VA</span></div>
+                <span class="exp-meta">Aug 2024 – Aug 2025</span>
+              </div>
+              <ul class="exp-bullets">
+                <li>Built Python automation that cut manual QA effort by 40%+ and tightened release cycles</li>
+                <li>Deployed SIEM monitoring + network security controls; raised threat-detection coverage and triage speed</li>
+                <li>Conducted vulnerability assessments and authored security documentation for FedRAMP / NIST 800-53 audits</li>
+              </ul>
+            </div>
+
+            <div class="exp-entry">
+              <div class="exp-header">
+                <div><span class="exp-title">Founder &amp; Software Engineer</span> <span class="exp-company">— Hummus Development LLC</span></div>
+                <span class="exp-meta">Nov 2021 – Present</span>
+              </div>
+              <ul class="exp-bullets">
+                <li>Operate a one-person product studio: paid client websites, in-house SaaS, AI tooling, and native iOS apps — full lifecycle from sales to deploy</li>
+                <li>Run live infrastructure on Vercel, Netlify, Supabase, Stripe, Twilio, Resend, and a self-hosted Tailscale-served AI gateway on personal hardware</li>
+                <li>Issued first paid client invoice April 2026 (Wheaton Valet Cleaners, $4,000) following 5-page Next.js rebuild + analytics + chatbot delivery</li>
+                <li>Maintain operational discipline: Git-before-deploy, restoreSiteDeploy rollback drills, env-var hygiene, and incident-response playbooks</li>
+              </ul>
+            </div>
+
+            <div class="exp-entry">
+              <div class="exp-header">
+                <div><span class="exp-title">Lead Technical Specialist</span> <span class="exp-company">— New Horizon Hosting LLC</span></div>
+                <span class="exp-meta">Aug 2020 – Apr 2022</span>
+              </div>
+              <ul class="exp-bullets">
+                <li>Managed Windows Server hosting environments supporting 50+ client applications with 99.9% uptime SLA</li>
+                <li>Developed PHP/SQL web applications serving active end-user bases across multiple client sites</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="r-sec">
+            <h2 class="section-title">Selected Projects</h2>
+
+            <div class="project-card">
+              <div class="project-header">
+                <div class="project-name-row">
+                  <span class="project-name">RoofRoof.solutions</span>
+                  <span class="project-status status-live">Live · Revenue</span>
+                </div>
+                <a href="https://roofroof.solutions" class="project-link"><strong>roofroof.solutions</strong></a>
+              </div>
+              <div class="project-tagline">Self-serve roofing-lead marketplace — live Stripe payments, Twilio SMS, Meta Pixel + CAPI</div>
+              <ul class="project-bullets">
+                <li>Architected an 8,000+ line Express/Node + Netlify Functions marketplace where contractors purchase qualified roofing leads at flat $149 each, billed upfront via Stripe</li>
+                <li>Built custom coupon engine (single-use per user, max-quantity caps, server-only enumeration), admin order/refund flow with FK-safe deletion, and lead-capture SMS blast over Twilio</li>
+                <li>Wired Supabase Postgres via PgBouncer transaction pooler, RLS on every table, CAPI-deduped Pixel events (PageView / FormStart / Lead / Schedule), and Resend-verified email domain</li>
+                <li>Operate live: Netlify Pro auto-deploy from GitHub (~28s push-to-live), incident playbook including <em>restoreSiteDeploy</em> rollback when a contributor rogue-deployed an old bundle</li>
+              </ul>
+              <div class="project-tech">
+                <span class="tech">Node.js</span><span class="tech">Express</span><span class="tech">Netlify Functions</span><span class="tech">Supabase</span><span class="tech">Stripe</span><span class="tech">Twilio</span><span class="tech">Resend</span><span class="tech">Meta CAPI</span>
+              </div>
+            </div>
+
+            <div class="project-card alt">
+              <div class="project-header">
+                <div class="project-name-row">
+                  <span class="project-name">Wheaton Valet Cleaners</span>
+                  <span class="project-status status-paid">Paid Client · $4K</span>
+                </div>
+                <a href="https://wheaton-valet-cleaners.vercel.app" class="project-link"><strong>vercel preview</strong></a>
+              </div>
+              <div class="project-tagline">Next.js 16 rebuild — 5 brand pages, federal-compliant Liberty Press launch, AI chatbot, full intake pipeline</div>
+              <ul class="project-bullets">
+                <li>Delivered full Next.js 16 + Tailwind + Framer Motion rebuild for Wheaton Valet Cleaners LLC: 5 brand pages (flagship + 3 sister locations + DOE federal site), 10 service routes, A-grade SEO with 12 JSON-LD schemas</li>
+                <li>Wired live Resend transactional email + Twilio SMS through a single <code style="font-family:'JetBrains Mono',monospace;font-size:10.5px;background:#eef1f5;padding:1px 4px;border-radius:2px;">/api/intake</code> endpoint; chatbot smoke-tested 14/14 across price-quote, hours, address-intent, and Liberty Press flows</li>
+                <li>Issued invoice <strong>HD-2026-001</strong> for $4,000 / Net 14 — Hummus Development's first contracted client engagement closed and billed</li>
+              </ul>
+              <div class="project-tech">
+                <span class="tech">Next.js 16</span><span class="tech">React 19</span><span class="tech">Tailwind</span><span class="tech">Framer Motion</span><span class="tech">Vercel</span><span class="tech">Resend</span><span class="tech">Twilio</span><span class="tech">JSON-LD SEO</span>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="project-header">
+                <div class="project-name-row">
+                  <span class="project-name">SentinelIQ</span>
+                  <span class="project-status status-shipped">Shipped</span>
+                </div>
+                <a href="https://github.com/karimsangid/sentinel-iq" class="project-link"><strong>github.com/karimsangid/sentinel-iq</strong></a>
+              </div>
+              <div class="project-tagline">AI-powered SIEM companion — LLM embeddings for anomaly detection, natural-language log query</div>
+              <ul class="project-bullets">
+                <li>Ingests syslog, Windows Events, CEF, and firewall CSV; computes vector embeddings into ChromaDB and runs three independent anomaly-scoring methods over the timeline</li>
+                <li>Built a natural-language query engine that translates plain-English security questions into structured filters via LLM + tool calls</li>
+                <li>React dashboard streams real-time log events over WebSocket with severity timeline, threat heatmap, and AI-generated incident summaries</li>
+              </ul>
+              <div class="project-tech">
+                <span class="tech">Python</span><span class="tech">FastAPI</span><span class="tech">React</span><span class="tech">ChromaDB</span><span class="tech">Ollama</span><span class="tech">Docker</span><span class="tech">WebSocket</span>
+              </div>
+            </div>
+
+            <div class="project-card alt">
+              <div class="project-header">
+                <div class="project-name-row">
+                  <span class="project-name">Papi AI</span>
+                  <span class="project-status status-live">Live · Mobile + Web</span>
+                </div>
+                <span class="project-link"><strong>Expo Go preview channel</strong> · papi-ai-mu.vercel.app</span>
+              </div>
+              <div class="project-tagline">Cross-platform AI dating wingman — RN/Expo mobile + Vercel FastAPI backend + custom Qwen2.5-7B LoRA pipeline</div>
+              <ul class="project-bullets">
+                <li>React Native (Expo SDK 54) mobile app with EAS-Update preview channel; tap-to-fullscreen chat-image modal, voice + screenshot reply, per-match memory, vision (HEIC re-encode + 1600px resize)</li>
+                <li>Vercel FastAPI backend on Groq Llama 3.3 70B (chat) and whisper-large-v3 (multilingual voice transcription); strict version-tagged rollouts with SQLite memory + WebSocket streaming</li>
+                <li>Built a self-hosted LoRA fine-tune lab (Unsloth + WSL + RTX 4060 Ti 16GB): seed extraction, synthetic-corpus generation, Qwen2.5-7B training, GGUF export, served via local Ollama gateway</li>
+              </ul>
+              <div class="project-tech">
+                <span class="tech">React Native</span><span class="tech">Expo</span><span class="tech">FastAPI</span><span class="tech">Groq</span><span class="tech">Vercel</span><span class="tech">Unsloth</span><span class="tech">LoRA / GGUF</span><span class="tech">Ollama</span>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="project-header">
+                <div class="project-name-row">
+                  <span class="project-name">Local AI Gateway + Hummus IQ</span>
+                  <span class="project-status status-shipped">Self-Hosted</span>
+                </div>
+                <span class="project-link"><strong>Tailscale-served · 100.89.111.87:8089</strong></span>
+              </div>
+              <div class="project-tagline">OpenAI-compatible HTTP gateway in front of personal Ollama + a 5,400-line full-stack AI assistant</div>
+              <ul class="project-bullets">
+                <li><strong>Local AI Gateway:</strong> Bearer-auth OpenAI-compat HTTP API over Tailscale, Windows Scheduled Task at logon, foundation for fully local AI workflows</li>
+                <li><strong>Hummus IQ v8:</strong> 5,400-line FastAPI assistant — RAG (ChromaDB), SQLite thread persistence, dynamic Ollama model resolver per role, vision pipeline, web search + scrape, code execution, real WebSocket streaming with cancel</li>
+              </ul>
+              <div class="project-tech">
+                <span class="tech">Python</span><span class="tech">FastAPI</span><span class="tech">Ollama</span><span class="tech">ChromaDB</span><span class="tech">Tailscale</span><span class="tech">PWA</span><span class="tech">SwiftUI / WidgetKit</span>
+              </div>
+            </div>
+
+          </section>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div>
+
+          <section class="r-sec">
+            <h2 class="section-title">Client Engagements</h2>
+            <div class="client-grid">
+              <div class="client-cell">
+                <div class="client-name">Wheaton Valet Cleaners</div>
+                <div class="client-line">Full Next.js 16 rebuild · 5 brand pages · DOE Liberty Press launch · $4K invoice</div>
+                <div class="client-stack">Next.js · Vercel · Resend · Twilio</div>
+              </div>
+              <div class="client-cell">
+                <div class="client-name">Duke Dental Care</div>
+                <div class="client-line">Family practice site (live on dukedentalcare.net) + 4,451-line Expo patient app</div>
+                <div class="client-stack">Netlify · GA4 · Expo · Supabase</div>
+              </div>
+              <div class="client-cell">
+                <div class="client-name">Ex Home Solutions</div>
+                <div class="client-line">70-route MD home-services site · 24 service×location matrix · 96/100 SEO</div>
+                <div class="client-stack">Next.js · llms.txt · JSON-LD</div>
+              </div>
+              <div class="client-cell">
+                <div class="client-name">My Halo Auto</div>
+                <div class="client-line">DMV mechanic site with live Google reviews integration</div>
+                <div class="client-stack">Static · Netlify · Vercel</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="r-sec">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-stack">
+              <div class="skill-row">
+                <span class="skill-label">Lang</span>
+                <div class="pills">
+                  <span class="pill">Python</span><span class="pill">TypeScript</span><span class="pill">JavaScript</span><span class="pill">Java</span><span class="pill">C#</span><span class="pill">SQL</span><span class="pill">Swift</span><span class="pill">Lua</span><span class="pill">Bash</span><span class="pill">PowerShell</span>
+                </div>
+              </div>
+              <div class="skill-row">
+                <span class="skill-label">AI / ML</span>
+                <div class="pills">
+                  <span class="pill">RAG</span><span class="pill">LoRA Fine-Tune</span><span class="pill">Unsloth</span><span class="pill">GGUF / llama.cpp</span><span class="pill">Embeddings</span><span class="pill">Vector DBs</span><span class="pill">Ollama</span><span class="pill">Groq</span><span class="pill">OpenCV</span><span class="pill">Whisper</span>
+                </div>
+              </div>
+              <div class="skill-row">
+                <span class="skill-label">Web</span>
+                <div class="pills">
+                  <span class="pill">Next.js 16</span><span class="pill">React 19</span><span class="pill">FastAPI</span><span class="pill">Express</span><span class="pill">Flask</span><span class="pill">React Native / Expo</span><span class="pill">SwiftUI / WidgetKit</span><span class="pill">WebSocket</span><span class="pill">PWA</span>
+                </div>
+              </div>
+              <div class="skill-row">
+                <span class="skill-label">Infra</span>
+                <div class="pills">
+                  <span class="pill">Azure</span><span class="pill">Vercel</span><span class="pill">Netlify</span><span class="pill">Supabase</span><span class="pill">Stripe</span><span class="pill">Twilio</span><span class="pill">Resend</span><span class="pill">Tailscale</span><span class="pill">Docker</span><span class="pill">GitHub Actions</span>
+                </div>
+              </div>
+              <div class="skill-row">
+                <span class="skill-label">Security</span>
+                <div class="pills">
+                  <span class="pill">SIEM</span><span class="pill">Vulnerability Assessment</span><span class="pill">Pen Testing</span><span class="pill">OSINT</span><span class="pill">Threat Detection</span><span class="pill">NIST 800-53</span><span class="pill">FIPS</span><span class="pill">FedRAMP</span><span class="pill">JWT / OAuth</span>
+                </div>
+              </div>
+              <div class="skill-row">
+                <span class="skill-label">Data</span>
+                <div class="pills">
+                  <span class="pill">PostgreSQL</span><span class="pill">SQLite</span><span class="pill">ChromaDB</span><span class="pill">PgBouncer / RLS</span><span class="pill">SQL Tuning</span><span class="pill">Schema Design</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="r-sec">
+            <h2 class="section-title">Education &amp; Certifications</h2>
+            <div class="edu-row">
+              <span class="degree">M.S. Computer Science</span>
+              <span class="meta">In Progress</span>
+            </div>
+            <div class="edu-row">
+              <span class="school">George Mason University · Fairfax, VA</span>
+            </div>
+            <div class="cert-grid" style="margin-top:7px;">
+              <div class="cert-item"><strong>AZ-204</strong> Azure Developer Associate</div>
+              <div class="cert-item"><strong>GMU</strong> Ethical Hacking · 2020</div>
+              <div class="cert-item"><strong>Cert</strong> Python Programming</div>
+              <div class="cert-item"><strong>Cert</strong> C# Development</div>
+              <div class="cert-item" style="grid-column: span 2;"><strong>Capital One Coders</strong> Most Technical Application Award · 2016</div>
+            </div>
+          </section>
+
+          <section class="r-sec">
+            <h2 class="section-title">Also In Production</h2>
+            <ul class="exp-bullets" style="padding-left:12px;">
+              <li><strong>Cram</strong> — RAG study assistant with SM-2 spaced repetition + LLM-graded quizzes</li>
+              <li><strong>HummusOSINT</strong> — username/email/domain/IP recon CLI with branded PDF reports</li>
+              <li><strong>HummusLink</strong> — WebSocket sync bridge between Windows + iPhone (mDNS, QR pairing, PWA)</li>
+              <li><strong>Hummus Pulse</strong> — Claude usage telemetry daemon + native SwiftUI iOS app with 5 widget families</li>
+              <li><strong>HummusTravel</strong> — Tailscale tunnel keepalive + companion SwiftUI / WidgetKit app</li>
+              <li><strong>FiveM Server Platform</strong> — 300+ Lua scripts, 143 vehicle mods, 150+ resources on Linux dedicated infrastructure</li>
+            </ul>
+          </section>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+</body>
+</html>

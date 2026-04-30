@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RoofRoof.solutions — Case Study | Karim Sangid</title>
+<meta name="description" content="Building a live roofing-lead marketplace from scratch — Stripe payments, Twilio SMS, Supabase Postgres, Meta Pixel + CAPI dedup, and a real production incident response.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://karimsangid.dev/case/roofroof">
+<meta property="og:title" content="RoofRoof.solutions — Case Study">
+<meta property="og:description" content="Building a live roofing-lead marketplace from scratch — Stripe, Twilio, Supabase, Meta CAPI.">
+<meta property="og:url" content="https://karimsangid.dev/case/roofroof">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://karimsangid.dev/api/og?slug=roofroof">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://karimsangid.dev/api/og?slug=roofroof">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23050507'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-weight='700' font-size='38' fill='%23ff4444'>K</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #050507;
+    --bg-card: #0d0d12;
+    --bg-card-2: #14141b;
+    --text: #ffffff;
+    --text-soft: #b8bcc8;
+    --text-mute: #6b7080;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.16);
+    --accent: #ff4444;
+    --accent-soft: rgba(255,68,68,0.10);
+    --accent-line: rgba(255,68,68,0.28);
+    --gold: #d9a14a;
+    --green: #4ade80;
+    --blue: #60a5fa;
+    --purple: #c084fc;
+    --font-h: 'Space Grotesk', system-ui, sans-serif;
+    --font-b: 'Inter', system-ui, sans-serif;
+    --font-m: 'JetBrains Mono', monospace;
+  }
+
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-b);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: #ff6b6b; }
+
+  /* Subtle scanline grid background */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,68,68,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,68,68,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 1; }
+
+  /* ---- TOP NAV ---- */
+  nav.top {
+    position: sticky;
+    top: 0;
+    background: rgba(5,5,7,0.86);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+  }
+  nav.top .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+  nav.top .logo {
+    font-family: var(--font-h);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+  }
+  nav.top .logo .dot { color: var(--accent); }
+  nav.top .crumbs {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text-mute);
+    font-family: var(--font-m);
+  }
+  nav.top .crumbs a { color: var(--text-soft); }
+  nav.top .crumbs .sep { color: var(--accent); }
+
+  /* ---- HERO ---- */
+  header.hero {
+    padding: 80px 0 50px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  header.hero::before {
+    content: "";
+    position: absolute;
+    top: 60%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255,68,68,0.10) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-m);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .hero-eyebrow .pipe { color: var(--text-mute); margin: 0 8px; }
+  h1.hero-title {
+    font-family: var(--font-h);
+    font-size: clamp(36px, 5.5vw, 64px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    margin-bottom: 20px;
+  }
+  h1.hero-title .accent { color: var(--accent); }
+  .hero-tag {
+    font-size: 18px;
+    color: var(--text-soft);
+    max-width: 720px;
+    margin-bottom: 28px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--font-m);
+    font-size: 12px;
+    color: var(--text-mute);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .hero-meta .item strong { color: var(--text); font-weight: 600; }
+  .hero-cta {
+    margin-top: 32px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    font-family: var(--font-h);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.4px;
+    border: 1px solid var(--border-strong);
+    border-radius: 4px;
+    transition: all 0.18s ease;
+    color: var(--text);
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+  .btn.btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn.btn-primary:hover { background: #ff6b6b; border-color: #ff6b6b; color: #fff; }
+
+  /* ---- STATS GRID ---- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    margin: 60px 0;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .stat {
+    background: var(--bg);
+    padding: 26px 22px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: var(--font-h);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+  .stat-label {
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--text-mute);
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+  }
+  @media (max-width: 720px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ---- SECTIONS ---- */
+  section.section { padding: 50px 0; border-bottom: 1px solid var(--border); }
+  section.section:last-child { border-bottom: none; }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 28px;
+  }
+  .section-num {
+    font-family: var(--font-m);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 2px;
+  }
+  h2.section-title {
+    font-family: var(--font-h);
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+  }
+
+  p.lead {
+    font-size: 17px;
+    color: var(--text-soft);
+    margin-bottom: 18px;
+  }
+  p { font-size: 16px; color: var(--text-soft); margin-bottom: 14px; }
+  p strong, .body strong { color: var(--text); font-weight: 600; }
+  p code, .body code {
+    font-family: var(--font-m);
+    font-size: 13px;
+    background: var(--bg-card);
+    padding: 2px 7px;
+    border-radius: 3px;
+    color: var(--gold);
+    border: 1px solid var(--border);
+  }
+
+  ul.bullets {
+    margin: 14px 0 18px;
+    list-style: none;
+  }
+  ul.bullets li {
+    font-size: 16px;
+    color: var(--text-soft);
+    padding-left: 22px;
+    position: relative;
+    margin-bottom: 8px;
+  }
+  ul.bullets li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--accent);
+    font-size: 12px;
+  }
+  ul.bullets li strong { color: var(--text); font-weight: 600; }
+
+  /* ---- ARCHITECTURE DIAGRAM ---- */
+  .arch {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px;
+    margin: 24px 0;
+    font-family: var(--font-m);
+    font-size: 13px;
+    overflow-x: auto;
+  }
+  .arch pre {
+    color: var(--text-soft);
+    line-height: 1.55;
+    white-space: pre;
+  }
+  .arch .layer { color: var(--gold); font-weight: 600; }
+  .arch .pipe { color: var(--accent); }
+  .arch .node { color: var(--blue); }
+  .arch .label { color: var(--text-mute); }
+
+  /* ---- TECH GRID ---- */
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 18px 0;
+  }
+  .tech-cell {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 14px 16px;
+  }
+  .tech-cell.gold { border-left-color: var(--gold); }
+  .tech-cell.green { border-left-color: var(--green); }
+  .tech-cell.blue { border-left-color: var(--blue); }
+  .tech-cell.purple { border-left-color: var(--purple); }
+  .tech-cell h4 {
+    font-family: var(--font-h);
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: 0.3px;
+  }
+  .tech-cell p {
+    font-size: 13px;
+    color: var(--text-mute);
+    margin: 0;
+  }
+  @media (max-width: 720px) {
+    .tech-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ---- CALLOUT ---- */
+  .callout {
+    background: linear-gradient(135deg, rgba(255,68,68,0.08), rgba(217,161,74,0.05));
+    border: 1px solid var(--accent-line);
+    border-radius: 6px;
+    padding: 24px 26px;
+    margin: 28px 0;
+  }
+  .callout .label {
+    font-family: var(--font-m);
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .callout p { margin: 0; color: var(--text); font-size: 15px; }
+  .callout p strong { color: var(--accent); }
+
+  /* ---- INCIDENT TIMELINE ---- */
+  .timeline {
+    border-left: 2px solid var(--accent-line);
+    padding-left: 24px;
+    margin: 20px 0;
+  }
+  .timeline-event {
+    position: relative;
+    margin-bottom: 22px;
+  }
+  .timeline-event::before {
+    content: "";
+    position: absolute;
+    left: -32px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+  .timeline-event .ts {
+    font-family: var(--font-m);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.6px;
+    margin-bottom: 4px;
+  }
+  .timeline-event h5 {
+    font-family: var(--font-h);
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .timeline-event p { font-size: 14px; margin: 0; }
+
+  /* ---- FOOTER ---- */
+  footer {
+    padding: 60px 0 80px;
+    border-top: 1px solid var(--border);
+  }
+  .footer-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .footer-grid p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-mute);
+    font-family: var(--font-m);
+  }
+  .next-case {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px;
+    margin-bottom: 50px;
+    transition: border-color 0.18s ease;
+  }
+  .next-case:hover { border-color: var(--accent); }
+  .next-case .label {
+    font-family: var(--font-m);
+    font-size: 11px;
+    color: var(--text-mute);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .next-case h3 {
+    font-family: var(--font-h);
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .next-case h3 .arrow { color: var(--accent); margin-left: 8px; }
+  .next-case p { margin: 0; color: var(--text-mute); font-size: 14px; }
+
+  @media (max-width: 720px) {
+    h1.hero-title { font-size: 38px; letter-spacing: -1px; }
+    .hero-tag { font-size: 16px; }
+    nav.top .crumbs { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <a href="/" class="logo">K<span class="dot">.</span>S</a>
+    <div class="crumbs">
+      <a href="/">~</a>
+      <span class="sep">/</span>
+      <a href="/#projects">work</a>
+      <span class="sep">/</span>
+      <span>roofroof</span>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">
+      Case Study <span class="pipe">|</span> Live in Production <span class="pipe">|</span> Hummus Development LLC
+    </div>
+    <h1 class="hero-title">RoofRoof<span class="accent">.</span>solutions</h1>
+    <p class="hero-tag">
+      A self-serve marketplace where roofing contractors order qualified leads and pay upfront via Stripe.
+      Built end-to-end on Express + Netlify Functions + Supabase, with Twilio SMS notifications, Meta Pixel + CAPI deduplication, and a custom server-authoritative coupon engine.
+    </p>
+    <div class="hero-meta">
+      <span class="item"><strong>Stack</strong> · Node.js / Netlify / Supabase</span>
+      <span class="item"><strong>Status</strong> · Live · Stripe in production</span>
+      <span class="item"><strong>Scale</strong> · 8,000+ LOC</span>
+      <span class="item"><strong>Role</strong> · Solo architect + operator</span>
+    </div>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://roofroof.solutions" target="_blank" rel="noopener">Visit live site &rarr;</a>
+      <a class="btn" href="/">&larr; Back to portfolio</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">8K+</div>
+      <div class="stat-label">Lines of Code</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">11</div>
+      <div class="stat-label">DB Tables · RLS Locked</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">~28s</div>
+      <div class="stat-label">Push to Live</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">$149</div>
+      <div class="stat-label">Flat per Lead</div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2 class="section-title">The Problem</h2>
+    </div>
+    <p class="lead">
+      Local roofing contractors waste thousands a month on lead-gen platforms that bundle stale, oversold leads under opaque pricing. The economics break for the buyer, the experience breaks for the homeowner, and nobody owns the relationship.
+    </p>
+    <p>
+      RoofRoof is built around a simple inversion: <strong>flat-price leads, exclusive on first-touch, billed upfront, no per-night invoice surprise.</strong> A contractor logs in, chooses a service area, drops a credit card, and gets a clean stream of phone-verified intent leads — each <code>$149</code>, each from a real homeowner who filled out the LP form and consented to outreach.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Architecture</h2>
+    </div>
+    <p>
+      Single deployment surface (Netlify), single domain (<code>roofroof.solutions</code>), single Postgres (Supabase). Functions handle the API; the rest is static. Every secret lives in Netlify env, every external write is wrapped in a try/catch so a Twilio outage never 500s the lead form.
+    </p>
+    <div class="arch">
+<pre><span class="label">                          [ Visitor / Contractor ]</span>
+                                    <span class="pipe">│</span>
+              <span class="pipe">┌─────────────────────┴─────────────────────┐</span>
+              <span class="pipe">│</span>                                           <span class="pipe">│</span>
+       <span class="node">/rr-lp.html</span>                                <span class="node">/dashboard</span>
+       <span class="label">(intake form)</span>                              <span class="label">(buyer portal)</span>
+              <span class="pipe">│</span>                                           <span class="pipe">│</span>
+              <span class="pipe">└─────────────────────┬─────────────────────┘</span>
+                                    <span class="pipe">▼</span>
+                       <span class="layer">Netlify Functions  (Express)</span>
+   <span class="pipe">┌──────────────┬──────────────┬──────────────┬──────────────┐</span>
+   <span class="pipe">▼</span>              <span class="pipe">▼</span>              <span class="pipe">▼</span>              <span class="pipe">▼</span>              <span class="pipe">▼</span>
+ <span class="node">leads</span>          <span class="node">orders</span>         <span class="node">stripe</span>         <span class="node">coupons</span>        <span class="node">admin</span>
+ <span class="label">/intake</span>        <span class="label">/checkout</span>      <span class="label">/webhook</span>       <span class="label">/validate</span>      <span class="label">CRUD + refund</span>
+   <span class="pipe">│</span>              <span class="pipe">│</span>              <span class="pipe">│</span>              <span class="pipe">│</span>              <span class="pipe">│</span>
+   <span class="pipe">└──────────────┴──────┬───────┴──────────────┴──────────────┘</span>
+                          <span class="pipe">▼</span>
+              <span class="layer">Supabase Postgres  (PgBouncer · :6543 · RLS)</span>
+              <span class="label">leads · orders · users · coupons · payments · ...</span>
+                          <span class="pipe">│</span>
+       <span class="pipe">┌──────────────────────┼──────────────────────┐</span>
+       <span class="pipe">▼</span>                      <span class="pipe">▼</span>                      <span class="pipe">▼</span>
+   <span class="node">Stripe</span> <span class="label">(live)</span>      <span class="node">Twilio</span> <span class="label">(toll-free)</span>     <span class="node">Resend</span> <span class="label">(verified)</span>
+   <span class="label">payments + webhook</span>  <span class="label">SMS lead-blast</span>       <span class="label">transactional</span></pre>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Hardest Engineering Decisions</h2>
+    </div>
+
+    <h3 style="font-family:var(--font-h); font-size:18px; font-weight:600; margin-top:20px; margin-bottom:8px;">Server-authoritative coupon engine</h3>
+    <p>
+      Promo codes ship with a per-coupon JSON config: <code>free_order: bool</code>, <code>max_quantity: int</code>, <code>once_per_user: bool</code>, <code>flat_off_cents</code>. Validation lives entirely server-side. Public-page coupons (e.g. <code>ROOF25</code>) are advertised; affiliate codes (<code>AFFILIATEKAZ</code>, <code>ROOFY5</code>) are never rendered into the HTML — they exist only in <code>server/routes/coupons.js</code>, so a curious visitor can't enumerate them by viewing source.
+    </p>
+    <ul class="bullets">
+      <li><strong>Per-user enforcement:</strong> a <code>userHasUsedCoupon()</code> helper joins on <code>orders.coupon_code</code> + <code>orders.user_id</code>, so the same affiliate code can't be re-applied across orders.</li>
+      <li><strong>Guest path locked down:</strong> <code>applyCoupon</code> for unauthenticated users returns "Sign in to apply this code" for anything but <code>ROOF25</code>.</li>
+      <li><strong>Discount lockout flag:</strong> <code>orders.coupon_applied</code> guarantees the discount lands on the first invoice and never compounds across re-bills.</li>
+    </ul>
+
+    <h3 style="font-family:var(--font-h); font-size:18px; font-weight:600; margin-top:24px; margin-bottom:8px;">Meta Pixel + CAPI deduplication</h3>
+    <p>
+      Browser Pixel + server-side Conversions API (via Stape gateway) both fire <code>Lead</code> when a homeowner completes the intake form. To prevent Meta from counting the same conversion twice, every browser/server pair shares a deterministic <code>event_id</code> = the new <code>leads.id</code> UUID. Meta dedups on collision and the attribution stays clean.
+    </p>
+
+    <h3 style="font-family:var(--font-h); font-size:18px; font-weight:600; margin-top:24px; margin-bottom:8px;">Connection pooling vs. PgBouncer</h3>
+    <p>
+      Netlify Functions are short-lived → cold-start a fresh Postgres connection on every invocation = pool exhaustion at scale. Solution: route Supabase via the transaction pooler at <code>:6543</code>, with one strict caveat — disable prepared-statement caching on the asyncpg/postgres-js client (<code>statement_cache_size=0</code>). Without that flag you hit a stream of <code>DuplicatePreparedStatementError</code>s on every cold start. (Saved as a permanent note in personal memory — too painful to relearn.)
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Live Operations</h2>
+    </div>
+    <p>This is not a portfolio toy — it processes real card payments and sends SMS to real numbers. That changes the engineering bar.</p>
+    <div class="tech-grid">
+      <div class="tech-cell">
+        <h4>Auto-deploy from GitHub</h4>
+        <p>~28 seconds from <code>git push origin fixed-price-model</code> to Netlify production. Push-before-deploy is the law — no rogue CLI deploys allowed.</p>
+      </div>
+      <div class="tech-cell gold">
+        <h4>Row-level security</h4>
+        <p>RLS enabled on every one of the 11 Supabase tables. Service role for server, anon role for client, never the other way around.</p>
+      </div>
+      <div class="tech-cell green">
+        <h4>Stripe live + webhook</h4>
+        <p>Live <code>sk_live_</code> keys; webhook <code>/api/stripe/webhook</code> verifies signatures and reconciles order state.</p>
+      </div>
+      <div class="tech-cell blue">
+        <h4>Twilio toll-free</h4>
+        <p><code>+1 855-974-3074</code> for outbound notifications. Lead-capture SMS blast fans out to a comma-separated list held in a single Netlify env var, edited without code change.</p>
+      </div>
+      <div class="tech-cell purple">
+        <h4>Daily watcher</h4>
+        <p>Scheduled trigger pings Twilio once per day; pushes an ntfy alert if the toll-free verification status changes (currently IN_REVIEW).</p>
+      </div>
+      <div class="tech-cell">
+        <h4>Restore-deploy drill</h4>
+        <p>One <code>restoreSiteDeploy</code> call rolls live back to any prior bundle in seconds — free, no rebuild credits, no DNS churn. Tested in anger; see incident below.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Incident: The Rogue CLI Deploy</h2>
+    </div>
+    <p>
+      April 17 — admin lead rows stopped being clickable. Black-box smoke-test passed (200s everywhere), but the modal logic was missing from the live admin bundle. Worth telling because the response shape is the differentiator.
+    </p>
+    <div class="timeline">
+      <div class="timeline-event">
+        <div class="ts">01:57 UTC · Detection</div>
+        <h5>Live admin missing 235 lines</h5>
+        <p>Auto-deploy chain looked clean on GitHub but the Netlify build history showed a CLI deploy 14 minutes earlier with <code>commit_ref: None, committer: None</code> — fingerprint of <code>netlify deploy --prod</code> from someone's stale local checkout.</p>
+      </div>
+      <div class="timeline-event">
+        <div class="ts">02:04 UTC · Diagnosis</div>
+        <h5>Found the offender</h5>
+        <p>A third-party collaborator on <code>vibeyvault917-art/roofroofcopy</code> had pushed an old branch to production via CLI. The deploy had no commit, no committer, and silently overwrote 235 lines of admin UI including the <code>openLeadModal</code> handler.</p>
+      </div>
+      <div class="timeline-event">
+        <div class="ts">02:08 UTC · Fix</div>
+        <h5>One API call, instant rollback</h5>
+        <p><code>netlify api restoreSiteDeploy</code> against the last clean auto-deploy bundle. Live restored in seconds, no rebuild, no credits charged. Wrote a permanent recipe so this fix is one paste away next time.</p>
+      </div>
+      <div class="timeline-event">
+        <div class="ts">Same day · Forward visibility</div>
+        <h5>Spec'd Vibey-Watch</h5>
+        <p>Drafted a 30-min-cadence Python daemon that polls vibey's GitHub events + Netlify deploy hooks, pushes ntfy on rogue activity. Build deferred — but the visibility gap is closed in spec form.</p>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="label">Lesson encoded</div>
+      <p><strong>Git-before-Netlify is now non-negotiable.</strong> Any change goes to GitHub first; if a deploy doesn't trace back to a commit on <code>fixed-price-model</code>, it gets <code>restoreSiteDeploy</code>'d on sight.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">06</span>
+      <h2 class="section-title">What I'd Do Differently</h2>
+    </div>
+    <ul class="bullets">
+      <li><strong>Stage branch deploys.</strong> All experiments now go through branch deploys with auto-publish off. Burned the team's 3,000-credit Netlify Pro cap once running 299 prod deploys in a billing cycle — ~99.7% utilization triggered platform-wide HTTP 503 on the team. Recovery via add-on credits + manual <code>createSiteBuild</code> was clean but not a path I want to walk twice.</li>
+      <li><strong>Move the test harness off Twilio's live pool.</strong> A leftover <code>+15551234567</code> placeholder in a seed script was firing dozens of Error 21211 events per week against the toll-free number that's currently in carrier verification — bad for approval, easy to miss, fixed.</li>
+      <li><strong>Write the e2e suite to the new billing model.</strong> The flip from nightly billing to upfront-at-create left a handful of <code>test-e2e.js</code> assertions still asserting the old invariant. They pass, but they're testing the wrong thing.</li>
+    </ul>
+  </section>
+
+  <a href="/case/wheaton" class="next-case">
+    <div class="label">Next Case Study</div>
+    <h3>Wheaton Valet Cleaners <span class="arrow">&rarr;</span></h3>
+    <p>First paid client engagement — Next.js 16 multi-brand rebuild, federal-compliant Liberty Press launch, $4K invoice closed.</p>
+  </a>
+
+</div>
+
+<footer>
+  <div class="wrap footer-grid">
+    <p>&copy; 2026 Karim Sangid · Hummus Development LLC</p>
+    <p><a href="/" style="color:var(--text-soft);">karimsangid.dev</a> · <a href="https://github.com/karimsangid" style="color:var(--text-soft);">github.com/karimsangid</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
