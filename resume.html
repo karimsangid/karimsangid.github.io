@@ -443,20 +443,121 @@
     font-size: 10px;
   }
 
-  /* ---- PRINT ---- */
+  /* ============================================================
+     PRINT — convert dark site theme to light professional layout
+     so PDFs / printed copies are recruiter-friendly + ATS-safe
+     ============================================================ */
   @media print {
+    /* Print-specific colors — light-mode professional palette */
     html { font-size: 12.5px; }
-    body { background: var(--bg); }
+    body {
+      background: #ffffff !important;
+      color: #1f2933 !important;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    }
     .control-bar { display: none !important; }
-    .page-wrap { padding: 0; display: block; }
-    .page { box-shadow: none; width: 100%; max-width: none; min-height: auto; margin: 0; border: none; border-radius: 0; }
-    header.resume-head { padding: 22px 36px 16px; }
-    header.resume-head::after { left: 36px; right: 36px; }
-    main { padding: 14px 36px 18px; }
-    section.r-sec { margin-bottom: 12px; }
-    .project-card { break-inside: avoid; padding: 8px 13px 6px; margin-bottom: 6px; }
-    .exp-entry { break-inside: avoid; margin-bottom: 8px; }
-    a { color: inherit !important; }
+    .page-wrap { padding: 0; display: block; background: #ffffff !important; }
+    .page {
+      box-shadow: none;
+      width: 100%;
+      max-width: none;
+      min-height: auto;
+      margin: 0;
+      border: none;
+      border-radius: 0;
+      background: #ffffff !important;
+    }
+
+    /* HEADER — solid white with brand-color rule below */
+    header.resume-head {
+      background: #ffffff !important;
+      color: #0e1116 !important;
+      padding: 22px 36px 16px !important;
+      border-bottom: 1px solid #e3e7ec !important;
+    }
+    header.resume-head::after {
+      left: 36px; right: 36px; bottom: 0;
+      background: linear-gradient(90deg, #b8252b 0%, #d9a14a 100%) !important;
+      height: 2px !important;
+    }
+    header.resume-head h1 { color: #0e1116 !important; }
+    header.resume-head h1 .dot { color: #b8252b !important; }
+    header.resume-head .subtitle { color: #4b5765 !important; }
+    header.resume-head .subtitle .sep { color: #b8252b !important; }
+
+    .contact-grid .label { color: #7a8696 !important; }
+    .contact-grid a,
+    .contact-grid span:not(.label) { color: #0e1116 !important; }
+
+    /* MAIN BODY */
+    main { padding: 14px 36px 18px !important; }
+    section.r-sec { margin-bottom: 10px !important; break-inside: auto; }
+
+    .section-title {
+      color: #b8252b !important;
+      border-left: 3px solid #b8252b !important;
+    }
+
+    /* SUMMARY */
+    .summary p { color: #4b5765 !important; }
+    .summary strong { color: #0e1116 !important; }
+
+    /* EXPERIENCE */
+    .exp-entry { break-inside: avoid; margin-bottom: 7px !important; }
+    .exp-title { color: #0e1116 !important; }
+    .exp-company { color: #4b5765 !important; }
+    .exp-meta { color: #7a8696 !important; }
+    .exp-bullets li { color: #1f2933 !important; }
+    .exp-bullets li::before { color: #b8252b !important; }
+    .exp-bullets li strong { color: #0e1116 !important; }
+
+    /* PROJECTS */
+    .project-card {
+      break-inside: avoid;
+      background: #fafbfc !important;
+      border: 1px solid #d6dde6 !important;
+      border-left: 3px solid #b8252b !important;
+      padding: 8px 13px 6px !important;
+      margin-bottom: 6px !important;
+    }
+    .project-card.gold { border-left-color: #d9a14a !important; }
+    .project-name { color: #0e1116 !important; }
+    .project-link { color: #b8252b !important; }
+    .project-type { color: #7a8696 !important; }
+    .project-bullets li { color: #1f2933 !important; }
+    .project-bullets li::before { color: #b8252b !important; }
+    .project-bullets li strong { color: #0e1116 !important; }
+    .project-bullets li code {
+      background: #fbf0dc !important;
+      color: #8a4a0c !important;
+      border: 1px solid #e3e7ec !important;
+    }
+    .project-tech .tag {
+      background: #fbf0dc !important;
+      color: #8a4a0c !important;
+      border: 1px solid #f0e3c5 !important;
+    }
+
+    /* SKILLS */
+    .skill-label { color: #0e1116 !important; }
+    .pills .pill {
+      background: #eef1f5 !important;
+      color: #36404c !important;
+      border: 1px solid #e3e7ec !important;
+    }
+
+    /* EDUCATION */
+    .edu-row .degree { color: #0e1116 !important; }
+    .edu-row .school { color: #4b5765 !important; }
+    .edu-row .meta { color: #7a8696 !important; }
+    .cert-item { color: #1f2933 !important; }
+    .cert-item strong { color: #b8252b !important; }
+    .cert-item .cert-detail { color: #7a8696 !important; }
+
+    /* Hide URL underlines, force inherit color on links */
+    a { color: inherit !important; text-decoration: none !important; }
+
+    /* Render ALL backgrounds + colors in the PDF, not blanks */
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
