@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SentinelIQ — Case Study | Karim Sangid</title>
+<meta name="description" content="An AI-powered SIEM companion that turns syslog, Windows Events, CEF, and firewall logs into a queryable, anomaly-scored security timeline — with a natural-language query layer that translates plain English into structured filters.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://karimsangid.dev/case/sentinel">
+<meta property="og:title" content="SentinelIQ — Case Study">
+<meta property="og:description" content="AI-powered SIEM companion: LLM embeddings for anomaly detection, natural-language log query, three independent scoring methods.">
+<meta property="og:url" content="https://karimsangid.dev/case/sentinel">
+<meta property="og:image" content="https://karimsangid.dev/api/og?slug=sentinel">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://karimsangid.dev/api/og?slug=sentinel">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23050507'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-weight='700' font-size='38' fill='%23ff4444'>K</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #050507;
+    --bg-card: #0d0d12;
+    --bg-card-2: #14141b;
+    --text: #ffffff;
+    --text-soft: #b8bcc8;
+    --text-mute: #6b7080;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.16);
+    --accent: #4ade80;
+    --accent-soft: rgba(74,222,128,0.10);
+    --accent-line: rgba(74,222,128,0.32);
+    --red: #ff4444;
+    --gold: #d9a14a;
+    --blue: #60a5fa;
+    --purple: #c084fc;
+    --crit: #f87171;
+    --warn: #fbbf24;
+    --font-h: 'Space Grotesk', system-ui, sans-serif;
+    --font-b: 'Inter', system-ui, sans-serif;
+    --font-m: 'JetBrains Mono', monospace;
+  }
+
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-b);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: #6dec9a; }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(74,222,128,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74,222,128,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 1; }
+
+  nav.top {
+    position: sticky;
+    top: 0;
+    background: rgba(5,5,7,0.86);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+  }
+  nav.top .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+  nav.top .logo {
+    font-family: var(--font-h);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    color: var(--text);
+  }
+  nav.top .logo .dot { color: var(--red); }
+  nav.top .crumbs {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text-mute);
+    font-family: var(--font-m);
+  }
+  nav.top .crumbs a { color: var(--text-soft); }
+  nav.top .crumbs .sep { color: var(--accent); }
+
+  header.hero {
+    padding: 80px 0 50px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  header.hero::before {
+    content: "";
+    position: absolute;
+    top: 60%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(74,222,128,0.10) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-m);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .hero-eyebrow .pipe { color: var(--text-mute); margin: 0 8px; }
+  h1.hero-title {
+    font-family: var(--font-h);
+    font-size: clamp(36px, 5.5vw, 60px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    margin-bottom: 20px;
+  }
+  h1.hero-title .accent { color: var(--accent); }
+  .hero-tag {
+    font-size: 18px;
+    color: var(--text-soft);
+    max-width: 720px;
+    margin-bottom: 28px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--font-m);
+    font-size: 12px;
+    color: var(--text-mute);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .hero-meta .item strong { color: var(--text); font-weight: 600; }
+  .hero-cta {
+    margin-top: 32px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    font-family: var(--font-h);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.4px;
+    border: 1px solid var(--border-strong);
+    border-radius: 4px;
+    transition: all 0.18s ease;
+    color: var(--text);
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+  .btn.btn-primary { background: var(--accent); border-color: var(--accent); color: #042b14; }
+  .btn.btn-primary:hover { background: #6dec9a; border-color: #6dec9a; color: #042b14; }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    margin: 60px 0;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .stat {
+    background: var(--bg);
+    padding: 26px 22px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: var(--font-h);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+  .stat-label {
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--text-mute);
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+  }
+  @media (max-width: 720px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  section.section { padding: 50px 0; border-bottom: 1px solid var(--border); }
+  section.section:last-child { border-bottom: none; }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 28px;
+  }
+  .section-num {
+    font-family: var(--font-m);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 2px;
+  }
+  h2.section-title {
+    font-family: var(--font-h);
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+  }
+
+  p.lead { font-size: 17px; color: var(--text-soft); margin-bottom: 18px; }
+  p { font-size: 16px; color: var(--text-soft); margin-bottom: 14px; }
+  p strong, .body strong { color: var(--text); font-weight: 600; }
+  p code, .body code {
+    font-family: var(--font-m);
+    font-size: 13px;
+    background: var(--bg-card);
+    padding: 2px 7px;
+    border-radius: 3px;
+    color: var(--gold);
+    border: 1px solid var(--border);
+  }
+
+  ul.bullets { margin: 14px 0 18px; list-style: none; }
+  ul.bullets li {
+    font-size: 16px;
+    color: var(--text-soft);
+    padding-left: 22px;
+    position: relative;
+    margin-bottom: 8px;
+  }
+  ul.bullets li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--accent);
+    font-size: 12px;
+  }
+  ul.bullets li strong { color: var(--text); font-weight: 600; }
+
+  .terminal {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin: 24px 0;
+    overflow: hidden;
+  }
+  .terminal-bar {
+    background: var(--bg-card-2);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .terminal-bar .dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #555;
+  }
+  .terminal-bar .dot:nth-child(1) { background: #ff5f56; }
+  .terminal-bar .dot:nth-child(2) { background: #ffbd2e; }
+  .terminal-bar .dot:nth-child(3) { background: #27c93f; }
+  .terminal-bar .label {
+    margin-left: 12px;
+    font-family: var(--font-m);
+    font-size: 11px;
+    color: var(--text-mute);
+    letter-spacing: 0.6px;
+  }
+  .terminal-body {
+    padding: 18px 22px;
+    font-family: var(--font-m);
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--text-soft);
+  }
+  .terminal-body .ts { color: var(--text-mute); }
+  .terminal-body .ok { color: var(--accent); }
+  .terminal-body .warn { color: var(--warn); }
+  .terminal-body .crit { color: var(--crit); }
+  .terminal-body .info { color: var(--blue); }
+  .terminal-body .nlq { color: var(--gold); }
+
+  .method-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 24px 0;
+  }
+  .method-cell {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 18px 18px 16px;
+  }
+  .method-cell.gold { border-top-color: var(--gold); }
+  .method-cell.blue { border-top-color: var(--blue); }
+  .method-cell .method-num {
+    font-family: var(--font-m);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .method-cell.gold .method-num { color: var(--gold); }
+  .method-cell.blue .method-num { color: var(--blue); }
+  .method-cell h4 {
+    font-family: var(--font-h);
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .method-cell p { font-size: 13px; color: var(--text-mute); margin: 0; line-height: 1.55; }
+  @media (max-width: 720px) {
+    .method-grid { grid-template-columns: 1fr; }
+  }
+
+  .arch {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px;
+    margin: 24px 0;
+    font-family: var(--font-m);
+    font-size: 13px;
+    overflow-x: auto;
+  }
+  .arch pre {
+    color: var(--text-soft);
+    line-height: 1.55;
+    white-space: pre;
+  }
+  .arch .layer { color: var(--gold); font-weight: 600; }
+  .arch .pipe { color: var(--accent); }
+  .arch .node { color: var(--blue); }
+  .arch .label { color: var(--text-mute); }
+
+  .callout {
+    background: linear-gradient(135deg, rgba(74,222,128,0.08), rgba(96,165,250,0.05));
+    border: 1px solid var(--accent-line);
+    border-radius: 6px;
+    padding: 24px 26px;
+    margin: 28px 0;
+  }
+  .callout .label {
+    font-family: var(--font-m);
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .callout p { margin: 0; color: var(--text); font-size: 15px; }
+  .callout p strong { color: var(--accent); }
+
+  footer {
+    padding: 60px 0 80px;
+    border-top: 1px solid var(--border);
+  }
+  .footer-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .footer-grid p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-mute);
+    font-family: var(--font-m);
+  }
+  .next-case {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px;
+    margin-bottom: 50px;
+    transition: border-color 0.18s ease;
+  }
+  .next-case:hover { border-color: var(--accent); }
+  .next-case .label {
+    font-family: var(--font-m);
+    font-size: 11px;
+    color: var(--text-mute);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .next-case h3 {
+    font-family: var(--font-h);
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .next-case h3 .arrow { color: var(--accent); margin-left: 8px; }
+  .next-case p { margin: 0; color: var(--text-mute); font-size: 14px; }
+
+  @media (max-width: 720px) {
+    h1.hero-title { font-size: 36px; letter-spacing: -1px; }
+    .hero-tag { font-size: 16px; }
+    nav.top .crumbs { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <a href="/" class="logo">K<span class="dot">.</span>S</a>
+    <div class="crumbs">
+      <a href="/">~</a>
+      <span class="sep">/</span>
+      <a href="/#projects">work</a>
+      <span class="sep">/</span>
+      <span>sentinel-iq</span>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">
+      Case Study <span class="pipe">|</span> AI &times; Cybersecurity <span class="pipe">|</span> Hummus Development LLC
+    </div>
+    <h1 class="hero-title">SentinelIQ<span class="accent">.</span></h1>
+    <p class="hero-tag">
+      An AI-powered SIEM companion that turns multi-format security logs into a queryable, anomaly-scored timeline — with a natural-language query layer that translates plain English into structured filters.
+    </p>
+    <div class="hero-meta">
+      <span class="item"><strong>Stack</strong> · Python / FastAPI / React / ChromaDB</span>
+      <span class="item"><strong>Status</strong> · Public on GitHub</span>
+      <span class="item"><strong>Domain</strong> · SIEM &middot; Threat Detection</span>
+      <span class="item"><strong>Role</strong> · Solo design + build</span>
+    </div>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://github.com/karimsangid/sentinel-iq" target="_blank" rel="noopener">View on GitHub &rarr;</a>
+      <a class="btn" href="/">&larr; Back to portfolio</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Log Format Parsers</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Scoring Methods</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">NL</div>
+      <div class="stat-label">Query → SQL</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">A+</div>
+      <div class="stat-label">Code Quality</div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2 class="section-title">The Problem</h2>
+    </div>
+    <p class="lead">
+      Every security analyst I've worked with spends most of their day three things deep: pivoting between SIEM dashboards that don't talk to each other, hand-writing query DSLs against schemas they've memorized but resent, and trying to remember whether <em>this</em> spike of failed logins is "Tuesday morning normal" or "actually an incident."
+    </p>
+    <p>
+      SentinelIQ is built around a different default: <strong>ingest everything, embed it, score it three ways, and let the analyst ask questions in English.</strong> Logs are useless if they're locked behind a query language; alerts are noise if the model thinks a holiday weekend is anomalous; and a SIEM that can't tell you "show me failed SSH attempts from new IPs in the last hour" without you knowing the schema is just a $50K log archive.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Multi-Format Log Ingestion</h2>
+    </div>
+    <p>
+      Real security teams aren't running one log source — they're running a syslog collector for Linux fleet, Windows Event collectors for the AD domain, a CEF feed off a network appliance, and a CSV dump from whatever EDR they bought last year. SentinelIQ has parsers for all four, normalizing into a single schema:
+    </p>
+    <ul class="bullets">
+      <li><strong>Syslog (RFC 5424)</strong> — structured priority, facility, severity, hostname, app-name, msgid, timestamp, message body. Tested against journald, rsyslog, and a Cisco ASA capture.</li>
+      <li><strong>Windows Event Logs (EVTX/JSON)</strong> — channel, event-id, provider, level, computer, user-sid, payload data. Maps the noisy Microsoft event-id space to plain-English action labels (e.g., 4625 → "failed logon").</li>
+      <li><strong>CEF (Common Event Format)</strong> — vendor, product, signature-id, name, severity, custom extensions. The lingua franca for network appliances.</li>
+      <li><strong>Firewall CSV</strong> — flexible header detection so a Palo Alto export drops in next to a pfSense one without code changes.</li>
+    </ul>
+    <p>
+      Each event lands in SQLite for the timeline view <em>and</em> ChromaDB as a 384-dim embedding so the anomaly engine and NL query layer can both reason over the same store.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Three Anomaly Scoring Methods</h2>
+    </div>
+    <p>
+      One scoring method = one blind spot. SentinelIQ runs three independent methods on every event and surfaces the disagreement, not just the consensus.
+    </p>
+    <div class="method-grid">
+      <div class="method-cell">
+        <div class="method-num">Method 01</div>
+        <h4>Embedding distance</h4>
+        <p>Each new event's vector is compared against the running k-NN cloud of the last N events from the same source. Outliers in semantic space surface even when the surface text looks routine.</p>
+      </div>
+      <div class="method-cell gold">
+        <div class="method-num">Method 02</div>
+        <h4>Frequency Z-score</h4>
+        <p>Per-source, per-event-type rolling baseline. A 142-attempts-per-minute brute force isn't anomalous because the words are scary — it's anomalous because the rate is six standard deviations above this host's normal.</p>
+      </div>
+      <div class="method-cell blue">
+        <div class="method-num">Method 03</div>
+        <h4>Time-of-day prior</h4>
+        <p>Same event, 3 AM, weekend = different score than 10 AM, Tuesday. Catches lateral-movement patterns that hide inside business-hours noise.</p>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="label">Design principle</div>
+      <p><strong>Disagreement is the signal.</strong> When two methods score an event high and one scores it low, the dashboard surfaces it as "investigate" — not "alert." That's where the actual analyst value lives.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Natural Language Query Engine</h2>
+    </div>
+    <p>
+      The killer feature: an analyst types <em>"show failed logins in the last 24h from IPs we haven't seen this week"</em> — the system translates that into a structured filter pipeline (event-type, time-range, source-IP cardinality lookup), runs it against SQLite + ChromaDB, and returns a result table with citations back to raw events.
+    </p>
+    <p>
+      The translation layer uses Ollama-served local LLMs for everything (no logs leaving the network), with a tool-call schema constraining what the model is allowed to emit. The model never writes raw SQL — it picks from a fixed set of typed filter primitives. Hallucinations show up as parse errors, not as silent wrong queries.
+    </p>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="label">sentineliq // dashboard.log</span>
+      </div>
+      <div class="terminal-body">
+<span class="ts">[03:14:22]</span> <span class="ok">INFO </span> Syslog ingestion started on :514<br>
+<span class="ts">[03:14:23]</span> <span class="warn">WARN </span> Anomaly score 0.87 — src 10.0.0.45 (M01:0.91 M02:0.88 M03:0.82)<br>
+<span class="ts">[03:14:24]</span> <span class="crit">CRIT </span> Brute-force detected — 142 attempts/min on sshd@bastion-01<br>
+<span class="ts">[03:14:25]</span> <span class="ok">INFO </span> Embedding vectors indexed: 24,891<br>
+<span class="ts">[03:14:26]</span> <span class="warn">WARN </span> Unusual port scan from 192.168.1.33 — 47 ports / 8s<br>
+<span class="ts">[03:14:27]</span> <span class="info">NLQ  </span> <span class="nlq">"show failed logins last 24h"</span> → 312 results<br>
+<span class="ts">[03:14:28]</span> <span class="crit">ALERT</span> Lateral movement pattern (3 hosts, sequential SMB)<br>
+<span class="ts">[03:14:29]</span> <span class="ok">INFO </span> ChromaDB k-NN: 12 nearest events (cos-dist 0.21–0.34)<br>
+<span class="ts">[03:14:30]</span> <span class="info">NLQ  </span> <span class="nlq">"summarize last 5 alerts"</span> → AI-gen incident report<br>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Architecture</h2>
+    </div>
+    <div class="arch">
+<pre><span class="label">                    [ Log sources ]</span>
+   <span class="node">syslog</span>      <span class="node">winevt</span>      <span class="node">CEF</span>        <span class="node">firewall.csv</span>
+     <span class="pipe">│</span>            <span class="pipe">│</span>          <span class="pipe">│</span>             <span class="pipe">│</span>
+     <span class="pipe">└────────────┴──────────┴─────────────┘</span>
+                          <span class="pipe">▼</span>
+              <span class="layer">Format-agnostic parser layer</span>
+                          <span class="pipe">▼</span>
+            <span class="layer">Normalized event { ts, src, type, msg, ... }</span>
+                          <span class="pipe">▼</span>
+       <span class="pipe">┌──────────────────────┼──────────────────────┐</span>
+       <span class="pipe">▼</span>                      <span class="pipe">▼</span>                      <span class="pipe">▼</span>
+   <span class="node">SQLite</span> <span class="label">(timeline)</span>     <span class="node">ChromaDB</span> <span class="label">(vectors)</span>     <span class="node">Anomaly</span>
+                                                  <span class="label">M01 / M02 / M03</span>
+       <span class="pipe">│</span>                      <span class="pipe">│</span>                      <span class="pipe">│</span>
+       <span class="pipe">└──────────────────────┼──────────────────────┘</span>
+                          <span class="pipe">▼</span>
+              <span class="layer">FastAPI  (query + WebSocket stream)</span>
+                          <span class="pipe">▼</span>
+       <span class="pipe">┌──────────────────────┼──────────────────────┐</span>
+       <span class="pipe">▼</span>                      <span class="pipe">▼</span>                      <span class="pipe">▼</span>
+  <span class="node">Ollama LLM</span>           <span class="node">React Dashboard</span>          <span class="node">Incident</span>
+  <span class="label">NL → typed filters</span>   <span class="label">timeline / heatmap</span>      <span class="label">summarizer</span></pre>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">06</span>
+      <h2 class="section-title">Why It's a Useful Signal</h2>
+    </div>
+    <p>
+      I built SentinelIQ for one reason: in my QA &amp; Cybersecurity Engineer role at NextgenID I'd written enough vulnerability assessments and FedRAMP / NIST 800-53 documentation to know what's missing in the day-to-day analyst workflow — and what won't get sold to teams that already have Splunk.
+    </p>
+    <ul class="bullets">
+      <li><strong>Local-first.</strong> Logs never leave the network. Ollama, ChromaDB, SQLite — everything runs on a single box. That's the only model that works for federal-compliance environments where I spend my day job.</li>
+      <li><strong>Format-pluralism, not format-religion.</strong> No "convert your logs to our schema first" — meet the team where the logs already are.</li>
+      <li><strong>Three independent methods, surfaced honestly.</strong> Disagreement between scorers is more interesting than agreement. Most SIEMs hide the variance; SentinelIQ shows it.</li>
+      <li><strong>NL query as the front door, not a feature.</strong> The dashboard exists, but the primary interaction is "ask in English, get a citation back." That's the workflow change that matters.</li>
+    </ul>
+  </section>
+
+  <a href="/case/papi" class="next-case">
+    <div class="label">Next Case Study</div>
+    <h3>Papi AI <span class="arrow">&rarr;</span></h3>
+    <p>Cross-platform AI dating wingman: React Native mobile + Vercel FastAPI backend + custom Qwen2.5-7B LoRA fine-tune on a local RTX 4060 Ti.</p>
+  </a>
+
+</div>
+
+<footer>
+  <div class="wrap footer-grid">
+    <p>&copy; 2026 Karim Sangid · Hummus Development LLC</p>
+    <p><a href="/" style="color:var(--text-soft);">karimsangid.dev</a> · <a href="https://github.com/karimsangid" style="color:var(--text-soft);">github.com/karimsangid</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
