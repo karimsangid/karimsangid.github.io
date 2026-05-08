@@ -1926,6 +1926,13 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
   color: var(--text-secondary);
 }
 
+.footer-credit {
+  margin-top: 4px;
+  font-size: 11px;
+  opacity: 0.4;
+  letter-spacing: 0.02em;
+}
+
 /* ============================================================
    SCROLLBAR
    ============================================================ */
