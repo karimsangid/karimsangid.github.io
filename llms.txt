@@ -1,0 +1,22 @@
+# Karim Sangid — AI & Security Engineer
+
+> Personal portfolio of Karim Sangid: AI & Security Engineer and founder of Hummus Development LLC. Builds end-to-end products: live Stripe marketplaces, paid client web platforms, a mobile AI dating app, self-hosted LoRA fine-tuning on consumer GPUs, multi-site SEO + analytics infrastructure.
+
+## Sections
+
+- [Home](https://karimsangid.is-a.dev/): hero, projects, case-study cards, founder timeline
+- [Resume](https://karimsangid.is-a.dev/resume): single-column resume rendering, print-optimized
+- [Case study: RoofRoof](https://karimsangid.is-a.dev/case/roofroof): live roofing-lead marketplace deep-dive
+- [Case study: Wheaton Valet](https://karimsangid.is-a.dev/case/wheaton): multi-brand client rebuild + federal launch
+- [Case study: SentinelIQ](https://karimsangid.is-a.dev/case/sentinel): AI security log analyzer
+- [Case study: Papi AI](https://karimsangid.is-a.dev/case/papi): mobile dating assistant + LoRA fine-tuning
+
+## About
+
+Karim Sangid is the founder of Hummus Development LLC, a one-person studio shipping production AI and security software. Background spans identity verification (NextgenID), cloud certifications (Azure), and end-to-end product development across web, mobile, and AI infrastructure.
+
+## Contact
+
+- Portfolio: https://karimsangid.is-a.dev
+- GitHub: https://github.com/karimsangid
+- Hummus Development LLC
