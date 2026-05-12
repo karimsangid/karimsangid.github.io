@@ -1,11 +1,10 @@
 {
   "name": "karimsangid-portfolio",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "type": "module",
-  "description": "karimsangid.dev — portfolio + case studies + dynamic OG images + gated /admin telemetry dashboard",
+  "description": "karimsangid.dev portfolio + case studies + dynamic OG images (admin moved off-Vercel onto Tailscale)",
   "dependencies": {
-    "@vercel/og": "^0.6.4",
-    "jose": "^5.9.6"
+    "@vercel/og": "^0.6.4"
   }
 }
