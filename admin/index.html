@@ -5,213 +5,22 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="robots" content="noindex,nofollow" />
   <title>HUMMUS_DEV // AUTH GATE</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%230a0b0d'/><text x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-weight='700' font-size='34' fill='%236dff8e'>K</text></svg>">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta http-equiv="refresh" content="0; url=https://karimsangid.vercel.app/admin">
+  <link rel="canonical" href="https://karimsangid.vercel.app/admin">
   <style>
-    :root {
-      --bg: #0a0b0d;
-      --panel: #11141a;
-      --line: #1f242d;
-      --text: #e6ebf2;
-      --mute: #7c8896;
-      --dim: #4f5864;
-      --green: #6dff8e;
-      --green-glow: rgba(109, 255, 142, .35);
-      --amber: #ffb86b;
-      --crit: #ff5b6e;
-      --mono: 'Geist Mono', 'JetBrains Mono', ui-monospace, Menlo, monospace;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--mono);
-      font-size: 14px;
-      -webkit-font-smoothing: antialiased;
-      min-height: 100vh;
-    }
-    body {
-      display: grid;
-      place-items: center;
-      padding: 24px;
-    }
-    body::before {
-      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
-      background:
-        repeating-linear-gradient(to bottom, rgba(255,255,255,.012) 0 1px, transparent 1px 3px),
-        radial-gradient(120% 90% at 50% 0%, transparent 60%, rgba(0,0,0,.55) 100%);
-      mix-blend-mode: screen;
-    }
-    .gate {
-      position: relative; z-index: 1;
-      width: 100%; max-width: 480px;
-      border: 1px solid var(--line);
-      background: var(--panel);
-      padding: 28px;
-      animation: reveal .5s cubic-bezier(.2,.7,.2,1);
-    }
-    @keyframes reveal { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-    .gate h1 {
-      font-size: 11px;
-      letter-spacing: .22em;
-      color: var(--mute);
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-    .gate h1 b { color: var(--text); font-weight: 600; }
-    .gate .sub {
-      font-size: 12px;
-      color: var(--dim);
-      margin-bottom: 22px;
-      letter-spacing: .04em;
-    }
-    .status {
-      padding: 14px;
-      border: 1px solid var(--line);
-      background: #06080b;
-      font-size: 12.5px;
-      letter-spacing: .04em;
-      min-height: 70px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .led {
-      flex: 0 0 auto;
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      background: var(--amber);
-      box-shadow: 0 0 8px rgba(255,184,107,.45);
-      animation: pulse 1s ease-in-out infinite;
-    }
-    .led.ok { background: var(--green); box-shadow: 0 0 8px var(--green-glow); animation: none; }
-    .led.err { background: var(--crit); box-shadow: 0 0 8px rgba(255,91,110,.45); animation: none; }
-    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
-    .status .msg b { color: var(--text); }
-    .status .msg .small { color: var(--mute); font-size: 11.5px; display: block; margin-top: 4px; }
-    .actions {
-      margin-top: 18px;
-      display: flex;
-      gap: 10px;
-    }
-    .actions a, .actions button {
-      flex: 1;
-      text-decoration: none;
-      text-align: center;
-      background: var(--green);
-      color: #0a0b0d;
-      font-family: var(--mono);
-      font-weight: 700;
-      font-size: 12px;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      padding: 13px 14px;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 0 18px var(--green-glow);
-      transition: filter .15s ease;
-    }
-    .actions a.ghost, .actions button.ghost {
-      background: transparent;
-      color: var(--mute);
-      border: 1px solid var(--line);
-      box-shadow: none;
-    }
-    .actions a:hover, .actions button:hover { filter: brightness(1.1); }
-    .meta {
-      margin-top: 22px;
-      padding-top: 14px;
-      border-top: 1px solid var(--line);
-      font-size: 10.5px;
-      letter-spacing: .16em;
-      color: var(--dim);
-      text-transform: uppercase;
-      display: flex;
-      justify-content: space-between;
-    }
-    @media (max-width: 880px) {
-      body::before { display: none; }
-      body { padding: 16px; }
-      .gate { padding: 22px; }
-    }
+    body { background: #0a0b0d; color: #e6ebf2; font-family: ui-monospace, Menlo, monospace; display: grid; place-items: center; min-height: 100vh; margin: 0; padding: 24px; }
+    .box { border: 1px solid #1f242d; background: #11141a; padding: 24px; max-width: 420px; text-align: center; }
+    .box h1 { font-size: 12px; letter-spacing: .2em; color: #7c8896; text-transform: uppercase; margin: 0 0 12px; }
+    .box p { font-size: 13px; color: #4f5864; margin: 0 0 14px; }
+    .box a { color: #6dff8e; text-decoration: none; font-weight: 600; letter-spacing: .12em; font-size: 12px; text-transform: uppercase; }
   </style>
 </head>
 <body>
-  <main class="gate">
-    <h1><b>HUMMUS_DEV</b> &nbsp;/&nbsp; restricted endpoint</h1>
-    <p class="sub">Tailscale required &middot; tailnet-only access</p>
-
-    <div class="status" id="status">
-      <span class="led" id="led"></span>
-      <div class="msg" id="msg">
-        <b>Probing tailnet&hellip;</b>
-        <span class="small">Checking reachability to kcustom.tailf47164.ts.net</span>
-      </div>
-    </div>
-
-    <div class="actions">
-      <a id="goto" href="https://kcustom.tailf47164.ts.net/admin">[ENTER]</a>
-      <a class="ghost" href="https://tailscale.com/download" target="_blank" rel="noopener">[INSTALL TAILSCALE]</a>
-    </div>
-
-    <div class="meta">
-      <span>karim@hummus-dev</span>
-      <span id="ts">&mdash;</span>
-    </div>
-  </main>
-
-  <script>
-    (function () {
-      var TAILNET_URL = 'https://kcustom.tailf47164.ts.net/admin';
-      var TAILNET_PROBE = 'https://kcustom.tailf47164.ts.net/admin/login';
-      var led = document.getElementById('led');
-      var msg = document.getElementById('msg');
-      var ts = document.getElementById('ts');
-
-      ts.textContent = new Date().toISOString().slice(0, 19) + 'Z';
-
-      function show(state, title, sub) {
-        led.className = 'led ' + state;
-        msg.innerHTML = '<b>' + title + '</b><span class="small">' + sub + '</span>';
-      }
-
-      var done = false;
-      var controller = new AbortController();
-      var timeout = setTimeout(function () {
-        if (done) return;
-        done = true;
-        controller.abort();
-        show('err',
-          'Tailscale not detected.',
-          'Open the Tailscale app on this device and toggle it ON, then reload. If you do not have it: tap [INSTALL TAILSCALE] below.'
-        );
-      }, 4000);
-
-      // no-cors probe: success means we reached the tailnet host (any response).
-      // failure means DNS NXDOMAIN / connection refused / Tailscale off.
-      fetch(TAILNET_PROBE, { mode: 'no-cors', signal: controller.signal, cache: 'no-store' })
-        .then(function () {
-          if (done) return;
-          done = true;
-          clearTimeout(timeout);
-          show('ok',
-            'Tailnet reachable. Bouncing to admin&hellip;',
-            'You should land at the login page in a moment.'
-          );
-          setTimeout(function () { window.location.href = TAILNET_URL; }, 400);
-        })
-        .catch(function () {
-          if (done) return;
-          done = true;
-          clearTimeout(timeout);
-          show('err',
-            'Tailscale not detected.',
-            'Open the Tailscale app on this device and toggle it ON, then reload.'
-          );
-        });
-    })();
-  </script>
+  <div class="box">
+    <h1>HUMMUS_DEV / auth gate</h1>
+    <p>Redirecting to the verified entry point&hellip;</p>
+    <a href="https://karimsangid.vercel.app/admin">[continue]</a>
+  </div>
+  <script>setTimeout(function(){location.replace('https://karimsangid.vercel.app/admin');},50);</script>
 </body>
 </html>
