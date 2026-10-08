@@ -3,14 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RoofRoof.solutions — Case Study | Karim Sangid</title>
-<meta name="description" content="Building a live roofing-lead marketplace from scratch — Stripe payments, Twilio SMS, Supabase Postgres, Meta Pixel + CAPI dedup, and a real production incident response.">
+<title>All Service Leads — Case Study | Karim Sangid</title>
+<meta name="description" content="All Service Leads, a roofing-lead marketplace live since April 2026: Netlify Functions, Supabase Postgres, Stripe checkout, Twilio SMS, and a real rollback.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://karimsangid.is-a.dev/case/roofroof">
-<meta property="og:title" content="RoofRoof.solutions — Case Study">
-<meta property="og:description" content="Building a live roofing-lead marketplace from scratch — Stripe, Twilio, Supabase, Meta CAPI.">
+<meta property="og:title" content="All Service Leads — Case Study">
+<meta property="og:description" content="Roofing-lead marketplace: Netlify Functions, Supabase, live Stripe, Twilio, Resend.">
 <meta property="og:url" content="https://karimsangid.is-a.dev/case/roofroof">
 <meta property="og:type" content="article">
+<meta property="og:site_name" content="Karim Sangid">
+<meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://karimsangid.is-a.dev/og/roofroof.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -450,7 +452,7 @@
       <span class="sep">/</span>
       <a href="/#projects">work</a>
       <span class="sep">/</span>
-      <span>roofroof</span>
+      <span>all-service-leads</span>
     </div>
   </div>
 </nav>
@@ -460,19 +462,18 @@
     <div class="hero-eyebrow">
       Case Study <span class="pipe">|</span> Live in Production <span class="pipe">|</span> Hummus Development LLC
     </div>
-    <h1 class="hero-title">RoofRoof<span class="accent">.</span>solutions</h1>
+    <h1 class="hero-title">All Service Leads<span class="accent">.</span></h1>
     <p class="hero-tag">
-      A self-serve marketplace where roofing contractors order qualified leads and pay upfront via Stripe.
-      Built end-to-end on Express + Netlify Functions + Supabase, with Twilio SMS notifications, Meta Pixel + CAPI deduplication, and a custom server-authoritative coupon engine.
+      A roofing-lead marketplace with live Stripe checkout, now growing into prepaid leads and live call transfers. I designed the platform and, with two collaborators, took it to production in April 2026 on Express/Node, Netlify Functions and Supabase Postgres, with Twilio SMS and Resend email.
     </p>
     <div class="hero-meta">
       <span class="item"><strong>Stack</strong> · Node.js / Netlify / Supabase</span>
       <span class="item"><strong>Status</strong> · Live · Stripe in production</span>
-      <span class="item"><strong>Scale</strong> · 8,000+ LOC</span>
-      <span class="item"><strong>Role</strong> · Solo architect + operator</span>
+      <span class="item"><strong>Launched</strong> · April 2026</span>
+      <span class="item"><strong>Role</strong> · Platform design and engineering, with two collaborators</span>
     </div>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="https://roofroof.solutions" target="_blank" rel="noopener">Visit live site &rarr;</a>
+      <a class="btn btn-primary" href="https://allserviceleads.com" target="_blank" rel="noopener">Visit live site &rarr;</a>
       <a class="btn" href="/">&larr; Back to portfolio</a>
     </div>
   </div>
@@ -482,20 +483,20 @@
 
   <div class="stats">
     <div class="stat">
-      <div class="stat-num">8K+</div>
-      <div class="stat-label">Lines of Code</div>
+      <div class="stat-num">Live</div>
+      <div class="stat-label">Stripe Billing</div>
     </div>
     <div class="stat">
-      <div class="stat-num">11</div>
-      <div class="stat-label">DB Tables · RLS Locked</div>
+      <div class="stat-num">Apr 2026</div>
+      <div class="stat-label">Production Launch</div>
     </div>
     <div class="stat">
-      <div class="stat-num">~28s</div>
-      <div class="stat-label">Push to Live</div>
+      <div class="stat-num">3</div>
+      <div class="stat-label">Person Team</div>
     </div>
     <div class="stat">
-      <div class="stat-num">$149</div>
-      <div class="stat-label">Flat per Lead</div>
+      <div class="stat-num">2</div>
+      <div class="stat-label">Products: Leads, Calls</div>
     </div>
   </div>
 
@@ -505,10 +506,10 @@
       <h2 class="section-title">The Problem</h2>
     </div>
     <p class="lead">
-      Local roofing contractors waste thousands a month on lead-gen platforms that bundle stale, oversold leads under opaque pricing. The economics break for the buyer, the experience breaks for the homeowner, and nobody owns the relationship.
+      Roofing contractors often pay lead-gen platforms for stale, shared leads under opaque pricing. The economics break for the buyer, the experience breaks for the homeowner, and nobody owns the relationship.
     </p>
     <p>
-      RoofRoof is built around a simple inversion: <strong>flat-price leads, exclusive on first-touch, billed upfront, no per-night invoice surprise.</strong> A contractor logs in, chooses a service area, drops a credit card, and gets a clean stream of phone-verified intent leads from homeowners who filled out the LP form and consented to outreach.
+      All Service Leads is built around a simple inversion: <strong>one flat price per lead or per call, paid once upfront, with no contract and nothing that renews.</strong> A contractor picks a ZIP code and a radius, pays, and gets leads from homeowners who asked about their own roof, or takes the call live when a homeowner is connected.
     </p>
   </section>
 
@@ -518,7 +519,7 @@
       <h2 class="section-title">Architecture</h2>
     </div>
     <p>
-      Single deployment surface (Netlify), single domain (<code>roofroof.solutions</code>), single Postgres (Supabase). Functions handle the API; the rest is static. Every secret lives in Netlify env, every external write is wrapped in a try/catch so a Twilio outage never 500s the lead form.
+      Single deployment surface (Netlify), single domain (<code>allserviceleads.com</code>), single Postgres (Supabase). Functions handle the API; the rest is static. Every secret lives in Netlify env, every external write is wrapped in a try/catch so a Twilio outage never 500s the lead form.
     </p>
     <div class="arch">
 <pre><span class="label">                          [ Visitor / Contractor ]</span>
@@ -566,7 +567,7 @@
 
     <h3 style="font-family:var(--font-h); font-size:18px; font-weight:600; margin-top:24px; margin-bottom:8px;">Serverless + Postgres pooling</h3>
     <p>
-      Short-lived serverless functions cold-starting fresh DB connections on every invocation = pool exhaustion at scale. Solution: route Postgres through a transaction pooler with prepared-statement caching disabled on the client. Skip the latter and you get a stream of duplicate-prepared-statement errors on every cold start. (Saved as a permanent note in personal memory — too painful to relearn.)
+      Short-lived serverless functions cold-starting fresh DB connections on every invocation = pool exhaustion at scale. Solution: route Postgres through a transaction pooler with prepared-statement caching disabled on the client. Skip the latter and you get a stream of duplicate-prepared-statement errors on every cold start.
     </p>
   </section>
 
@@ -579,7 +580,7 @@
     <div class="tech-grid">
       <div class="tech-cell">
         <h4>Auto-deploy from GitHub</h4>
-        <p>~28 seconds from <code>git push</code> to production. Push-before-deploy is the law — no rogue CLI deploys allowed.</p>
+        <p>Auto-deploys from GitHub on every push to the production branch. Push-before-deploy is the rule; no CLI deploys to production.</p>
       </div>
       <div class="tech-cell gold">
         <h4>Row-level security</h4>
@@ -620,8 +621,8 @@
       </div>
       <div class="timeline-event">
         <div class="ts">Diagnosis</div>
-        <h5>Stale fork, force-pushed to prod</h5>
-        <p>An external collaborator's fork had pushed an old branch directly to production via CLI. The deploy carried no commit hash and silently overwrote a chunk of admin-UI handlers.</p>
+        <h5>Stale checkout, deployed to prod</h5>
+        <p>A CLI deploy from an old local checkout went straight to production. It carried no commit hash and silently overwrote part of the admin UI's handlers.</p>
       </div>
       <div class="timeline-event">
         <div class="ts">Fix</div>
@@ -631,7 +632,7 @@
       <div class="timeline-event">
         <div class="ts">Forward visibility</div>
         <h5>Spec'd a watch daemon</h5>
-        <p>Drafted a periodic Python daemon that polls public collaborator activity + deploy hooks and pushes ntfy on anything that looks rogue. Build deferred — but the visibility gap is closed in spec form.</p>
+        <p>Drafted a periodic Python daemon that watches deploy hooks and alerts on any deploy that doesn't trace back to a commit. Build deferred.</p>
       </div>
     </div>
     <div class="callout">
@@ -655,7 +656,7 @@
   <a href="/case/wheaton" class="next-case">
     <div class="label">Next Case Study</div>
     <h3>Wheaton Valet Cleaners <span class="arrow">&rarr;</span></h3>
-    <p>First contracted client engagement — Next.js 16 multi-brand rebuild, federal-compliant Liberty Press launch.</p>
+    <p>Multi-brand Next.js 16 client build: one codebase, 26 routes, Resend and OpenPhone intake, ongoing SEO.</p>
   </a>
 
 </div>

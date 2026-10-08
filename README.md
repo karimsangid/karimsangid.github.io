@@ -1,20 +1,21 @@
-# karimsangid.dev — Personal Portfolio
+# karimsangid.is-a.dev — Personal Portfolio
 
-A multi-page portfolio site for Karim Sangid, built with pure HTML, CSS, and JavaScript. No frameworks, no build tools — just clean, performant code. Deployed to Vercel.
+A multi-page portfolio site for Karim Sangid, built with plain HTML, CSS, and JavaScript. No frameworks and no build step. Served by GitHub Pages.
 
 **By Hummus Development LLC**
 
 ## Live Site
 
-[karimsangid.dev](https://karimsangid.dev)
+[karimsangid.is-a.dev](https://karimsangid.is-a.dev)
 
 ## Pages
 
-- `/` — single-page portfolio (about, work, case studies, stack, experience, contact)
-- `/case/roofroof` — RoofRoof.solutions live marketplace deep-dive
-- `/case/wheaton` — Wheaton Valet Cleaners paid-client case study
-- `/resume` — web view of resume v3 with Print/PDF action
-- `/admin` — gated profit-telemetry dashboard (httpOnly JWT cookie via `middleware.js`)
+- `/` — portfolio (about, work, case studies, stack, experience, contact)
+- `/resume` — web resume with print-to-PDF
+- `/case/roofroof` — All Service Leads marketplace
+- `/case/wheaton` — Wheaton Valet Cleaners client build
+- `/case/sentinel` — SentinelIQ
+- `/case/papi` — Papi AI
 
 ## Features
 
@@ -26,34 +27,19 @@ A multi-page portfolio site for Karim Sangid, built with pure HTML, CSS, and Jav
 - Vertical timeline for experience
 - Mobile hamburger navigation
 - SEO optimized with Open Graph tags + canonical URLs
-- Lighthouse 95+ performance score
 - Print-friendly resume page (`/resume`)
 
-## Deployment (Vercel)
+## Deployment
 
-Deployed via Vercel CLI. **Auto-deploy on push is NOT wired** — pushes to GitHub do not trigger a build.
+GitHub Pages serves the `master` branch. The `CNAME` file maps the custom domain `karimsangid.is-a.dev`. Extensionless URLs such as `/resume` resolve to the matching `.html` file.
 
-```bash
-# from project directory
-npx vercel --prod --yes
-# then promote alias if needed
-```
+## Admin
 
-`vercel.json` configures `cleanUrls: true` so `/resume.html` → `/resume`, `/case/roofroof.html` → `/case/roofroof`. Admin routes are excluded from indexing via `X-Robots-Tag: noindex, nofollow`.
-
-DNS:
-- CNAME file in repo root points the domain to Vercel
-- Apex domain configured in Vercel dashboard
-
-## Admin Dashboard
-
-`/admin` is gated by an `admin_session` httpOnly JWT cookie issued by `/api/admin/login`. Verified in `middleware.js` via `jose`. Required env vars on Vercel:
-- `ADMIN_PASSWORD`
-- `ADMIN_JWT_SECRET`
+The `admin/` and `api/` folders hold a separate Vercel admin tool and are not part of the public site.
 
 ## Local Development
 
-Just open `index.html` in a browser. No build step required for the public pages. (The admin login + JWT verification only run on Vercel, since `middleware.js` runs in the Vercel Edge runtime.)
+Open `index.html` in a browser. No build step is needed.
 
 ## License
 

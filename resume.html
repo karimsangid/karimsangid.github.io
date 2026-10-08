@@ -3,18 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resume — Karim Sangid</title>
-<meta name="description" content="Karim Sangid — AI & Security Engineer, Full-Stack Product Builder, Founder of Hummus Development LLC. MS Computer Science at George Mason University. Azure AZ-204 certified.">
+<title>Karim Sangid — Resume · AI Engineer, Software Developer</title>
+<meta name="description" content="Resume of Karim Sangid, AI engineer and software developer: LLM agents, evals, QLoRA fine-tuning, and web and mobile apps in production. Security+, AZ-204.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://karimsangid.is-a.dev/resume">
-<meta property="og:title" content="Resume — Karim Sangid">
-<meta property="og:description" content="AI & Security Engineer · Full-Stack Product Builder · Founder, Hummus Development LLC">
+<meta property="og:title" content="Karim Sangid — Resume · AI Engineer, Software Developer">
+<meta property="og:description" content="AI Engineer · Software Developer · Founder, Hummus Development LLC">
 <meta property="og:url" content="https://karimsangid.is-a.dev/resume">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Karim Sangid">
+<meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://karimsangid.is-a.dev/og/resume.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Karim Sangid — Resume · AI Engineer, Software Developer">
+<meta name="twitter:description" content="AI Engineer · Software Developer · Founder, Hummus Development LLC">
 <meta name="twitter:image" content="https://karimsangid.is-a.dev/og/resume.png">
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23050507'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-weight='700' font-size='38' fill='%23ff4444'>K</text></svg>">
@@ -259,6 +263,12 @@
     color: var(--text-mute);
     letter-spacing: 0.4px;
   }
+  .exp-note {
+    font-family: var(--font-m);
+    font-size: 10.5px;
+    color: var(--text-mute);
+    margin: 0 0 3px;
+  }
   .exp-bullets {
     list-style: none;
     padding-left: 14px;
@@ -291,6 +301,17 @@
     margin-bottom: 9px;
   }
   .project-card:last-child { margin-bottom: 0; }
+  .project-group {
+    font-family: var(--font-h);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    margin: 12px 0 6px;
+  }
+  .project-group:first-of-type { margin-top: 0; }
+  .link-sep { color: var(--text-mute); font-size: 10px; }
   .project-card.gold { border-left-color: var(--gold); }
 
   .project-header {
@@ -405,6 +426,8 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    flex-wrap: wrap;
+    gap: 2px 12px;
     font-size: 12.5px;
     margin-bottom: 4px;
   }
@@ -520,6 +543,7 @@
       font-size: 13px !important;
       letter-spacing: 1.2px !important;
       margin-bottom: 10px !important;
+      break-after: avoid;
     }
 
     /* SUMMARY — bigger body text */
@@ -547,6 +571,11 @@
       font-family: inherit !important;
       letter-spacing: 0 !important;
     }
+    .exp-note {
+      color: #5a6a7a !important;
+      font-family: inherit !important;
+      font-size: 11.5px !important;
+    }
     .exp-bullets { padding-left: 14px !important; margin-top: 3px !important; }
     .exp-bullets li {
       color: #2c3e50 !important;
@@ -564,7 +593,7 @@
 
     /* PROJECTS — V2(1) padding 12px/16px/10px, name 13.5 */
     .project-card {
-      break-inside: avoid;
+      break-inside: auto;
       background: #f8fafc !important;
       border: 1px solid #d1dce6 !important;
       border-left: 3px solid #b8252b !important;
@@ -573,7 +602,16 @@
       margin-bottom: 10px !important;
     }
     .project-card.gold { border-left-color: #d9a14a !important; }
-    .project-header { margin-bottom: 4px !important; }
+    .project-group {
+      color: #5a6a7a !important;
+      font-family: 'Inter', sans-serif !important;
+      font-size: 11px !important;
+      break-after: avoid;
+    }
+    .link-sep { color: #5a6a7a !important; }
+    .project-header { margin-bottom: 4px !important; break-after: avoid; }
+    .project-card li { break-inside: avoid; }
+    .site-credit { display: none !important; }
     .project-name {
       color: #1a2332 !important;
       font-size: 13.5px !important;
@@ -689,7 +727,8 @@
     print-color-adjust: exact;
   }
 
-  @page { size: letter; margin: 0; }
+  @page { size: letter; margin: 0.45in 0; }
+  @page :first { margin-top: 0; }
 
   @media (max-width: 720px) {
     html { font-size: 12.5px; }
@@ -712,7 +751,7 @@
   <div class="control-inner">
     <a href="/" class="branding">
       K<span class="dot">.</span>S
-      <span class="meta">// Resume v5 · 2026-06-09</span>
+      <span class="meta">// Resume · Oct 2026</span>
     </a>
     <div class="control-actions">
       <a href="/" class="ctrl-btn">&larr; Portfolio</a>
@@ -730,10 +769,9 @@
         <div>
           <h1>Karim Sangid<span class="dot">.</span></h1>
           <div class="subtitle">
-            AI &amp; Security Engineer <span class="sep">/</span>
-            Full-Stack Product Builder <span class="sep">/</span>
-            Azure AZ-204 <span class="sep">/</span>
-            Founder, Hummus Development LLC
+            AI Engineer <span class="sep">/</span>
+            Software Developer <span class="sep">/</span>
+            <span style="white-space:nowrap">Founder, Hummus Development LLC</span>
           </div>
         </div>
         <div class="contact-grid">
@@ -745,6 +783,8 @@
           <a href="https://linkedin.com/in/karim-sangid">linkedin.com/in/karim-sangid</a>
           <span class="label">GitHub</span>
           <a href="https://github.com/karimsangid">github.com/karimsangid</a>
+          <span class="label">Based</span>
+          <span>McLean, VA · US Citizen · clearance eligible</span>
         </div>
       </div>
     </header>
@@ -755,13 +795,7 @@
       <section class="r-sec summary">
         <h2 class="section-title">Summary</h2>
         <p>
-          Engineer who <strong>ships into production</strong>. Through Hummus Development LLC, operate a one-person product studio building a
-          <strong>live roofing-lead marketplace</strong> (Stripe, Twilio, Supabase), a <strong>portfolio of paid client web platforms</strong>,
-          a <strong>native iOS car-community social app</strong>, a <strong>cross-platform AI app</strong> with custom LoRA fine-tuning on a local RTX 4060 Ti, and an
-          <strong>AI-powered SIEM companion</strong>. Currently a Field Engineer at Frequentis (site surveys, wiring diagrams, production and site build-out);
-          previously led federal identity-management deployment at NextgenID for federal-compliance environments (NIST, FIPS).
-          MS Computer Science at George Mason University. Azure Developer Associate (AZ-204).
-          25+ shipped projects, 75,000+ lines of production code. US Citizen, clearance eligible.
+          AI engineer and software developer who builds LLM applications end to end and <strong>measures them before they ship</strong>, from tool-calling agents over retrieval-augmented generation (RAG) to <strong>QLoRA fine-tunes on local hardware</strong>. Runs Hummus Development, shipping Next.js and React Native products and Python and Node backends on PostgreSQL for paying customers. Earlier roles brought Python test automation and NIST-aligned security work in federal environments, plus firmware builds and Red Hat Linux node work on safety-critical communication systems. <strong>CompTIA Security+</strong> and <strong>Microsoft Azure Developer Associate (AZ-204)</strong> certified.
         </p>
       </section>
 
@@ -771,53 +805,38 @@
 
         <div class="exp-entry">
           <div class="exp-header">
-            <div><span class="exp-title">Field Engineer</span> <span class="exp-company">— Frequentis</span></div>
-            <span class="exp-meta">May 2026 – Present</span>
-          </div>
-          <ul class="exp-bullets">
-            <li>Conduct on-site surveys to assess installation requirements, site conditions, and equipment layout</li>
-            <li>Produce wiring diagrams and installation documentation for communication-system deployments</li>
-            <li>Handle production and physical site build-out — assembling, wiring, and integrating hardware on customer sites</li>
-          </ul>
-        </div>
-
-        <div class="exp-entry">
-          <div class="exp-header">
-            <div><span class="exp-title">Field Engineer II</span> <span class="exp-company">— NextgenID, McLean, VA</span></div>
-            <span class="exp-meta">Aug 2025 – Mar 2026</span>
-          </div>
-          <ul class="exp-bullets">
-            <li>Led enterprise deployment of integrated identity-management hardware/software systems across multiple federal client sites</li>
-            <li>Resolved production incidents across networking, OS, and application layers with 95%+ first-visit resolution</li>
-            <li>Implemented secure system configurations aligned with NIST and FIPS controls for federal-compliance environments</li>
-            <li>Collaborated with cross-functional engineering teams to deliver performance improvements and reduce system downtime</li>
-          </ul>
-        </div>
-
-        <div class="exp-entry">
-          <div class="exp-header">
-            <div><span class="exp-title">Quality Assurance &amp; Cybersecurity Engineer</span> <span class="exp-company">— NextgenID, McLean, VA</span></div>
-            <span class="exp-meta">Aug 2024 – Aug 2025</span>
-          </div>
-          <ul class="exp-bullets">
-            <li>Built Python automation that reduced manual QA effort by 40%+ and accelerated release cycles</li>
-            <li>Resolved 70–85% of reported defects through structured debugging, root cause analysis, and regression testing</li>
-            <li>Deployed SIEM monitoring solutions and configured network security controls, improving threat detection coverage</li>
-            <li>Conducted vulnerability assessments and authored security documentation for FedRAMP / NIST 800-53 audits</li>
-          </ul>
-        </div>
-
-        <div class="exp-entry">
-          <div class="exp-header">
-            <div><span class="exp-title">Founder &amp; Software Engineer</span> <span class="exp-company">— Hummus Development LLC</span></div>
+            <div><span class="exp-title">Founder &amp; AI/ML Software Engineer</span> <span class="exp-company">— Hummus Development LLC, McLean, VA</span></div>
             <span class="exp-meta">Nov 2021 – Present</span>
           </div>
           <ul class="exp-bullets">
-            <li>Operate a one-person product studio: client websites, in-house SaaS, AI tooling, and native iOS apps end-to-end</li>
-            <li>Designed and shipped the Hummus Development studio site (hummus.is-a.dev) as the agency front for the client portfolio below</li>
-            <li>Delivered paid client engagements across 2026 — Wheaton Valet Cleaners, National Vascular Associates, and Liberty Press — spanning Next.js rebuilds, technical SEO, transactional email/SMS, and an AI chatbot</li>
-            <li>Run live infrastructure on Vercel, Netlify, Supabase, Stripe, Twilio, Resend, and a self-hosted Tailscale-served AI gateway</li>
-            <li>Maintain operational discipline: Git-before-deploy, restoreSiteDeploy rollback drills, env-var hygiene, incident-response playbooks</li>
+            <li>Built the <strong>LLM projects</strong> detailed under Projects, including Hummus IQ, a local-first agentic assistant with its own six-model evaluation harness; a QLoRA fine-tune of a 7B code model; and a conversational lead qualifier for All Service Leads.</li>
+            <li>Wrote <strong>3,000+ automated assertions across 40+ suites</strong> behind Hummus IQ's single release gate, ran red-team rounds before shipping, and used a model A/B benchmark to reverse a change that only looked like an improvement.</li>
+            <li>Shipped <strong>four apps to the App Store</strong> and delivered client sites and platforms in 2026 (a lead marketplace with live Stripe billing, e-commerce storefronts, a multi-brand rebuild). Run the hosting stack directly (Vercel, Netlify, Supabase, Twilio, Resend) with rollback drills and incident playbooks.</li>
+          </ul>
+        </div>
+
+        <div class="exp-entry">
+          <div class="exp-header">
+            <div><span class="exp-title">Field Engineer – Software, Firmware &amp; Deployment</span> <span class="exp-company">— Frequentis</span></div>
+            <span class="exp-meta">May 2026 – Aug 2026</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Built and factory-updated <strong>device firmware</strong> for safety-critical communication systems.</li>
+            <li>Worked over SSH and PuTTY on the <strong>Red Hat Enterprise Linux (RHEL)</strong> nodes behind these systems, including <strong>RabbitMQ</strong> messaging between services.</li>
+            <li>Handled on-site installation and deployment: site surveys, wiring diagrams, structured cabling, terminations, and grounding.</li>
+          </ul>
+        </div>
+
+        <div class="exp-entry">
+          <div class="exp-header">
+            <div><span class="exp-title">Field Engineer II – Systems &amp; Integration</span> <span class="exp-company">— NextgenID, McLean, VA</span></div>
+            <span class="exp-meta">Aug 2024 – Mar 2026</span>
+          </div>
+          <p class="exp-note">Promoted Aug 2025 from Quality Assurance &amp; Cybersecurity Engineer (Aug 2024 – Aug 2025)</p>
+          <ul class="exp-bullets">
+            <li>Worked on site in <strong>federal customer environments</strong>, supporting integration, configuration, and releases of identity-management software on compliance-controlled networks.</li>
+            <li>Configured systems in line with <strong>NIST and FIPS</strong> controls, deployed the hardware and software at multiple client sites, and worked with customer staff and internal engineering to trace recurring faults to a fix.</li>
+            <li>As QA &amp; Cybersecurity Engineer, built <strong>Python unit and integration test automation</strong> that cut manual QA effort by more than <strong>40%</strong>; also deployed <strong>SIEM</strong>, configured network security controls, ran vulnerability assessments, and wrote <strong>FedRAMP and NIST 800-53</strong> audit documentation.</li>
           </ul>
         </div>
 
@@ -827,140 +846,192 @@
             <span class="exp-meta">Aug 2020 – Apr 2022</span>
           </div>
           <ul class="exp-bullets">
-            <li>Managed Windows Server hosting environments supporting 50+ client applications with 99.9% uptime SLA</li>
-            <li>Developed PHP/SQL web applications serving active end-user bases across multiple client sites</li>
+            <li>Developed <strong>PHP/SQL web applications</strong> and operated the Windows Server environments hosting them.</li>
           </ul>
         </div>
       </section>
 
       <!-- PROJECTS -->
       <section class="r-sec">
-        <h2 class="section-title">Projects</h2>
+        <h2 class="section-title">Selected Projects</h2>
+
+        <h3 class="project-group">AI Engineering</h3>
 
         <div class="project-card">
           <div class="project-header">
             <div>
-              <span class="project-name">RoofRoof.solutions — Live Roofing-Lead Marketplace</span>
-              &nbsp;<a href="https://roofroof.solutions" class="project-link">roofroof.solutions</a>
+              <span class="project-name">Hummus IQ</span>
             </div>
-            <span class="project-type">Hummus Development LLC</span>
+            <span class="project-type">Local-first agentic LLM assistant</span>
           </div>
           <ul class="project-bullets">
-            <li>Architected an 8,000+ line Express/Node + Netlify Functions marketplace where contractors purchase qualified roofing leads, billed upfront via Stripe</li>
-            <li>Built custom server-authoritative coupon engine (single-use per user, max-quantity caps), admin order/refund flow with FK-safe deletion, and lead-capture SMS blast over Twilio</li>
-            <li>Wired Supabase Postgres via PgBouncer transaction pooler, RLS on every table, CAPI-deduped Pixel events (PageView / Lead / Schedule), and Resend-verified email domain</li>
-            <li>Operate live: Netlify Pro auto-deploy from GitHub (~28s push-to-live), incident playbook including <em>restoreSiteDeploy</em> rollback when a contributor rogue-deployed an old bundle</li>
+            <li>Designed the request router: a triage step sends each request to a direct answer, a <strong>10-round tool-calling agent</strong> over ChromaDB retrieval with inline citations, a plan-solve-verify-revise loop, or a <strong>best-of-N ensemble</strong> with an LLM judge and a synthesis step.</li>
+            <li>Built the <strong>evals</strong> for its coding agent: six open-weight models on 12 tasks, scored by <strong>218 hidden unit tests</strong> in a network-denied sandbox over two full passes, against a do-nothing baseline.</li>
+            <li>Reading the run transcripts turned up an agent-loop bug: the agent had overwritten files with placeholders 207 times in 144 runs. Two fixes to the loop raised <strong>every model's hidden-test pass rate</strong> across both passes; qwen3:14b went from 38% to 70%.</li>
+            <li>A/B-tested a 1.7B model for triage and verification. It looked 5–16× faster but misrouted all four reasoning test questions and caught none of three planted wrong answers (the 14B caught all three), so the change was reverted.</li>
+            <li>Hardened it for NDA and government-sensitive work: a <strong>prompt-injection trust boundary</strong> keeps retrieved pages, tool results, and memory out of the system prompt as untrusted data, and the air-gap mode fails closed. Red-teamed the <strong>sandboxed Python tool</strong> over three rounds and pinned every escape with a regression test; completed a <strong>NIST SP 800-171</strong> self-assessment of all 110 requirements, with a POA&amp;M for open items.</li>
           </ul>
           <div class="project-tech">
-            <span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">Netlify Functions</span><span class="tag">Supabase</span><span class="tag">Stripe</span><span class="tag">Twilio</span><span class="tag">Resend</span><span class="tag">Meta CAPI</span>
+            <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">ChromaDB</span><span class="tag">Ollama</span>
           </div>
         </div>
 
         <div class="project-card gold">
           <div class="project-header">
             <div>
-              <span class="project-name">Car Lounge — Native iOS Car-Community Social App</span>
-              &nbsp;<span class="project-link">App Store · in submission</span>
+              <span class="project-name">AI Lead Qualifier</span>
             </div>
-            <span class="project-type">Hummus Development LLC</span>
+            <span class="project-type">Built for All Service Leads</span>
           </div>
           <ul class="project-bullets">
-            <li>React Native / Expo social platform for car enthusiasts — customizable user garages, photo posts, competitive leaderboard, and location-aware chat</li>
-            <li>Wired an Apple In-App Purchase subscription tier into an EAS-built native binary; Supabase Postgres backend with RLS on every table and a leaderboard powered by a custom Postgres RPC</li>
-            <li>Shipped a hosted admin console (Vercel + Basic Auth → Supabase) and completed App Store Connect bundle + IAP product configuration for release</li>
+            <li>Built the extraction step that pulls lead details into a <strong>JSON schema</strong> with one repair retry, then added a <strong>grounding check</strong> after small local models started inventing facts the customer never stated.</li>
+            <li>A 12-point rubric decides when to page the sales team, and every outbound message passes one <strong>fail-closed guardrail</strong> for opt-outs and TCPA-style messaging rules. Verified end to end on web chat.</li>
           </ul>
           <div class="project-tech">
-            <span class="tag">React Native</span><span class="tag">Expo</span><span class="tag">Supabase</span><span class="tag">Apple IAP</span><span class="tag">EAS</span><span class="tag">PostgreSQL</span><span class="tag">Vercel</span>
+            <span class="tag">TypeScript</span><span class="tag">Local qwen3:14b</span><span class="tag">Web chat</span><span class="tag">Messenger</span><span class="tag">SMS</span>
           </div>
         </div>
 
         <div class="project-card">
           <div class="project-header">
             <div>
-              <span class="project-name">Wheaton Valet Cleaners — Multi-Brand Client Rebuild</span>
-              &nbsp;<a href="https://wheaton-valet-cleaners.vercel.app" class="project-link">live preview</a>
+              <span class="project-name">QLoRA Fine-Tuning</span>
             </div>
-            <span class="project-type">Hummus Development LLC</span>
+            <span class="project-type">7B code model on a single 16 GB GPU</span>
           </div>
           <ul class="project-bullets">
-            <li>Delivered full Next.js 16 + Tailwind + Framer Motion rebuild for Wheaton Valet Cleaners LLC: 5 brand pages (flagship + 3 sister locations + DOE federal site), 10 service routes, A-grade SEO with 12 JSON-LD schemas</li>
-            <li>Wired live Resend transactional email + Twilio SMS through a single <code>/api/intake</code> endpoint; AI chatbot smoke-tested 14/14 across price-quote, hours, address-intent, and Liberty Press flows</li>
-            <li>First contracted Hummus Development client engagement — delivered, deployed, and signed off in April 2026</li>
+            <li>Fine-tuned qwen2.5-coder 7B on one <strong>RTX 4060 Ti</strong> with 4-bit NF4 and LoRA r=16 on all attention and MLP projections (0.53% of weights), using assistant-only loss masking at about 12.6 GB VRAM.</li>
+            <li>When Triton would not compile headless, <strong>rewrote the trainer</strong> directly on Transformers, PEFT, and bitsandbytes. Generated the 2,400 training conversations in plain Python, then exported the adapter to GGUF and served it through Ollama on the stock quantized base.</li>
+            <li>Turned it into an <strong>on-prem feature</strong> that fine-tunes a coding model on a team's own repository, with secrets filtered out and the encrypted dataset kept on the machine. On the codebase of a production app (1,139 training and 53 held-out examples) it reached a <strong>held-out loss of 0.64</strong>; a hand-run comparison with the base model showed better formatting and house style but weaker schema recall.</li>
           </ul>
           <div class="project-tech">
-            <span class="tag">Next.js 16</span><span class="tag">React 19</span><span class="tag">Tailwind</span><span class="tag">Framer Motion</span><span class="tag">Vercel</span><span class="tag">Resend</span><span class="tag">Twilio</span>
+            <span class="tag">PyTorch</span><span class="tag">Transformers</span><span class="tag">PEFT</span><span class="tag">bitsandbytes</span>
           </div>
         </div>
 
         <div class="project-card gold">
           <div class="project-header">
             <div>
-              <span class="project-name">SentinelIQ — AI Security Log Analyzer</span>
-              &nbsp;<a href="https://github.com/karimsangid/sentinel-iq" class="project-link">github.com/karimsangid/sentinel-iq</a>
+              <span class="project-name">Papi AI</span>
+              &nbsp;<a href="https://apps.apple.com/us/app/papi-ai/id6769550749" class="project-link" target="_blank" rel="noopener">App Store</a>
             </div>
-            <span class="project-type">Hummus Development LLC</span>
+            <span class="project-type">Consumer LLM app (iOS)</span>
           </div>
           <ul class="project-bullets">
-            <li>AI-powered SIEM companion that ingests security logs (syslog, Windows Events, CEF, firewall CSV); computes vector embeddings into ChromaDB and runs three independent anomaly-scoring methods over the timeline</li>
-            <li>Natural-language query engine translates plain-English security questions into structured filter pipelines via LLM + tool calls; results return with citations to raw events</li>
-            <li>React dashboard streams real-time log events over WebSocket with severity timeline, threat heatmap, and AI-generated incident summaries</li>
+            <li>Built the FastAPI backend: <strong>SSE streaming</strong>, vision, whisper-large-v3 voice transcription, and per-conversation memory. When the hosted provider retired the vision and text models the app depended on, rebuilt both paths as <strong>fallback chains</strong> that skip retired models and fail over on rate limits.</li>
           </ul>
           <div class="project-tech">
-            <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">React</span><span class="tag">ChromaDB</span><span class="tag">Ollama</span><span class="tag">Docker</span><span class="tag">WebSocket</span>
+            <span class="tag">FastAPI</span><span class="tag">Groq</span><span class="tag">SSE</span>
           </div>
         </div>
 
         <div class="project-card">
           <div class="project-header">
             <div>
-              <span class="project-name">Papi AI — Cross-Platform AI Wingman + Custom LoRA</span>
-              &nbsp;<a href="https://papi-ai-mu.vercel.app" class="project-link">papi-ai-mu.vercel.app</a>
+              <span class="project-name">On-Prem GPU Inference Server</span>
             </div>
-            <span class="project-type">Hummus Development LLC</span>
+            <span class="project-type">OpenAI-compatible gateway</span>
           </div>
           <ul class="project-bullets">
-            <li>React Native (Expo SDK 54) mobile app with EAS-Update preview channel; tap-to-fullscreen chat-image modal, voice + screenshot reply, per-match memory, vision (HEIC re-encode + 1600px resize)</li>
-            <li>Vercel FastAPI backend on Groq Llama 3.3 70B (chat) and whisper-large-v3 (multilingual voice transcription); strict version-tagged rollouts with SQLite memory + WebSocket streaming</li>
-            <li>Self-hosted LoRA fine-tune lab (Unsloth + WSL + RTX 4060 Ti 16GB): seed extraction, synthetic-corpus generation, Qwen2.5-7B training, GGUF export, served via local Ollama gateway</li>
+            <li>Run a home GPU server behind a custom <strong>OpenAI-compatible API</strong> (streaming chat completions, embeddings, text-to-speech) with bearer auth and model-name mapping. It runs as an auto-restarting service, and cloud-hosted apps reach it over a private Tailscale network.</li>
           </ul>
           <div class="project-tech">
-            <span class="tag">React Native</span><span class="tag">Expo</span><span class="tag">FastAPI</span><span class="tag">Groq</span><span class="tag">Vercel</span><span class="tag">Unsloth</span><span class="tag">LoRA / GGUF</span><span class="tag">Ollama</span>
+            <span class="tag">Ollama</span><span class="tag">FastAPI</span><span class="tag">Tailscale</span>
+          </div>
+        </div>
+
+        <h3 class="project-group">Software</h3>
+
+        <div class="project-card gold">
+          <div class="project-header">
+            <div>
+              <span class="project-name">Car Lounge</span>
+              &nbsp;<a href="https://apps.apple.com/us/app/car-lounge/id6773178672" class="project-link" target="_blank" rel="noopener">App Store</a>
+            </div>
+            <span class="project-type">Car-community social app</span>
+          </div>
+          <ul class="project-bullets">
+            <li>Solo build, 200+ commits. The backend has <strong>123 Postgres migrations</strong> defining 120+ row-level security policies and 130+ SQL functions, plus 12 Edge Functions for App Store receipt validation, Stripe webhooks, and moderation. CI runs type-check, lint, <strong>800+ Jest tests</strong>, and a Playwright smoke test, then builds and submits the iOS app from a macOS runner.</li>
+          </ul>
+          <div class="project-tech">
+            <span class="tag">React Native / Expo</span><span class="tag">Supabase</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <div>
+              <span class="project-name">E-Commerce Platform</span>
+            </div>
+            <span class="project-type">Retail client</span>
+          </div>
+          <ul class="project-bullets">
+            <li><strong>Seven-week solo build</strong> on a 20-table Postgres schema, handling affiliate commissions with CSV payouts, PayPal and merchant-of-record webhooks, and state sales tax; a cron expires unpaid orders, and an admin console runs shipping and refunds. Later forked for a second brand.</li>
+          </ul>
+          <div class="project-tech">
+            <span class="tag">Next.js 16</span><span class="tag">TypeScript</span><span class="tag">PostgreSQL</span>
           </div>
         </div>
 
         <div class="project-card gold">
           <div class="project-header">
             <div>
-              <span class="project-name">Local AI Gateway + Hummus IQ — Self-Hosted AI Stack</span>
-              &nbsp;<span class="project-link">Tailscale-served</span>
+              <span class="project-name">Client Platforms</span>
+              &nbsp;<a href="https://allserviceleads.com" class="project-link" target="_blank" rel="noopener">allserviceleads.com</a> <span class="link-sep">&middot;</span> <a href="https://www.wheatonvaletcleaners.com" class="project-link" target="_blank" rel="noopener">wheatonvaletcleaners.com</a>
             </div>
-            <span class="project-type">Hummus Development LLC</span>
+            <span class="project-type">Lead marketplace &amp; multi-brand rebuild</span>
           </div>
           <ul class="project-bullets">
-            <li><strong>Local AI Gateway:</strong> Bearer-auth OpenAI-compat HTTP API (<code>/v1/chat/completions</code>, <code>/v1/embeddings</code>) over Tailscale, Windows Scheduled Task at logon, foundation for fully local AI workflows</li>
-            <li><strong>Hummus IQ v8:</strong> 5,400-line FastAPI assistant — RAG (ChromaDB), SQLite thread persistence, dynamic Ollama model resolver per role, vision pipeline, 7-engine parallel web search, code execution, real WebSocket streaming with cancel</li>
-            <li>Additional shipped work: Habittally (own Expo + Supabase habit-streak app with AI photo verification), Cram (RAG study assistant with SM-2 spaced repetition), HummusOSINT (recon + PDF reports), HummusLink (cross-platform sync bridge), Hummus Pulse + HummusTravel (native SwiftUI + WidgetKit iOS apps)</li>
+            <li><strong>All Service Leads</strong>: designed the platform and, with two collaborators, took it to production in April 2026 (Express/Node on Netlify Functions, Supabase Postgres, Stripe checkout, Twilio SMS, Resend email). Still building it as it grows into prepaid leads and live call transfers.</li>
+            <li><strong>Wheaton Valet Cleaners</strong>: built a single Next.js 16 codebase (26 routes) serving a dry-cleaning group's flagship, sister brands, and locations. An intake endpoint sends Resend email and OpenPhone SMS, and a knowledge-base chatbot falls back to a hosted LLM. Kept on for monthly SEO.</li>
+          </ul>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <div>
+              <span class="project-name">Buckets &amp; SmileTune</span>
+              &nbsp;<a href="https://apps.apple.com/us/app/buckets-3d-basketball/id6793218340" class="project-link" target="_blank" rel="noopener">Buckets</a> <span class="link-sep">&middot;</span> <a href="https://apps.apple.com/us/app/smiletune-instrument-tuner/id6793990690" class="project-link" target="_blank" rel="noopener">SmileTune</a>
+            </div>
+            <span class="project-type">App Store apps</span>
+          </div>
+          <ul class="project-bullets">
+            <li>Buckets is a Three.js/WebGL basketball game with hand-written verlet physics for the net. SmileTune is a tuner with <strong>real-time pitch detection written from scratch</strong> (radix-2 FFT autocorrelation, McLeod NSDF, parabolic interpolation).</li>
           </ul>
           <div class="project-tech">
-            <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Ollama</span><span class="tag">ChromaDB</span><span class="tag">Tailscale</span><span class="tag">SwiftUI / WidgetKit</span><span class="tag">PWA</span>
+            <span class="tag">Capacitor</span><span class="tag">Swift</span>
           </div>
         </div>
-      </section>
 
-      <!-- CLIENT ENGAGEMENTS -->
-      <section class="r-sec">
-        <h2 class="section-title">Client Engagements — 2026</h2>
-        <ul class="exp-bullets" style="padding-left:14px;">
-          <li><strong>Wheaton Valet Cleaners</strong> — Next.js 16 multi-brand rebuild (5 sites incl. a DOE federal page) + AI chatbot · wheatonvaletcleaners.com</li>
-          <li><strong>National Vascular Associates</strong> — vascular-practice web rebuild + technical SEO pass · nationalvasc.vercel.app</li>
-          <li><strong>M&amp;S AutoHaus</strong> — Mercedes specialist shop site with live Google-reviews integration · msautohaus.org</li>
-          <li><strong>Liberty Press</strong> — federal print-services brand + Liberty-first AI chatbot · liberty-press.vercel.app</li>
-          <li><strong>Camelia Khan</strong> — creator media-kit site + ongoing social-media management · cameliakhan.com</li>
-          <li><strong>Vibey Media Group</strong> — DTC ad-agency one-pager with embedded reel showcase · vibey-media-site.vercel.app</li>
-          <li><strong>Deven Golf Apparel</strong> — golf-apparel brand storefront with integrated checkout · devenbrand.shop</li>
-          <li><strong>G-Force Ridez</strong> — exotic-car rental site with cinematic video showcase</li>
-          <li><strong>Tinycarz</strong> — diecast / car-culture catalog site with phone-framed video reels · tinycarz.vercel.app</li>
-        </ul>
+        <h3 class="project-group">Security &amp; Systems</h3>
+
+        <div class="project-card gold">
+          <div class="project-header">
+            <div>
+              <span class="project-name">SentinelIQ</span>
+              &nbsp;<a href="https://github.com/karimsangid/sentinel-iq" class="project-link" target="_blank" rel="noopener">github.com/karimsangid/sentinel-iq</a>
+            </div>
+            <span class="project-type">Security log analytics &amp; anomaly detection</span>
+          </div>
+          <ul class="project-bullets">
+            <li>Normalizes syslog, Windows Events, CEF, and JSON/CSV logs into one schema, embeds them in ChromaDB, and scores the timeline three ways: embedding distance, frequency z-score, and severity escalation. An LLM turns plain-English questions into search filters, with semantic search filling in when few events match. React/WebSocket dashboard, packaged with Docker Compose.</li>
+          </ul>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <div>
+              <span class="project-name">PacketScope</span>
+            </div>
+            <span class="project-type">Network protocol analyzer</span>
+          </div>
+          <ul class="project-bullets">
+            <li>Captures live traffic through Npcap's wpcap.dll via ctypes with no third-party dependencies, decodes Ethernet/VLAN and ARP up through DNS, DHCP, HTTP, and TLS SNI, reassembles TCP streams, and flags port scans and SYN floods.</li>
+          </ul>
+          <div class="project-tech">
+            <span class="tag">Python stdlib</span><span class="tag">Npcap via ctypes</span>
+          </div>
+        </div>
       </section>
 
       <!-- SKILLS -->
@@ -968,45 +1039,39 @@
         <h2 class="section-title">Technical Skills</h2>
         <div class="skills-stack">
           <div class="skill-row">
-            <span class="skill-label">Languages</span>
-            <div class="pills">
-              <span class="pill">Python</span><span class="pill">TypeScript</span><span class="pill">JavaScript</span><span class="pill">Java</span><span class="pill">C#</span><span class="pill">SQL</span><span class="pill">Swift</span><span class="pill">Lua</span><span class="pill">PHP</span><span class="pill">Bash</span><span class="pill">PowerShell</span>
-            </div>
-          </div>
-          <div class="skill-row">
             <span class="skill-label">AI / ML</span>
             <div class="pills">
-              <span class="pill">RAG</span><span class="pill">LoRA Fine-Tuning</span><span class="pill">Unsloth</span><span class="pill">GGUF / llama.cpp</span><span class="pill">LLM Integration</span><span class="pill">Vector DBs</span><span class="pill">Embeddings</span><span class="pill">OpenCV</span><span class="pill">ChromaDB</span><span class="pill">Ollama</span><span class="pill">Groq</span><span class="pill">Whisper</span>
+              <span class="pill">LLM agents &amp; tool calling</span><span class="pill">RAG &amp; vector search</span><span class="pill">Evals &amp; A/B testing</span><span class="pill">LLM-as-judge</span><span class="pill">Fine-tuning (LoRA / QLoRA)</span><span class="pill">Quantization (NF4, GGUF)</span><span class="pill">Structured output (JSON schema)</span><span class="pill">Grounding, guardrails &amp; prompt-injection defense</span><span class="pill">Speech-to-text (Whisper)</span><span class="pill">PyTorch</span><span class="pill">Hugging Face Transformers</span><span class="pill">PEFT</span><span class="pill">Ollama</span><span class="pill">ChromaDB</span>
             </div>
           </div>
           <div class="skill-row">
-            <span class="skill-label">Web</span>
+            <span class="skill-label">Languages</span>
             <div class="pills">
-              <span class="pill">Next.js 16</span><span class="pill">React 19</span><span class="pill">FastAPI</span><span class="pill">Express.js</span><span class="pill">Flask</span><span class="pill">React Native / Expo</span><span class="pill">SwiftUI / WidgetKit</span><span class="pill">WebSocket</span><span class="pill">Tailwind</span><span class="pill">Framer Motion</span>
+              <span class="pill">Python</span><span class="pill">TypeScript</span><span class="pill">JavaScript</span><span class="pill">C#</span><span class="pill">SQL</span><span class="pill">Swift</span><span class="pill">Bash</span>
             </div>
           </div>
           <div class="skill-row">
-            <span class="skill-label">Cloud / Infra</span>
+            <span class="skill-label">Software</span>
             <div class="pills">
-              <span class="pill">Microsoft Azure</span><span class="pill">Vercel</span><span class="pill">Netlify</span><span class="pill">Supabase</span><span class="pill">Docker</span><span class="pill">CI/CD</span><span class="pill">GitHub Actions</span><span class="pill">EAS Update</span><span class="pill">Tailscale</span><span class="pill">Linux</span>
+              <span class="pill">FastAPI</span><span class="pill">Node.js / Express</span><span class="pill">REST APIs &amp; JSON</span><span class="pill">Next.js 16</span><span class="pill">React 19</span><span class="pill">React Native / Expo</span><span class="pill">Tailwind</span><span class="pill">Three.js / WebGL</span><span class="pill">WebSocket / SSE</span><span class="pill">PostgreSQL (RLS, RPC)</span><span class="pill">Stripe</span><span class="pill">Jest</span><span class="pill">Playwright</span><span class="pill">Unit &amp; integration testing</span>
             </div>
           </div>
           <div class="skill-row">
-            <span class="skill-label">Pay / Comms</span>
+            <span class="skill-label">Cloud / DevOps</span>
             <div class="pills">
-              <span class="pill">Stripe (live)</span><span class="pill">Twilio SMS</span><span class="pill">Resend</span><span class="pill">Meta Pixel + CAPI</span><span class="pill">GA4</span><span class="pill">GTM</span>
+              <span class="pill">Git / GitHub Actions</span><span class="pill">CI/CD</span><span class="pill">Docker / Compose</span><span class="pill">Microsoft Azure</span><span class="pill">Vercel</span><span class="pill">Netlify</span><span class="pill">Supabase Edge Functions</span><span class="pill">Tailscale</span>
             </div>
           </div>
           <div class="skill-row">
             <span class="skill-label">Security</span>
             <div class="pills">
-              <span class="pill">SIEM</span><span class="pill">Vulnerability Assessment</span><span class="pill">Penetration Testing</span><span class="pill">OSINT</span><span class="pill">Threat Detection</span><span class="pill">NIST 800-53</span><span class="pill">FIPS</span><span class="pill">FedRAMP</span><span class="pill">JWT / OAuth</span>
+              <span class="pill">SIEM</span><span class="pill">Vulnerability assessment</span><span class="pill">Penetration testing</span><span class="pill">Sandboxing &amp; least privilege</span><span class="pill">NIST 800-53 / 800-171</span><span class="pill">FIPS</span><span class="pill">FedRAMP</span><span class="pill">Secure coding</span>
             </div>
           </div>
           <div class="skill-row">
-            <span class="skill-label">Data</span>
+            <span class="skill-label">Systems &amp; HW</span>
             <div class="pills">
-              <span class="pill">PostgreSQL</span><span class="pill">SQLite</span><span class="pill">ChromaDB</span><span class="pill">PgBouncer / RLS</span><span class="pill">SQL Tuning</span><span class="pill">Schema Design</span>
+              <span class="pill">Linux (RHEL)</span><span class="pill">SSH / PuTTY</span><span class="pill">RabbitMQ</span><span class="pill">Firmware build &amp; factory update</span><span class="pill">TCP/IP networking</span><span class="pill">Protocol analysis (Npcap)</span><span class="pill">GPU / CUDA</span><span class="pill">Site surveys &amp; structured cabling</span>
             </div>
           </div>
         </div>
@@ -1016,18 +1081,17 @@
       <section class="r-sec">
         <h2 class="section-title">Education &amp; Certifications</h2>
         <div class="edu-row">
-          <span class="degree">Master of Science, Computer Science</span>
-          <span class="meta">In Progress</span>
+          <span class="degree">Master of Science, Computer Science (in progress)</span>
         </div>
         <div class="edu-row">
           <span class="school">George Mason University · Fairfax, VA</span>
         </div>
         <div class="cert-grid" style="margin-top:8px;">
-          <div class="cert-item"><strong>AZ-204</strong> Microsoft Azure Developer Associate</div>
-          <div class="cert-item"><strong>GMU</strong> Ethical Hacking <span class="cert-detail">· 2020</span></div>
-          <div class="cert-item"><strong>Cert</strong> Python Programming</div>
-          <div class="cert-item"><strong>Cert</strong> C# Development</div>
-          <div class="cert-item" style="grid-column: span 2;"><strong>Capital One Coders</strong> Most Technical Application Award <span class="cert-detail">· 2016</span></div>
+          <div class="cert-item"><strong>CompTIA</strong> Security+</div>
+          <div class="cert-item"><strong>AZ-204</strong> Microsoft Certified: Azure Developer Associate</div>
+          <div class="cert-item"><strong>GMU</strong> Ethical Hacking Certificate <span class="cert-detail">· 2020</span></div>
+          <div class="cert-item"><strong>PY</strong> Python Programming Certificate</div>
+          <div class="cert-item"><strong>C#</strong> C# Development Certificate</div>
         </div>
       </section>
 
@@ -1035,7 +1099,7 @@
   </div>
 </div>
 
-<footer style="text-align:center;padding:24px 16px;font-size:11px;color:#888;opacity:0.4;letter-spacing:0.02em;">
+<footer class="site-credit" style="text-align:center;padding:24px 16px;font-size:11px;color:#888;opacity:0.4;letter-spacing:0.02em;">
   Created by Hummus Development &middot; 2026
 </footer>
 

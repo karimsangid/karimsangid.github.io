@@ -4,16 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Papi AI — Case Study | Karim Sangid</title>
-<meta name="description" content="Building a cross-platform AI dating wingman end-to-end: React Native mobile, Vercel FastAPI backend on Groq, custom Qwen2.5-7B LoRA fine-tune on a local RTX 4060 Ti, served through a personal Tailscale-fronted Ollama gateway.">
+<meta name="description" content="Papi AI, an AI dating wingman on the App Store: React Native on a FastAPI backend with SSE streaming, vision and voice, on Groq models with fallback chains.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://karimsangid.is-a.dev/case/papi">
 <meta property="og:title" content="Papi AI — Case Study">
-<meta property="og:description" content="React Native mobile + Vercel FastAPI + custom LoRA fine-tune on a local RTX 4060 Ti.">
+<meta property="og:description" content="React Native app + FastAPI backend on hosted Groq models, with fallback chains that survive model retirements.">
 <meta property="og:url" content="https://karimsangid.is-a.dev/case/papi">
 <meta property="og:image" content="https://karimsangid.is-a.dev/og/papi.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:type" content="article">
+<meta property="og:site_name" content="Karim Sangid">
+<meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://karimsangid.is-a.dev/og/papi.png">
 
@@ -478,16 +480,16 @@
 <header class="hero">
   <div class="wrap">
     <div class="hero-eyebrow">
-      Case Study <span class="pipe">|</span> Mobile + Backend + Custom LoRA <span class="pipe">|</span> Hummus Development LLC
+      Case Study <span class="pipe">|</span> Mobile + Backend <span class="pipe">|</span> Hummus Development LLC
     </div>
     <h1 class="hero-title">Papi AI<span class="accent">.</span></h1>
     <p class="hero-tag">
-      A cross-platform AI dating wingman that ships on a real iPhone, runs on Vercel-hosted FastAPI, and is being progressively de-risked from third-party LLMs by training a custom Qwen2.5-7B LoRA on a 16 GB GPU at home.
+      An AI dating wingman on the App Store for iPhone. A React Native app talks to a FastAPI backend that streams replies over SSE, reads screenshots, transcribes voice, and keeps per-match memory, running on hosted Groq models behind fallback chains.
     </p>
     <div class="hero-meta">
-      <span class="item"><strong>Stack</strong> · React Native / FastAPI / LoRA / GGUF</span>
-      <span class="item"><strong>Status</strong> · v1.0 LIVE on the iOS App Store (2026-05-15)</span>
-      <span class="item"><strong>Deploy</strong> · App Store + Vercel + Local Ollama</span>
+      <span class="item"><strong>Stack</strong> · React Native / FastAPI / Groq / SSE</span>
+      <span class="item"><strong>Status</strong> · Live on the App Store since 2026-05-15 (v1.0.8)</span>
+      <span class="item"><strong>Deploy</strong> · App Store + Vercel</span>
       <span class="item"><strong>Role</strong> · Solo founder / engineer</span>
     </div>
     <div class="hero-cta">
@@ -502,20 +504,20 @@
 
   <div class="stats">
     <div class="stat">
-      <div class="stat-num">v2.9</div>
-      <div class="stat-label">Mobile Version Live</div>
+      <div class="stat-num">v1.0.8</div>
+      <div class="stat-label">On the App Store</div>
     </div>
     <div class="stat">
-      <div class="stat-num">7B</div>
-      <div class="stat-label">Param LoRA Base</div>
+      <div class="stat-num">SSE</div>
+      <div class="stat-label">Streaming Replies</div>
     </div>
     <div class="stat">
-      <div class="stat-num">31<span style="font-size:18px;color:var(--text-mute);"> tok/s</span></div>
-      <div class="stat-label">Local Inference</div>
+      <div class="stat-num">2</div>
+      <div class="stat-label">Fallback Chains (chat, vision)</div>
     </div>
     <div class="stat">
-      <div class="stat-num">3</div>
-      <div class="stat-label">Distinct Layers</div>
+      <div class="stat-num">20+</div>
+      <div class="stat-label">Translator Languages</div>
     </div>
   </div>
 
@@ -525,23 +527,23 @@
       <h2 class="section-title">The Goal</h2>
     </div>
     <p class="lead">
-      Papi started as a single-file dating-app helper and has grown into a three-layer product: a mobile app users actually open on their phone, a backend that runs on Vercel and Groq, and an in-progress custom fine-tune that will eventually replace the third-party LLM on a personal RTX 4060 Ti.
+      Papi started as a single-file dating-app helper and grew into two layers that ship together: a mobile app people open on their phone, and a FastAPI backend on Vercel that calls hosted models on Groq.
     </p>
     <p>
-      The interesting engineering isn't <em>"Papi answers Tinder messages."</em> It's <strong>three layers that have to ship together</strong> — every release means a coordinated mobile + backend + (eventually) model update — and the long-term goal is to own the entire stack so the inference cost tends toward zero and the data never leaves my hardware.
+      The interesting engineering isn't <em>"Papi answers Tinder messages."</em> It's keeping a consumer app working while the hosted models underneath it change. Every release coordinates a mobile and a backend update, and the backend has to keep answering when the provider retires the model it was calling.
     </p>
   </section>
 
   <section class="section">
     <div class="section-head">
       <span class="section-num">02</span>
-      <h2 class="section-title">Three Layers, Tightly Versioned</h2>
+      <h2 class="section-title">Two Layers and a Fallback Plan</h2>
     </div>
     <div class="three-stack">
       <div class="stack-cell">
         <div class="layer-label">Layer 01 · Mobile</div>
         <h4>papi-ai-app</h4>
-        <p>React Native on Expo SDK 54. Live on the iOS App Store as of 2026-05-15 — submitted v1.0, approved by Apple in under 14 hours. Voice mode with 30+ HD voices, screenshot replies, profile openers, per-match memory, 20+ language translator.</p>
+        <p>React Native on Expo SDK 54. Live on the App Store since 2026-05-15. Voice mode with 30+ HD voices, screenshot replies, profile openers, per-match memory, and a translator for 20+ languages.</p>
         <div class="deps">
           <span class="dep">Expo 54</span>
           <span class="dep">EAS Build</span>
@@ -552,7 +554,7 @@
       <div class="stack-cell gold">
         <div class="layer-label">Layer 02 · Backend</div>
         <h4>papi-ai-web</h4>
-        <p>Vercel FastAPI on Groq Llama 3.3 70B (chat) + whisper-large-v3 (multilingual voice). Strict version-tagged rollouts; the health endpoint hardcodes the version so a stale deployment lights up red immediately.</p>
+        <p>FastAPI on Vercel with SSE streaming, vision, whisper-large-v3 voice transcription, and per-match memory. Version-tagged rollouts; the health endpoint reports the version, so a stale deployment shows up immediately.</p>
         <div class="deps">
           <span class="dep">Vercel</span>
           <span class="dep">FastAPI</span>
@@ -561,14 +563,14 @@
         </div>
       </div>
       <div class="stack-cell green">
-        <div class="layer-label">Layer 03 · Local Model</div>
-        <h4>papi-finetune</h4>
-        <p>Qwen2.5-7B LoRA fine-tune lab. WSL Ubuntu + uv-managed Python 3.11 + torch 2.11+cu130 + Unsloth + xformers. Seed-extract → synthetic-corpus → train → GGUF export → drop into local Ollama gateway.</p>
+        <div class="layer-label">Layer 03 · Resilience</div>
+        <h4>fallback chains</h4>
+        <p>Chat and vision each walk an ordered chain of hosted Groq models. A retired model is skipped, a rate limit falls through to the next model, and the chains are environment variables, so a model swap is a config change.</p>
         <div class="deps">
-          <span class="dep">Unsloth</span>
-          <span class="dep">PEFT</span>
-          <span class="dep">TRL</span>
-          <span class="dep">GGUF</span>
+          <span class="dep">Groq</span>
+          <span class="dep">Fallback chains</span>
+          <span class="dep">429 failover</span>
+          <span class="dep">Env-driven models</span>
         </div>
       </div>
     </div>
@@ -580,63 +582,37 @@
       <h2 class="section-title">Architecture</h2>
     </div>
     <p>
-      Today the app calls Vercel; tomorrow that same call routes through a personal Tailscale-fronted Ollama gateway running the fine-tuned model. The mobile and backend layers don't need to know which model is on the other end.
+      The app calls one FastAPI backend on Vercel. For each request the backend uses the first model in the chain that is still available and not rate-limited, so the mobile app never needs to know which model answered.
     </p>
     <div class="arch">
 <pre><span class="label">                        [ User on iPhone ]</span>
                                 <span class="pipe">│</span>
                        <span class="layer">React Native (Expo)</span>
                                 <span class="pipe">│</span>
-                  HTTPS / WebSocket / multipart
+                    HTTPS / SSE / multipart
                                 <span class="pipe">▼</span>
-                       <span class="layer">Vercel Edge / Functions</span>
+                       <span class="layer">Vercel Functions</span>
                        <span class="layer">FastAPI (papi-ai-web)</span>
                                 <span class="pipe">│</span>
        <span class="pipe">┌────────────────────┬───────┴────────┬────────────────────┐</span>
        <span class="pipe">▼</span>                    <span class="pipe">▼</span>                <span class="pipe">▼</span>                    <span class="pipe">▼</span>
-   <span class="node">Groq Cloud</span>            <span class="green">Local Ollama</span>     <span class="node">Whisper-V3</span>          <span class="pink">SQLite</span>
-   <span class="label">Llama 3.3 70B</span>         <span class="label">Qwen2.5-7B + LoRA</span><span class="label">  (multilingual)</span>     <span class="label">memory</span>
-   <span class="label">(today)</span>               <span class="label">(in progress)</span>     <span class="label">voice transcribe</span>
-       <span class="pipe">│</span>                    <span class="pipe">▲</span>
-       <span class="pipe">└────────────────────┘</span>
-              <span class="label">routed via</span>
-            <span class="pipe">┌──────────────┐</span>
-            <span class="pipe">│</span> <span class="green">Tailscale</span>    <span class="pipe">│</span>
-            <span class="pipe">│</span> <span class="green">100.89.111.87</span><span class="pipe">│</span>
-            <span class="pipe">│</span> <span class="green">:8089</span> Bearer  <span class="pipe">│</span>
-            <span class="pipe">└──────────────┘</span></pre>
+     <span class="node">Groq</span>                 <span class="node">Groq</span>        <span class="node">Whisper-V3</span>             <span class="pink">Memory</span>
+   <span class="label">chat chain</span>          <span class="label">vision chain</span>   <span class="label">voice transcribe</span>      <span class="label">per match</span></pre>
     </div>
   </section>
 
   <section class="section">
     <div class="section-head">
       <span class="section-num">04</span>
-      <h2 class="section-title">The Local Fine-Tune Lab</h2>
+      <h2 class="section-title">When the Models Went Away</h2>
     </div>
-    <div class="gpu-spec">
-      <div>
-        <div class="label">GPU spec</div>
-        <h4>NVIDIA RTX 4060 Ti</h4>
-        <p>Workstation card, single GPU, runs in Karim's tower at home. Sufficient VRAM for Qwen2.5-7B QLoRA without offload; enough headroom for inference + training swap.</p>
-      </div>
-      <div style="text-align:right;">
-        <span class="vram">16</span><span class="vram-unit">GB</span>
-      </div>
-    </div>
-    <p>
-      The fine-tune lab is a five-script pipeline:
-    </p>
+    <p>In August 2026 the hosted provider retired the vision models and then the text models the app depended on, and image requests started failing with "model does not exist". Swapping in one new model name would only have reset the clock.</p>
     <ul class="bullets">
-      <li><strong><code>extract_seed.py</code></strong> — pulls real Papi conversations + persona blocks into a clean ChatML format.</li>
-      <li><strong><code>synth_generate.py</code></strong> — expands seed corpus with synthetic continuations (currently via the local Ollama gateway, intentionally <em>not</em> via third-party APIs because if the goal is "build my own AI" the data layer also has to be self-hosted).</li>
-      <li><strong><code>train_lora.py</code></strong> — Unsloth-accelerated QLoRA on Qwen2.5-7B-instruct. WSL Ubuntu, Python 3.11.15 in a uv-managed venv, torch 2.11+cu130, xformers 0.0.35, trl 0.15.2, peft 0.19.1, bitsandbytes 0.49.2 — full stack imports clean.</li>
-      <li><strong><code>export_gguf.py</code></strong> — converts the LoRA adapter + base into a single GGUF for llama.cpp / Ollama consumption.</li>
-      <li><strong><code>peek.py</code></strong> + <strong>Modelfile.papi</strong> — final drop into the personal Ollama instance behind the Tailscale gateway, ready to serve through the same API the Vercel backend calls today.</li>
+      <li><strong>Fallback chains.</strong> Chat and vision each walk an ordered list of models instead of calling one.</li>
+      <li><strong>Skip what's gone.</strong> A model the API reports as retired is dropped for the rest of the process, so the next request goes straight to a working one.</li>
+      <li><strong>Fail over on rate limits.</strong> Each model has its own token bucket, so a 429 falls through to the next model instead of surfacing an error.</li>
+      <li><strong>Config, not code.</strong> The model lists are environment variables, so the next retirement is a settings change.</li>
     </ul>
-    <div class="callout">
-      <div class="label">Discipline</div>
-      <p><strong>"Own AI" includes the data layer.</strong> Synthesizing training data via someone else's API still leaves a critical dependency upstream. This pipeline draws its synthetic corpus from a local model so the entire training-and-serving loop is self-hosted from day one.</p>
-    </div>
   </section>
 
   <section class="section">
@@ -661,23 +637,10 @@
     </p>
   </section>
 
-  <section class="section">
-    <div class="section-head">
-      <span class="section-num">06</span>
-      <h2 class="section-title">What's Next</h2>
-    </div>
-    <ul class="bullets">
-      <li><strong>Scale the synthetic corpus to ≥500 examples</strong>, run the first real LoRA training pass, evaluate against held-out conversations.</li>
-      <li><strong>Cut over the chat path</strong> from Groq Llama to local Qwen2.5-7B-LoRA via the Tailscale gateway. Keep Groq as a fallback while measuring quality + latency from real device.</li>
-      <li><strong>Per-match memory upgrades</strong> — embed each conversation, retrieve relevant past context on every reply, evaluate offline before shipping to the app.</li>
-      <li><strong>Post-launch growth</strong> — measure App Store install-to-active funnel, watch first reviews, ship a v1.1 with whichever rough edge users hit first.</li>
-    </ul>
-  </section>
-
   <a href="/case/roofroof" class="next-case">
     <div class="label">Next Case Study</div>
-    <h3>RoofRoof.solutions <span class="arrow">&rarr;</span></h3>
-    <p>Live roofing-lead marketplace — Stripe in production, Twilio toll-free, Supabase + RLS, Meta Pixel + CAPI dedup, restoreSiteDeploy incident write-up.</p>
+    <h3>All Service Leads <span class="arrow">&rarr;</span></h3>
+    <p>Roofing-lead marketplace with live Stripe billing, Twilio SMS and Resend email, plus a write-up of a real production incident.</p>
   </a>
 
 </div>

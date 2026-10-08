@@ -8,76 +8,6 @@
   var isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
   // ============================================================
-  // LOADING SCREEN — DRAMATIC BOOT SEQUENCE
-  // ============================================================
-  var loader = document.getElementById('loader');
-  var loaderPercent = document.getElementById('loaderPercent');
-  var loaderGrid = document.getElementById('loaderGrid');
-
-  // Loader grid canvas animation (skip on touch — element is display:none anyway,
-  // running it just burns CPU during the critical first paint)
-  if (loaderGrid && !isTouch) {
-    var lgCtx = loaderGrid.getContext('2d');
-    loaderGrid.width = window.innerWidth;
-    loaderGrid.height = window.innerHeight;
-    var gridRunning = true;
-
-    function drawLoaderGrid() {
-      if (!gridRunning) return;
-      lgCtx.clearRect(0, 0, loaderGrid.width, loaderGrid.height);
-      lgCtx.strokeStyle = 'rgba(255, 68, 68, 0.04)';
-      lgCtx.lineWidth = 0.5;
-      var spacing = 60;
-      var time = Date.now() * 0.001;
-      for (var x = 0; x < loaderGrid.width; x += spacing) {
-        var wave = Math.sin(x * 0.01 + time) * 10;
-        lgCtx.beginPath();
-        lgCtx.moveTo(x, 0);
-        lgCtx.lineTo(x + wave, loaderGrid.height);
-        lgCtx.stroke();
-      }
-      for (var y = 0; y < loaderGrid.height; y += spacing) {
-        var wave2 = Math.cos(y * 0.01 + time) * 10;
-        lgCtx.beginPath();
-        lgCtx.moveTo(0, y);
-        lgCtx.lineTo(loaderGrid.width, y + wave2);
-        lgCtx.stroke();
-      }
-      requestAnimationFrame(drawLoaderGrid);
-    }
-    drawLoaderGrid();
-  }
-
-  // Percent counter
-  var percentVal = 0;
-  function countPercent() {
-    if (percentVal < 100) {
-      percentVal += Math.floor(Math.random() * 8) + 2;
-      if (percentVal > 100) percentVal = 100;
-      if (loaderPercent) loaderPercent.textContent = percentVal + '%';
-      setTimeout(countPercent, 60 + Math.random() * 80);
-    }
-  }
-  countPercent();
-
-  window.addEventListener('load', function () {
-    var holdMs = isTouch ? 400 : 1800;
-    var fadeMs = isTouch ? 350 : 1000;
-    setTimeout(function () {
-      percentVal = 100;
-      if (loaderPercent) loaderPercent.textContent = '100%';
-      // Screen flash (skip on touch for snappier reveal)
-      if (!isTouch) {
-        document.body.classList.add('flash');
-        setTimeout(function () { document.body.classList.remove('flash'); }, 200);
-      }
-      loader.classList.add('done');
-      gridRunning = false;
-      setTimeout(function () { loader.style.display = 'none'; }, fadeMs);
-    }, holdMs);
-  });
-
-  // ============================================================
   // CUSTOM CURSOR + GLOW
   // ============================================================
   var dot = document.getElementById('cursorDot');
@@ -764,11 +694,11 @@
   }
 
   // ============================================================
-  // TERMINAL TYPING (PC Terminal)
+  // TERMINAL TYPING (Local AI Gateway)
   // ============================================================
   var cmdTyped = document.querySelector('.vis-cmd-typed');
   if (cmdTyped) {
-    var commands = ['Get-Process | Sort CPU -Desc', 'netstat -an | Select-String LISTEN', 'Get-Service | Where Status -eq Running', 'systeminfo | Select-String "OS"'];
+    var commands = ['GET /v1/models', 'POST /v1/embeddings', 'POST /v1/audio/speech', 'POST /v1/chat/completions stream=true'];
     var cmdIdx = 0, charIdx = 0, typing = true;
 
     function typeCmd() {

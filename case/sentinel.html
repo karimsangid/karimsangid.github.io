@@ -4,16 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SentinelIQ — Case Study | Karim Sangid</title>
-<meta name="description" content="An AI-powered SIEM companion that turns syslog, Windows Events, CEF, and firewall logs into a queryable, anomaly-scored security timeline — with a natural-language query layer that translates plain English into structured filters.">
+<meta name="description" content="SentinelIQ turns syslog, Windows Event, CEF, JSON and CSV logs into an anomaly-scored security timeline you can query in plain English.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://karimsangid.is-a.dev/case/sentinel">
 <meta property="og:title" content="SentinelIQ — Case Study">
-<meta property="og:description" content="AI-powered SIEM companion: LLM embeddings for anomaly detection, natural-language log query, three independent scoring methods.">
+<meta property="og:description" content="Security log analytics: five log formats, three anomaly-scoring methods, plain-English questions turned into search filters.">
 <meta property="og:url" content="https://karimsangid.is-a.dev/case/sentinel">
 <meta property="og:image" content="https://karimsangid.is-a.dev/og/sentinel.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:type" content="article">
+<meta property="og:site_name" content="Karim Sangid">
+<meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://karimsangid.is-a.dev/og/sentinel.png">
 
@@ -461,7 +463,7 @@
     </div>
     <h1 class="hero-title">SentinelIQ<span class="accent">.</span></h1>
     <p class="hero-tag">
-      An AI-powered SIEM companion that turns multi-format security logs into a queryable, anomaly-scored timeline — with a natural-language query layer that translates plain English into structured filters.
+      Security log analytics that turns multi-format logs into a queryable, anomaly-scored timeline, with a natural-language layer that turns plain-English questions into search filters.
     </p>
     <div class="hero-meta">
       <span class="item"><strong>Stack</strong> · Python / FastAPI / React / ChromaDB</span>
@@ -480,8 +482,8 @@
 
   <div class="stats">
     <div class="stat">
-      <div class="stat-num">4</div>
-      <div class="stat-label">Log Format Parsers</div>
+      <div class="stat-num">5</div>
+      <div class="stat-label">Log Formats</div>
     </div>
     <div class="stat">
       <div class="stat-num">3</div>
@@ -489,11 +491,11 @@
     </div>
     <div class="stat">
       <div class="stat-num">NL</div>
-      <div class="stat-label">Query → SQL</div>
+      <div class="stat-label">Query → Filters</div>
     </div>
     <div class="stat">
-      <div class="stat-num">A+</div>
-      <div class="stat-label">Code Quality</div>
+      <div class="stat-num">Local</div>
+      <div class="stat-label">Ollama + ChromaDB</div>
     </div>
   </div>
 
@@ -503,7 +505,7 @@
       <h2 class="section-title">The Problem</h2>
     </div>
     <p class="lead">
-      Every security analyst I've worked with spends most of their day three things deep: pivoting between SIEM dashboards that don't talk to each other, hand-writing query DSLs against schemas they've memorized but resent, and trying to remember whether <em>this</em> spike of failed logins is "Tuesday morning normal" or "actually an incident."
+      Security analysts spend much of their day three things deep: pivoting between SIEM dashboards that don't talk to each other, hand-writing query DSLs against schemas they've memorized but resent, and trying to remember whether <em>this</em> spike of failed logins is "Tuesday morning normal" or "actually an incident."
     </p>
     <p>
       SentinelIQ is built around a different default: <strong>ingest everything, embed it, score it three ways, and let the analyst ask questions in English.</strong> Logs are useless if they're locked behind a query language; alerts are noise if the model thinks a holiday weekend is anomalous; and a SIEM that can't tell you "show me failed SSH attempts from new IPs in the last hour" without you knowing the schema is just a $50K log archive.
@@ -516,16 +518,16 @@
       <h2 class="section-title">Multi-Format Log Ingestion</h2>
     </div>
     <p>
-      Real security teams aren't running one log source — they're running a syslog collector for Linux fleet, Windows Event collectors for the AD domain, a CEF feed off a network appliance, and a CSV dump from whatever EDR they bought last year. SentinelIQ has parsers for all four, normalizing into a single schema:
+      Real security teams aren't running one log source — they're running a syslog collector for Linux fleet, Windows Event collectors for the AD domain, a CEF feed off a network appliance, and a CSV dump from whatever EDR they bought last year. SentinelIQ parses all of them, plus generic JSON, into a single schema:
     </p>
     <ul class="bullets">
-      <li><strong>Syslog (RFC 5424)</strong> — structured priority, facility, severity, hostname, app-name, msgid, timestamp, message body. Tested against journald, rsyslog, and a Cisco ASA capture.</li>
-      <li><strong>Windows Event Logs (EVTX/JSON)</strong> — channel, event-id, provider, level, computer, user-sid, payload data. Maps the noisy Microsoft event-id space to plain-English action labels (e.g., 4625 → "failed logon").</li>
+      <li><strong>Syslog (RFC 5424)</strong> — structured priority, facility, severity, hostname, app-name, msgid, timestamp, message body.</li>
+      <li><strong>Windows Event Logs (JSON export)</strong> — channel, event-id, provider, level, computer, user-sid, payload data.</li>
       <li><strong>CEF (Common Event Format)</strong> — vendor, product, signature-id, name, severity, custom extensions. The lingua franca for network appliances.</li>
-      <li><strong>Firewall CSV</strong> — flexible header detection so a Palo Alto export drops in next to a pfSense one without code changes.</li>
+      <li><strong>JSON and CSV</strong> — generic parsers with flexible field detection, so exports from other tools, firewall CSVs included, drop in without code changes.</li>
     </ul>
     <p>
-      Each event lands in SQLite for the timeline view <em>and</em> ChromaDB as a 384-dim embedding so the anomaly engine and NL query layer can both reason over the same store.
+      Each event lands in SQLite for the timeline view <em>and</em> in ChromaDB as an embedding, so the anomaly engine and the query layer reason over the same store.
     </p>
   </section>
 
@@ -535,28 +537,28 @@
       <h2 class="section-title">Three Anomaly Scoring Methods</h2>
     </div>
     <p>
-      One scoring method = one blind spot. SentinelIQ runs three independent methods on every event and surfaces the disagreement, not just the consensus.
+      One scoring method = one blind spot. SentinelIQ runs three methods over the recent window and keeps the highest score for each event, along with which method flagged it and why.
     </p>
     <div class="method-grid">
       <div class="method-cell">
         <div class="method-num">Method 01</div>
         <h4>Embedding distance</h4>
-        <p>Each new event's vector is compared against the running k-NN cloud of the last N events from the same source. Outliers in semantic space surface even when the surface text looks routine.</p>
+        <p>Each event's embedding is compared against the centroid of the stored events. Events that sit unusually far from it get flagged, even when the text looks routine.</p>
       </div>
       <div class="method-cell gold">
         <div class="method-num">Method 02</div>
         <h4>Frequency Z-score</h4>
-        <p>Per-source, per-event-type rolling baseline. A 142-attempts-per-minute brute force isn't anomalous because the words are scary — it's anomalous because the rate is six standard deviations above this host's normal.</p>
+        <p>Per-source event counts in ten-minute buckets, scored against that source's own baseline. A brute-force burst isn't anomalous because the words are scary; it's anomalous because the rate sits far above this host's normal.</p>
       </div>
       <div class="method-cell blue">
         <div class="method-num">Method 03</div>
-        <h4>Time-of-day prior</h4>
-        <p>Same event, 3 AM, weekend = different score than 10 AM, Tuesday. Catches lateral-movement patterns that hide inside business-hours noise.</p>
+        <h4>Severity escalation</h4>
+        <p>Compares the share of high and critical events in the recent window against the earlier one. When that rate more than doubles, the newer high-severity events are flagged as an escalation.</p>
       </div>
     </div>
     <div class="callout">
       <div class="label">Design principle</div>
-      <p><strong>Disagreement is the signal.</strong> When two methods score an event high and one scores it low, the dashboard surfaces it as "investigate" — not "alert." That's where the actual analyst value lives.</p>
+      <p><strong>Every flag explains itself.</strong> Each anomaly carries the method that raised it and a one-line reason, so an analyst can see why an event was flagged before deciding whether it matters.</p>
     </div>
   </section>
 
@@ -566,10 +568,10 @@
       <h2 class="section-title">Natural Language Query Engine</h2>
     </div>
     <p>
-      The killer feature: an analyst types <em>"show failed logins in the last 24h from IPs we haven't seen this week"</em> — the system translates that into a structured filter pipeline (event-type, time-range, source-IP cardinality lookup), runs it against SQLite + ChromaDB, and returns a result table with citations back to raw events.
+      An analyst types a question like <em>"show failed SSH logins from the last hour"</em>. A local model served by Ollama turns it into structured search parameters (a text pattern, a time range, a limit), the query runs against the event store, and semantic search over the embeddings fills in when few events match.
     </p>
     <p>
-      The translation layer uses Ollama-served local LLMs for everything (no logs leaving the network), with a tool-call schema constraining what the model is allowed to emit. The model never writes raw SQL — it picks from a fixed set of typed filter primitives. Hallucinations show up as parse errors, not as silent wrong queries.
+      Everything runs locally, so logs never leave the machine. If the model's output doesn't parse, a keyword fallback still builds a usable query instead of failing.
     </p>
     <div class="terminal">
       <div class="terminal-bar">
@@ -577,13 +579,13 @@
         <span class="label">sentineliq // dashboard.log</span>
       </div>
       <div class="terminal-body">
-<span class="ts">[03:14:22]</span> <span class="ok">INFO </span> Syslog ingestion started on :514<br>
-<span class="ts">[03:14:23]</span> <span class="warn">WARN </span> Anomaly score 0.87 — src 10.0.0.45 (M01:0.91 M02:0.88 M03:0.82)<br>
-<span class="ts">[03:14:24]</span> <span class="crit">CRIT </span> Brute-force detected — 142 attempts/min on sshd@bastion-01<br>
+<span class="ts">[03:14:22]</span> <span class="ok">INFO </span> Ingested auth.log (syslog): 1,204 events<br>
+<span class="ts">[03:14:23]</span> <span class="warn">WARN </span> Anomaly score 0.87 — src 10.0.0.45 (vector_distance)<br>
+<span class="ts">[03:14:24]</span> <span class="crit">CRIT </span> Threat score 0.90 — sshd "invalid user" + "failed password" from 10.0.0.45<br>
 <span class="ts">[03:14:25]</span> <span class="ok">INFO </span> Embedding vectors indexed: 24,891<br>
-<span class="ts">[03:14:26]</span> <span class="warn">WARN </span> Unusual port scan from 192.168.1.33 — 47 ports / 8s<br>
+<span class="ts">[03:14:26]</span> <span class="warn">WARN </span> Frequency spike from 192.168.1.33 — 10-min bucket far above baseline<br>
 <span class="ts">[03:14:27]</span> <span class="info">NLQ  </span> <span class="nlq">"show failed logins last 24h"</span> → 312 results<br>
-<span class="ts">[03:14:28]</span> <span class="crit">ALERT</span> Lateral movement pattern (3 hosts, sequential SMB)<br>
+<span class="ts">[03:14:28]</span> <span class="crit">ALERT</span> Severity escalation — high/critical share more than doubled<br>
 <span class="ts">[03:14:29]</span> <span class="ok">INFO </span> ChromaDB k-NN: 12 nearest events (cos-dist 0.21–0.34)<br>
 <span class="ts">[03:14:30]</span> <span class="info">NLQ  </span> <span class="nlq">"summarize last 5 alerts"</span> → AI-gen incident report<br>
       </div>
@@ -597,7 +599,7 @@
     </div>
     <div class="arch">
 <pre><span class="label">                    [ Log sources ]</span>
-   <span class="node">syslog</span>      <span class="node">winevt</span>      <span class="node">CEF</span>        <span class="node">firewall.csv</span>
+   <span class="node">syslog</span>      <span class="node">winevt</span>      <span class="node">CEF</span>        <span class="node">JSON / CSV</span>
      <span class="pipe">│</span>            <span class="pipe">│</span>          <span class="pipe">│</span>             <span class="pipe">│</span>
      <span class="pipe">└────────────┴──────────┴─────────────┘</span>
                           <span class="pipe">▼</span>
@@ -617,7 +619,7 @@
        <span class="pipe">┌──────────────────────┼──────────────────────┐</span>
        <span class="pipe">▼</span>                      <span class="pipe">▼</span>                      <span class="pipe">▼</span>
   <span class="node">Ollama LLM</span>           <span class="node">React Dashboard</span>          <span class="node">Incident</span>
-  <span class="label">NL → typed filters</span>   <span class="label">timeline / heatmap</span>      <span class="label">summarizer</span></pre>
+  <span class="label">NL → search filters</span>   <span class="label">timeline / severity</span>      <span class="label">summarizer</span></pre>
     </div>
   </section>
 
@@ -630,17 +632,17 @@
       I built SentinelIQ for one reason: in my QA &amp; Cybersecurity Engineer role at NextgenID I'd written enough vulnerability assessments and FedRAMP / NIST 800-53 documentation to know what's missing in the day-to-day analyst workflow — and what won't get sold to teams that already have Splunk.
     </p>
     <ul class="bullets">
-      <li><strong>Local-first.</strong> Logs never leave the network. Ollama, ChromaDB, SQLite — everything runs on a single box. That's the only model that works for federal-compliance environments where I spend my day job.</li>
+      <li><strong>Local-first.</strong> Logs never leave the network. Ollama, ChromaDB and SQLite all run on a single box, which suits air-gapped and regulated networks.</li>
       <li><strong>Format-pluralism, not format-religion.</strong> No "convert your logs to our schema first" — meet the team where the logs already are.</li>
-      <li><strong>Three independent methods, surfaced honestly.</strong> Disagreement between scorers is more interesting than agreement. Most SIEMs hide the variance; SentinelIQ shows it.</li>
-      <li><strong>NL query as the front door, not a feature.</strong> The dashboard exists, but the primary interaction is "ask in English, get a citation back." That's the workflow change that matters.</li>
+      <li><strong>Three methods, each explained.</strong> Every flagged event says which method raised it and why, instead of a bare score.</li>
+      <li><strong>NL query as the front door, not a feature.</strong> The dashboard exists, but the primary interaction is "ask in English, get the matching events back." That's the workflow change that matters.</li>
     </ul>
   </section>
 
   <a href="/case/papi" class="next-case">
     <div class="label">Next Case Study</div>
     <h3>Papi AI <span class="arrow">&rarr;</span></h3>
-    <p>Cross-platform AI dating wingman: React Native mobile + Vercel FastAPI backend + custom Qwen2.5-7B LoRA fine-tune on a local RTX 4060 Ti.</p>
+    <p>AI dating wingman on the App Store: React Native app, FastAPI backend, hosted Groq models behind fallback chains.</p>
   </a>
 
 </div>

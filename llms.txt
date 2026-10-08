@@ -1,22 +1,23 @@
-# Karim Sangid — AI & Security Engineer
+# Karim Sangid — AI Engineer · Software Developer
 
-> Personal portfolio of Karim Sangid: AI & Security Engineer and founder of Hummus Development LLC. Builds end-to-end products: live Stripe marketplaces, paid client web platforms, a mobile AI dating app, self-hosted LoRA fine-tuning on consumer GPUs, multi-site SEO + analytics infrastructure.
+> Personal portfolio of Karim Sangid, an AI engineer and software developer and the founder of Hummus Development LLC. He builds LLM applications end to end and measures them before they ship: tool-calling agents over retrieval-augmented generation, evaluation harnesses, and QLoRA fine-tunes on local hardware. Four of his apps are live on the App Store.
 
 ## Sections
 
-- [Home](https://karimsangid.is-a.dev/): hero, projects, case-study cards, founder timeline
-- [Resume](https://karimsangid.is-a.dev/resume): single-column resume rendering, print-optimized
-- [Case study: RoofRoof](https://karimsangid.is-a.dev/case/roofroof): live roofing-lead marketplace deep-dive
-- [Case study: Wheaton Valet](https://karimsangid.is-a.dev/case/wheaton): multi-brand client rebuild + federal launch
-- [Case study: SentinelIQ](https://karimsangid.is-a.dev/case/sentinel): AI security log analyzer
-- [Case study: Papi AI](https://karimsangid.is-a.dev/case/papi): mobile dating assistant + LoRA fine-tuning
+- [Home](https://karimsangid.is-a.dev/): projects, case studies, stack, experience, certifications, contact
+- [Resume](https://karimsangid.is-a.dev/resume): web resume, print-ready
+- [Case study: All Service Leads](https://karimsangid.is-a.dev/case/roofroof): roofing-lead marketplace with live Stripe billing
+- [Case study: Wheaton Valet Cleaners](https://karimsangid.is-a.dev/case/wheaton): multi-brand Next.js 16 client build
+- [Case study: SentinelIQ](https://karimsangid.is-a.dev/case/sentinel): security log analytics and anomaly detection
+- [Case study: Papi AI](https://karimsangid.is-a.dev/case/papi): consumer LLM app for iOS with provider fallback chains
 
 ## About
 
-Karim Sangid is the founder of Hummus Development LLC, a one-person studio shipping production AI and security software. Background spans identity verification (NextgenID), cloud certifications (Azure), and end-to-end product development across web, mobile, and AI infrastructure.
+Karim Sangid is an AI engineer and software developer and the founder of Hummus Development LLC (Nov 2021 to present), where he builds LLM systems and ships web, mobile and backend products for paying customers. Earlier roles: Field Engineer at Frequentis (May 2026 to Aug 2026); QA & Cybersecurity Engineer, then Field Engineer II, at NextgenID (Aug 2024 to Mar 2026); and Lead Technical Specialist at New Horizon Hosting (Aug 2020 to Apr 2022). M.S. Computer Science (in progress), George Mason University. CompTIA Security+ and Microsoft Certified: Azure Developer Associate (AZ-204).
 
 ## Contact
 
+- Email: dev.hummus@gmail.com
 - Portfolio: https://karimsangid.is-a.dev
 - GitHub: https://github.com/karimsangid
-- Hummus Development LLC
+- LinkedIn: https://linkedin.com/in/karim-sangid

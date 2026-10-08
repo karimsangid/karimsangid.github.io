@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Karim Sangid — AI &amp; Security Engineer</title>
-  <meta name="description" content="Karim Sangid is an AI & Security Engineer and full-stack product builder. Founder of Hummus Development LLC. Live Stripe marketplace, paid client web platforms, mobile AI app, self-hosted LoRA fine-tuning. MS Computer Science at George Mason University.">
+  <title>Karim Sangid — AI Engineer · Software Developer</title>
+  <meta name="description" content="Karim Sangid is an AI engineer and software developer: LLM agents, retrieval, evals and QLoRA fine-tuning, plus four apps live on the App Store.">
   <meta name="author" content="Karim Sangid">
-  <meta name="keywords" content="Karim Sangid, software engineer, AI, security, Azure, full-stack, Next.js, FastAPI, LoRA fine-tuning, Stripe, portfolio, Hummus Development">
+  <meta name="keywords" content="Karim Sangid, AI engineer, software developer, LLM applications, AI agents, RAG, LLM evaluation, QLoRA, FastAPI, Python, TypeScript, Next.js, React Native, PostgreSQL, Hummus Development">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Karim Sangid — AI & Security Engineer">
-  <meta property="og:description" content="AI & Security Engineer · Full-Stack Product Builder · Founder, Hummus Development LLC. Live Stripe marketplace, paid client web platforms, mobile AI app, self-hosted LoRA fine-tuning.">
+  <meta property="og:title" content="Karim Sangid — AI Engineer · Software Developer">
+  <meta property="og:description" content="AI Engineer · Software Developer · Founder, Hummus Development LLC. LLM agents, retrieval and evals, QLoRA fine-tuning on local hardware, and four apps live on the App Store.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://karimsangid.is-a.dev">
+  <meta property="og:site_name" content="Karim Sangid">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://karimsangid.is-a.dev/">
   <meta property="og:image" content="https://karimsangid.is-a.dev/og/home.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -27,12 +29,12 @@
 
   <!-- SEO Meta Tags -->
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://karimsangid.is-a.dev">
+  <link rel="canonical" href="https://karimsangid.is-a.dev/">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Karim Sangid — AI & Security Engineer">
-  <meta name="twitter:description" content="AI & Security Engineer · Full-Stack Product Builder · Founder, Hummus Development LLC.">
+  <meta name="twitter:title" content="Karim Sangid — AI Engineer · Software Developer">
+  <meta name="twitter:description" content="AI Engineer · Software Developer · Founder, Hummus Development LLC.">
   <meta name="twitter:image" content="https://karimsangid.is-a.dev/og/home.png">
 
   <!-- Structured Data -->
@@ -41,17 +43,14 @@
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Karim Sangid",
-    "url": "https://karimsangid.is-a.dev",
-    "jobTitle": "AI & Security Engineer",
+    "url": "https://karimsangid.is-a.dev/",
+    "jobTitle": "AI Engineer and Software Developer",
     "worksFor": {
       "@type": "Organization",
       "name": "Hummus Development LLC"
     },
-    "alumniOf": {
-      "@type": "CollegeOrUniversity",
-      "name": "George Mason University"
-    },
-    "knowsAbout": ["Artificial Intelligence", "Cybersecurity", "Python", "Machine Learning", "Cloud Computing", "Azure", "Computer Vision", "RAG", "LLM"],
+    "email": "mailto:dev.hummus@gmail.com",
+    "knowsAbout": ["Large language models", "AI agents and tool calling", "Retrieval-augmented generation", "LLM evaluation", "QLoRA fine-tuning", "Python", "TypeScript", "FastAPI", "Next.js", "React Native", "PostgreSQL", "Cybersecurity", "Microsoft Azure"],
     "sameAs": [
       "https://github.com/karimsangid",
       "https://linkedin.com/in/karim-sangid"
@@ -59,28 +58,9 @@
   }
   </script>
 
-  <link rel="stylesheet" href="styles.css?v=20">
+  <link rel="stylesheet" href="styles.css?v=22">
 </head>
 <body>
-
-  <!-- Loading Screen -->
-  <div class="loader" id="loader">
-    <div class="loader-scanlines"></div>
-    <canvas class="loader-grid-canvas" id="loaderGrid"></canvas>
-    <div class="loader-content">
-      <div class="loader-text loader-glitch" data-text="K.S">
-        <span class="loader-letter">K</span><span class="loader-dot">.</span><span class="loader-letter">S</span>
-      </div>
-      <div class="loader-boot" id="loaderBoot">
-        <p class="boot-line" style="--i:0">[SYS] Initializing core modules...</p>
-        <p class="boot-line" style="--i:1">[NET] Establishing secure connection...</p>
-        <p class="boot-line" style="--i:2">[GPU] Rendering pipeline active...</p>
-        <p class="boot-line" style="--i:3">[OK_] All systems operational.</p>
-      </div>
-      <div class="loader-bar"><div class="loader-bar-fill"></div></div>
-      <div class="loader-percent" id="loaderPercent">0%</div>
-    </div>
-  </div>
 
   <!-- Custom Cursor -->
   <div class="cursor-dot" id="cursorDot"></div>
@@ -151,16 +131,12 @@
         </span>
       </h1>
       <div class="hero-subtitle">
-        <span class="hero-role reveal-text">AI &amp; Security Engineer</span>
+        <span class="hero-role reveal-text">AI Engineer &middot; Software Developer</span>
       </div>
       <div class="hero-founder">
         <span class="hero-role reveal-text" style="--delay:0.8s">Founder, Hummus Development LLC</span>
       </div>
-      <p class="hero-desc">MS Computer Science @ George Mason University &bull; Azure AZ-204 Certified.<br>Live Stripe marketplace, paid client web platforms, mobile AI app, self-hosted LoRA fine-tuning.</p>
-    </div>
-    <div class="hero-scroll">
-      <span class="hero-scroll-text">Scroll</span>
-      <div class="hero-scroll-line"></div>
+      <p class="hero-desc">M.S. Computer Science (in progress), George&nbsp;Mason&nbsp;University<br>CompTIA Security+ &bull; Azure AZ-204<br>LLM agents, retrieval and evals, QLoRA fine-tuning on local hardware, and four apps live on the App Store.</p>
     </div>
     <div class="hero-vignette" aria-hidden="true"></div>
   </section>
@@ -168,16 +144,16 @@
   <!-- Marquee -->
   <div class="marquee" aria-hidden="true">
     <div class="marquee-track">
-      <span class="marquee-content">NEXT.JS &bull; PYTHON &bull; FASTAPI &bull; REACT 19 &bull; STRIPE &bull; TWILIO &bull; SUPABASE &bull; CHROMADB &bull; OPENCV &bull; AZURE &bull; DOCKER &bull; WEBSOCKET &bull; OLLAMA &bull; LORA &bull; UNSLOTH &bull; GGUF &bull; SIEM &bull; RAG &bull; LLM &bull; TYPESCRIPT &bull; SWIFTUI &bull; WIDGETKIT &bull; NODE.JS &bull; LINUX &bull; EXPO &bull; GROQ &bull;&nbsp;</span>
-      <span class="marquee-content">NEXT.JS &bull; PYTHON &bull; FASTAPI &bull; REACT 19 &bull; STRIPE &bull; TWILIO &bull; SUPABASE &bull; CHROMADB &bull; OPENCV &bull; AZURE &bull; DOCKER &bull; WEBSOCKET &bull; OLLAMA &bull; LORA &bull; UNSLOTH &bull; GGUF &bull; SIEM &bull; RAG &bull; LLM &bull; TYPESCRIPT &bull; SWIFTUI &bull; WIDGETKIT &bull; NODE.JS &bull; LINUX &bull; EXPO &bull; GROQ &bull;&nbsp;</span>
+      <span class="marquee-content">NEXT.JS &bull; PYTHON &bull; TYPESCRIPT &bull; FASTAPI &bull; REACT 19 &bull; REACT NATIVE &bull; NODE.JS &bull; POSTGRESQL &bull; SUPABASE &bull; STRIPE &bull; TWILIO &bull; OLLAMA &bull; CHROMADB &bull; PYTORCH &bull; TRANSFORMERS &bull; PEFT &bull; QLORA &bull; GGUF &bull; RAG &bull; LLM AGENTS &bull; EVALS &bull; WHISPER &bull; GROQ &bull;&nbsp;</span>
+      <span class="marquee-content">NEXT.JS &bull; PYTHON &bull; TYPESCRIPT &bull; FASTAPI &bull; REACT 19 &bull; REACT NATIVE &bull; NODE.JS &bull; POSTGRESQL &bull; SUPABASE &bull; STRIPE &bull; TWILIO &bull; OLLAMA &bull; CHROMADB &bull; PYTORCH &bull; TRANSFORMERS &bull; PEFT &bull; QLORA &bull; GGUF &bull; RAG &bull; LLM AGENTS &bull; EVALS &bull; WHISPER &bull; GROQ &bull;&nbsp;</span>
     </div>
   </div>
 
   <!-- Reverse Marquee -->
   <div class="marquee marquee--reverse" aria-hidden="true">
     <div class="marquee-track marquee-track--reverse">
-      <span class="marquee-content">SQLITE &bull; POSTGRESQL &bull; MYSQL &bull; REDIS &bull; NOSQL &bull; REST API &bull; GRAPHQL &bull; MICROSERVICES &bull; PWA &bull; TAILSCALE &bull; CLOUDFLARE &bull; NGINX &bull; JWT &bull; OAUTH &bull; WHOIS &bull; DNS &bull; SSL &bull; OSINT &bull;&nbsp;</span>
-      <span class="marquee-content">SQLITE &bull; POSTGRESQL &bull; MYSQL &bull; REDIS &bull; NOSQL &bull; REST API &bull; GRAPHQL &bull; MICROSERVICES &bull; PWA &bull; TAILSCALE &bull; CLOUDFLARE &bull; NGINX &bull; JWT &bull; OAUTH &bull; WHOIS &bull; DNS &bull; SSL &bull; OSINT &bull;&nbsp;</span>
+      <span class="marquee-content">DOCKER &bull; GITHUB ACTIONS &bull; CI/CD &bull; AZURE &bull; VERCEL &bull; NETLIFY &bull; TAILSCALE &bull; WEBSOCKET &bull; SSE &bull; THREE.JS &bull; JEST &bull; PLAYWRIGHT &bull; SIEM &bull; NIST 800-171 &bull; FIPS &bull; FEDRAMP &bull; RHEL &bull; RABBITMQ &bull; NPCAP &bull;&nbsp;</span>
+      <span class="marquee-content">DOCKER &bull; GITHUB ACTIONS &bull; CI/CD &bull; AZURE &bull; VERCEL &bull; NETLIFY &bull; TAILSCALE &bull; WEBSOCKET &bull; SSE &bull; THREE.JS &bull; JEST &bull; PLAYWRIGHT &bull; SIEM &bull; NIST 800-171 &bull; FIPS &bull; FEDRAMP &bull; RHEL &bull; RABBITMQ &bull; NPCAP &bull;&nbsp;</span>
     </div>
   </div>
 
@@ -185,28 +161,28 @@
   <section class="about" id="about">
     <div class="container">
       <div class="about-statement scroll-reveal">
-        <p class="about-quote">I ship products,<br>not <em>side projects</em>.</p>
+        <p class="about-quote">Measured first,<br>then <em>shipped</em>.</p>
       </div>
       <div class="about-stats scroll-reveal">
         <div class="stat">
-          <span class="stat-number" data-target="75000">0</span><span class="stat-plus">+</span>
-          <span class="stat-label">Lines of Code</span>
+          <span class="stat-number" data-target="4">0</span>
+          <span class="stat-label">Apps on the App Store</span>
         </div>
         <div class="stat">
-          <span class="stat-number" data-target="23">0</span><span class="stat-plus">+</span>
-          <span class="stat-label">Projects Shipped</span>
+          <span class="stat-number" data-target="3000">0</span><span class="stat-plus">+</span>
+          <span class="stat-label">Automated Assertions</span>
         </div>
         <div class="stat">
-          <span class="stat-number" data-target="12">0</span>
-          <span class="stat-label">GitHub Repos</span>
+          <span class="stat-number" data-target="218">0</span>
+          <span class="stat-label">Hidden Eval Tests</span>
         </div>
         <div class="stat">
-          <span class="stat-label stat-label--cert">AZ-204</span>
-          <span class="stat-label">Azure Certified</span>
+          <span class="stat-label stat-label--cert stat-label--cert-pair">Security+<br>AZ-204</span>
+          <span class="stat-label">Certified</span>
         </div>
       </div>
       <div class="about-bio scroll-reveal">
-        <p>MS Computer Science student at George Mason University. I run a one-person product studio under Hummus Development LLC: a live roofing-lead marketplace with Stripe and Twilio, multi-brand client web platforms shipped April 2026, a cross-platform AI dating app with custom LoRA fine-tuning on local hardware, and an AI-powered SIEM companion. Azure AZ-204 certified.</p>
+        <p>I'm an AI engineer and software developer. I build LLM applications end to end and measure them before they ship, from tool-calling agents with retrieval to QLoRA fine-tunes on local hardware. Through Hummus Development LLC I build Next.js and React Native products, with Python and Node backends on PostgreSQL, for paying customers; four of my apps are live on the App Store. In earlier roles I wrote Python test automation and did NIST-aligned security work in federal environments, and built firmware and worked on Red Hat Linux nodes for safety-critical communication systems.</p>
       </div>
     </div>
   </section>
@@ -229,52 +205,52 @@
         <div class="project-info">
           <span class="project-number">01</span>
           <h3 class="project-name">Hummus IQ</h3>
-          <p class="project-desc">AI Assistant</p>
+          <p class="project-desc">Local-First Agentic LLM Assistant</p>
           <ul class="project-features">
-            <li>Local LLM with RAG, persistent memory &amp; vision</li>
-            <li>7-engine parallel web search</li>
-            <li>Real-time WebSocket streaming</li>
-            <li>Code execution sandbox</li>
+            <li>Triage router: direct answer, 10-round tool-calling agent with cited retrieval, plan-solve-verify-revise, or best-of-N with an LLM judge</li>
+            <li>Eval harness: 6 open-weight models, 12 tasks, 218 hidden unit tests in a network-denied sandbox</li>
+            <li>3,000+ automated assertions across 40+ suites behind one release gate</li>
+            <li>Prompt-injection trust boundary, fail-closed air-gap mode, NIST SP 800-171 self-assessment</li>
           </ul>
           <div class="project-tech">
-            <span>Python</span><span>FastAPI</span><span>ChromaDB</span><span>Ollama</span><span>SQLite</span>
+            <span>Python</span><span>FastAPI</span><span>ChromaDB</span><span>Ollama</span>
           </div>
-          <a href="https://github.com/karimsangid/hummus-iq" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
+          <span class="project-link project-link--private">Private Repository</span>
         </div>
         <div class="project-visual">
           <div class="vis-chat">
             <div class="vis-chat-bubble vis-chat-bubble--user" style="--i:0">How does RAG improve accuracy?</div>
-            <div class="vis-chat-bubble vis-chat-bubble--ai" style="--i:1">RAG grounds responses in retrieved documents, reducing hallucination...</div>
-            <div class="vis-chat-bubble vis-chat-bubble--user" style="--i:2">Search the web for latest benchmarks</div>
-            <div class="vis-chat-bubble vis-chat-bubble--ai" style="--i:3">Searching 7 engines in parallel...</div>
+            <div class="vis-chat-bubble vis-chat-bubble--ai" style="--i:1">RAG grounds the answer in retrieved documents and cites them inline [1], [2]...</div>
+            <div class="vis-chat-bubble vis-chat-bubble--user" style="--i:2">Check that answer before I use it</div>
+            <div class="vis-chat-bubble vis-chat-bubble--ai" style="--i:3">Running plan, solve, verify, revise...</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Project 02: RoofRoof -->
+    <!-- Project 02: All Service Leads -->
     <div class="project-card scroll-reveal" data-project="2" data-enter="right">
       <div class="project-card-inner">
         <div class="card-spotlight"></div>
         <div class="project-info">
           <span class="project-number">02</span>
-          <h3 class="project-name">RoofRoof.solutions</h3>
+          <h3 class="project-name">All Service Leads</h3>
           <p class="project-desc">Live Roofing-Lead Marketplace &mdash; Stripe + Twilio + Supabase</p>
           <ul class="project-features">
-            <li>8,000+ line Express/Node + Netlify Functions stack</li>
-            <li>Live Stripe payments, custom coupon engine, admin refunds</li>
-            <li>Twilio SMS lead-blast + Meta Pixel/CAPI dedup</li>
-            <li>Supabase Postgres via PgBouncer pooler with RLS</li>
+            <li>Designed the platform and took it to production in April 2026 with two collaborators</li>
+            <li>Express/Node on Netlify Functions with Supabase Postgres</li>
+            <li>Live Stripe checkout, Twilio SMS, Resend email</li>
+            <li>Growing into prepaid leads and live call transfers</li>
           </ul>
           <div class="project-tech">
-            <span>Node.js</span><span>Express</span><span>Netlify Functions</span><span>Supabase</span><span>Stripe</span><span>Twilio</span><span>Meta CAPI</span>
+            <span>Node.js</span><span>Express</span><span>Netlify Functions</span><span>Supabase</span><span>Stripe</span><span>Twilio</span><span>Resend</span>
           </div>
-          <a href="https://roofroof.solutions" target="_blank" rel="noopener" class="project-link">Visit roofroof.solutions &rarr;</a>
+          <a href="https://allserviceleads.com" target="_blank" rel="noopener" class="project-link">Visit allserviceleads.com &rarr;</a>
         </div>
         <div class="project-visual">
           <div class="vis-house-scene">
             <canvas class="vis-house-canvas" id="houseCanvas" width="500" height="450"></canvas>
-            <div class="vis-sat-label">ROOFROOF.SOLUTIONS</div>
+            <div class="vis-sat-label">ALLSERVICELEADS.COM</div>
           </div>
         </div>
       </div>
@@ -287,15 +263,15 @@
         <div class="project-info">
           <span class="project-number">03</span>
           <h3 class="project-name">SentinelIQ</h3>
-          <p class="project-desc">AI-Powered Security Log Analyzer</p>
+          <p class="project-desc">Security Log Analytics &amp; Anomaly Detection</p>
           <ul class="project-features">
-            <li>Ingests syslog, Windows Events, CEF &amp; firewall logs</li>
-            <li>LLM embeddings for anomaly detection (3 methods)</li>
-            <li>Natural language querying of security data</li>
-            <li>Real-time dashboard with threat timeline</li>
+            <li>Normalizes syslog, Windows Events, CEF, JSON and CSV into one schema</li>
+            <li>Three anomaly methods: embedding distance, frequency z-score, severity escalation</li>
+            <li>Plain-English questions become search filters, with semantic search filling in</li>
+            <li>React/WebSocket dashboard, packaged with Docker Compose</li>
           </ul>
           <div class="project-tech">
-            <span>Python</span><span>FastAPI</span><span>React</span><span>ChromaDB</span><span>Ollama</span><span>Azure</span><span>Docker</span>
+            <span>Python</span><span>FastAPI</span><span>React</span><span>ChromaDB</span><span>Ollama</span><span>Docker</span>
           </div>
           <a href="https://github.com/karimsangid/sentinel-iq" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
         </div>
@@ -304,21 +280,21 @@
             <div class="vis-terminal-bar"><span></span><span></span><span></span></div>
             <div class="vis-terminal-body">
               <div class="vis-terminal-lines">
-                <p><span class="vis-t-time">[03:14:22]</span> <span class="vis-t-ok">INFO</span> Syslog ingestion started on :514</p>
+                <p><span class="vis-t-time">[03:14:22]</span> <span class="vis-t-ok">INFO</span> Ingested auth.log (syslog): 1,204 events</p>
                 <p><span class="vis-t-time">[03:14:23]</span> <span class="vis-t-warn">WARN</span> Anomaly score 0.87 — src 10.0.0.45</p>
-                <p><span class="vis-t-time">[03:14:24]</span> <span class="vis-t-err">CRIT</span> Brute-force detected — 142 attempts/min</p>
+                <p><span class="vis-t-time">[03:14:24]</span> <span class="vis-t-err">CRIT</span> Threat score 0.90 — sshd, 10.0.0.45</p>
                 <p><span class="vis-t-time">[03:14:25]</span> <span class="vis-t-ok">INFO</span> Embedding vectors indexed: 24,891</p>
-                <p><span class="vis-t-time">[03:14:26]</span> <span class="vis-t-warn">WARN</span> Unusual port scan from 192.168.1.33</p>
-                <p><span class="vis-t-time">[03:14:27]</span> <span class="vis-t-ok">INFO</span> NLP query: "show failed logins last 24h"</p>
-                <p><span class="vis-t-time">[03:14:28]</span> <span class="vis-t-err">ALERT</span> Lateral movement pattern identified</p>
+                <p><span class="vis-t-time">[03:14:26]</span> <span class="vis-t-warn">WARN</span> Frequency spike from 192.168.1.33</p>
+                <p><span class="vis-t-time">[03:14:27]</span> <span class="vis-t-ok">INFO</span> NL query: "show failed logins last 24h"</p>
+                <p><span class="vis-t-time">[03:14:28]</span> <span class="vis-t-err">ALERT</span> Severity escalation in last window</p>
                 <p><span class="vis-t-time">[03:14:29]</span> <span class="vis-t-ok">INFO</span> ChromaDB similarity search: 12 results</p>
-                <p><span class="vis-t-time">[03:14:22]</span> <span class="vis-t-ok">INFO</span> Syslog ingestion started on :514</p>
+                <p><span class="vis-t-time">[03:14:22]</span> <span class="vis-t-ok">INFO</span> Ingested auth.log (syslog): 1,204 events</p>
                 <p><span class="vis-t-time">[03:14:23]</span> <span class="vis-t-warn">WARN</span> Anomaly score 0.87 — src 10.0.0.45</p>
-                <p><span class="vis-t-time">[03:14:24]</span> <span class="vis-t-err">CRIT</span> Brute-force detected — 142 attempts/min</p>
+                <p><span class="vis-t-time">[03:14:24]</span> <span class="vis-t-err">CRIT</span> Threat score 0.90 — sshd, 10.0.0.45</p>
                 <p><span class="vis-t-time">[03:14:25]</span> <span class="vis-t-ok">INFO</span> Embedding vectors indexed: 24,891</p>
-                <p><span class="vis-t-time">[03:14:26]</span> <span class="vis-t-warn">WARN</span> Unusual port scan from 192.168.1.33</p>
-                <p><span class="vis-t-time">[03:14:27]</span> <span class="vis-t-ok">INFO</span> NLP query: "show failed logins last 24h"</p>
-                <p><span class="vis-t-time">[03:14:28]</span> <span class="vis-t-err">ALERT</span> Lateral movement pattern identified</p>
+                <p><span class="vis-t-time">[03:14:26]</span> <span class="vis-t-warn">WARN</span> Frequency spike from 192.168.1.33</p>
+                <p><span class="vis-t-time">[03:14:27]</span> <span class="vis-t-ok">INFO</span> NL query: "show failed logins last 24h"</p>
+                <p><span class="vis-t-time">[03:14:28]</span> <span class="vis-t-err">ALERT</span> Severity escalation in last window</p>
                 <p><span class="vis-t-time">[03:14:29]</span> <span class="vis-t-ok">INFO</span> ChromaDB similarity search: 12 results</p>
               </div>
             </div>
@@ -327,60 +303,46 @@
       </div>
     </div>
 
-    <!-- Project 04: HummusI -->
+    <!-- Project 04: PacketScope -->
     <div class="project-card scroll-reveal" data-project="4" data-enter="right">
       <div class="project-card-inner">
         <div class="card-spotlight"></div>
         <div class="project-info">
           <span class="project-number">04</span>
-          <h3 class="project-name">HummusOSINT</h3>
-          <p class="project-desc">Open Source Intelligence Platform</p>
+          <h3 class="project-name">PacketScope</h3>
+          <p class="project-desc">Network Protocol Analyzer</p>
           <ul class="project-features">
-            <li>Username search across 100+ platforms</li>
-            <li>Email breach detection (HIBP)</li>
-            <li>Domain recon (WHOIS, DNS, subdomains, SSL)</li>
-            <li>IP geolocation + port scanning &amp; PDF reports</li>
+            <li>Live capture through Npcap's wpcap.dll via ctypes, no third-party dependencies</li>
+            <li>Decodes Ethernet/VLAN and ARP up through DNS, DHCP, HTTP and TLS SNI</li>
+            <li>Reassembles TCP streams</li>
+            <li>Flags port scans and SYN floods</li>
           </ul>
           <div class="project-tech">
-            <span>Python</span><span>FastAPI</span><span>SQLite</span><span>dnspython</span><span>python-whois</span>
+            <span>Python</span><span>ctypes</span><span>Npcap</span><span>TCP/IP</span>
           </div>
           <span class="project-link project-link--private">Private Repository</span>
         </div>
         <div class="project-visual">
-          <canvas class="vis-matrix-canvas" id="osintCanvas" width="300" height="220"></canvas>
-        </div>
-      </div>
-    </div>
-
-    <!-- Project 05: Cram -->
-    <div class="project-card scroll-reveal" data-project="5" data-enter="left">
-      <div class="project-card-inner">
-        <div class="card-spotlight"></div>
-        <div class="project-info">
-          <span class="project-number">05</span>
-          <h3 class="project-name">Cram</h3>
-          <p class="project-desc">AI Study Assistant</p>
-          <ul class="project-features">
-            <li>RAG-powered Q&amp;A with source citations</li>
-            <li>Flashcard generation with SM-2 spaced repetition</li>
-            <li>Practice quizzes with LLM grading</li>
-            <li>Knowledge gap tracker</li>
-          </ul>
-          <div class="project-tech">
-            <span>Python</span><span>FastAPI</span><span>ChromaDB</span><span>Ollama</span><span>SQLite</span><span>WebSocket</span>
-          </div>
-          <a href="https://github.com/karimsangid/cram" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
-        </div>
-        <div class="project-visual">
-          <div class="vis-flashcard">
-            <div class="vis-flashcard-inner">
-              <div class="vis-flashcard-front">
-                <span class="vis-fc-label">QUESTION</span>
-                <p>What is RAG in the context of LLMs?</p>
-              </div>
-              <div class="vis-flashcard-back">
-                <span class="vis-fc-label">ANSWER</span>
-                <p>Retrieval-Augmented Generation — combining LLM reasoning with external knowledge retrieval.</p>
+          <div class="vis-terminal">
+            <div class="vis-terminal-bar"><span></span><span></span><span></span></div>
+            <div class="vis-terminal-body">
+              <div class="vis-terminal-lines">
+                <p><span class="vis-t-time">[TCP]</span> 10.0.0.4:52114 &gt; 93.184.216.34:443 SYN</p>
+                <p><span class="vis-t-time">[TLS]</span> ClientHello SNI example.com</p>
+                <p><span class="vis-t-time">[DNS]</span> 10.0.0.4 query A example.com</p>
+                <p><span class="vis-t-time">[ARP]</span> who-has 10.0.0.1 tell 10.0.0.4</p>
+                <p><span class="vis-t-time">[DHCP]</span> ACK 10.0.0.4 lease 86400s</p>
+                <p><span class="vis-t-time">[HTTP]</span> GET /index.html Host: example.com</p>
+                <p><span class="vis-t-warn">WARN</span> SYN flood suspected: 10.0.0.66 &gt; :80</p>
+                <p><span class="vis-t-ok">INFO</span> TCP stream reassembled: 4,812 bytes</p>
+                <p><span class="vis-t-time">[TCP]</span> 10.0.0.4:52114 &gt; 93.184.216.34:443 SYN</p>
+                <p><span class="vis-t-time">[TLS]</span> ClientHello SNI example.com</p>
+                <p><span class="vis-t-time">[DNS]</span> 10.0.0.4 query A example.com</p>
+                <p><span class="vis-t-time">[ARP]</span> who-has 10.0.0.1 tell 10.0.0.4</p>
+                <p><span class="vis-t-time">[DHCP]</span> ACK 10.0.0.4 lease 86400s</p>
+                <p><span class="vis-t-time">[HTTP]</span> GET /index.html Host: example.com</p>
+                <p><span class="vis-t-warn">WARN</span> SYN flood suspected: 10.0.0.66 &gt; :80</p>
+                <p><span class="vis-t-ok">INFO</span> TCP stream reassembled: 4,812 bytes</p>
               </div>
             </div>
           </div>
@@ -388,29 +350,65 @@
       </div>
     </div>
 
-    <!-- Project 06: HummusLink -->
+    <!-- Project 05: AI Lead Qualifier -->
+    <div class="project-card scroll-reveal" data-project="5" data-enter="left">
+      <div class="project-card-inner">
+        <div class="card-spotlight"></div>
+        <div class="project-info">
+          <span class="project-number">05</span>
+          <h3 class="project-name">AI Lead Qualifier</h3>
+          <p class="project-desc">Conversational Lead Intake &middot; Built for All Service Leads</p>
+          <ul class="project-features">
+            <li>Runs on a local qwen3:14b; verified end to end on web chat</li>
+            <li>Extraction into a JSON schema with one repair retry</li>
+            <li>Grounding check added after small local models started inventing facts</li>
+            <li>A 12-point rubric decides when to page the sales team; every outbound message passes one fail-closed guardrail for opt-outs and TCPA-style rules</li>
+          </ul>
+          <div class="project-tech">
+            <span>TypeScript</span><span>Ollama</span><span>qwen3:14b</span><span>JSON Schema</span><span>Web chat</span><span>Messenger</span><span>SMS</span>
+          </div>
+          <span class="project-link project-link--private">Private Repository</span>
+        </div>
+        <div class="project-visual">
+          <div class="vis-flashcard">
+            <div class="vis-flashcard-inner">
+              <div class="vis-flashcard-front">
+                <span class="vis-fc-label">CUSTOMER</span>
+                <p>Got a leak over the garage. Can someone come out this week?</p>
+              </div>
+              <div class="vis-flashcard-back">
+                <span class="vis-fc-label">EXTRACTED</span>
+                <p>Roof repair &middot; this week &middot; checked against what the customer actually said</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 06: Car Lounge -->
     <div class="project-card scroll-reveal" data-project="6" data-enter="right">
       <div class="project-card-inner">
         <div class="card-spotlight"></div>
         <div class="project-info">
           <span class="project-number">06</span>
-          <h3 class="project-name">HummusLink</h3>
-          <p class="project-desc">Cross-Platform Sync Bridge</p>
+          <h3 class="project-name">Car Lounge</h3>
+          <p class="project-desc">Car-Community Social App &mdash; Live on the App Store</p>
           <ul class="project-features">
-            <li>Windows PC to iPhone real-time sync</li>
-            <li>File transfer, clipboard sync, text/photo sharing</li>
-            <li>PWA + system tray app</li>
-            <li>mDNS auto-discovery, QR code pairing</li>
+            <li>Solo build in React Native / Expo, 200+ commits</li>
+            <li>123 Postgres migrations defining 120+ row-level security policies and 130+ SQL functions</li>
+            <li>12 Edge Functions for App Store receipt validation, Stripe webhooks and moderation</li>
+            <li>CI runs type-check, lint, 800+ Jest tests and a Playwright smoke test, then builds and submits the iOS app from a macOS runner</li>
           </ul>
           <div class="project-tech">
-            <span>Python</span><span>FastAPI</span><span>WebSocket</span><span>PWA</span><span>mDNS</span>
+            <span>React Native</span><span>Expo</span><span>Supabase</span><span>PostgreSQL</span><span>Edge Functions</span><span>Jest</span><span>Playwright</span><span>GitHub Actions</span>
           </div>
-          <a href="https://github.com/karimsangid/hummuslink" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
+          <a href="https://apps.apple.com/us/app/car-lounge/id6773178672" target="_blank" rel="noopener" class="project-link">Download on the App Store &rarr;</a>
         </div>
         <div class="project-visual">
           <div class="vis-devices">
             <div class="vis-device vis-device--pc">
-              <div class="vis-device-screen">PC</div>
+              <div class="vis-device-screen">CI</div>
             </div>
             <div class="vis-device-connection">
               <span class="vis-conn-dot" style="--d:0"></span>
@@ -432,26 +430,26 @@
         <div class="project-info">
           <span class="project-number">07</span>
           <h3 class="project-name">Wheaton Valet Cleaners</h3>
-          <p class="project-desc">Paid Client Build &mdash; Next.js 16 Multi-Brand Site</p>
+          <p class="project-desc">Client Build &mdash; Next.js 16 Multi-Brand Site</p>
           <ul class="project-features">
-            <li>Full Next.js 16 + Tailwind + Framer Motion rebuild</li>
-            <li>5 brand pages incl. DOE Liberty Press federal launch</li>
-            <li>A-grade SEO &mdash; 12 JSON-LD schemas, chatbot 14/14 smoke</li>
-            <li>Live Resend email + Twilio SMS intake pipeline</li>
+            <li>One Next.js 16 codebase for the flagship, sister brands and locations (26 routes)</li>
+            <li>Intake endpoint sends Resend email and OpenPhone SMS</li>
+            <li>Knowledge-base chatbot that falls back to a hosted LLM</li>
+            <li>Kept on for monthly SEO</li>
           </ul>
           <div class="project-tech">
-            <span>Next.js 16</span><span>React 19</span><span>Tailwind</span><span>Framer Motion</span><span>Vercel</span><span>Resend</span><span>Twilio</span>
+            <span>Next.js 16</span><span>React 19</span><span>Tailwind</span><span>Vercel</span><span>Resend</span><span>OpenPhone</span>
           </div>
-          <a href="https://wheaton-valet-cleaners.vercel.app" target="_blank" rel="noopener" class="project-link">View live site &rarr;</a>
+          <a href="https://www.wheatonvaletcleaners.com" target="_blank" rel="noopener" class="project-link">Visit wheatonvaletcleaners.com &rarr;</a>
         </div>
         <div class="project-visual">
           <div class="vis-phone">
             <div class="vis-phone-notch"></div>
             <div class="vis-phone-screen">
               <div class="vis-phone-header">Wheaton Valet</div>
-              <div class="vis-phone-item"><span class="vis-phone-dot"></span> Dry Cleaning <span class="vis-phone-price">2-day</span></div>
-              <div class="vis-phone-item"><span class="vis-phone-dot"></span> Wash &amp; Fold <span class="vis-phone-price">$1.85/lb</span></div>
-              <div class="vis-phone-item"><span class="vis-phone-dot"></span> Alterations <span class="vis-phone-price">From $12</span></div>
+              <div class="vis-phone-item"><span class="vis-phone-dot"></span> Dry Cleaning <span class="vis-phone-price">Pickup</span></div>
+              <div class="vis-phone-item"><span class="vis-phone-dot"></span> Wash &amp; Fold <span class="vis-phone-price">Delivery</span></div>
+              <div class="vis-phone-item"><span class="vis-phone-dot"></span> Alterations <span class="vis-phone-price">In store</span></div>
               <div class="vis-phone-btn">Schedule Pickup</div>
             </div>
           </div>
@@ -459,37 +457,37 @@
       </div>
     </div>
 
-    <!-- Project 08: FiveM Game Development -->
+    <!-- Project 08: QLoRA Fine-Tuning -->
     <div class="project-card scroll-reveal" data-project="8" data-enter="right">
       <div class="project-card-inner">
         <div class="card-spotlight"></div>
         <div class="project-info">
           <span class="project-number">08</span>
-          <h3 class="project-name">FiveM Server Platform</h3>
-          <p class="project-desc">Multiplayer Game Infrastructure &amp; Development</p>
+          <h3 class="project-name">QLoRA Fine-Tuning</h3>
+          <p class="project-desc">7B Code Model on a Single 16 GB GPU</p>
           <ul class="project-features">
-            <li>Built &amp; managed roleplay server with 143 custom vehicle mods and 150+ game resources</li>
-            <li>Developed 300+ Lua scripts (client/server architecture) for gameplay systems, economy, and inventory</li>
-            <li>Managed Linux dedicated servers — SQL databases, uptime monitoring, automated backups, DDoS protection</li>
-            <li>Led development team: deployment workflows, version control across 150+ resources, QA testing</li>
-            <li>Created custom 3D vehicle models, textures, LOD optimization, and streaming configuration</li>
+            <li>qwen2.5-coder 7B on one RTX 4060 Ti: 4-bit NF4, LoRA r=16 on all attention and MLP projections (0.53% of weights)</li>
+            <li>Assistant-only loss masking at about 12.6 GB VRAM</li>
+            <li>Rewrote the trainer on Transformers, PEFT and bitsandbytes when Triton would not compile headless</li>
+            <li>Exported the adapter to GGUF and served it through Ollama on the stock quantized base</li>
+            <li>Packaged as an on-prem feature that fine-tunes on a team's own repository; on a production app's codebase (1,139 train / 53 held-out) it reached a held-out loss of 0.64</li>
           </ul>
           <div class="project-tech">
-            <span>Lua</span><span>C#</span><span>JavaScript</span><span>SQL</span><span>Linux</span><span>3D Modeling</span><span>Server Admin</span><span>Networking</span>
+            <span>PyTorch</span><span>Transformers</span><span>PEFT</span><span>bitsandbytes</span><span>GGUF</span><span>Ollama</span>
           </div>
-          <span class="project-link project-link--private">Proprietary</span>
+          <span class="project-link project-link--private">Private Repository</span>
         </div>
         <div class="project-visual">
           <div class="vis-fivem">
             <div class="vis-fivem-server">
-              <div class="vis-fivem-header">SERVER CONSOLE</div>
+              <div class="vis-fivem-header">TRAINING LOG</div>
               <div class="vis-fivem-lines">
-                <p class="vis-fivem-line">[OK] Starting resources...</p>
-                <p class="vis-fivem-line">[OK] 143 vehicles loaded</p>
-                <p class="vis-fivem-line">[OK] 150 resources mounted</p>
-                <p class="vis-fivem-line">[OK] SQL connected</p>
-                <p class="vis-fivem-line">[OK] 47 players online</p>
-                <p class="vis-fivem-line vis-fivem-active">>&nbsp;Server running on port 30120</p>
+                <p class="vis-fivem-line">[OK] loaded 2400 conversations</p>
+                <p class="vis-fivem-line">[OK] base: qwen2.5-coder 7B, 4-bit NF4</p>
+                <p class="vis-fivem-line">[OK] LoRA r=16, 0.53% trainable</p>
+                <p class="vis-fivem-line">[OK] assistant-only loss</p>
+                <p class="vis-fivem-line">[OK] adapter exported to GGUF</p>
+                <p class="vis-fivem-line vis-fivem-active">&gt;&nbsp;serving through Ollama</p>
               </div>
             </div>
           </div>
@@ -504,15 +502,15 @@
         <div class="project-info">
           <span class="project-number">09</span>
           <h3 class="project-name">Papi AI</h3>
-          <p class="project-desc">AI Dating Wingman &mdash; Live on the iOS App Store</p>
+          <p class="project-desc">AI Dating Wingman &mdash; Live on the App Store</p>
           <ul class="project-features">
             <li>Screenshot replies, profile openers, voice-mode practice, 20+ language translator</li>
-            <li>RN/Expo SDK 54 iOS app, shipped via EAS Build &amp; ASC API</li>
-            <li>Vercel FastAPI backend &mdash; Groq Llama 3.3 70B + Whisper + Edge TTS</li>
-            <li>Self-hosted Qwen2.5-7B LoRA pipeline (Unsloth + WSL + 4060 Ti)</li>
+            <li>React Native / Expo app for iOS</li>
+            <li>FastAPI backend: SSE streaming, vision, whisper-large-v3 transcription, per-match memory</li>
+            <li>Hosted Groq models behind fallback chains that skip retired models and fail over on rate limits</li>
           </ul>
           <div class="project-tech">
-            <span>React Native</span><span>Expo</span><span>FastAPI</span><span>Groq</span><span>Unsloth</span><span>LoRA / GGUF</span><span>App Store</span>
+            <span>React Native</span><span>Expo</span><span>FastAPI</span><span>Groq</span><span>SSE</span><span>Whisper</span><span>App Store</span>
           </div>
           <a href="https://apps.apple.com/us/app/papi-ai/id6769550749" target="_blank" rel="noopener" class="project-link">Download on the App Store &rarr;</a>
         </div>
@@ -526,19 +524,19 @@
       </div>
     </div>
 
-    <!-- Project 10: PC Terminal Server -->
+    <!-- Project 10: On-Prem GPU Inference Server -->
     <div class="project-card scroll-reveal" data-project="10" data-enter="right">
       <div class="project-card-inner">
         <div class="card-spotlight"></div>
         <div class="project-info">
           <span class="project-number">10</span>
-          <h3 class="project-name">Local AI Gateway</h3>
-          <p class="project-desc">OpenAI-Compatible API in Front of Personal Ollama</p>
+          <h3 class="project-name">On-Prem GPU Inference Server</h3>
+          <p class="project-desc">OpenAI-Compatible API in Front of a Home GPU Server</p>
           <ul class="project-features">
-            <li>Bearer-auth HTTP gateway over Tailscale</li>
-            <li>/v1/chat/completions, /v1/embeddings, /v1/models</li>
-            <li>Foundation for fully local AI workflows</li>
-            <li>Windows Scheduled Task &mdash; runs on logon, 24/7</li>
+            <li>Streaming chat completions, embeddings and text-to-speech</li>
+            <li>Bearer auth and model-name mapping</li>
+            <li>Runs as an auto-restarting service</li>
+            <li>Cloud-hosted apps reach it over a private Tailscale network</li>
           </ul>
           <div class="project-tech">
             <span>Python</span><span>FastAPI</span><span>Ollama</span><span>Tailscale</span><span>Bearer Auth</span>
@@ -549,8 +547,8 @@
           <div class="vis-cmd">
             <div class="vis-cmd-bar"><span></span><span></span><span></span></div>
             <div class="vis-cmd-body">
-              <p>$ curl -H "Authorization: Bearer $KEY" \</p>
-              <p>&nbsp;&nbsp;&nbsp;&nbsp;100.89.111.87:8089/v1/chat/completions</p>
+              <p>$ curl $GATEWAY/v1/chat/completions \</p>
+              <p>&nbsp;&nbsp;-H "Authorization: Bearer $KEY"</p>
               <p>&gt; <span class="vis-cmd-typed"></span><span class="vis-cmd-cursor">|</span></p>
             </div>
           </div>
@@ -687,66 +685,66 @@
         <span class="word-mask"><span class="word">STUDIES</span></span>
       </h2>
       <p class="scroll-reveal" style="font-size:17px;color:var(--text-secondary);max-width:680px;margin-top:18px;">
-        Four of the projects above, opened up. Architecture, hardest decisions, live operations, real incidents.
+        Four of the projects above in more depth: how they're built, the decisions that mattered, and what happened once they were live.
       </p>
       <div class="case-grid">
         <a href="/case/roofroof" class="case-card scroll-reveal">
           <div class="case-eyebrow">
-            Live in production <span class="pipe">|</span> Stripe + Twilio + Supabase
+            Live in production <span class="pipe">|</span> Stripe + Twilio
           </div>
-          <h3 class="case-title">RoofRoof<span class="accent">.</span>solutions</h3>
+          <h3 class="case-title">All Service Leads<span class="accent">.</span></h3>
           <p class="case-summary">
-            Self-serve roofing-lead marketplace. Live Stripe payments, server-authoritative coupon engine, Meta Pixel + CAPI dedup, restoreSiteDeploy incident write-up.
+            Roofing-lead marketplace I designed and, with two collaborators, took to production in April 2026. Live Stripe checkout, Twilio SMS, Resend email, and a rollback tested on a real incident.
           </p>
           <div class="case-stats">
-            <div class="case-stat"><div class="num">8K+</div><div class="lbl">LOC</div></div>
-            <div class="case-stat"><div class="num">11</div><div class="lbl">DB tables · RLS</div></div>
-            <div class="case-stat"><div class="num">~28s</div><div class="lbl">Push to live</div></div>
+            <div class="case-stat"><div class="num">Live</div><div class="lbl">Stripe billing</div></div>
+            <div class="case-stat"><div class="num">Apr '26</div><div class="lbl">Production launch</div></div>
+            <div class="case-stat"><div class="num">Netlify</div><div class="lbl">Serverless</div></div>
           </div>
           <span class="case-cta">Read the case study <span class="arrow">&rarr;</span></span>
         </a>
         <a href="/case/wheaton" class="case-card gold scroll-reveal">
           <div class="case-eyebrow">
-            Multi-brand client rebuild <span class="pipe">|</span> Federal-compliant launch
+            Multi-brand client build <span class="pipe">|</span> Next.js 16
           </div>
           <h3 class="case-title">Wheaton Valet<span class="accent">.</span></h3>
           <p class="case-summary">
-            Five-brand Next.js 16 rebuild. Federal-compliant launch inside the U.S. Department of Education. Delivered, deployed, and signed off.
+            One Next.js 16 codebase for a dry-cleaning group's flagship, sister brands and locations, with Resend and OpenPhone intake and a knowledge-base chatbot. Kept on for monthly SEO.
           </p>
           <div class="case-stats">
-            <div class="case-stat"><div class="num">5</div><div class="lbl">Brand pages</div></div>
-            <div class="case-stat"><div class="num">12</div><div class="lbl">JSON-LD schemas</div></div>
-            <div class="case-stat"><div class="num">14/14</div><div class="lbl">Bot smoke pass</div></div>
+            <div class="case-stat"><div class="num">26</div><div class="lbl">Routes</div></div>
+            <div class="case-stat"><div class="num">1</div><div class="lbl">Codebase</div></div>
+            <div class="case-stat"><div class="num">Monthly</div><div class="lbl">SEO work</div></div>
           </div>
           <span class="case-cta">Read the case study <span class="arrow">&rarr;</span></span>
         </a>
         <a href="/case/sentinel" class="case-card green scroll-reveal">
           <div class="case-eyebrow">
-            AI &times; Cybersecurity <span class="pipe">|</span> ChromaDB + LLM embeddings
+            AI &times; Cybersecurity <span class="pipe">|</span> ChromaDB + Ollama
           </div>
           <h3 class="case-title">SentinelIQ<span class="accent">.</span></h3>
           <p class="case-summary">
-            AI-powered SIEM companion. Multi-format log ingestion (syslog / Windows Events / CEF / firewall), three independent anomaly-scoring methods, plain-English query engine.
+            Security log analytics. Syslog, Windows Events, CEF, JSON and CSV in one schema, three anomaly-scoring methods, and plain-English questions turned into search filters.
           </p>
           <div class="case-stats">
-            <div class="case-stat"><div class="num">4</div><div class="lbl">Log parsers</div></div>
+            <div class="case-stat"><div class="num">5</div><div class="lbl">Log formats</div></div>
             <div class="case-stat"><div class="num">3</div><div class="lbl">Scoring methods</div></div>
-            <div class="case-stat"><div class="num">NL</div><div class="lbl">Query engine</div></div>
+            <div class="case-stat"><div class="num">NL</div><div class="lbl">Query layer</div></div>
           </div>
           <span class="case-cta">Read the case study <span class="arrow">&rarr;</span></span>
         </a>
         <a href="/case/papi" class="case-card purple scroll-reveal">
           <div class="case-eyebrow">
-            Mobile + Backend + LoRA <span class="pipe">|</span> RTX 4060 Ti at home
+            Mobile + Backend <span class="pipe">|</span> Live on the App Store
           </div>
           <h3 class="case-title">Papi AI<span class="accent">.</span></h3>
           <p class="case-summary">
-            Cross-platform AI wingman. React Native mobile + Vercel FastAPI on Groq + custom Qwen2.5-7B LoRA fine-tune lab on a local 16 GB GPU.
+            AI dating wingman for iPhone. A React Native app on a FastAPI backend with SSE streaming, vision and voice, running hosted Groq models behind fallback chains.
           </p>
           <div class="case-stats">
-            <div class="case-stat"><div class="num">v2.9</div><div class="lbl">Live mobile</div></div>
-            <div class="case-stat"><div class="num">7B</div><div class="lbl">LoRA base</div></div>
-            <div class="case-stat"><div class="num">3</div><div class="lbl">Stack layers</div></div>
+            <div class="case-stat"><div class="num">v1.0.8</div><div class="lbl">On the App Store</div></div>
+            <div class="case-stat"><div class="num">SSE</div><div class="lbl">Streaming replies</div></div>
+            <div class="case-stat"><div class="num">2</div><div class="lbl">Fallback chains</div></div>
           </div>
           <span class="case-cta">Read the case study <span class="arrow">&rarr;</span></span>
         </a>
@@ -768,83 +766,68 @@
             <span class="skill-pill">Python</span>
             <span class="skill-pill">TypeScript</span>
             <span class="skill-pill">JavaScript</span>
-            <span class="skill-pill">Java</span>
             <span class="skill-pill">C#</span>
             <span class="skill-pill">SQL</span>
             <span class="skill-pill">Swift</span>
-            <span class="skill-pill">PHP</span>
-            <span class="skill-pill">Lua</span>
-            <span class="skill-pill">HTML5</span>
-            <span class="skill-pill">CSS3</span>
             <span class="skill-pill">Bash</span>
-            <span class="skill-pill">PowerShell</span>
+            <span class="skill-pill">PHP</span>
           </div>
         </div>
         <div class="skill-category">
           <h4 class="skill-category-title">AI / ML</h4>
           <div class="skill-pills">
-            <span class="skill-pill">RAG Pipelines</span>
-            <span class="skill-pill">LoRA Fine-Tuning</span>
-            <span class="skill-pill">Unsloth</span>
-            <span class="skill-pill">GGUF / llama.cpp</span>
-            <span class="skill-pill">LLM Integration</span>
-            <span class="skill-pill">Computer Vision</span>
-            <span class="skill-pill">Vector Databases</span>
-            <span class="skill-pill">Embeddings</span>
-            <span class="skill-pill">OpenCV</span>
-            <span class="skill-pill">ChromaDB</span>
-            <span class="skill-pill">Ollama</span>
-            <span class="skill-pill">Groq</span>
+            <span class="skill-pill">LLM Agents &amp; Tool Calling</span>
+            <span class="skill-pill">RAG &amp; Vector Search</span>
+            <span class="skill-pill">Evals &amp; A/B Testing</span>
+            <span class="skill-pill">LLM-as-Judge</span>
+            <span class="skill-pill">LoRA / QLoRA Fine-Tuning</span>
+            <span class="skill-pill">Quantization (NF4, GGUF)</span>
+            <span class="skill-pill">Structured Output</span>
+            <span class="skill-pill">Grounding &amp; Guardrails</span>
+            <span class="skill-pill">Prompt-Injection Defense</span>
             <span class="skill-pill">Whisper</span>
-            <span class="skill-pill">Prompt Engineering</span>
-            <span class="skill-pill">Anomaly Detection</span>
+            <span class="skill-pill">PyTorch</span>
+            <span class="skill-pill">Hugging Face Transformers</span>
+            <span class="skill-pill">PEFT</span>
+            <span class="skill-pill">Ollama</span>
+            <span class="skill-pill">ChromaDB</span>
           </div>
         </div>
         <div class="skill-category">
           <h4 class="skill-category-title">Frameworks &amp; Libraries</h4>
           <div class="skill-pills">
+            <span class="skill-pill">FastAPI</span>
+            <span class="skill-pill">Node.js / Express</span>
             <span class="skill-pill">Next.js 16</span>
             <span class="skill-pill">React 19</span>
-            <span class="skill-pill">React Native</span>
-            <span class="skill-pill">Expo</span>
-            <span class="skill-pill">SwiftUI</span>
-            <span class="skill-pill">WidgetKit</span>
-            <span class="skill-pill">FastAPI</span>
-            <span class="skill-pill">Flask</span>
-            <span class="skill-pill">Express.js</span>
+            <span class="skill-pill">React Native / Expo</span>
             <span class="skill-pill">Tailwind</span>
-            <span class="skill-pill">Framer Motion</span>
-            <span class="skill-pill">WebSocket</span>
-            <span class="skill-pill">NumPy</span>
-            <span class="skill-pill">ReportLab</span>
+            <span class="skill-pill">Three.js / WebGL</span>
+            <span class="skill-pill">WebSocket / SSE</span>
+            <span class="skill-pill">Jest</span>
+            <span class="skill-pill">Playwright</span>
           </div>
         </div>
         <div class="skill-category">
           <h4 class="skill-category-title">Cloud &amp; DevOps</h4>
           <div class="skill-pills">
             <span class="skill-pill">Microsoft Azure</span>
-            <span class="skill-pill">Azure Functions</span>
+            <span class="skill-pill">Git / GitHub Actions</span>
+            <span class="skill-pill">CI/CD</span>
+            <span class="skill-pill">Docker / Compose</span>
             <span class="skill-pill">Vercel</span>
             <span class="skill-pill">Netlify</span>
-            <span class="skill-pill">Supabase</span>
-            <span class="skill-pill">Docker</span>
-            <span class="skill-pill">CI/CD</span>
-            <span class="skill-pill">GitHub Actions</span>
-            <span class="skill-pill">EAS Update</span>
-            <span class="skill-pill">Linux</span>
-            <span class="skill-pill">Windows Server</span>
-            <span class="skill-pill">WSL2</span>
+            <span class="skill-pill">Supabase Edge Functions</span>
+            <span class="skill-pill">Tailscale</span>
           </div>
         </div>
         <div class="skill-category">
           <h4 class="skill-category-title">Payments &amp; Comms</h4>
           <div class="skill-pills">
-            <span class="skill-pill">Stripe (live)</span>
+            <span class="skill-pill">Stripe</span>
             <span class="skill-pill">Twilio SMS</span>
             <span class="skill-pill">Resend</span>
-            <span class="skill-pill">Meta Pixel + CAPI</span>
-            <span class="skill-pill">GA4</span>
-            <span class="skill-pill">GTM</span>
+            <span class="skill-pill">OpenPhone</span>
             <span class="skill-pill">Webhooks</span>
           </div>
         </div>
@@ -853,38 +836,34 @@
           <div class="skill-pills">
             <span class="skill-pill">SIEM</span>
             <span class="skill-pill">Vulnerability Assessment</span>
-            <span class="skill-pill">Ethical Hacking</span>
             <span class="skill-pill">Penetration Testing</span>
-            <span class="skill-pill">OSINT</span>
-            <span class="skill-pill">Network Security</span>
-            <span class="skill-pill">Threat Detection</span>
-            <span class="skill-pill">NIST / FedRAMP</span>
-            <span class="skill-pill">Compliance</span>
+            <span class="skill-pill">Sandboxing &amp; Least Privilege</span>
+            <span class="skill-pill">NIST 800-53 / 800-171</span>
+            <span class="skill-pill">FIPS</span>
+            <span class="skill-pill">FedRAMP</span>
+            <span class="skill-pill">Secure Coding</span>
           </div>
         </div>
         <div class="skill-category">
           <h4 class="skill-category-title">Databases &amp; Storage</h4>
           <div class="skill-pills">
-            <span class="skill-pill">SQLite</span>
-            <span class="skill-pill">PostgreSQL</span>
-            <span class="skill-pill">MySQL</span>
+            <span class="skill-pill">PostgreSQL (RLS, RPC)</span>
+            <span class="skill-pill">Supabase</span>
             <span class="skill-pill">ChromaDB</span>
-            <span class="skill-pill">Database Design</span>
-            <span class="skill-pill">SQL Tuning</span>
+            <span class="skill-pill">REST APIs &amp; JSON</span>
           </div>
         </div>
         <div class="skill-category">
-          <h4 class="skill-category-title">Tools &amp; Platforms</h4>
+          <h4 class="skill-category-title">Systems &amp; Hardware</h4>
           <div class="skill-pills">
-            <span class="skill-pill">REST APIs</span>
-            <span class="skill-pill">mDNS / Zeroconf</span>
-            <span class="skill-pill">PWA</span>
-            <span class="skill-pill">JWT Auth</span>
-            <span class="skill-pill">QR Code Systems</span>
-            <span class="skill-pill">PDF Generation</span>
-            <span class="skill-pill">3D Modeling</span>
-            <span class="skill-pill">cPanel</span>
-            <span class="skill-pill">Tailscale</span>
+            <span class="skill-pill">Linux (RHEL)</span>
+            <span class="skill-pill">SSH / PuTTY</span>
+            <span class="skill-pill">RabbitMQ</span>
+            <span class="skill-pill">Firmware Builds</span>
+            <span class="skill-pill">TCP/IP Networking</span>
+            <span class="skill-pill">Protocol Analysis (Npcap)</span>
+            <span class="skill-pill">GPU / CUDA</span>
+            <span class="skill-pill">Site Surveys &amp; Cabling</span>
           </div>
         </div>
       </div>
@@ -898,16 +877,43 @@
         <span class="word-mask"><span class="word">EXPERIENCE</span></span>
       </h2>
       <div class="timeline">
+        <div class="timeline-item scroll-reveal" data-current="true">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">Nov 2021 &mdash; Present</span>
+            <h4 class="timeline-role">Founder &amp; AI/ML Software Engineer</h4>
+            <p class="timeline-company">Hummus Development LLC</p>
+            <ul class="timeline-bullets">
+              <li>Built LLM projects including Hummus IQ, a local-first agentic assistant with its own six-model evaluation harness; a QLoRA fine-tune of a 7B code model; and a conversational lead qualifier for All Service Leads</li>
+              <li>Wrote 3,000+ automated assertions across 40+ suites behind Hummus IQ's single release gate, ran red-team rounds before shipping, and used a model A/B benchmark to reverse a change that only looked like an improvement</li>
+              <li>Shipped four apps to the App Store and delivered client sites and platforms in 2026: a lead marketplace with live Stripe billing, e-commerce storefronts, and a multi-brand rebuild</li>
+              <li>Run the hosting stack directly (Vercel, Netlify, Supabase, Twilio, Resend) with rollback drills and incident playbooks</li>
+            </ul>
+          </div>
+        </div>
+        <div class="timeline-item scroll-reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">May 2026 &mdash; Aug 2026</span>
+            <h4 class="timeline-role">Field Engineer &ndash; Software, Firmware &amp; Deployment</h4>
+            <p class="timeline-company">Frequentis</p>
+            <ul class="timeline-bullets">
+              <li>Built and factory-updated device firmware for safety-critical communication systems</li>
+              <li>Worked over SSH and PuTTY on the Red Hat Enterprise Linux (RHEL) nodes behind these systems, including RabbitMQ messaging between services</li>
+              <li>Handled on-site installation and deployment: site surveys, wiring diagrams, structured cabling, terminations, and grounding</li>
+            </ul>
+          </div>
+        </div>
         <div class="timeline-item scroll-reveal">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
             <span class="timeline-date">Aug 2025 &mdash; Mar 2026</span>
-            <h4 class="timeline-role">Field Engineer II</h4>
+            <h4 class="timeline-role">Field Engineer II &ndash; Systems &amp; Integration</h4>
             <p class="timeline-company">NextgenID &mdash; McLean, VA</p>
             <ul class="timeline-bullets">
-              <li>Led enterprise deployment of integrated hardware and software identity management systems across multiple client sites</li>
-              <li>Performed advanced diagnostics across hardware, networking, and software platforms to resolve critical production issues</li>
-              <li>Implemented secure system configurations aligned with federal government compliance requirements (NIST, FIPS)</li>
+              <li>Worked on site in federal customer environments, supporting integration, configuration, and releases of identity-management software on compliance-controlled networks</li>
+              <li>Configured systems in line with NIST and FIPS controls and deployed the hardware and software at multiple client sites</li>
+              <li>Worked with customer staff and internal engineering to trace recurring faults to a fix</li>
             </ul>
           </div>
         </div>
@@ -915,26 +921,12 @@
           <div class="timeline-dot"></div>
           <div class="timeline-content">
             <span class="timeline-date">Aug 2024 &mdash; Aug 2025</span>
-            <h4 class="timeline-role">QA &amp; Cybersecurity Engineer</h4>
+            <h4 class="timeline-role">Quality Assurance &amp; Cybersecurity Engineer</h4>
             <p class="timeline-company">NextgenID &mdash; McLean, VA</p>
             <ul class="timeline-bullets">
-              <li>Built automation scripts in Python that reduced manual QA effort by 40%+ and accelerated release cycles</li>
-              <li>Deployed SIEM monitoring solutions and configured network security controls, improving threat detection coverage</li>
-              <li>Conducted vulnerability assessments and authored security documentation for government compliance audits</li>
-            </ul>
-          </div>
-        </div>
-        <div class="timeline-item scroll-reveal" data-current="true">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-date">Nov 2021 &mdash; Present</span>
-            <h4 class="timeline-role">Founder &amp; Software Engineer</h4>
-            <p class="timeline-company">Hummus Development LLC</p>
-            <ul class="timeline-bullets">
-              <li>Operate a one-person product studio &mdash; paid client web platforms, in-house SaaS, AI tooling, and native iOS apps end-to-end</li>
-              <li>Delivered first contracted client engagement April 2026 (Wheaton Valet Cleaners) — 5-page Next.js 16 rebuild + intake pipeline + chatbot</li>
-              <li>Run live infrastructure across Vercel, Netlify, Supabase, Stripe, Twilio, Resend, and a self-hosted Tailscale-served AI gateway on personal hardware</li>
-              <li>23 shipped projects, 75,000+ lines of production code across Python, TypeScript, Swift, JavaScript, Lua, and C#</li>
+              <li>Built Python unit and integration test automation that cut manual QA effort by more than 40%</li>
+              <li>Deployed SIEM and configured network security controls</li>
+              <li>Ran vulnerability assessments and wrote FedRAMP and NIST 800-53 audit documentation</li>
             </ul>
           </div>
         </div>
@@ -945,8 +937,7 @@
             <h4 class="timeline-role">Lead Technical Specialist</h4>
             <p class="timeline-company">New Horizon Hosting LLC</p>
             <ul class="timeline-bullets">
-              <li>Managed Windows Server hosting environments supporting 50+ client applications with 99.9% uptime</li>
-              <li>Developed dynamic web applications using PHP and SQL serving active user bases</li>
+              <li>Developed PHP/SQL web applications and operated the Windows Server environments hosting them</li>
             </ul>
           </div>
         </div>
@@ -956,25 +947,24 @@
         <h3 class="certs-title">Certifications</h3>
         <div class="certs-grid">
           <div class="cert-item">
+            <span class="cert-badge">SEC+</span>
+            <span class="cert-name">CompTIA Security+</span>
+          </div>
+          <div class="cert-item">
             <span class="cert-badge">AZ-204</span>
-            <span class="cert-name">Azure Developer Associate</span>
+            <span class="cert-name">Microsoft Certified: Azure Developer Associate</span>
           </div>
           <div class="cert-item">
             <span class="cert-badge">GMU</span>
-            <span class="cert-name">Ethical Hacking</span>
+            <span class="cert-name">Ethical Hacking Certificate (2020)</span>
           </div>
           <div class="cert-item">
             <span class="cert-badge">PY</span>
-            <span class="cert-name">Python Programming</span>
+            <span class="cert-name">Python Programming Certificate</span>
           </div>
           <div class="cert-item">
             <span class="cert-badge">C#</span>
-            <span class="cert-name">C# Development</span>
-          </div>
-          <div class="cert-item cert-item--award">
-            <span class="cert-badge cert-badge--award">C1</span>
-            <span class="cert-name">Most Technical Application Award</span>
-            <span class="cert-issuer">Capital One Coders &bull; 2016</span>
+            <span class="cert-name">C# Development Certificate</span>
           </div>
         </div>
       </div>
@@ -1003,10 +993,9 @@
     </div>
     <footer class="footer">
       <p>&copy; 2026 Karim Sangid &bull; Hummus Development LLC</p>
-      <p class="footer-credit">Created by Hummus Development &middot; 2026</p>
     </footer>
   </section>
 
-  <script src="script.js?v=18"></script>
+  <script src="script.js?v=19"></script>
 </body>
 </html>
