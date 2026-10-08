@@ -16,16 +16,57 @@
 <meta property="og:image" content="https://karimsangid.is-a.dev/og/wheaton.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Wheaton Valet Cleaners — Case Study">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Wheaton Valet Cleaners — Case Study">
+<meta name="twitter:description" content="One Next.js 16 codebase for a multi-brand dry-cleaning group: 26 routes, Resend + OpenPhone intake, knowledge-base chatbot.">
 <meta name="twitter:image" content="https://karimsangid.is-a.dev/og/wheaton.png">
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23050507'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-weight='700' font-size='38' fill='%23ff4444'>K</text></svg>">
+<meta name="theme-color" content="#050507">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="/fonts/inter-latin-v20.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/space-grotesk-latin-v22.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/jetbrains-mono-latin-v24.woff2" as="font" type="font/woff2" crossorigin>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Wheaton Valet Cleaners — Case Study",
+  "description": "Client build: one Next.js 16 codebase (26 routes) for a dry-cleaning group's flagship, sister brands and locations, with Resend and OpenPhone intake.",
+  "url": "https://karimsangid.is-a.dev/case/wheaton",
+  "mainEntityOfPage": "https://karimsangid.is-a.dev/case/wheaton",
+  "image": "https://karimsangid.is-a.dev/og/wheaton.png",
+  "author": {
+    "@type": "Person",
+    "name": "Karim Sangid",
+    "url": "https://karimsangid.is-a.dev/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Hummus Development LLC"
+  },
+  "dateModified": "2026-10-08",
+  "inLanguage": "en-US"
+}
+</script>
 
 <style>
+  /* Self-hosted fonts (latin subset, OFL; see /fonts/OFL.txt) + metric-matched fallbacks */
+  @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 300 700; font-display: swap; src: url(/fonts/space-grotesk-latin-v22.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(/fonts/inter-latin-v20.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400 800; font-display: swap; src: url(/fonts/jetbrains-mono-latin-v24.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Space Grotesk Fallback'; font-weight: 100 500; src: local('Arial'), local('ArialMT'); size-adjust: 104.31%; ascent-override: 94.34%; descent-override: 27.99%; line-gap-override: 0%; }
+  @font-face { font-family: 'Space Grotesk Fallback'; font-weight: 600 900; src: local('Arial Bold'), local('Arial-BoldMT'); size-adjust: 99.04%; ascent-override: 99.35%; descent-override: 29.48%; line-gap-override: 0%; }
+  @font-face { font-family: 'Inter Fallback'; font-weight: 100 500; src: local('Arial'), local('ArialMT'); size-adjust: 105.16%; ascent-override: 92.12%; descent-override: 22.94%; line-gap-override: 0%; }
+  @font-face { font-family: 'Inter Fallback'; font-weight: 600 900; src: local('Arial Bold'), local('Arial-BoldMT'); size-adjust: 98.88%; ascent-override: 97.97%; descent-override: 24.39%; line-gap-override: 0%; }
+  @font-face { font-family: 'JetBrains Mono Fallback'; font-weight: 100 500; src: local('Courier New'), local('CourierNewPSMT'); size-adjust: 100%; ascent-override: 102%; descent-override: 30%; line-gap-override: 0%; }
+  @font-face { font-family: 'JetBrains Mono Fallback'; font-weight: 600 900; src: local('Courier New Bold'), local('CourierNewPS-BoldMT'); size-adjust: 100%; ascent-override: 102%; descent-override: 30%; line-gap-override: 0%; }
+
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
@@ -34,7 +75,7 @@
     --bg-card-2: #14141b;
     --text: #ffffff;
     --text-soft: #b8bcc8;
-    --text-mute: #6b7080;
+    --text-mute: #80859a;
     --border: rgba(255,255,255,0.08);
     --border-strong: rgba(255,255,255,0.16);
     --accent: #d9a14a;
@@ -43,9 +84,9 @@
     --red: #ff4444;
     --green: #4ade80;
     --blue: #60a5fa;
-    --font-h: 'Space Grotesk', system-ui, sans-serif;
-    --font-b: 'Inter', system-ui, sans-serif;
-    --font-m: 'JetBrains Mono', monospace;
+    --font-h: 'Space Grotesk', 'Space Grotesk Fallback', system-ui, sans-serif;
+    --font-b: 'Inter', 'Inter Fallback', system-ui, sans-serif;
+    --font-m: 'JetBrains Mono', 'JetBrains Mono Fallback', monospace;
   }
 
   html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
@@ -175,7 +216,7 @@
     letter-spacing: 0.4px;
     border: 1px solid var(--border-strong);
     border-radius: 4px;
-    transition: all 0.18s ease;
+    transition: border-color 0.18s ease, color 0.18s ease, background-color 0.18s ease, transform 0.18s ease;
     color: var(--text);
   }
   .btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
@@ -282,7 +323,7 @@
     border-radius: 4px;
     padding: 16px 18px;
   }
-  .page-cell h4 {
+  .page-cell h3 {
     font-family: var(--font-h);
     font-size: 14px;
     font-weight: 700;
@@ -411,9 +452,44 @@
     .hero-tag { font-size: 16px; }
     nav.top .crumbs { display: none; }
   }
+
+  /* ---- Accessibility + motion ---- */
+  .skip-link {
+    position: absolute; left: 16px; top: 12px; z-index: 1000;
+    padding: 8px 14px; border-radius: 4px;
+    background: #050507; color: #fff; border: 1px solid #ff4444;
+    font-family: var(--font-m); font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+    transform: translateY(-160%); transition: transform 0.2s ease;
+  }
+  .skip-link:focus { transform: none; color: #fff; }
+  :focus-visible { outline: 2px solid #ff4444; outline-offset: 3px; }
+  :focus:not(:focus-visible) { outline: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+
+  header.hero { overflow-x: clip; }
+  @supports not (overflow-x: clip) { header.hero { overflow: hidden; } }
+  .next-case { display: block; }
+  .arch pre { width: max-content; margin: 0 auto; }
+  @media (max-width: 720px) {
+    .arch { padding: 16px; font-size: clamp(10px, 2.8vw, 13px); }
+  }
+  h2.section-title { line-height: 1.15; }
+  @media (max-width: 720px) {
+    .hero-eyebrow { display: flex; flex-direction: column; gap: 4px; }
+    .hero-eyebrow .pipe { display: none; }
+    .hero-cta .btn { width: 100%; justify-content: center; }
+    footer .sep { display: none; }
+    footer p:last-child a { display: block; padding: 6px 0; }
+  }
+  p, li { text-wrap: pretty; }
+  h1, h2, h3 { text-wrap: balance; }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <nav class="top">
   <div class="wrap">
@@ -428,10 +504,12 @@
   </div>
 </nav>
 
+<main id="main">
+
 <header class="hero">
   <div class="wrap">
     <div class="hero-eyebrow">
-      Case Study <span class="pipe">|</span> Multi-Brand Client Rebuild <span class="pipe">|</span> Hummus Development LLC
+      <span>Case Study</span> <span class="pipe">|</span> <span>Multi-Brand Client Rebuild</span> <span class="pipe">|</span> <span>Hummus Development LLC</span>
     </div>
     <h1 class="hero-title">Wheaton Valet<span class="accent">.</span></h1>
     <p class="hero-tag">
@@ -494,22 +572,22 @@
     </p>
     <div class="pages-grid">
       <div class="page-cell">
-        <h4>Wheaton (flagship)</h4>
+        <h3>Wheaton (flagship)</h3>
         <div class="route">/</div>
         <p>Family-owned local dry cleaner in Wheaton, MD. Warm palette, hours, services grid, 4 sister-locations cross-link.</p>
       </div>
       <div class="page-cell">
-        <h4>Debonair · Kensington</h4>
+        <h3>Debonair · Kensington</h3>
         <div class="route">/debonair/kensington</div>
         <p>Kensington storefront of the premium Debonair brand. Distinct branding, separate intake, custom hours.</p>
       </div>
       <div class="page-cell">
-        <h4>Debonair · DC</h4>
+        <h3>Debonair · DC</h3>
         <div class="route">/debonair/washington-dc</div>
         <p>Sub-location of the Debonair brand with its own storefront content and contact details.</p>
       </div>
       <div class="page-cell">
-        <h4>Rockville</h4>
+        <h3>Rockville</h3>
         <div class="route">/rockville</div>
         <p>Newer location with full feature parity to Wheaton — services, hours, intake, SEO.</p>
       </div>
@@ -579,18 +657,20 @@
     </div>
   </section>
 
-  <a href="/case/roofroof" class="next-case">
+  <a href="/case/sentinel" class="next-case">
     <div class="label">Next Case Study</div>
-    <h3>All Service Leads <span class="arrow">&rarr;</span></h3>
-    <p>Roofing-lead marketplace with live Stripe billing, Twilio SMS and Resend email, plus a write-up of a real production incident.</p>
+    <h3>SentinelIQ <span class="arrow">&rarr;</span></h3>
+    <p>Security log analytics. Syslog, Windows Events, CEF, JSON and CSV in one schema, three anomaly-scoring methods, and plain-English questions turned into search filters.</p>
   </a>
 
 </div>
 
+</main>
+
 <footer>
   <div class="wrap footer-grid">
     <p>&copy; 2026 Karim Sangid · Hummus Development LLC</p>
-    <p><a href="/" style="color:var(--text-soft);">karimsangid.is-a.dev</a> · <a href="https://github.com/karimsangid" style="color:var(--text-soft);">github.com/karimsangid</a></p>
+    <p><a href="/" style="color:var(--text-soft);">karimsangid.is-a.dev</a><span class="sep" aria-hidden="true"> · </span><a href="https://github.com/karimsangid" style="color:var(--text-soft);">github.com/karimsangid</a></p>
   </div>
 </footer>
 

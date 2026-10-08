@@ -13,19 +13,60 @@
 <meta property="og:image" content="https://karimsangid.is-a.dev/og/sentinel.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="SentinelIQ — Case Study">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Karim Sangid">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SentinelIQ — Case Study">
+<meta name="twitter:description" content="Security log analytics: five log formats, three anomaly-scoring methods, plain-English questions turned into search filters.">
 <meta name="twitter:image" content="https://karimsangid.is-a.dev/og/sentinel.png">
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23050507'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-weight='700' font-size='38' fill='%23ff4444'>K</text></svg>">
+<meta name="theme-color" content="#050507">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="/fonts/inter-latin-v20.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/space-grotesk-latin-v22.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/jetbrains-mono-latin-v24.woff2" as="font" type="font/woff2" crossorigin>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "SentinelIQ — Case Study",
+  "description": "SentinelIQ turns syslog, Windows Event, CEF, JSON and CSV logs into an anomaly-scored security timeline you can query in plain English.",
+  "url": "https://karimsangid.is-a.dev/case/sentinel",
+  "mainEntityOfPage": "https://karimsangid.is-a.dev/case/sentinel",
+  "image": "https://karimsangid.is-a.dev/og/sentinel.png",
+  "author": {
+    "@type": "Person",
+    "name": "Karim Sangid",
+    "url": "https://karimsangid.is-a.dev/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Hummus Development LLC"
+  },
+  "dateModified": "2026-10-08",
+  "inLanguage": "en-US"
+}
+</script>
 
 <style>
+  /* Self-hosted fonts (latin subset, OFL; see /fonts/OFL.txt) + metric-matched fallbacks */
+  @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 300 700; font-display: swap; src: url(/fonts/space-grotesk-latin-v22.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(/fonts/inter-latin-v20.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400 800; font-display: swap; src: url(/fonts/jetbrains-mono-latin-v24.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Space Grotesk Fallback'; font-weight: 100 500; src: local('Arial'), local('ArialMT'); size-adjust: 104.31%; ascent-override: 94.34%; descent-override: 27.99%; line-gap-override: 0%; }
+  @font-face { font-family: 'Space Grotesk Fallback'; font-weight: 600 900; src: local('Arial Bold'), local('Arial-BoldMT'); size-adjust: 99.04%; ascent-override: 99.35%; descent-override: 29.48%; line-gap-override: 0%; }
+  @font-face { font-family: 'Inter Fallback'; font-weight: 100 500; src: local('Arial'), local('ArialMT'); size-adjust: 105.16%; ascent-override: 92.12%; descent-override: 22.94%; line-gap-override: 0%; }
+  @font-face { font-family: 'Inter Fallback'; font-weight: 600 900; src: local('Arial Bold'), local('Arial-BoldMT'); size-adjust: 98.88%; ascent-override: 97.97%; descent-override: 24.39%; line-gap-override: 0%; }
+  @font-face { font-family: 'JetBrains Mono Fallback'; font-weight: 100 500; src: local('Courier New'), local('CourierNewPSMT'); size-adjust: 100%; ascent-override: 102%; descent-override: 30%; line-gap-override: 0%; }
+  @font-face { font-family: 'JetBrains Mono Fallback'; font-weight: 600 900; src: local('Courier New Bold'), local('CourierNewPS-BoldMT'); size-adjust: 100%; ascent-override: 102%; descent-override: 30%; line-gap-override: 0%; }
+
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
@@ -34,7 +75,7 @@
     --bg-card-2: #14141b;
     --text: #ffffff;
     --text-soft: #b8bcc8;
-    --text-mute: #6b7080;
+    --text-mute: #80859a;
     --border: rgba(255,255,255,0.08);
     --border-strong: rgba(255,255,255,0.16);
     --accent: #4ade80;
@@ -46,9 +87,9 @@
     --purple: #c084fc;
     --crit: #f87171;
     --warn: #fbbf24;
-    --font-h: 'Space Grotesk', system-ui, sans-serif;
-    --font-b: 'Inter', system-ui, sans-serif;
-    --font-m: 'JetBrains Mono', monospace;
+    --font-h: 'Space Grotesk', 'Space Grotesk Fallback', system-ui, sans-serif;
+    --font-b: 'Inter', 'Inter Fallback', system-ui, sans-serif;
+    --font-m: 'JetBrains Mono', 'JetBrains Mono Fallback', monospace;
   }
 
   html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
@@ -178,7 +219,7 @@
     letter-spacing: 0.4px;
     border: 1px solid var(--border-strong);
     border-radius: 4px;
-    transition: all 0.18s ease;
+    transition: border-color 0.18s ease, color 0.18s ease, background-color 0.18s ease, transform 0.18s ease;
     color: var(--text);
   }
   .btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
@@ -342,7 +383,7 @@
   }
   .method-cell.gold .method-num { color: var(--gold); }
   .method-cell.blue .method-num { color: var(--blue); }
-  .method-cell h4 {
+  .method-cell h3 {
     font-family: var(--font-h);
     font-size: 16px;
     font-weight: 700;
@@ -439,9 +480,48 @@
     .hero-tag { font-size: 16px; }
     nav.top .crumbs { display: none; }
   }
+
+  /* ---- Accessibility + motion ---- */
+  .skip-link {
+    position: absolute; left: 16px; top: 12px; z-index: 1000;
+    padding: 8px 14px; border-radius: 4px;
+    background: #050507; color: #fff; border: 1px solid #ff4444;
+    font-family: var(--font-m); font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+    transform: translateY(-160%); transition: transform 0.2s ease;
+  }
+  .skip-link:focus { transform: none; color: #fff; }
+  :focus-visible { outline: 2px solid #ff4444; outline-offset: 3px; }
+  :focus:not(:focus-visible) { outline: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+
+  header.hero { overflow-x: clip; }
+  @supports not (overflow-x: clip) { header.hero { overflow: hidden; } }
+  .next-case { display: block; }
+  .arch pre { width: max-content; margin: 0 auto; }
+  @media (max-width: 720px) {
+    .arch { padding: 16px; font-size: clamp(10px, 2.8vw, 13px); }
+  }
+  h2.section-title { line-height: 1.15; }
+  @media (max-width: 720px) {
+    .hero-eyebrow { display: flex; flex-direction: column; gap: 4px; }
+    .hero-eyebrow .pipe { display: none; }
+    .hero-cta .btn { width: 100%; justify-content: center; }
+    footer .sep { display: none; }
+    footer p:last-child a { display: block; padding: 6px 0; }
+    /* Diagram scrolls sideways on phones: fade the right edge as a hint;
+       trailing padding keeps the last column clear of the fade when scrolled to the end. */
+    .arch { padding: 12px; -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); }
+    .arch pre { padding-right: 14%; }
+  }
+  p, li { text-wrap: pretty; }
+  h1, h2, h3 { text-wrap: balance; }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <nav class="top">
   <div class="wrap">
@@ -456,10 +536,12 @@
   </div>
 </nav>
 
+<main id="main">
+
 <header class="hero">
   <div class="wrap">
     <div class="hero-eyebrow">
-      Case Study <span class="pipe">|</span> AI &times; Cybersecurity <span class="pipe">|</span> Hummus Development LLC
+      <span>Case Study</span> <span class="pipe">|</span> <span>AI &times; Cybersecurity</span> <span class="pipe">|</span> <span>Hummus Development LLC</span>
     </div>
     <h1 class="hero-title">SentinelIQ<span class="accent">.</span></h1>
     <p class="hero-tag">
@@ -542,17 +624,17 @@
     <div class="method-grid">
       <div class="method-cell">
         <div class="method-num">Method 01</div>
-        <h4>Embedding distance</h4>
+        <h3>Embedding distance</h3>
         <p>Each event's embedding is compared against the centroid of the stored events. Events that sit unusually far from it get flagged, even when the text looks routine.</p>
       </div>
       <div class="method-cell gold">
         <div class="method-num">Method 02</div>
-        <h4>Frequency Z-score</h4>
+        <h3>Frequency Z-score</h3>
         <p>Per-source event counts in ten-minute buckets, scored against that source's own baseline. A brute-force burst isn't anomalous because the words are scary; it's anomalous because the rate sits far above this host's normal.</p>
       </div>
       <div class="method-cell blue">
         <div class="method-num">Method 03</div>
-        <h4>Severity escalation</h4>
+        <h3>Severity escalation</h3>
         <p>Compares the share of high and critical events in the recent window against the earlier one. When that rate more than doubles, the newer high-severity events are flagged as an escalation.</p>
       </div>
     </div>
@@ -597,25 +679,25 @@
       <span class="section-num">05</span>
       <h2 class="section-title">Architecture</h2>
     </div>
-    <div class="arch">
+    <div class="arch" role="img" tabindex="0" aria-label="Architecture: syslog, Windows Event, CEF and JSON/CSV sources feed a format-agnostic parser that produces one normalized event schema. Events go to SQLite for the timeline, ChromaDB for vectors and the anomaly engine (three methods). FastAPI serves queries and a WebSocket stream to the Ollama natural-language layer, the React dashboard and the incident summarizer.">
 <pre><span class="label">                    [ Log sources ]</span>
    <span class="node">syslog</span>      <span class="node">winevt</span>      <span class="node">CEF</span>        <span class="node">JSON / CSV</span>
-     <span class="pipe">│</span>            <span class="pipe">│</span>          <span class="pipe">│</span>             <span class="pipe">│</span>
-     <span class="pipe">└────────────┴──────────┴─────────────┘</span>
-                          <span class="pipe">▼</span>
+     <span class="pipe">│</span>            <span class="pipe">│</span>           <span class="pipe">│</span>            <span class="pipe">│</span>
+     <span class="pipe">└────────────┴───────────┼────────────┘</span>
+                              <span class="pipe">▼</span>
               <span class="layer">Format-agnostic parser layer</span>
-                          <span class="pipe">▼</span>
+                              <span class="pipe">▼</span>
             <span class="layer">Normalized event { ts, src, type, msg, ... }</span>
-                          <span class="pipe">▼</span>
+                              <span class="pipe">▼</span>
        <span class="pipe">┌──────────────────────┼──────────────────────┐</span>
        <span class="pipe">▼</span>                      <span class="pipe">▼</span>                      <span class="pipe">▼</span>
    <span class="node">SQLite</span> <span class="label">(timeline)</span>     <span class="node">ChromaDB</span> <span class="label">(vectors)</span>     <span class="node">Anomaly</span>
                                                   <span class="label">M01 / M02 / M03</span>
        <span class="pipe">│</span>                      <span class="pipe">│</span>                      <span class="pipe">│</span>
        <span class="pipe">└──────────────────────┼──────────────────────┘</span>
-                          <span class="pipe">▼</span>
+                              <span class="pipe">▼</span>
               <span class="layer">FastAPI  (query + WebSocket stream)</span>
-                          <span class="pipe">▼</span>
+                              <span class="pipe">▼</span>
        <span class="pipe">┌──────────────────────┼──────────────────────┐</span>
        <span class="pipe">▼</span>                      <span class="pipe">▼</span>                      <span class="pipe">▼</span>
   <span class="node">Ollama LLM</span>           <span class="node">React Dashboard</span>          <span class="node">Incident</span>
@@ -647,10 +729,12 @@
 
 </div>
 
+</main>
+
 <footer>
   <div class="wrap footer-grid">
     <p>&copy; 2026 Karim Sangid · Hummus Development LLC</p>
-    <p><a href="/" style="color:var(--text-soft);">karimsangid.is-a.dev</a> · <a href="https://github.com/karimsangid" style="color:var(--text-soft);">github.com/karimsangid</a></p>
+    <p><a href="/" style="color:var(--text-soft);">karimsangid.is-a.dev</a><span class="sep" aria-hidden="true"> · </span><a href="https://github.com/karimsangid" style="color:var(--text-soft);">github.com/karimsangid</a></p>
   </div>
 </footer>
 

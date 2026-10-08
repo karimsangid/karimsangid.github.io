@@ -35,7 +35,7 @@ GitHub Pages serves the `master` branch. The `CNAME` file maps the custom domain
 
 ## Admin
 
-The `admin/` and `api/` folders hold a separate Vercel admin tool and are not part of the public site.
+The `admin/` and `api/` folders hold a separate Vercel admin tool and are not part of the public site. `_config.yml` excludes them (and the package and tooling files) from the GitHub Pages build, so the domain does not serve them.
 
 ## Local Development
 
